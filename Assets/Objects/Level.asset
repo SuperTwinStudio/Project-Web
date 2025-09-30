@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c46fc275a273cb4a92575d4a65e25f6, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  Name: Default
+  MapSize: 50
+  RoomSize: 1
+  MaxStep: 10
+  BaseDoorChance: 80
+  StartRoom: {fileID: 30979004110380592, guid: 3a94dc3c4f8d47246adc8fb1902debcc, type: 3}
+  StandardRooms:
+  - {fileID: 3389901333541950644, guid: 3184ae222973b414fb719f9916656c0e, type: 3}
+  - {fileID: 9029137478122719699, guid: 1c5e8f0ec38b3134485d3ed72f7ae6a5, type: 3}
+  - {fileID: 5783244680719809224, guid: 7b1c8c80f1cd93e4e8c0bf8122743061, type: 3}
+  TreasureRooms:
+  - {fileID: 8986349882563286524, guid: d168a651d05f5d74f9324350d724e576, type: 3}
+  ItemRooms:
+  - {fileID: 4562919049632809792, guid: 596e3ca69f3608644abb19e7f31a9bdc, type: 3}
+  BossRooms:
+  - {fileID: 2479406874792931051, guid: eebb702ca1bc3f64083782089915d872, type: 3}
