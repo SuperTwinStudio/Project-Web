@@ -23,9 +23,6 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text ammoText;
     [SerializeField] private Item ammoItem;
 
-    //Player
-    private Transform Top => Player.Top;
-
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -137,13 +134,11 @@ public class GameMenu : Menu {
      \______/  \______/     \_/    \_______/|_*/
 
     protected override void OnCovered() {
-        //Show cursor
-        Game.UnhideCursor(this);
+        //Don't do nothin
     }
 
     protected override void OnUncovered() {
-        //Hide cursor
-        Game.HideCursor(this);
+        //Don't do nothin
     }
 
 }

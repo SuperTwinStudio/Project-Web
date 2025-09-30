@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour {
     [Header("UI")]
     [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private Animator menuTransitions;
-    
+
     public Canvas MainCanvas => _mainCanvas;
 
     public bool InTransition { get; private set; }

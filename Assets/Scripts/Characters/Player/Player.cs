@@ -22,22 +22,32 @@ public class Player : Character {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterController controller;
     [SerializeField] private GameObject model;
     [SerializeField] private Animator animator;
 
+    //Camera
+    [Header("Camera")]
+    [SerializeField] private new Camera camera;
+    [SerializeField] private Transform cameraPoint;
+
+    private Transform cameraTransform;
+
     //Movement
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 0.8f;
+    [SerializeField] private float moveSpeed = 5f;
 
-    private bool isControlled, isMoving, isRunning;
+    private Transform playerTransform;
 
-    private const float MAX_ROTATION_DELTA = 700;
+    private bool isControlled, isMoving;
 
 
     //State
     private void Start() {
+        //Get transforms
+        cameraTransform = camera.transform;
+        playerTransform = transform;
+
         //Events
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
         MenuManager.AddOnMenuChanged(OnMenuChanged);
@@ -57,18 +67,18 @@ public class Player : Character {
         | $$      | $$  | $$| $$  | $$| $$_  $$ 
         | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$
         |________/ \______/  \______/ |__/  \_*/
-        
+
         //Get look input
         lookInput = lookAction.ReadValue<Vector2>();
 
-        //Rotate horizontally
-        /*transform.Rotate(Vector3.up, lookInput.x);
-
-        //Rotate vertically
-        headVerticalRotation = Mathf.Clamp(headVerticalRotation - lookInput.y * Preferences.MouseSensitivity, -80, 80);
-        Vector3 clampedVerticalRotation = Top.localEulerAngles;
-        clampedVerticalRotation.x = headVerticalRotation;
-        Top.localEulerAngles = clampedVerticalRotation;*/
+        //Try to get mouse world point in player plane
+        var plane = new Plane(Vector3.up, playerTransform.position);
+        var ray = camera.ScreenPointToRay(lookInput);
+        if (plane.Raycast(ray, out float distance)) {
+            //Success -> Get point & look towards it
+            var hitPoint = ray.GetPoint(distance);
+            playerTransform.LookAt(hitPoint, Vector3.up);
+        }
 
 
          /*$      /$$                              
@@ -88,10 +98,12 @@ public class Player : Character {
         if (isMoving) {
             //Calculate move direction
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
-            isRunning = false;
 
             //Move in move direction
             controller.SimpleMove(moveSpeed * moveDirection);
+
+            //Move camera to player
+            cameraPoint.position = playerTransform.position;
         }
 
 
@@ -106,14 +118,11 @@ public class Player : Character {
         
         //Animate
         animator.SetBool("isMoving", isMoving);
-        animator.SetBool("isRunning", isRunning);
     }
 
     private void StopMovement() {
         isMoving = false;
-        isRunning = false;
         animator.SetBool("isMoving", isMoving);
-        animator.SetBool("isRunning", isRunning);
     }
 
     //Health
