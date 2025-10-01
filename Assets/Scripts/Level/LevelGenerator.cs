@@ -104,35 +104,53 @@ public class LevelGenerator : MonoBehaviour
         // Generate room gameobjects
         m_LevelContainer.position = Vector3.zero;
         Vector2 startRoomPos = Vector2.zero;
+		List<Vector2Int> endRooms = new List<Vector2Int>();
+		Room[,] roomObjectMap = new Room[def.MapSize, def.MapSize];
 
         for (int x = 0; x < def.MapSize; x++)
-        {
-            for (int y = 0; y < def.MapSize; y++)
-            {
-                if (m_GenerationGrid[x, y] == 0) continue;
+		{
+			for (int y = 0; y < def.MapSize; y++)
+			{
+				if (m_GenerationGrid[x, y] == 0)
+				{
+					roomObjectMap[x, y] = null;
+					continue;
+				}
 
-                if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_END)) 
-                { 
-                    SpawnEndRoom(def, new Vector2Int(x, y)); 
-                }
-                else if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_START)) 
-                {
-                    GameObject room = Instantiate(def.StartRoom, new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
-                    room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[x, y]);
+				if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_END))
+				{
+					roomObjectMap[x, y] = null;
+					endRooms.Add(new Vector2Int(x, y));
+				}
+				else if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_START))
+				{
+					GameObject room = Instantiate(def.StartRoom, new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+					roomObjectMap[x,y] = room.GetComponent<Room>();
 
-                    startRoomPos = new Vector2(x * def.RoomSize, -y * def.RoomSize);
-                }
-                else
-                {
-                    // TO-DO: Randomize standard rooms
-                    GameObject room = Instantiate(def.StandardRooms[0], new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
-                    room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[x, y]);
-                }
-            }
-        }
+					startRoomPos = new Vector2(x * def.RoomSize, -y * def.RoomSize);
+				}
+				else
+				{
+					int roomId = Random.Range(0, def.StandardRooms.Length);
+					GameObject room = Instantiate(def.StandardRooms[roomId], new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+					roomObjectMap[x,y] = room.GetComponent<Room>();
+				}
+			}
+		}
+
+		SpawnEndRooms(def, endRooms); 
+
+		for (int x = 0; x < def.MapSize; x++)
+		{
+			for (int y = 0; y < def.MapSize; y++)
+			{
+				if (roomObjectMap[x, y] == null) continue;
+				roomObjectMap[x, y].InitializeDoors(m_GenerationGrid[x, y]);
+			}
+		}
 
         // Center level at 0,0
-        m_LevelContainer.position = new Vector3(-startRoomPos.x, 0, -startRoomPos.y);
+		m_LevelContainer.position = new Vector3(-startRoomPos.x, 0, -startRoomPos.y);
     }
 
     private void CleanLevel()
@@ -189,11 +207,90 @@ public class LevelGenerator : MonoBehaviour
         return Vector2Int.zero;
     }
 
-    private void SpawnEndRoom(LevelDefinition def, Vector2Int roomPos)
-    {
-        // TO-DO: Add end room criteria
-        GameObject room = Instantiate(def.TreasureRooms[0], new Vector3(roomPos.x * def.RoomSize, 0, -roomPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
-        room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[roomPos.x, roomPos.y]);
+	private void SpawnEndRooms(LevelDefinition def, List<Vector2Int> endRooms)
+	{
+		// Find furthest room to spawn a boss room
+		int furthestRoom = -1;
+		float furthestDistance = -1;
+		int mid = def.MapSize / 2;
+		for (int i = 0; i < endRooms.Count; i++)
+		{
+			float distance = Vector2.Distance(endRooms[i], new Vector2(mid, mid));
+			if (Mathf.Abs(distance) > furthestDistance)
+			{
+				furthestDistance = distance;
+				furthestRoom = i;
+			}
+		}
+
+		int bossRoom = Random.Range(0, def.BossRooms.Length);
+		Vector2Int bossPos = endRooms[furthestRoom];
+		GameObject room = Instantiate(def.BossRooms[bossRoom], new Vector3(bossPos.x * def.RoomSize, 0, -bossPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+		room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[bossPos.x, bossPos.y]);
+
+		// Remove boss room from further processing
+		endRooms.RemoveAt(furthestRoom);
+
+		// Create treasure rooms
+		int treasureCount = Random.Range(2, 4);
+		for (int i = 0; i < treasureCount; i++)
+		{
+			int rand = Random.Range(0, endRooms.Count);
+			if (endRooms.Count == 0) break;
+			Vector2Int selRoom = endRooms[rand];
+
+			int roomObj = Random.Range(0, def.TreasureRooms.Length);
+			room = Instantiate(def.TreasureRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+			room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
+
+			endRooms.RemoveAt(rand);
+		}
+
+		// Create item rooms
+		int itemCount = Random.Range(1, 2);
+		for (int i = 0; i < treasureCount; i++)
+		{
+			int rand = Random.Range(0, endRooms.Count);
+			if (endRooms.Count == 0) break;
+			Vector2Int selRoom = endRooms[rand];
+
+			int roomObj = Random.Range(0, def.ItemRooms.Length);
+			room = Instantiate(def.ItemRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+			room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
+
+			endRooms.RemoveAt(rand);
+		}
+
+		// Purge remaining end rooms
+		foreach (Vector2Int roomPos in endRooms)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				// Mask out the door flag
+				switch (i)
+				{
+					case (int)Directions.UP:
+						if (roomPos.y == 0) continue;
+						m_GenerationGrid[roomPos.x, roomPos.y - 1] &= 0b11111101;
+						break;
+
+					case (int)Directions.DOWN:
+						if (roomPos.y == def.MapSize - 1) continue;
+						m_GenerationGrid[roomPos.x, roomPos.y + 1] &= 0b11111110;
+						break;
+
+					case (int)Directions.LEFT:
+						if (roomPos.x == 0) continue;
+						m_GenerationGrid[roomPos.x - 1, roomPos.y] &= 0b11110111;
+						break;
+
+					case (int)Directions.RIGHT:
+						if (roomPos.x == def.MapSize - 1) continue;
+						m_GenerationGrid[roomPos.x + 1, roomPos.y] &= 0b11111011;
+						break;
+				}
+			}
+		}
     }
 
     private bool GetRoomFlag(int value, RoomFlags flag) 

@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Default
   MapSize: 50
   RoomSize: 1
-  MaxStep: 10
+  MaxStep: 5
   BaseDoorChance: 80
   StartRoom: {fileID: 30979004110380592, guid: 3a94dc3c4f8d47246adc8fb1902debcc, type: 3}
   StandardRooms:
@@ -24,7 +24,13 @@ MonoBehaviour:
   - {fileID: 5783244680719809224, guid: 7b1c8c80f1cd93e4e8c0bf8122743061, type: 3}
   TreasureRooms:
   - {fileID: 8986349882563286524, guid: d168a651d05f5d74f9324350d724e576, type: 3}
+  - {fileID: 4954573100525498126, guid: ee4145cd3336e19459385aaf916dfc0d, type: 3}
+  - {fileID: 1367058486912978023, guid: 289be5a2e95da334a8cd04b32236f4b8, type: 3}
   ItemRooms:
   - {fileID: 4562919049632809792, guid: 596e3ca69f3608644abb19e7f31a9bdc, type: 3}
+  - {fileID: 7856032523871331110, guid: d3674a790ca756c4b96ffe98f47abb95, type: 3}
+  - {fileID: 2709847421995725803, guid: 7efe2170a3b58b74aa57f4d0ce5d973c, type: 3}
   BossRooms:
   - {fileID: 2479406874792931051, guid: eebb702ca1bc3f64083782089915d872, type: 3}
+  - {fileID: 8749003393491955314, guid: b76f8595843e8114696bf78321a90568, type: 3}
+  - {fileID: 6392718724888077867, guid: 4686f9ffbf2eb894d800f1f2f8e59727, type: 3}
