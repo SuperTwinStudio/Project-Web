@@ -613,13 +613,8 @@ namespace Botpa {
         [CustomPropertyDrawer(typeof(TurboEventGroup))]
         private class TurboEventGroupInspector : PropertyDrawer {
 
-            //Container size
-            public const float lineHeight = 20f;
-
-
-            //Property drawer
             public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-                return lineHeight;
+                return 0;
             }
 
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
@@ -628,7 +623,7 @@ namespace Botpa {
                 EditorGUI.BeginChangeCheck();
 
                 //Create list
-                EditorGUILayout.PropertyField(property.FindPropertyRelative("events"));
+                EditorGUILayout.PropertyField(property.FindPropertyRelative("events"), label);
                 
                 //Finish & check for changes
                 if (EditorGUI.EndChangeCheck()) {

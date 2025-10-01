@@ -10,6 +10,7 @@ public class Player : Character {
 
     public Level Level => _level;
     public MenuManager MenuManager => Level.MenuManager;
+    public CameraController CameraController => Level.CameraController;
 
     //Input
     [Header("Input")]
@@ -22,16 +23,14 @@ public class Player : Character {
 
     //Components
     [Header("Components")]
+    [SerializeField] private Loadout _loadout;
     [SerializeField] private CharacterController controller;
     [SerializeField] private GameObject model;
     [SerializeField] private Animator animator;
 
-    //Camera
-    [Header("Camera")]
-    [SerializeField] private new Camera camera;
-    [SerializeField] private Transform cameraPoint;
-
     private Transform cameraTransform;
+
+    public Loadout Loadout => _loadout;
 
     //Movement
     [Header("Movement")]
@@ -45,7 +44,7 @@ public class Player : Character {
     //State
     private void Start() {
         //Get transforms
-        cameraTransform = camera.transform;
+        cameraTransform = CameraController.Camera.transform;
         playerTransform = transform;
 
         //Events
@@ -73,7 +72,7 @@ public class Player : Character {
 
         //Try to get mouse world point in player plane
         var plane = new Plane(Vector3.up, playerTransform.position);
-        var ray = camera.ScreenPointToRay(lookInput);
+        var ray = CameraController.Camera.ScreenPointToRay(lookInput);
         if (plane.Raycast(ray, out float distance)) {
             //Success -> Get point & look towards it
             var hitPoint = ray.GetPoint(distance);
@@ -101,9 +100,6 @@ public class Player : Character {
 
             //Move in move direction
             controller.SimpleMove(moveSpeed * moveDirection);
-
-            //Move camera to player
-            cameraPoint.position = playerTransform.position;
         }
 
 

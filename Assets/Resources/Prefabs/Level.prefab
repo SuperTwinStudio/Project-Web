@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuManager: {fileID: 8532293889821563977}
+  _cameraController: {fileID: 7048343673859228868}
   _player: {fileID: 3014555502683683044}
 --- !u!1 &6401108275833707088
 GameObject:
@@ -401,9 +402,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
+      propertyPath: _level
+      value: 
+      objectReference: {fileID: 3232228542684844082}
+    - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
+      propertyPath: _follow
+      value: 
+      objectReference: {fileID: 3204367320352726324}
     - target: {fileID: 5804849042694651802, guid: 234e122141942324dbae257553da3aab, type: 3}
       propertyPath: m_Name
-      value: Camera Point
+      value: Camera Controller
       objectReference: {fileID: 0}
     - target: {fileID: 6851129620146797947, guid: 234e122141942324dbae257553da3aab, type: 3}
       propertyPath: m_Name
@@ -429,6 +438,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 144873982867131581, guid: 234e122141942324dbae257553da3aab, type: 3}
   m_PrefabInstance: {fileID: 3304462673617012840}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7048343673859228868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
+  m_PrefabInstance: {fileID: 3304462673617012840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b810f4f9500e1e944b5253c16272bd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3434638960966169847
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Localization;
 
 public enum ItemUse { None, Single, Infinite }
@@ -14,16 +13,21 @@ public class Item : ScriptableObject {
 
     public Sprite Icon => _icon;
     public string Name => _name.GetLocalizedString();
+    public string FileName => name; //"name" is the name of the object, aka the file
 
 
     //Get item
     public static Item GetItemFromName(string name) {
+        //Invalid name
+        if (string.IsNullOrEmpty(name)) return null;
+
+        //Look for item in resources
         return Resources.Load<Item>($"Items/{name}");
     }
 
     //Dictionary support
     public override string ToString() {
-        return name; //The name of the file
+        return FileName;
     }
 
     public override bool Equals(object obj) {

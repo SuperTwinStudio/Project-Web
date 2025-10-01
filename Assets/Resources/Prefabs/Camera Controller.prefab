@@ -58,8 +58,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1141763122774888124}
+  - component: {fileID: 5479597004360944812}
   m_Layer: 0
-  m_Name: Camera Point
+  m_Name: Camera Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +83,21 @@ Transform:
   - {fileID: 8083971421064998679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5479597004360944812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804849042694651802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b810f4f9500e1e944b5253c16272bd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: {fileID: 0}
+  _point: {fileID: 1141763122774888124}
+  _camera: {fileID: 3906178916977583015}
 --- !u!1 &6851129620146797947
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +111,7 @@ GameObject:
   - component: {fileID: 353334354724279492}
   - component: {fileID: 4817911844253341012}
   m_Layer: 0
-  m_Name: Camera (now for real)
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
