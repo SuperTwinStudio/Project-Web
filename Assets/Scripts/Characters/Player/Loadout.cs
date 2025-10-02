@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Botpa;
 using UnityEngine;
@@ -8,14 +9,12 @@ public class Loadout : MonoBehaviour, ISavable {
     [Header("Classes")]
     [SerializeField] private List<PlayerClass> classes = new();
 
-    private PlayerClass _currentClass;
+    private event Action<PlayerClass> OnClassChanged;
 
-    public PlayerClass CurrentClass { get => _currentClass; private set => _currentClass = value; }
+    public PlayerClass CurrentClass { get; private set; }
 
     //Money
-    private int _money = 0;
-
-    public int Money { get => _money; private set => _money = value; }
+    public int Money { get; private set; }
 
     //Treasures
     private readonly SerializableDictionary<Item, int> Treasures = new();
@@ -42,7 +41,25 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public void SelectClass(Item item) {
+        //Hide previous class
+        if (CurrentClass) CurrentClass.Show(false);
+
+        //Select class
         CurrentClass = GetClass(item);
+
+        //Show new class
+        if (CurrentClass) CurrentClass.Show(true);
+
+        //Call event
+        OnClassChanged?.Invoke(CurrentClass);
+    }
+
+    public void AddOnClassChanged(Action<PlayerClass> action) {
+        OnClassChanged += action;
+    }
+
+    public void RemoveOnClassChanged(Action<PlayerClass> action) {
+        OnClassChanged -= action;
     }
 
     //Using

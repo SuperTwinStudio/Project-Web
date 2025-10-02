@@ -13,15 +13,15 @@ public class GameMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference inventoryAction;
 
-    //Effects
-    [Header("Effects")]
+    //Health
+    [Header("Health")]
+    [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image damageIndicator;
 
-    //Ammo
-    [Header("Ammo")]
-    [SerializeField] private GameObject ammoIndicator;
-    [SerializeField] private TMP_Text ammoText;
-    [SerializeField] private Item ammoItem;
+    //Player class
+    [Header("Player class")]
+    [SerializeField] private Image classPrimaryIcon;
+    [SerializeField] private Image classSecondaryIcon;
 
 
       /*$$$$$   /$$                 /$$
@@ -62,28 +62,22 @@ public class GameMenu : Menu {
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-    //Effects
-    private void UpdateDamageIndicator(float health) {
+    //Health
+    private void UpdateHealthIndicator(float health) {
+        //Update health UI
+        healthText.SetText($"Health: {health}");
+
+        //Damage indicator effect
         Color color = damageIndicator.color;
         color.a = Ease.OutCubic(1f - health / Character.MAX_HEALTH);
         damageIndicator.color = color;
     }
 
-    //Ammo
-    private void UpdateAmmo() {
-        /*
-        //Gather info
-        int ammoCount = 0;//Arms.AmmoCount;
-        bool show = ammoCount >= 0;
-
-        //Update ammo
-        ammoIndicator.SetActive(show);
-        if (show) ammoText.SetText("" + ammoCount);
-        */
-    }
-
-    private void OnItemChanged(Item item, int amount) {
-        if (item == ammoItem) UpdateAmmo();
+    //Player class
+    private void OnClassChanged(PlayerClass c) {
+        //Update icons n stuff
+        classPrimaryIcon.sprite = c.Item.Icon;
+        classSecondaryIcon.sprite = c.Item.Icon;
     }
 
 
@@ -103,24 +97,21 @@ public class GameMenu : Menu {
         base.OnOpen();
         
         //Add player health change event & update
-        Level.Player.AddOnHealthChanged(UpdateDamageIndicator);
-        UpdateDamageIndicator(Level.Player.Health);
+        Player.AddOnHealthChanged(UpdateHealthIndicator);
+        UpdateHealthIndicator(Player.Health);
         
-        //Update ammo
-        UpdateAmmo();
-
-        //Add item change event
-        //Inventory.AddOnItemChanged(OnItemChanged);
+        //Add class change event
+        Player.Loadout.AddOnClassChanged(OnClassChanged);
     }
 
     protected override void OnClose() {
         base.OnClose();
         
         //Remove player health change event
-        Level.Player.AddOnHealthChanged(UpdateDamageIndicator);
+        Player.AddOnHealthChanged(UpdateHealthIndicator);
 
-        //Remove item change event
-        //Inventory.RemoveOnItemChanged(OnItemChanged);
+        //Remove class change event
+        Player.Loadout.RemoveOnClassChanged(OnClassChanged);
     }
 
 

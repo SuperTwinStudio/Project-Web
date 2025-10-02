@@ -71,11 +71,12 @@ public class Player : Character {
         lookInput = lookAction.ReadValue<Vector2>();
 
         //Try to get mouse world point in player plane
-        var plane = new Plane(Vector3.up, playerTransform.position);
+        var plane = new Plane(Vector3.up, playerTransform.position + new Vector3(0, controller.height / 2, 0));
         var ray = CameraController.Camera.ScreenPointToRay(lookInput);
         if (plane.Raycast(ray, out float distance)) {
             //Success -> Get point & look towards it
             var hitPoint = ray.GetPoint(distance);
+            hitPoint.y = playerTransform.position.y;
             playerTransform.LookAt(hitPoint, Vector3.up);
         }
 
@@ -117,7 +118,7 @@ public class Player : Character {
         |__/  |__/|__/  |__/|__/|__/ |__/ |__/ \_______/   \___/   \______*/
         
         //Animate
-        animator.SetBool("isMoving", isMoving);
+        //animator.SetBool("isMoving", isMoving);
     }
 
     private void StopMovement() {
