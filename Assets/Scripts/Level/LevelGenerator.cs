@@ -262,7 +262,7 @@ public class LevelGenerator : MonoBehaviour
 		}
 
 		// Generate secret rooms
-		if (def.GenerateSecretRooms && endRooms.Count != 0)
+		if (def.GenerateSecretRooms && def.SecretRooms.Length != 0 && endRooms.Count != 0)
 		{
 			int rand = Random.Range(0, 100);
 			if (rand < def.SecretRoomChance)
