@@ -102,6 +102,10 @@ public class Player : Character {
             controller.SimpleMove(moveSpeed * moveDirection);
         }
 
+        //Class actions
+        if (primaryAction.Triggered()) Loadout.UsePrimary();
+        if (secondaryAction.Triggered()) Loadout.UseSecondary();
+
 
           /*$$$$$            /$$                           /$$              
          /$$__  $$          |__/                          | $$              

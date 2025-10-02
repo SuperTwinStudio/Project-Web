@@ -21,6 +21,12 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<Item, int> Treasures = new();
 
 
+    //State
+    private void Start() {
+        //Testing
+        SelectClass(classes[0].Item);
+    }
+
     //Classes
     private PlayerClass GetClass(Item item) {
         foreach (var c in classes) {
@@ -37,6 +43,15 @@ public class Loadout : MonoBehaviour, ISavable {
 
     public void SelectClass(Item item) {
         CurrentClass = GetClass(item);
+    }
+
+    //Using
+    public void UsePrimary() {
+        if (CurrentClass) CurrentClass.UsePrimary();
+    }
+
+    public void UseSecondary() {
+        if (CurrentClass) CurrentClass.UseSecondary();
     }
 
     //Saving

@@ -266,9 +266,6 @@ namespace Botpa {
                 Method,
             }
 
-            //Target type
-            bool targetIsComponent = true;
-
             //Container size
             private float lineX = 0f;
             private float lineWidth = 0f;
@@ -303,7 +300,7 @@ namespace Botpa {
                 UnityEngine.Object script = (UnityEngine.Object) scriptProperty.boxedValue;
 
                 //Method
-                Rect methodRect = new(targetIsComponent ? lineX + lineWidth / 2 : lineX, scriptRect.y, targetIsComponent ? lineWidth / 2 : lineWidth, lineHeight);
+                Rect methodRect = new(lineX + lineWidth / 2, scriptRect.y, lineWidth / 2, lineHeight);
                 SerializedProperty methodProperty = property.FindPropertyRelative("method");
                 string method = methodProperty.stringValue;
 
@@ -323,13 +320,7 @@ namespace Botpa {
                 |__/      |__/|__/  \__/ \_______/|______*/ 
 
                 //Target changed -> Reset info
-                if (target != targetOld) {
-                    Reset(property, From.Target);
-
-                    //Reset method rect since script is not needed
-                    methodRect.x = targetIsComponent ? lineX + lineWidth / 2 : lineX;
-                    methodRect.width = targetIsComponent ? lineWidth / 2 : lineWidth;
-                }
+                if (target != targetOld) Reset(property, From.Target);
 
                 //No script but has method -> Reset info
                 if (script == null && method != "") Reset(property, From.Method);
@@ -372,12 +363,17 @@ namespace Botpa {
                                                   | $$                
                                                   |_*/                
                 
-                if (targetIsComponent && EditorGUI.DropdownButton(scriptRect, new GUIContent(GetScriptName(script)), FocusType.Passive)) {
-                    //No target or target is not a component
-                    if (!target || !targetIsComponent) return;
+                if (EditorGUI.DropdownButton(scriptRect, new GUIContent(GetScriptName(script)), FocusType.Passive)) {
+                    //Missing target
+                    if (!target) return;
 
                     //Select script
-                    Component[] components = ((Component) target).GetComponents<Component>();
+                    Component[] components;
+                    if (target is GameObject @object) {
+                        components = @object.GetComponents<Component>();
+                    } else {
+                        components = ((Component) target).GetComponents<Component>();
+                    }
 
                     //Create menu
                     GenericMenu menu = new();
@@ -407,8 +403,8 @@ namespace Botpa {
 
                 //Show method selection dropdown
                 if (EditorGUI.DropdownButton(methodRect, new GUIContent(method == "" ? "Method" : method), FocusType.Passive)) {
-                    //No target or script
-                    if (!target || script == null) return;
+                    //Missing target or script
+                    if (!target || !script) return;
 
                     //Select method
                     MethodInfo[] methods = script.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
@@ -491,38 +487,41 @@ namespace Botpa {
             }
 
             //Util
-            private void Reset(SerializedProperty property, From from) {      
+            private void Reset(SerializedProperty property, From from) {
+                //Get properties
                 SerializedProperty targetProperty = property.FindPropertyRelative("target");
                 SerializedProperty targetOldProperty = property.FindPropertyRelative("targetOld");
                 SerializedProperty scriptProperty = property.FindPropertyRelative("script");
                 SerializedProperty methodProperty = property.FindPropertyRelative("method");
                 SerializedProperty parametersProperty = property.FindPropertyRelative("parameters");
+                
+                //Get target object
+                var targetObject = targetProperty.objectReferenceValue;
 
                 //Reset
                 switch (from) {
                     case From.Target:
                         //Update target
                         targetOldProperty.objectReferenceValue = targetProperty.objectReferenceValue;
-                        targetIsComponent = targetProperty.objectReferenceValue.GetType().IsSubclassOf(typeof(Component));
 
                         //Update script
-                        scriptProperty.objectReferenceValue = targetIsComponent ? null : targetProperty.objectReferenceValue;
+                        scriptProperty.objectReferenceValue = targetObject ? null : targetProperty.objectReferenceValue;
 
                         //Reset method & parameters
-                        scriptProperty.objectReferenceValue = targetIsComponent ? null : targetProperty.objectReferenceValue;
+                        scriptProperty.objectReferenceValue = targetObject ? null : targetProperty.objectReferenceValue;
                         methodProperty.stringValue = "";
                         parametersProperty.ClearArray();
                         break;
 
                     case From.Script:
                         //Update script
-                        scriptProperty.objectReferenceValue = targetIsComponent ? null : targetProperty.objectReferenceValue;
+                        scriptProperty.objectReferenceValue = targetObject ? null : targetProperty.objectReferenceValue;
 
                         //Reset method & parameters
                         methodProperty.stringValue = "";
                         parametersProperty.ClearArray();
                         break;
-                    
+
                     case From.Method:
                         //Reset method & parameters
                         methodProperty.stringValue = "";
