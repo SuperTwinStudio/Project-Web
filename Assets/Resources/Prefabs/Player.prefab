@@ -201,7 +201,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8214366377953657043}
+  - {fileID: 6151232229092319239}
   m_Father: {fileID: 7162894825253278290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &126722947489078730
@@ -219,20 +221,39 @@ MonoBehaviour:
   _item: {fileID: 11400000, guid: cd0ad7cf8152c0b4aaddbb4eb872adab, type: 2}
   primaryCategory: 0
   primaryCooldown: 1
-  primaryRange: 1
-  primaryOnUse:
-    events:
-    - targetOld: {fileID: 126722947489078730}
-      target: {fileID: 126722947489078730}
-      script: {fileID: 126722947489078730}
-      method: SpawnProjectile
-      parameters:
-      - _name: prefab
-        _value:
-          typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          serializedValue: 
-          serializedObjectValue: {fileID: 0}
+  primaryDamage: 1
+  primaryOnUse: {fileID: 5355120954222836582}
+--- !u!1 &2677809244141699322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6151232229092319239}
+  m_Layer: 0
+  m_Name: Secondary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6151232229092319239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677809244141699322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 403091629657982332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4172667643584869072
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee531d3e9bbbe034b89d8576619385ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  classes: []
+  classes:
+  - {fileID: 126722947489078730}
 --- !u!1 &6097828882005455566
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +539,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3640619533063552155}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8659561243304648876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8214366377953657043}
+  - component: {fileID: 5355120954222836582}
+  m_Layer: 0
+  m_Name: Primary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8214366377953657043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659561243304648876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 403091629657982332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5355120954222836582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659561243304648876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3033adc50cec5646827fcd5bba52e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeScale: 0
+  _playOnStart: 0
+  _playOnStartDelay: 0
+  events:
+  - targetOld: {fileID: 5355120954222836582}
+    target: {fileID: 5355120954222836582}
+    script: {fileID: 5355120954222836582}
+    method: Wait
+    parameters:
+    - _name: seconds
+      _value:
+        typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        serializedValue: 0.2
+        serializedObjectValue: {fileID: 0}
+  - targetOld: {fileID: 1588256840926952031}
+    target: {fileID: 1588256840926952031}
+    script: {fileID: 126722947489078730}
+    method: AtackMelee
+    parameters:
+    - _name: range
+      _value:
+        typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        serializedValue: 0.5
+        serializedObjectValue: {fileID: 0}
+  - targetOld: {fileID: 5355120954222836582}
+    target: {fileID: 5355120954222836582}
+    script: {fileID: 5355120954222836582}
+    method: Wait
+    parameters:
+    - _name: seconds
+      _value:
+        typeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        serializedValue: 0.2
+        serializedObjectValue: {fileID: 0}
 --- !u!1 &8695033723301023732
 GameObject:
   m_ObjectHideFlags: 0

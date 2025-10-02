@@ -1,6 +1,5 @@
 using Botpa;
 using UnityEngine;
-using UnityEngine.Events;
 
 public enum PlayerClassCategory { Melee, Ranged, Effect }
 
@@ -16,8 +15,10 @@ public class PlayerClass : MonoBehaviour {
     [Header("Primary")]
     [SerializeField] private PlayerClassCategory primaryCategory = PlayerClassCategory.Melee;
     [SerializeField, Min(0)] private float primaryCooldown = 1;
-    [SerializeField, Min(0)] private float primaryRange = 1; //For melee by now
-    [SerializeField] private TurboEventGroup primaryOnUse = new();
+    [SerializeField, Min(0)] private float primaryDamage = 1;
+    [SerializeField] private Cinematic primaryOnUse;
+
+    public bool PrimaryCanUse => !primaryOnUse.isPlaying;
 
     //Primary
     /*
@@ -28,10 +29,28 @@ public class PlayerClass : MonoBehaviour {
 
     //Use
     public void UsePrimary() {
+        primaryOnUse.Play();
+    }
 
+    public void UseSecondary() {
+        //
     }
 
     //Actions
+    public void AtackMelee(float range) {
+        float radius = range / 2;
+        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, Vector3.zero, 0);
+        foreach (var collision in collisions) {
+            Debug.Log(collision.collider);
+
+            //Check if collision is a damageable
+            if (!collision.collider.TryGetComponent(out IDamageable damageable)) continue;
+
+            //Damage
+            damageable.Damage(primaryDamage);
+        }
+    }
+
     public void SpawnProjectile(GameObject prefab) {
 
     }
