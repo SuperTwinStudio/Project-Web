@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: Cerilla Centelleante
     m_Metadata:
       m_Items: []
+  - m_Id: 767371087056896
+    m_Localized: Grapadora
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

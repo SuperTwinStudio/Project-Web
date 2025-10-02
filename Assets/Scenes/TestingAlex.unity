@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1064669486}
   - component: {fileID: 1064669485}
   m_Layer: 0
-  m_Name: Enemy Test
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -951,7 +951,7 @@ GameObject:
   - component: {fileID: 1756212905}
   - component: {fileID: 1756212906}
   - component: {fileID: 1756212907}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}

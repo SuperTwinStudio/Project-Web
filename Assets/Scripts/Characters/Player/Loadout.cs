@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Loadout : MonoBehaviour, ISavable {
 
+    //Events
+    public delegate void ClassChanged(PlayerClass oldClass, PlayerClass newClass);
+
     //Classes
     [Header("Classes")]
     [SerializeField] private List<PlayerClass> classes = new();
 
-    private event Action<PlayerClass> OnClassChanged;
+    private event ClassChanged OnClassChanged;
 
     public PlayerClass CurrentClass { get; private set; }
 
@@ -20,10 +23,10 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<Item, int> Treasures = new();
 
 
-    //State
+    //Testing
     private void Start() {
-        //Testing
         SelectClass(classes[0].Item);
+        //SelectClass(classes[1].Item);
     }
 
     //Classes
@@ -45,20 +48,21 @@ public class Loadout : MonoBehaviour, ISavable {
         if (CurrentClass) CurrentClass.Show(false);
 
         //Select class
+        var oldClass = CurrentClass;
         CurrentClass = GetClass(item);
 
         //Show new class
         if (CurrentClass) CurrentClass.Show(true);
 
         //Call event
-        OnClassChanged?.Invoke(CurrentClass);
+        OnClassChanged?.Invoke(oldClass, CurrentClass);
     }
 
-    public void AddOnClassChanged(Action<PlayerClass> action) {
+    public void AddOnClassChanged(ClassChanged action) {
         OnClassChanged += action;
     }
 
-    public void RemoveOnClassChanged(Action<PlayerClass> action) {
+    public void RemoveOnClassChanged(ClassChanged action) {
         OnClassChanged -= action;
     }
 
@@ -104,7 +108,7 @@ public class Loadout : MonoBehaviour, ISavable {
         foreach (var pair in save.treasures) Treasures.Add(Item.GetItemFromName(pair.Key), pair.Value);
     }
 
-    [System.Serializable]
+    [Serializable]
     private class LoadoutInfo {
 
         //Classes

@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: weapon_match
     m_Metadata:
       m_Items: []
+  - m_Id: 767371087056896
+    m_Key: weapon_stapler
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

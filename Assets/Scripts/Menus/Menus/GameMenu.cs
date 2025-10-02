@@ -18,10 +18,29 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image damageIndicator;
 
-    //Player class
-    [Header("Player class")]
-    [SerializeField] private Image classPrimaryIcon;
-    [SerializeField] private Image classSecondaryIcon;
+    //Class
+    private PlayerClass currentClass;
+
+    //Primary
+    [Header("Primary")]
+    [SerializeField] private Image primaryIcon;
+    [SerializeField] private GameObject primaryValueBadge;
+    [SerializeField] private TMP_Text primaryValueText;
+    [SerializeField] private Image primaryCooldown;
+
+    //Secondary
+    [Header("Secondary")]
+    [SerializeField] private Image secondaryIcon;
+    [SerializeField] private GameObject secondaryValueBadge;
+    [SerializeField] private TMP_Text secondaryValueText;
+    [SerializeField] private Image secondaryCooldown;
+
+    //Passive
+    [Header("Passive")]
+    [SerializeField] private Image passiveIcon;
+    [SerializeField] private GameObject passiveValueBadge;
+    [SerializeField] private TMP_Text passiveValueText;
+    [SerializeField] private Image passiveCooldown;
 
 
       /*$$$$$   /$$                 /$$
@@ -36,6 +55,13 @@ public class GameMenu : Menu {
     private void Update() {
         //Update shaders that use unscaled time
         damageIndicator.material.SetFloat("_UnscaledTime", Time.unscaledTime);
+
+        //Update icons
+        if (currentClass) {
+            primaryCooldown.fillAmount = currentClass.PrimaryCooldown;
+            secondaryCooldown.fillAmount = currentClass.SecondaryCooldown;
+            passiveCooldown.fillAmount = currentClass.PassiveCooldown;
+        }
     }
 
     private void OnDestroy() {
@@ -74,10 +100,46 @@ public class GameMenu : Menu {
     }
 
     //Player class
-    private void OnClassChanged(PlayerClass c) {
-        //Update icons n stuff
-        classPrimaryIcon.sprite = c.Item.Icon;
-        classSecondaryIcon.sprite = c.Item.Icon;
+    private void OnClassChanged(PlayerClass oldClass, PlayerClass newClass) {
+        //Update current class
+        currentClass = newClass;
+
+        //Update icons
+        primaryIcon.sprite = newClass.Item.Icon;
+        secondaryIcon.sprite = newClass.Item.Icon;
+        passiveIcon.sprite = newClass.Item.Icon;
+
+        //Update cooldowns
+        primaryCooldown.fillAmount = newClass.PrimaryCooldown;
+        secondaryCooldown.fillAmount = newClass.SecondaryCooldown;
+        passiveCooldown.fillAmount = newClass.PassiveCooldown;
+
+        //Update values
+        OnClassValueChanged(ClassType.Primary, newClass.PrimaryValue);
+        OnClassValueChanged(ClassType.Secondary, newClass.SecondaryValue);
+        OnClassValueChanged(ClassType.Passive, newClass.PassiveValue);
+        if (oldClass) oldClass.RemoveOnValueChanged(OnClassValueChanged);
+        if (newClass) newClass.AddOnValueChanged(OnClassValueChanged);
+    }
+
+    private void OnClassValueChanged(ClassType type, int value) {
+        //Get badge
+        GameObject badge = type switch {
+            ClassType.Primary => primaryValueBadge,
+            ClassType.Secondary => secondaryValueBadge,
+            _ => passiveValueBadge,
+        };
+
+        //Get text
+        TMP_Text text = type switch {
+            ClassType.Primary => primaryValueText,
+            ClassType.Secondary => secondaryValueText,
+            _ => passiveValueText,
+        };
+
+        //Update value
+        badge.SetActive(value > 0);
+        text.SetText($"{value}");
     }
 
 
