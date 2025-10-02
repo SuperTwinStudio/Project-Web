@@ -10,8 +10,8 @@ public class PlayerClass : MonoBehaviour {
     //Components
     protected Player Player => Game.Current.Level.Player;
 
-    //Class
-    [Header("Class")]
+    //Info
+    [Header("Info")]
     [SerializeField] private Item _item;
     [SerializeField] private GameObject model;
     [SerializeField] protected Animator animator;
@@ -21,44 +21,46 @@ public class PlayerClass : MonoBehaviour {
     public Item Item => _item;
 
     //Primary
-    protected readonly Timer primaryTimer = new();
+    private readonly Timer primaryTimer = new();
+
+    protected virtual float PrimaryCooldownDuration => 1;
+
+    public virtual bool PrimaryAvailable => !primaryTimer.counting;
+    public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
     public int PrimaryValue { get; private set; } = 0;
 
-    public bool PrimaryAvailable => !primaryTimer.counting;
-
-    public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
-    public virtual float PrimaryCooldownDuration => 1;
-
     //Secondary
-    protected readonly Timer secondaryTimer = new();
+    private readonly Timer secondaryTimer = new();
+
+    protected virtual float SecondaryCooldownDuration => 1;
+
+    public virtual bool SecondaryAvailable => !secondaryTimer.counting;
+    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
 
     public int SecondaryValue { get; private set; } = 0;
 
-    public bool SecondaryAvailable => !secondaryTimer.counting;
-
-    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
-    public virtual float SecondaryCooldownDuration => 1;
-
     //Passive
-    protected readonly Timer passiveTimer = new();
+    private readonly Timer passiveTimer = new();
+
+    protected virtual float PassiveCooldownDuration => 1;
+
+    public virtual bool PassiveAvailable => !passiveTimer.counting;
+    public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
     public int PassiveValue { get; private set; } = 0;
-
-    public bool PassiveAvailable => !passiveTimer.counting;
-
-    public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
-    public virtual float PassiveCooldownDuration => 1;
 
 
     //State
     protected virtual void Start() {
+        //Reset timers
         primaryTimer.Count(0);
         secondaryTimer.Count(0);
         passiveTimer.Count(0);
     }
 
     public void Show(bool show) {
+        //Toggle model
         model.SetActive(show);
     }
 

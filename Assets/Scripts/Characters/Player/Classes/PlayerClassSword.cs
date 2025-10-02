@@ -5,24 +5,27 @@ public class PlayerClassSword : PlayerClass {
 
     //Primary
     [Header("Primary")]
+    [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
     [SerializeField, Min(0)] private float primaryDamage = 30;
-    [SerializeField, Min(0)] private float primaryRadius = 1;
-    [SerializeField, Min(0)] private float primaryDistance = 0;
+    [SerializeField, Min(0)] private float primaryAttackRadius = 1;
+    [SerializeField, Min(0)] private float primaryAttackDistance = 0;
 
-    public override float PrimaryCooldownDuration => 0.4f;
+    protected override float PrimaryCooldownDuration => _primaryCooldown;
 
     //Secondary
     [Header("Secondary")]
+    [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondaryDamage = 50;
 
-    public override float SecondaryCooldownDuration => 2;
+    protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
-    private int hits = 0;
-    private bool isPassiveHit = false;
+    [Header("Passive")]
+    [SerializeField, Min(2)] private int passiveStrongHit = 4;
+    [SerializeField, Min(1)] private float passiveDamageMult = 2f;
 
-    private const int PASSIVE_STONG_HIT = 4;
-    private const float PASSIVE_DAMAGE_MULT = 2;
+    private bool isPassiveHit = false;
+    private int hits = 0;
 
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
@@ -43,18 +46,30 @@ public class PlayerClassSword : PlayerClass {
         animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
         //Attack
-        bool hit = AtackForward(isPassiveHit ? primaryDamage * PASSIVE_DAMAGE_MULT : primaryDamage, 1, 0);
+        bool hit = AtackForward(
+            isPassiveHit ? primaryDamage * passiveDamageMult : primaryDamage, 
+            primaryAttackRadius, 
+            primaryAttackDistance
+        );
         
         //Next hit
-        hits = (hits + 1) % PASSIVE_STONG_HIT;
-        isPassiveHit = hits == PASSIVE_STONG_HIT - 1;
+        hits = (hits + 1) % passiveStrongHit;
+        isPassiveHit = hits == passiveStrongHit - 1;
         UpdatePassiveValue();
+    }
+
+    //Secondary
+    protected override IEnumerator OnUseSecondaryCoroutine() {
+        yield return null;
+
+        //Set cooldown on primary so it can't be used while using secondary
+        SetCooldown(ClassType.Primary, PrimaryCooldownDuration);
     }
 
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(ClassType.Passive, PASSIVE_STONG_HIT - hits - 1);
+        SetValue(ClassType.Passive, passiveStrongHit - hits - 1);
     }
 
 }

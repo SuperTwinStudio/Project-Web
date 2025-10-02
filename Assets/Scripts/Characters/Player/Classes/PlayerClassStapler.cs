@@ -8,18 +8,22 @@ public class PlayerClassStapler : PlayerClass {
     [SerializeField, Min(0)] private int maxAmmo = 10;
     [SerializeField, Min(0)] private float reloadDuration = 2f;
 
-    private int ammo = 10;
+    private int ammo = 0;
     private bool isReloading = false;
 
     //Primary
-    public override float PrimaryCooldownDuration => 0.3f;
+    [Header("Primary")]
+    [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
+
+    protected override float PrimaryCooldownDuration => _primaryCooldown;
 
     //Secondary
     [Header("Secondary")]
-    [SerializeField, Min(1)] private int secondaryBurst = 3;
+    [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
+    [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
     [SerializeField, Min(0)] private float secondaryBurstDelay = 0.1f;
 
-    public override float SecondaryCooldownDuration => 2;
+    protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
@@ -95,7 +99,7 @@ public class PlayerClassStapler : PlayerClass {
         SetCooldown(ClassType.Primary, PrimaryCooldownDuration);
 
         //Shoot burst
-        for (int i = 0; i < secondaryBurst; i++) {
+        for (int i = 0; i < secondaryBurstAmount; i++) {
             //Shoot
             Shoot();
 
