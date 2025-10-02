@@ -25,6 +25,7 @@ public class DebugRegen : MonoBehaviour
 		m_DebugDefinition.ItemRooms = m_RoomDonor.ItemRooms;
 		m_DebugDefinition.BossRooms = m_RoomDonor.BossRooms;
 		m_DebugDefinition.GenerateSecretRooms = m_RoomDonor.GenerateSecretRooms;
+		m_DebugDefinition.SecretRoomsHaveDoors = m_RoomDonor.SecretRoomsHaveDoors;
 		m_DebugDefinition.SecretRoomChance = m_RoomDonor.SecretRoomChance;
 		m_DebugDefinition.SecretRooms = m_RoomDonor.SecretRooms;
 	}

@@ -18,6 +18,7 @@ public class LevelDefinition : ScriptableObject
     public GameObject[] BossRooms;
 	[Space]
 	public bool GenerateSecretRooms;
+	public bool SecretRoomsHaveDoors;
 	public int SecretRoomChance;
 	public GameObject[] SecretRooms;
 }

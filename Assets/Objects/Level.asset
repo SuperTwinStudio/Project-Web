@@ -35,6 +35,7 @@ MonoBehaviour:
   - {fileID: 8749003393491955314, guid: b76f8595843e8114696bf78321a90568, type: 3}
   - {fileID: 6392718724888077867, guid: 4686f9ffbf2eb894d800f1f2f8e59727, type: 3}
   GenerateSecretRooms: 1
+  SecretRoomsHaveDoors: 1
   SecretRoomChance: 25
   SecretRooms:
   - {fileID: 30979004110380592, guid: 0808ad2ff4b69224a9e1a5b5fee68fb1, type: 3}
