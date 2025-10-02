@@ -261,6 +261,20 @@ public class LevelGenerator : MonoBehaviour
 			endRooms.RemoveAt(rand);
 		}
 
+		if (def.GenerateSecretRooms && endRooms.Count != 0)
+		{
+			int rand = Random.Range(0, 100);
+			if (rand < def.SecretRoomChance)
+			{
+				int roomObj = Random.Range(0, def.SecretRooms.Length);
+				int roomId = Random.Range(0, endRooms.Count);
+				Vector2Int selRoom = endRooms[roomId];
+
+				room = Instantiate(def.SecretRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+				room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
+			}
+		}
+
 		// Purge remaining end rooms
 		foreach (Vector2Int roomPos in endRooms)
 		{
