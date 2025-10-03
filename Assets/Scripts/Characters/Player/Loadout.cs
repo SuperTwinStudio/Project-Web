@@ -6,15 +6,15 @@ using UnityEngine;
 public class Loadout : MonoBehaviour, ISavable {
 
     //Events
-    public delegate void ClassChanged(PlayerClass oldClass, PlayerClass newClass);
+    public delegate void ClassChanged(Weapon oldWeapon, Weapon newWeapon);
 
-    //Classes
-    [Header("Classes")]
-    [SerializeField] private List<PlayerClass> classes = new();
+    //Weapons
+    [Header("Weapon")]
+    [SerializeField] private List<Weapon> weapons = new();
 
-    private event ClassChanged OnClassChanged;
+    private event ClassChanged OnWeaponChanged;
 
-    public PlayerClass CurrentClass { get; private set; }
+    public Weapon CurrentWeapon { get; private set; }
 
     //Money
     public int Money { get; private set; }
@@ -23,56 +23,60 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<Item, int> Treasures = new();
 
 
-    //Testing
+    //State
     private void Start() {
-        SelectClass(classes[0].Item);
-        //SelectClass(classes[1].Item);
+        //Select first weapon class if none selected
+        if (!CurrentWeapon) SelectWeapon(weapons[0].Item);
     }
 
-    //Classes
-    private PlayerClass GetClass(Item item) {
-        foreach (var c in classes) {
-            //Check class item
-            if (c.Item != item) continue;
+    //Weapon
+    private Weapon GetWeapon(Item item) {
+        foreach (var weapon in weapons) {
+            //Check weapon item
+            if (weapon.Item != item) continue;
 
-            //Found class -> Return it
-            return c;
+            //Found weapon -> Return it
+            return weapon;
         }
 
         //Not found
         return null;
     }
 
-    public void SelectClass(Item item) {
-        //Hide previous class
-        if (CurrentClass) CurrentClass.Show(false);
+    private void SelectWeapon(Weapon weapon) {
+        //Hide previous weapon
+        if (CurrentWeapon) CurrentWeapon.Show(false);
 
-        //Select class
-        var oldClass = CurrentClass;
-        CurrentClass = GetClass(item);
+        //Select weapon
+        var oldWeapon = CurrentWeapon;
+        CurrentWeapon = weapon;
 
-        //Show new class
-        if (CurrentClass) CurrentClass.Show(true);
+        //Show new weapon
+        if (CurrentWeapon) CurrentWeapon.Show(true);
 
         //Call event
-        OnClassChanged?.Invoke(oldClass, CurrentClass);
+        OnWeaponChanged?.Invoke(oldWeapon, CurrentWeapon);
     }
 
-    public void AddOnClassChanged(ClassChanged action) {
-        OnClassChanged += action;
+    public void SelectWeapon(Item item) {
+        SelectWeapon(GetWeapon(item));
     }
 
-    public void RemoveOnClassChanged(ClassChanged action) {
-        OnClassChanged -= action;
+    public void AddOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged += action;
+    }
+
+    public void RemoveOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged -= action;
     }
 
     //Using
     public void UsePrimary() {
-        if (CurrentClass) CurrentClass.UsePrimary();
+        if (CurrentWeapon) CurrentWeapon.UsePrimary();
     }
 
     public void UseSecondary() {
-        if (CurrentClass) CurrentClass.UseSecondary();
+        if (CurrentWeapon) CurrentWeapon.UseSecondary();
     }
 
     //Saving
@@ -84,7 +88,7 @@ public class Loadout : MonoBehaviour, ISavable {
         //Create save
         var save = new LoadoutInfo() {
             //Weapon
-            currentClass = CurrentClass ? CurrentClass.Item.FileName : "",
+            currentWeapon = CurrentWeapon ? CurrentWeapon.Item.FileName : "",
             //Money
             money = Money,
             //Treasures
@@ -97,8 +101,8 @@ public class Loadout : MonoBehaviour, ISavable {
         //Parse save
         var save = JsonUtility.FromJson<LoadoutInfo>(saveJson);
 
-        //Load class
-        SelectClass(Item.GetItemFromName(save.currentClass));
+        //Load weapon
+        SelectWeapon(Item.GetItemFromName(save.currentWeapon));
 
         //Load money
         Money = save.money;
@@ -111,8 +115,8 @@ public class Loadout : MonoBehaviour, ISavable {
     [Serializable]
     private class LoadoutInfo {
 
-        //Classes
-        public string currentClass;
+        //Weapon
+        public string currentWeapon;
 
         //Money
         public int money = 0;

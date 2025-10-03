@@ -3,9 +3,9 @@ using System.Collections;
 using Botpa;
 using UnityEngine;
 
-public enum ClassType { Primary, Secondary, Passive }
+public enum WeaponType { Primary, Secondary, Passive }
 
-public class PlayerClass : MonoBehaviour {
+public class Weapon : MonoBehaviour {
 
     //Components
     protected Player Player => Game.Current.Level.Player;
@@ -13,12 +13,18 @@ public class PlayerClass : MonoBehaviour {
     //Info
     [Header("Info")]
     [SerializeField] private Item _item;
+    [SerializeField] private Sprite _primaryIcon;
+    [SerializeField] private Sprite _secondaryIcon;
+    [SerializeField] private Sprite _passiveIcon;
     [SerializeField] private GameObject model;
     [SerializeField] protected Animator animator;
 
-    private event Action<ClassType, int> OnValueChanged;
+    private event Action<WeaponType, int> OnValueChanged;
 
     public Item Item => _item;
+    public Sprite PrimaryIcon => _primaryIcon;
+    public Sprite SecondaryIcon => _secondaryIcon;
+    public Sprite PassiveIcon => _passiveIcon;
 
     //Primary
     private readonly Timer primaryTimer = new();
@@ -65,11 +71,11 @@ public class PlayerClass : MonoBehaviour {
     }
 
     //Class
-    protected void SetCooldown(ClassType type, float cooldown) {
+    protected void SetCooldown(WeaponType type, float cooldown) {
         //Get timer
         Timer timer = type switch {
-            ClassType.Primary => primaryTimer,
-            ClassType.Secondary => secondaryTimer,
+            WeaponType.Primary => primaryTimer,
+            WeaponType.Secondary => secondaryTimer,
             _ => passiveTimer,
         };
 
@@ -77,23 +83,23 @@ public class PlayerClass : MonoBehaviour {
         if (timer.counting) {
             //Already counting -> Check if count is needed
             float remaining = timer.duration - timer.counted;
-            if (remaining < cooldown) timer.Count(cooldown);
+            if (remaining < cooldown) timer.Extend(cooldown - remaining);
         } else {
             //Not counting -> Count
             timer.Count(cooldown);
         }
     }
 
-    protected void SetValue(ClassType type, int value) {
+    protected void SetValue(WeaponType type, int value) {
         //Update value
         switch (type) {
-            case ClassType.Primary:
+            case WeaponType.Primary:
                 PrimaryValue = value;
                 break;
-            case ClassType.Secondary:
+            case WeaponType.Secondary:
                 SecondaryValue = value;
                 break;
-            case ClassType.Passive:
+            case WeaponType.Passive:
                 PassiveValue = value;
                 break;
         }
@@ -102,11 +108,11 @@ public class PlayerClass : MonoBehaviour {
         OnValueChanged?.Invoke(type, value);
     }
 
-    public void AddOnValueChanged(Action<ClassType, int> action) {
+    public void AddOnValueChanged(Action<WeaponType, int> action) {
         OnValueChanged += action;
     }
 
-    public void RemoveOnValueChanged(Action<ClassType, int> action) {
+    public void RemoveOnValueChanged(Action<WeaponType, int> action) {
         OnValueChanged -= action;
     }
 
@@ -115,7 +121,7 @@ public class PlayerClass : MonoBehaviour {
 
     protected virtual void OnUsePrimary() {
         //Start cooldown
-        SetCooldown(ClassType.Primary, PrimaryCooldownDuration);
+        SetCooldown(WeaponType.Primary, PrimaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUsePrimaryCoroutine());
@@ -130,7 +136,7 @@ public class PlayerClass : MonoBehaviour {
 
     protected virtual void OnUseSecondary() {
         //Start cooldown timer
-        SetCooldown(ClassType.Secondary, SecondaryCooldownDuration);
+        SetCooldown(WeaponType.Secondary, SecondaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUseSecondaryCoroutine());
@@ -141,12 +147,36 @@ public class PlayerClass : MonoBehaviour {
     }
 
     //Actions
-    public bool AtackForward(float damage, float radius, float distance) {
-        //Casts a sphere of <radius> radius in front of the player and moves it forward <distance> amount to check for collisions
+    public bool AtackForward(float damage, float radius, float forward) {
+        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
         bool hit = false;
 
         //Cast attack
-        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, distance);
+        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
+
+        //Check collisions
+        foreach (var collision in collisions) {
+            //Check if collision is a damageable
+            if (!collision.collider.TryGetComponent(out IDamageable damageable)) continue;
+
+            //Ignore player
+            if (damageable is Player) continue;
+
+            //Damage
+            damageable.Damage(damage);
+            hit = true;
+        }
+
+        //Return if anything was hit
+        return hit;
+    }
+
+    public bool AtackAround(float damage, float radius) {
+        //Casts a sphere of <radius> radius around the player to check for collisions
+        bool hit = false;
+
+        //Cast attack
+        var collisions = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
 
         //Check collisions
         foreach (var collision in collisions) {

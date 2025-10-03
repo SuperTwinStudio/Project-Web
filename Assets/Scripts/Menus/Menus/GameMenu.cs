@@ -18,8 +18,8 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image damageIndicator;
 
-    //Class
-    private PlayerClass currentClass;
+    //Weapon
+    private Weapon currentWeapon;
 
     //Primary
     [Header("Primary")]
@@ -56,11 +56,11 @@ public class GameMenu : Menu {
         //Update shaders that use unscaled time
         damageIndicator.material.SetFloat("_UnscaledTime", Time.unscaledTime);
 
-        //Update icons
-        if (currentClass) {
-            primaryCooldown.fillAmount = currentClass.PrimaryCooldown;
-            secondaryCooldown.fillAmount = currentClass.SecondaryCooldown;
-            passiveCooldown.fillAmount = currentClass.PassiveCooldown;
+        //Update icons cooldown
+        if (currentWeapon) {
+            primaryCooldown.fillAmount = currentWeapon.PrimaryCooldown;
+            secondaryCooldown.fillAmount = currentWeapon.SecondaryCooldown;
+            passiveCooldown.fillAmount = currentWeapon.PassiveCooldown;
         }
     }
 
@@ -99,41 +99,41 @@ public class GameMenu : Menu {
         damageIndicator.color = color;
     }
 
-    //Player class
-    private void OnClassChanged(PlayerClass oldClass, PlayerClass newClass) {
-        //Update current class
-        currentClass = newClass;
+    //Weapon
+    private void OnWeaponChanged(Weapon oldWeapon, Weapon newWeapon) {
+        //Update current weapon
+        currentWeapon = newWeapon;
 
         //Update icons
-        primaryIcon.sprite = newClass.Item.Icon;
-        secondaryIcon.sprite = newClass.Item.Icon;
-        passiveIcon.sprite = newClass.Item.Icon;
+        primaryIcon.sprite = newWeapon.PrimaryIcon;
+        secondaryIcon.sprite = newWeapon.SecondaryIcon;
+        passiveIcon.sprite = newWeapon.PassiveIcon;
 
         //Update cooldowns
-        primaryCooldown.fillAmount = newClass.PrimaryCooldown;
-        secondaryCooldown.fillAmount = newClass.SecondaryCooldown;
-        passiveCooldown.fillAmount = newClass.PassiveCooldown;
+        primaryCooldown.fillAmount = newWeapon.PrimaryCooldown;
+        secondaryCooldown.fillAmount = newWeapon.SecondaryCooldown;
+        passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
 
         //Update values
-        OnClassValueChanged(ClassType.Primary, newClass.PrimaryValue);
-        OnClassValueChanged(ClassType.Secondary, newClass.SecondaryValue);
-        OnClassValueChanged(ClassType.Passive, newClass.PassiveValue);
-        if (oldClass) oldClass.RemoveOnValueChanged(OnClassValueChanged);
-        if (newClass) newClass.AddOnValueChanged(OnClassValueChanged);
+        OnWeaponValueChanged(WeaponType.Primary, newWeapon.PrimaryValue);
+        OnWeaponValueChanged(WeaponType.Secondary, newWeapon.SecondaryValue);
+        OnWeaponValueChanged(WeaponType.Passive, newWeapon.PassiveValue);
+        if (oldWeapon) oldWeapon.RemoveOnValueChanged(OnWeaponValueChanged);
+        if (newWeapon) newWeapon.AddOnValueChanged(OnWeaponValueChanged);
     }
 
-    private void OnClassValueChanged(ClassType type, int value) {
+    private void OnWeaponValueChanged(WeaponType type, int value) {
         //Get badge
         GameObject badge = type switch {
-            ClassType.Primary => primaryValueBadge,
-            ClassType.Secondary => secondaryValueBadge,
+            WeaponType.Primary => primaryValueBadge,
+            WeaponType.Secondary => secondaryValueBadge,
             _ => passiveValueBadge,
         };
 
         //Get text
         TMP_Text text = type switch {
-            ClassType.Primary => primaryValueText,
-            ClassType.Secondary => secondaryValueText,
+            WeaponType.Primary => primaryValueText,
+            WeaponType.Secondary => secondaryValueText,
             _ => passiveValueText,
         };
 
@@ -162,8 +162,8 @@ public class GameMenu : Menu {
         Player.AddOnHealthChanged(UpdateHealthIndicator);
         UpdateHealthIndicator(Player.Health);
         
-        //Add class change event
-        Player.Loadout.AddOnClassChanged(OnClassChanged);
+        //Add weapon change event
+        Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);
     }
 
     protected override void OnClose() {
@@ -172,8 +172,8 @@ public class GameMenu : Menu {
         //Remove player health change event
         Player.AddOnHealthChanged(UpdateHealthIndicator);
 
-        //Remove class change event
-        Player.Loadout.RemoveOnClassChanged(OnClassChanged);
+        //Remove weapon change event
+        Player.Loadout.RemoveOnWeaponChanged(OnWeaponChanged);
     }
 
 

@@ -23,14 +23,15 @@ public class Player : Character {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Loadout _loadout;
     [SerializeField] private CharacterController controller;
+    [SerializeField] private Loadout _loadout;
     [SerializeField] private GameObject model;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator _animator;
 
     private Transform cameraTransform;
 
     public Loadout Loadout => _loadout;
+    public Animator Animator => _animator;
 
     //Movement
     [Header("Movement")]
@@ -89,7 +90,7 @@ public class Player : Character {
         | $$\  $ | $$| $$  | $$  \  $$$/ | $$_____/
         | $$ \/  | $$|  $$$$$$/   \  $/  |  $$$$$$$
         |__/     |__/ \______/     \_/    \______*/
-        
+
         //Get move input
         moveInput = moveAction.ReadValue<Vector2>();
         isMoving = moveInput.sqrMagnitude > 0;
@@ -102,6 +103,16 @@ public class Player : Character {
             //Move in move direction
             controller.SimpleMove(moveSpeed * moveDirection);
         }
+
+
+          /*$$$$$              /$$     /$$
+         /$$__  $$            | $$    |__/
+        | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
+        | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
+        | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
+        | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
+        | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
+        |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
         //Class actions
         if (primaryAction.Triggered()) Loadout.UsePrimary();
@@ -116,14 +127,14 @@ public class Player : Character {
         | $$  | $$| $$  | $$| $$| $$ | $$ | $$ /$$__  $$  | $$ /$$| $$_____/
         | $$  | $$| $$  | $$| $$| $$ | $$ | $$|  $$$$$$$  |  $$$$/|  $$$$$$$
         |__/  |__/|__/  |__/|__/|__/ |__/ |__/ \_______/   \___/   \______*/
-        
+
         //Animate
-        //animator.SetBool("isMoving", isMoving);
+        //Animator.SetBool("isMoving", isMoving);
     }
 
     private void StopMovement() {
         isMoving = false;
-        animator.SetBool("isMoving", isMoving);
+        Animator.SetBool("isMoving", isMoving);
     }
 
     //Health

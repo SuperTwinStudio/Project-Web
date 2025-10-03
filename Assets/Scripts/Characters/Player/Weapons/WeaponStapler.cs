@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerClassStapler : PlayerClass {
+public class WeaponStapler : Weapon {
 
     //Ammo
     [Header("Ammo")]
+    [SerializeField, Min(0)] private GameObject bulletPrefab;
     [SerializeField, Min(0)] private int maxAmmo = 10;
     [SerializeField, Min(0)] private float reloadDuration = 2f;
 
@@ -14,12 +15,14 @@ public class PlayerClassStapler : PlayerClass {
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
+    [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
     //Secondary
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
+    [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
     [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
     [SerializeField, Min(0)] private float secondaryBurstDelay = 0.1f;
 
@@ -40,7 +43,7 @@ public class PlayerClassStapler : PlayerClass {
 
     private void SetAmmo(int newAmmo) {
         ammo = newAmmo;
-        SetValue(ClassType.Primary, ammo);
+        SetValue(WeaponType.Primary, ammo);
     }
 
     private void Shoot() {
@@ -73,8 +76,8 @@ public class PlayerClassStapler : PlayerClass {
         isReloading = true;
         
         //Add reload cooldown to primary and secondary
-        SetCooldown(ClassType.Primary, reloadDuration);
-        SetCooldown(ClassType.Secondary, reloadDuration);
+        SetCooldown(WeaponType.Primary, reloadDuration);
+        SetCooldown(WeaponType.Secondary, reloadDuration);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
@@ -83,6 +86,9 @@ public class PlayerClassStapler : PlayerClass {
     //Primary
     protected override IEnumerator OnUsePrimaryCoroutine() {
         yield return null;
+
+        //Set cooldown on secondary so it can't be used while using primary
+        SetCooldown(WeaponType.Secondary, primarySecondaryCooldown);
 
         //Shoot
         Shoot();
@@ -96,7 +102,7 @@ public class PlayerClassStapler : PlayerClass {
         yield return null;
 
         //Set cooldown on primary so it can't be used while using secondary
-        SetCooldown(ClassType.Primary, PrimaryCooldownDuration);
+        SetCooldown(WeaponType.Primary, secondaryPrimaryCooldown);
 
         //Shoot burst
         for (int i = 0; i < secondaryBurstAmount; i++) {
