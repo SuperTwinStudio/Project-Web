@@ -20,6 +20,10 @@ public class Player : Character {
     [SerializeField] private InputActionReference secondaryAction;
 
     private Vector2 moveInput, lookInput;
+    private readonly Timer primaryCoyote = new();
+    private readonly Timer secondaryCoyote = new();
+
+    private const float INPUT_COYOTE_DURATION = 0.25f;
 
     //Components
     [Header("Components")]
@@ -114,9 +118,14 @@ public class Player : Character {
         | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
         |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-        //Class actions
-        if (primaryAction.Triggered()) Loadout.UsePrimary();
-        if (secondaryAction.Triggered()) Loadout.UseSecondary();
+        //Check for action inputs
+        if (primaryAction.Triggered()) primaryCoyote.Count(INPUT_COYOTE_DURATION);
+        if (secondaryAction.Triggered()) secondaryCoyote.Count(INPUT_COYOTE_DURATION);
+
+        //Check if an action should be performed
+        if (primaryCoyote.counting && Loadout.UsePrimary()) primaryCoyote.Reset();
+        if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
+        
 
 
           /*$$$$$            /$$                           /$$              

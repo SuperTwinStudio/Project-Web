@@ -72,12 +72,12 @@ public class Loadout : MonoBehaviour, ISavable {
         OnWeaponChanged -= action;
     }
 
-    public void UsePrimary() {
-        if (CurrentWeapon) CurrentWeapon.UsePrimary();
+    public bool UsePrimary() {
+        return CurrentWeapon && CurrentWeapon.UsePrimary();
     }
 
-    public void UseSecondary() {
-        if (CurrentWeapon) CurrentWeapon.UseSecondary();
+    public bool UseSecondary() {
+        return CurrentWeapon && CurrentWeapon.UseSecondary();
     }
 
     //Treasures

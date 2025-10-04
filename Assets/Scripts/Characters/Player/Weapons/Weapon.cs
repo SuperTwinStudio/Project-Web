@@ -127,8 +127,10 @@ public class Weapon : MonoBehaviour {
         StartCoroutine(OnUsePrimaryCoroutine());
     }
 
-    public void UsePrimary() {
-        if (PrimaryAvailable) OnUsePrimary();
+    public bool UsePrimary() {
+        if (!PrimaryAvailable) return false;
+        OnUsePrimary();
+        return true;
     }
 
     //Secondary
@@ -142,8 +144,10 @@ public class Weapon : MonoBehaviour {
         StartCoroutine(OnUseSecondaryCoroutine());
     }
 
-    public void UseSecondary() {
-        if (SecondaryAvailable) OnUseSecondary();
+    public bool UseSecondary() {
+        if (!SecondaryAvailable) return false;
+        OnUseSecondary();
+        return true;
     }
 
     //Actions
