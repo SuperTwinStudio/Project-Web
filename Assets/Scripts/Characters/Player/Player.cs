@@ -1,8 +1,9 @@
+using System;
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character {
+public class Player : Character, ISavable {
 
     //Level
     [Header("Level")]
@@ -20,6 +21,10 @@ public class Player : Character {
     [SerializeField] private InputActionReference secondaryAction;
 
     private Vector2 moveInput, lookInput;
+    private readonly Timer primaryCoyote = new();
+    private readonly Timer secondaryCoyote = new();
+
+    private const float INPUT_COYOTE_DURATION = 0.25f;
 
     //Components
     [Header("Components")]
@@ -114,9 +119,14 @@ public class Player : Character {
         | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
         |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-        //Class actions
-        if (primaryAction.Triggered()) Loadout.UsePrimary();
-        if (secondaryAction.Triggered()) Loadout.UseSecondary();
+        //Check for action inputs
+        if (primaryAction.Triggered()) primaryCoyote.Count(INPUT_COYOTE_DURATION);
+        if (secondaryAction.Triggered()) secondaryCoyote.Count(INPUT_COYOTE_DURATION);
+
+        //Check if an action should be performed
+        if (primaryCoyote.counting && Loadout.UsePrimary()) primaryCoyote.Reset();
+        if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
+        
 
 
           /*$$$$$            /$$                           /$$              
@@ -134,7 +144,7 @@ public class Player : Character {
 
     private void StopMovement() {
         isMoving = false;
-        Animator.SetBool("isMoving", isMoving);
+        //Animator.SetBool("isMoving", isMoving);
     }
 
     //Health
@@ -173,6 +183,38 @@ public class Player : Character {
     private void OnMenuTransitionStart(string oldMenu, string newMenu) {
         //Menu transition started -> Stop player
         StopMovement();
+    }
+
+    //Saving
+    public string OnSave() {
+        return JsonUtility.ToJson(new PlayerSave() {
+            //Health
+            health = Health,
+            //Loadout
+            loadout = Loadout.OnSave()
+        });
+    }
+
+    public void OnLoad(string saveJson) {
+        //Parse save
+        var save = JsonUtility.FromJson<PlayerSave>(saveJson);
+
+        //Load health
+        Health = save.health;
+
+        //Load loadout
+        Loadout.OnLoad(save.loadout);
+    }
+
+    [Serializable]
+    private class PlayerSave {
+
+        //Health
+        public float health = MAX_HEALTH;
+
+        //Loadout
+        public string loadout = "{}";
+
     }
 
 }

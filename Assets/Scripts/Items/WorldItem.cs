@@ -14,7 +14,7 @@ public class WorldItem : MonoBehaviour {
         if (!other.CompareTag("Player") || !other.TryGetComponent(out Player player)) return;
 
         //Add item to player
-        player.Loadout.AddTreasure(item, amount);
+        player.Loadout.AddToInventory(item, amount);
 
         //Destroy self
         Destroy(gameObject);

@@ -26,11 +26,26 @@ public class Level : MonoBehaviour {
     public CameraController CameraController => _cameraController;
     public Player Player => _player;
 
+    //Level
+    [Header("Level")]
+    [SerializeField] private bool _isLobby;
+
+    public bool IsLobby => _isLobby;
+
 
     //State
     private void Awake() {
         //Assign player to camera follow point
         CameraController.Follow = Player.transform;
+    }
+
+    //Scene
+    public void EnterDungeon() {
+        Game.LoadScene("AlexDungeon");
+    }
+
+    public void ExitToLobby() {
+        Game.LoadScene("AlexLobby");
     }
 
 }

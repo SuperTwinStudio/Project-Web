@@ -19,10 +19,12 @@ public class Loadout : MonoBehaviour, ISavable {
     //Money
     public int Money { get; private set; }
 
-    //Treasures
-    private readonly SerializableDictionary<Item, int> _treasures = new();
+    //Inventory
+    private readonly SerializableDictionary<Item, int> _inventory = new();
 
-    public IReadOnlyDictionary<Item, int> Treasures => _treasures;
+    public int InventoryValue { get; private set; }
+
+    public IReadOnlyDictionary<Item, int> Inventory => _inventory;
 
 
     //State
@@ -72,59 +74,63 @@ public class Loadout : MonoBehaviour, ISavable {
         OnWeaponChanged -= action;
     }
 
-    public void UsePrimary() {
-        if (CurrentWeapon) CurrentWeapon.UsePrimary();
+    public bool UsePrimary() {
+        return CurrentWeapon && CurrentWeapon.UsePrimary();
     }
 
-    public void UseSecondary() {
-        if (CurrentWeapon) CurrentWeapon.UseSecondary();
+    public bool UseSecondary() {
+        return CurrentWeapon && CurrentWeapon.UseSecondary();
     }
 
-    //Treasures
-    public int ClearTreasures() {
-        //Calculate treasures value
-        int value = 0;
-        foreach (var treasure in Treasures.Keys) value += treasure.Value;
+    //Inventory
+    public void ClearInventory() {
+        //Empty dictionary
+        _inventory.Clear();
 
-        //Clear treasures
-        _treasures.Clear();
-
-        //Return emptied treasures value
-        return value;
+        //Reset value
+        InventoryValue = 0;
     }
 
-    public void AddTreasure(Item treasure, int amount) {
-        //Invalid treasure
-        if (treasure == null) return;
+    public void AddToInventory(Item item, int amount) {
+        //Invalid item
+        if (!item) return;
 
-        //Check if treasures has treasure
-        if (Treasures.ContainsKey(treasure))
-            _treasures[treasure] += amount;
+        //Add item
+        if (Inventory.ContainsKey(item))
+            _inventory[item] += amount;
         else
-            _treasures[treasure] = amount;
+            _inventory[item] = amount;
+
+        //Update value
+        InventoryValue += item.Value * amount;
+    }
+
+    public void SellInventory() {
+        Money += InventoryValue;
+        ClearInventory();
     }
 
     //Saving
     public string OnSave() {
-        //Create treasures dictionary
-        var treasures = new SerializableDictionary<string, int>();
-        foreach (var pair in Treasures) treasures.Add(pair.Key.FileName, pair.Value);
+        //Create inventory save
+        var inventory = new SerializableDictionary<string, int>();
+        foreach (var pair in Inventory) inventory.Add(pair.Key.FileName, pair.Value);
 
         //Create save
-        var save = new LoadoutInfo() {
+        var save = new LoadoutSave() {
             //Weapon
             currentWeapon = CurrentWeapon ? CurrentWeapon.Item.FileName : "",
             //Money
             money = Money,
-            //Treasures
-            treasures = treasures,
+            //Inventory
+            inventory = inventory
         };
         return JsonUtility.ToJson(save);
     }
 
     public void OnLoad(string saveJson) {
         //Parse save
-        var save = JsonUtility.FromJson<LoadoutInfo>(saveJson);
+        var save = JsonUtility.FromJson<LoadoutSave>(saveJson);
 
         //Load weapon
         SelectWeapon(Item.GetItemFromName(save.currentWeapon));
@@ -132,23 +138,26 @@ public class Loadout : MonoBehaviour, ISavable {
         //Load money
         Money = save.money;
 
-        //Load treasures
-        ClearTreasures();
-        foreach (var pair in save.treasures) AddTreasure(Item.GetItemFromName(pair.Key), pair.Value);
+        //Load inventory
+        ClearInventory();
+        foreach (var pair in save.inventory) AddToInventory(Item.GetItemFromName(pair.Key), pair.Value);
+
+        //Sell inventory if in lobby
+        if (Game.Current.Level.IsLobby) SellInventory();
     }
 
     [Serializable]
-    private class LoadoutInfo {
+    private class LoadoutSave {
 
         //Weapon
-        public string currentWeapon;
+        public string currentWeapon = "";
 
         //Money
         public int money = 0;
 
-        //Treasures
-        public SerializableDictionary<string, int> treasures = new();
-    
+        //Inventory
+        public SerializableDictionary<string, int> inventory = new();
+
     }
 
 }

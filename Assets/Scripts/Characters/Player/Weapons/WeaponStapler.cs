@@ -29,8 +29,8 @@ public class WeaponStapler : Weapon {
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
-    [Header("Passive")]
-    [SerializeField, Min(0)] private float passiveMaxDistance = 2;
+    //[Header("Passive")]
+    //[SerializeField, Min(0)] private float passiveMaxDistance = 2;
 
 
     //State
