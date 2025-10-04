@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8538115829238214355}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   primaryDamage: 1
   primaryAttackRadius: 1
   primaryAttackForward: 0
-  _secondaryCooldown: 2
+  _secondaryCooldown: 2.5
   secondaryPrimaryCooldown: 0.5
   secondaryDamage: 50
   secondarySpinRadius: 2.5

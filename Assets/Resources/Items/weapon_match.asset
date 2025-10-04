@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38692aa9f04acc41aa83332b589f8b3, type: 3}
-  m_Name: Match
+  m_Name: weapon_match
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
   _name:

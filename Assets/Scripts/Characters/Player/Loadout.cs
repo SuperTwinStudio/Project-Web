@@ -20,7 +20,9 @@ public class Loadout : MonoBehaviour, ISavable {
     public int Money { get; private set; }
 
     //Treasures
-    private readonly SerializableDictionary<Item, int> Treasures = new();
+    private readonly SerializableDictionary<Item, int> _treasures = new();
+
+    public IReadOnlyDictionary<Item, int> Treasures => _treasures;
 
 
     //State
@@ -70,13 +72,36 @@ public class Loadout : MonoBehaviour, ISavable {
         OnWeaponChanged -= action;
     }
 
-    //Using
     public void UsePrimary() {
         if (CurrentWeapon) CurrentWeapon.UsePrimary();
     }
 
     public void UseSecondary() {
         if (CurrentWeapon) CurrentWeapon.UseSecondary();
+    }
+
+    //Treasures
+    public int ClearTreasures() {
+        //Calculate treasures value
+        int value = 0;
+        foreach (var treasure in Treasures.Keys) value += treasure.Value;
+
+        //Clear treasures
+        _treasures.Clear();
+
+        //Return emptied treasures value
+        return value;
+    }
+
+    public void AddTreasure(Item treasure, int amount) {
+        //Invalid treasure
+        if (treasure == null) return;
+
+        //Check if treasures has treasure
+        if (Treasures.ContainsKey(treasure))
+            _treasures[treasure] += amount;
+        else
+            _treasures[treasure] = amount;
     }
 
     //Saving
@@ -108,8 +133,8 @@ public class Loadout : MonoBehaviour, ISavable {
         Money = save.money;
 
         //Load treasures
-        Treasures.Clear();
-        foreach (var pair in save.treasures) Treasures.Add(Item.GetItemFromName(pair.Key), pair.Value);
+        ClearTreasures();
+        foreach (var pair in save.treasures) AddTreasure(Item.GetItemFromName(pair.Key), pair.Value);
     }
 
     [Serializable]
