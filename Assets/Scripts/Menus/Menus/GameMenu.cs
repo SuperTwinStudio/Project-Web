@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameMenu : Menu {
     
     //Prefab
-    public override string Name => "Game";
+    public override string Name => MenusList.Game;
 
     //Input
     [Header("Input")]
@@ -101,6 +101,9 @@ public class GameMenu : Menu {
 
     //Weapon
     private void OnWeaponChanged(Weapon oldWeapon, Weapon newWeapon) {
+        //No weapon -> Ignore
+        if (!newWeapon) return;
+
         //Update current weapon
         currentWeapon = newWeapon;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PauseMenu : Menu {
   
     //Prefab
-    public override string Name => "Pause";
+    public override string Name => MenusList.Pause;
 
 
       /*$$$$$              /$$     /$$

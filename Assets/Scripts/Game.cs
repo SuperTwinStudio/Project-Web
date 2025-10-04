@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Game : MonoBehaviour {
+public class Game : MonoBehaviour, ISavable {
 
     //Singleton
     public static Game Current { get; private set; }
@@ -23,8 +25,11 @@ public class Game : MonoBehaviour {
     //Pause & Cursor
     private static readonly List<object> pause = new();
     private static readonly List<object> cursor = new();
-    
+
     public static bool IsPaused { get; private set; } = false;
+
+    //Saving
+    private string save = "{}";
 
 
     //State
@@ -34,7 +39,7 @@ public class Game : MonoBehaviour {
             //Another game exists -> Destroy this one
             Current.OnNewGame(this);
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
@@ -53,8 +58,14 @@ public class Game : MonoBehaviour {
         Unpause();
         UnhideCursor();
 
+        //Check for a level
+        if (!Level) return;
+
         //Init menus with new game menus
         Level.MenuManager.Init(newGame.Level.MenuManager);
+
+        //Load game state
+        OnLoad(save);
     }
 
     //Pause & Cursor
@@ -83,7 +94,7 @@ public class Game : MonoBehaviour {
         if (!pause.Contains(obj)) pause.Add(obj);
         UpdateIsPaused();
     }
-    
+
     public static void Unpause(object obj) {
         pause.Remove(obj);
         UpdateIsPaused();
@@ -93,10 +104,50 @@ public class Game : MonoBehaviour {
         if (!cursor.Contains(obj)) cursor.Add(obj);
         UpdateCursorVisibility();
     }
-    
+
     public static void UnhideCursor(object obj) {
         cursor.Remove(obj);
         UpdateCursorVisibility();
+    }
+
+    //Scenes
+    public void LoadScene(string name) {
+        //Save game so new scene keeps info
+        save = OnSave();
+
+        //Load scene
+        SceneManager.LoadScene(name);
+    }
+
+    //Saving
+    public string OnSave() {
+        //Check for a level
+        if (!Level) return "";
+
+        //Create save
+        return JsonUtility.ToJson(new GameSave() {
+            //Player
+            player = Level.Player.OnSave()
+        });
+    }
+
+    public void OnLoad(string saveJson) {
+        //Parse save
+        var save = JsonUtility.FromJson<GameSave>(saveJson);
+
+        //Check for a level
+        if (!Level) return;
+
+        //Load player
+        Level.Player.OnLoad(save.player);
+    }
+
+    [Serializable]
+    private class GameSave {
+
+        //Player
+        public string player = "{}";
+
     }
 
 }

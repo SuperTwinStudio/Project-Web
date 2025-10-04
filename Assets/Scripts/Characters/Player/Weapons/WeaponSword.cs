@@ -77,7 +77,7 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackAround(
-            isPassiveHit ? primaryDamage * passiveDamageMult : primaryDamage, 
+            secondaryDamage, 
             secondarySpinRadius
         );
     }

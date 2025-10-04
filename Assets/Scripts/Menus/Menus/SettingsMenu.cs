@@ -1,7 +1,7 @@
 public class SettingsMenu : Menu {
     
     //Prefab
-    public override string Name => "Settings";
+    public override string Name => MenusList.Settings;
 
 
      /*$$$$$$$                            /$$

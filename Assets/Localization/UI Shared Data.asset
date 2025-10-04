@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: UI
   m_TableCollectionNameGuidString: 99c271c4294dded488381bec0342cc95
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1416761367728128
+    m_Key: inventory_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1416883291951104
+    m_Key: inventory_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446249170341888
+    m_Key: shop_title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

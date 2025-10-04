@@ -4,7 +4,7 @@ using UnityEngine;
 public class HomeMenu : Menu {
     
     //Prefab
-    public override string Name => "Home";
+    public override string Name => MenusList.Home;
 
 
       /*$$$$$   /$$                 /$$

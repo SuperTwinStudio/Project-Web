@@ -1,8 +1,9 @@
+using System;
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character {
+public class Player : Character, ISavable {
 
     //Level
     [Header("Level")]
@@ -143,7 +144,7 @@ public class Player : Character {
 
     private void StopMovement() {
         isMoving = false;
-        Animator.SetBool("isMoving", isMoving);
+        //Animator.SetBool("isMoving", isMoving);
     }
 
     //Health
@@ -182,6 +183,38 @@ public class Player : Character {
     private void OnMenuTransitionStart(string oldMenu, string newMenu) {
         //Menu transition started -> Stop player
         StopMovement();
+    }
+
+    //Saving
+    public string OnSave() {
+        return JsonUtility.ToJson(new PlayerSave() {
+            //Health
+            health = Health,
+            //Loadout
+            loadout = Loadout.OnSave()
+        });
+    }
+
+    public void OnLoad(string saveJson) {
+        //Parse save
+        var save = JsonUtility.FromJson<PlayerSave>(saveJson);
+
+        //Load health
+        Health = save.health;
+
+        //Load loadout
+        Loadout.OnLoad(save.loadout);
+    }
+
+    [Serializable]
+    private class PlayerSave {
+
+        //Health
+        public float health = MAX_HEALTH;
+
+        //Loadout
+        public string loadout = "{}";
+
     }
 
 }
