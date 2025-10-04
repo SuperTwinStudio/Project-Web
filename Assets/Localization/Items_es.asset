@@ -26,6 +26,18 @@ MonoBehaviour:
     m_Localized: Cerilla Centelleante
     m_Metadata:
       m_Items: []
+  - m_Id: 767371087056896
+    m_Localized: Grapadora
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1381918873358336
+    m_Localized: Bolsa de Dinero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1381933679251456
+    m_Localized: Copa Dorada
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

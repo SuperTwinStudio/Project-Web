@@ -13,15 +13,34 @@ public class GameMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference inventoryAction;
 
-    //Effects
-    [Header("Effects")]
+    //Health
+    [Header("Health")]
+    [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image damageIndicator;
 
-    //Ammo
-    [Header("Ammo")]
-    [SerializeField] private GameObject ammoIndicator;
-    [SerializeField] private TMP_Text ammoText;
-    [SerializeField] private Item ammoItem;
+    //Weapon
+    private Weapon currentWeapon;
+
+    //Primary
+    [Header("Primary")]
+    [SerializeField] private Image primaryIcon;
+    [SerializeField] private GameObject primaryValueBadge;
+    [SerializeField] private TMP_Text primaryValueText;
+    [SerializeField] private Image primaryCooldown;
+
+    //Secondary
+    [Header("Secondary")]
+    [SerializeField] private Image secondaryIcon;
+    [SerializeField] private GameObject secondaryValueBadge;
+    [SerializeField] private TMP_Text secondaryValueText;
+    [SerializeField] private Image secondaryCooldown;
+
+    //Passive
+    [Header("Passive")]
+    [SerializeField] private Image passiveIcon;
+    [SerializeField] private GameObject passiveValueBadge;
+    [SerializeField] private TMP_Text passiveValueText;
+    [SerializeField] private Image passiveCooldown;
 
 
       /*$$$$$   /$$                 /$$
@@ -36,6 +55,13 @@ public class GameMenu : Menu {
     private void Update() {
         //Update shaders that use unscaled time
         damageIndicator.material.SetFloat("_UnscaledTime", Time.unscaledTime);
+
+        //Update icons cooldown
+        if (currentWeapon) {
+            primaryCooldown.fillAmount = currentWeapon.PrimaryCooldown;
+            secondaryCooldown.fillAmount = currentWeapon.SecondaryCooldown;
+            passiveCooldown.fillAmount = currentWeapon.PassiveCooldown;
+        }
     }
 
     private void OnDestroy() {
@@ -62,28 +88,58 @@ public class GameMenu : Menu {
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-    //Effects
-    private void UpdateDamageIndicator(float health) {
+    //Health
+    private void UpdateHealthIndicator(float health) {
+        //Update health UI
+        healthText.SetText($"Health: {health}");
+
+        //Damage indicator effect
         Color color = damageIndicator.color;
         color.a = Ease.OutCubic(1f - health / Character.MAX_HEALTH);
         damageIndicator.color = color;
     }
 
-    //Ammo
-    private void UpdateAmmo() {
-        /*
-        //Gather info
-        int ammoCount = 0;//Arms.AmmoCount;
-        bool show = ammoCount >= 0;
+    //Weapon
+    private void OnWeaponChanged(Weapon oldWeapon, Weapon newWeapon) {
+        //Update current weapon
+        currentWeapon = newWeapon;
 
-        //Update ammo
-        ammoIndicator.SetActive(show);
-        if (show) ammoText.SetText("" + ammoCount);
-        */
+        //Update icons
+        primaryIcon.sprite = newWeapon.PrimaryIcon;
+        secondaryIcon.sprite = newWeapon.SecondaryIcon;
+        passiveIcon.sprite = newWeapon.PassiveIcon;
+
+        //Update cooldowns
+        primaryCooldown.fillAmount = newWeapon.PrimaryCooldown;
+        secondaryCooldown.fillAmount = newWeapon.SecondaryCooldown;
+        passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
+
+        //Update values
+        OnWeaponValueChanged(WeaponType.Primary, newWeapon.PrimaryValue);
+        OnWeaponValueChanged(WeaponType.Secondary, newWeapon.SecondaryValue);
+        OnWeaponValueChanged(WeaponType.Passive, newWeapon.PassiveValue);
+        if (oldWeapon) oldWeapon.RemoveOnValueChanged(OnWeaponValueChanged);
+        if (newWeapon) newWeapon.AddOnValueChanged(OnWeaponValueChanged);
     }
 
-    private void OnItemChanged(Item item, int amount) {
-        if (item == ammoItem) UpdateAmmo();
+    private void OnWeaponValueChanged(WeaponType type, int value) {
+        //Get badge
+        GameObject badge = type switch {
+            WeaponType.Primary => primaryValueBadge,
+            WeaponType.Secondary => secondaryValueBadge,
+            _ => passiveValueBadge,
+        };
+
+        //Get text
+        TMP_Text text = type switch {
+            WeaponType.Primary => primaryValueText,
+            WeaponType.Secondary => secondaryValueText,
+            _ => passiveValueText,
+        };
+
+        //Update value
+        badge.SetActive(value > 0);
+        text.SetText($"{value}");
     }
 
 
@@ -103,24 +159,21 @@ public class GameMenu : Menu {
         base.OnOpen();
         
         //Add player health change event & update
-        Level.Player.AddOnHealthChanged(UpdateDamageIndicator);
-        UpdateDamageIndicator(Level.Player.Health);
+        Player.AddOnHealthChanged(UpdateHealthIndicator);
+        UpdateHealthIndicator(Player.Health);
         
-        //Update ammo
-        UpdateAmmo();
-
-        //Add item change event
-        //Inventory.AddOnItemChanged(OnItemChanged);
+        //Add weapon change event
+        Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);
     }
 
     protected override void OnClose() {
         base.OnClose();
         
         //Remove player health change event
-        Level.Player.AddOnHealthChanged(UpdateDamageIndicator);
+        Player.AddOnHealthChanged(UpdateHealthIndicator);
 
-        //Remove item change event
-        //Inventory.RemoveOnItemChanged(OnItemChanged);
+        //Remove weapon change event
+        Player.Loadout.RemoveOnWeaponChanged(OnWeaponChanged);
     }
 
 

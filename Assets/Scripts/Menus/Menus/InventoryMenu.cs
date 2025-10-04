@@ -14,9 +14,11 @@ public class InventoryMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference inventoryAction;
 
-    //Items
-    //[Header("Items")]
-    //[SerializeField] private InventoryItem[] items = new InventoryItem[9];
+    //Inventory
+    [Header("Inventory")]
+    [SerializeField] private GameObject emptyMessage;
+    [SerializeField] private RectTransform inventory;
+    [SerializeField] private GameObject itemPrefab;
 
 
       /*$$$$$   /$$                 /$$
@@ -44,21 +46,20 @@ public class InventoryMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     private void UpdateItems() {
-        //Update / Reset items
-        /*for (int i = 0; i < items.Length; i++) {
-            //Check if item or empty
-            if (i < Inventory.ItemsCount) {
-                //Item -> Load it
-                items[i].Load(Inventory.GetItem(i), Inventory.GetItemAmount(i));
-            } else {
-                //Empty -> Load nothing (reset)
-                items[i].Load();
-            }
-        }*/
-    }
+        //Clear old items
+        Util.DestroyChildren(inventory);
 
-    private void OnItemChanged(Item item, int amount) {
-        UpdateItems();
+        //Add new items
+        foreach (var pair in Player.Loadout.Treasures) {
+            //Create inventory item
+            var item = Instantiate(itemPrefab, inventory).GetComponent<InventoryItem>();
+
+            //Init item
+            item.Init(pair.Key, pair.Value);
+        }
+
+        //Toggle empty message
+        emptyMessage.SetActive(Player.Loadout.Treasures.Count <= 0);
     }
 
 
@@ -80,18 +81,12 @@ public class InventoryMenu : Menu {
         //Update items
         UpdateItems();
 
-        //Add item change event
-        //Inventory.AddOnItemChanged(OnItemChanged);
-
         //Pause game
         Game.Pause(this);
     }
 
     protected override void OnClose() {
         base.OnClose();
-
-        //Remove item change event
-        //Inventory.RemoveOnItemChanged(OnItemChanged);
 
         //Unpause game
         Game.Unpause(this);

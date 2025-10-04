@@ -9,9 +9,11 @@ public class Item : ScriptableObject {
 
     //Info
     [SerializeField] private Sprite _icon;
+    [SerializeField, Min(0)] private int _value;
     [SerializeField] private LocalizedString _name;
 
     public Sprite Icon => _icon;
+    public int Value => _value;
     public string Name => _name.GetLocalizedString();
     public string FileName => name; //"name" is the name of the object, aka the file
 

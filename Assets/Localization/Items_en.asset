@@ -26,6 +26,18 @@ MonoBehaviour:
     m_Localized: Sparkling Match
     m_Metadata:
       m_Items: []
+  - m_Id: 767371087056896
+    m_Localized: Stapler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1381918873358336
+    m_Localized: Money Bag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1381933679251456
+    m_Localized: Golden Cup
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

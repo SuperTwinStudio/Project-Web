@@ -1,57 +1,107 @@
+using System;
 using System.Collections.Generic;
 using Botpa;
 using UnityEngine;
 
 public class Loadout : MonoBehaviour, ISavable {
 
-    //Classes
-    [Header("Classes")]
-    [SerializeField] private List<PlayerClass> classes = new();
+    //Events
+    public delegate void ClassChanged(Weapon oldWeapon, Weapon newWeapon);
 
-    private PlayerClass _currentClass;
+    //Weapons
+    [Header("Weapon")]
+    [SerializeField] private List<Weapon> weapons = new();
 
-    public PlayerClass CurrentClass { get => _currentClass; private set => _currentClass = value; }
+    private event ClassChanged OnWeaponChanged;
+
+    public Weapon CurrentWeapon { get; private set; }
 
     //Money
-    private int _money = 0;
-
-    public int Money { get => _money; private set => _money = value; }
+    public int Money { get; private set; }
 
     //Treasures
-    private readonly SerializableDictionary<Item, int> Treasures = new();
+    private readonly SerializableDictionary<Item, int> _treasures = new();
+
+    public IReadOnlyDictionary<Item, int> Treasures => _treasures;
 
 
     //State
     private void Start() {
-        //Testing
-        SelectClass(classes[0].Item);
+        //Select first weapon class if none selected
+        if (!CurrentWeapon) SelectWeapon(weapons[0].Item);
     }
 
-    //Classes
-    private PlayerClass GetClass(Item item) {
-        foreach (var c in classes) {
-            //Check class item
-            if (c.Item != item) continue;
+    //Weapon
+    private Weapon GetWeapon(Item item) {
+        foreach (var weapon in weapons) {
+            //Check weapon item
+            if (weapon.Item != item) continue;
 
-            //Found class -> Return it
-            return c;
+            //Found weapon -> Return it
+            return weapon;
         }
 
         //Not found
         return null;
     }
 
-    public void SelectClass(Item item) {
-        CurrentClass = GetClass(item);
+    private void SelectWeapon(Weapon weapon) {
+        //Hide previous weapon
+        if (CurrentWeapon) CurrentWeapon.Show(false);
+
+        //Select weapon
+        var oldWeapon = CurrentWeapon;
+        CurrentWeapon = weapon;
+
+        //Show new weapon
+        if (CurrentWeapon) CurrentWeapon.Show(true);
+
+        //Call event
+        OnWeaponChanged?.Invoke(oldWeapon, CurrentWeapon);
     }
 
-    //Using
+    public void SelectWeapon(Item item) {
+        SelectWeapon(GetWeapon(item));
+    }
+
+    public void AddOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged += action;
+    }
+
+    public void RemoveOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged -= action;
+    }
+
     public void UsePrimary() {
-        if (CurrentClass) CurrentClass.UsePrimary();
+        if (CurrentWeapon) CurrentWeapon.UsePrimary();
     }
 
     public void UseSecondary() {
-        if (CurrentClass) CurrentClass.UseSecondary();
+        if (CurrentWeapon) CurrentWeapon.UseSecondary();
+    }
+
+    //Treasures
+    public int ClearTreasures() {
+        //Calculate treasures value
+        int value = 0;
+        foreach (var treasure in Treasures.Keys) value += treasure.Value;
+
+        //Clear treasures
+        _treasures.Clear();
+
+        //Return emptied treasures value
+        return value;
+    }
+
+    public void AddTreasure(Item treasure, int amount) {
+        //Invalid treasure
+        if (treasure == null) return;
+
+        //Check if treasures has treasure
+        if (Treasures.ContainsKey(treasure))
+            _treasures[treasure] += amount;
+        else
+            _treasures[treasure] = amount;
     }
 
     //Saving
@@ -63,7 +113,7 @@ public class Loadout : MonoBehaviour, ISavable {
         //Create save
         var save = new LoadoutInfo() {
             //Weapon
-            currentClass = CurrentClass ? CurrentClass.Item.FileName : "",
+            currentWeapon = CurrentWeapon ? CurrentWeapon.Item.FileName : "",
             //Money
             money = Money,
             //Treasures
@@ -76,22 +126,22 @@ public class Loadout : MonoBehaviour, ISavable {
         //Parse save
         var save = JsonUtility.FromJson<LoadoutInfo>(saveJson);
 
-        //Load class
-        SelectClass(Item.GetItemFromName(save.currentClass));
+        //Load weapon
+        SelectWeapon(Item.GetItemFromName(save.currentWeapon));
 
         //Load money
         Money = save.money;
 
         //Load treasures
-        Treasures.Clear();
-        foreach (var pair in save.treasures) Treasures.Add(Item.GetItemFromName(pair.Key), pair.Value);
+        ClearTreasures();
+        foreach (var pair in save.treasures) AddTreasure(Item.GetItemFromName(pair.Key), pair.Value);
     }
 
-    [System.Serializable]
+    [Serializable]
     private class LoadoutInfo {
 
-        //Classes
-        public string currentClass;
+        //Weapon
+        public string currentWeapon;
 
         //Money
         public int money = 0;
