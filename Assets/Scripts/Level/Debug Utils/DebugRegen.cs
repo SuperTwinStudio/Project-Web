@@ -71,20 +71,20 @@ public class DebugRegen : MonoBehaviour
 
 	public void ResetMapSize()
 	{
-		m_DebugDefinition.MapSize = 50;
-		m_SizeField.text = "50";
+		m_DebugDefinition.MapSize = m_RoomDonor.MapSize;
+		m_SizeField.text = m_RoomDonor.MapSize.ToString();
 	}
 
 	public void ResetMaxStep()
 	{
-		m_DebugDefinition.MaxStep = 5;
-		m_StepField.text = "5";
+		m_DebugDefinition.MaxStep = m_RoomDonor.MaxStep;
+		m_StepField.text = m_RoomDonor.MaxStep.ToString();
 	}
 
 	public void ResetDoorChance()
 	{
-		m_DebugDefinition.BaseDoorChance = 80;
-		m_DoorField.text = "80";
+		m_DebugDefinition.BaseDoorChance = m_RoomDonor.BaseDoorChance;
+		m_DoorField.text = m_RoomDonor.BaseDoorChance.ToString();
 	}
 
 	public void Regen()
@@ -109,7 +109,36 @@ public class DebugRegen : MonoBehaviour
 
 	public void ResetSecretChance()
 	{
-		m_DebugDefinition.SecretRoomChance = 25;
-		m_SecretField.text = "25";
+		m_DebugDefinition.SecretRoomChance = m_RoomDonor.SecretRoomChance;
+		m_SecretField.text = m_RoomDonor.SecretRoomChance.ToString();
 	}
+
+	public void GeneralReset()
+	{
+		ResetMapSize();
+		ResetMaxStep();
+		ResetDoorChance();
+		ResetSecretChance();
+
+		m_DebugDefinition.GenerateSecretRooms = m_RoomDonor.GenerateSecretRooms;
+		m_SecretGenerationToggle.isOn = m_RoomDonor.GenerateSecretRooms;
+
+        m_DebugDefinition.SecretRoomsHaveDoors = m_RoomDonor.SecretRoomsHaveDoors;
+        m_SecretDoorGenerationToggle.isOn = m_RoomDonor.SecretRoomsHaveDoors;
+    }
+
+	public void SaveToDonor()
+	{
+        m_RoomDonor.StartRoom = m_DebugDefinition.StartRoom;
+        m_RoomDonor.StandardRooms = m_DebugDefinition.StandardRooms;
+        m_RoomDonor.TreasureRooms = m_DebugDefinition.TreasureRooms;
+        m_RoomDonor.ItemRooms = m_DebugDefinition.ItemRooms;
+        m_RoomDonor.BossRooms = m_DebugDefinition.BossRooms;
+        m_RoomDonor.GenerateSecretRooms = m_DebugDefinition.GenerateSecretRooms;
+        m_RoomDonor.SecretRoomsHaveDoors = m_DebugDefinition.SecretRoomsHaveDoors;
+        m_RoomDonor.SecretRoomChance = m_DebugDefinition.SecretRoomChance;
+        m_RoomDonor.SecretRooms = m_DebugDefinition.SecretRooms;
+
+		Debug.Log($"Saved to {m_RoomDonor.name}");
+    }
 }
