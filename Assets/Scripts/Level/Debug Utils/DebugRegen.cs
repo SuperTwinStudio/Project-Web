@@ -20,12 +20,19 @@ public class DebugRegen : MonoBehaviour
 
 	void Start()
 	{
-		// Copy room data from the donor
-		m_DebugDefinition.StartRoom = m_RoomDonor.StartRoom;
+		// Copy data from the donor
+		m_DebugDefinition.MapSize = m_RoomDonor.MapSize;
+        m_DebugDefinition.RoomSize = m_RoomDonor.RoomSize;
+		m_DebugDefinition.MaxStep = m_RoomDonor.MaxStep;
+		m_DebugDefinition.BaseDoorChance = m_RoomDonor.BaseDoorChance;
+
+        m_DebugDefinition.StartRoom = m_RoomDonor.StartRoom;
 		m_DebugDefinition.StandardRooms = m_RoomDonor.StandardRooms;
 		m_DebugDefinition.TreasureRooms = m_RoomDonor.TreasureRooms;
 		m_DebugDefinition.ItemRooms = m_RoomDonor.ItemRooms;
 		m_DebugDefinition.BossRooms = m_RoomDonor.BossRooms;
+		m_DebugDefinition.RoomSize = m_RoomDonor.RoomSize;
+
 		m_DebugDefinition.GenerateSecretRooms = m_RoomDonor.GenerateSecretRooms;
 		m_DebugDefinition.SecretRoomsHaveDoors = m_RoomDonor.SecretRoomsHaveDoors;
 		m_DebugDefinition.SecretRoomChance = m_RoomDonor.SecretRoomChance;

@@ -5627,7 +5627,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 887157997}
         m_TargetAssemblyTypeName: DebugRegen, Assembly-CSharp
-        m_MethodName: ResetMapSize
+        m_MethodName: ResetMaxStep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
