@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: treasure_cup
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
-  _value: 100
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
@@ -23,6 +22,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  _value: 100
   references:
     version: 2
     RefIds: []

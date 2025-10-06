@@ -7,17 +7,17 @@ public class Item : ScriptableObject {
 
     //Info
     [SerializeField] private Sprite _icon;
-    [SerializeField, Min(0)] private int _value;
     [SerializeField] private LocalizedString _name;
+    [SerializeField, Min(0)] private int _value;
 
     public Sprite Icon => _icon;
-    public int Value => _value;
     public string Name => _name.GetLocalizedString();
+    public int Value => _value;
     public string FileName => name; //"name" is the name of the object, aka the file
 
 
     //Get item
-    public static Item GetItemFromName(string name) {
+    public static Item GetFromName(string name) {
         //Invalid name
         if (string.IsNullOrEmpty(name)) return null;
 

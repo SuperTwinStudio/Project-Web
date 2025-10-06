@@ -6,6 +6,7 @@ public class WeaponSword : Weapon {
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
+    [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
     [SerializeField, Min(0)] private float primaryAttackRadius = 1f;
@@ -16,6 +17,7 @@ public class WeaponSword : Weapon {
     //Secondary
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
+    [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
@@ -48,6 +50,9 @@ public class WeaponSword : Weapon {
         //Set cooldown on secondary so it can't be used while spinning
         SetCooldown(WeaponType.Secondary, primarySecondaryCooldown);
 
+        //Slow player
+        Player.AddEffect(Effect.GetFromName("AttackSlow"), primarySlowDuration);
+
         //Animate
         animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
@@ -70,6 +75,9 @@ public class WeaponSword : Weapon {
 
         //Set cooldown on primary so it can't be used while spinning
         SetCooldown(WeaponType.Primary, secondaryPrimaryCooldown);
+
+        //Slow player
+        Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
 
         //Animate
         animator.SetTrigger("Attack");
