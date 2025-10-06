@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,6 +46,16 @@ public class Player : Character, ISavable {
     private Transform playerTransform;
 
     private bool isControlled, isMoving;
+
+    //Effects
+    [Header("Effects")]
+    [SerializeField] private float effectDamagePerSecond = 10f;
+    [SerializeField] private float effectHealingPerSecond = 10f;
+    [SerializeField, Range(0, 1)] private float effectSlowMultiplier = 0.5f;
+
+    private readonly Dictionary<EffectType, float> effects = new();
+    private float effectDamage = 0; //Damage/healing
+    private float effectSlow = 0;
 
 
     //State
@@ -145,6 +156,25 @@ public class Player : Character, ISavable {
     private void StopMovement() {
         isMoving = false;
         //Animator.SetBool("isMoving", isMoving);
+    }
+
+    //Effects
+    private void UpdateEffects() {
+        
+    }
+
+    public void AddEffect(EffectAction effect) {
+        //Calculate effect end timestamp
+        float effectEndTimestamp = Time.time + effect.duration;
+
+        //Check if player already has effect
+        if (effects.ContainsKey(effect.type)) {
+            //Already has effect -> Check to update duration
+            effects[effect.type] = Mathf.Max(effects[effect.type], effectEndTimestamp);
+        } else {
+            //Does not have effect -> Add it
+            effects[effect.type] = effectEndTimestamp;
+        }
     }
 
     //Health

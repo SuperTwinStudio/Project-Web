@@ -2,9 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Localization;
 
-public enum ItemUse { None, Single, Infinite }
-
-[Serializable, CreateAssetMenu(fileName = "Item", menuName = "Item")]
+[Serializable, CreateAssetMenu(fileName = "Item", menuName = "Paper/Item")]
 public class Item : ScriptableObject {
 
     //Info
