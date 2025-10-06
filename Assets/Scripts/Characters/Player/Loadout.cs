@@ -133,14 +133,14 @@ public class Loadout : MonoBehaviour, ISavable {
         var save = JsonUtility.FromJson<LoadoutSave>(saveJson);
 
         //Load weapon
-        SelectWeapon(Item.GetItemFromName(save.currentWeapon));
+        SelectWeapon(Item.GetFromName(save.currentWeapon));
 
         //Load money
         Money = save.money;
 
         //Load inventory
         ClearInventory();
-        foreach (var pair in save.inventory) AddToInventory(Item.GetItemFromName(pair.Key), pair.Value);
+        foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value);
 
         //Sell inventory if in lobby
         if (Game.Current.Level.IsLobby) SellInventory();

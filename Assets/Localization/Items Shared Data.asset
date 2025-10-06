@@ -35,6 +35,14 @@ MonoBehaviour:
     m_Key: treasure_cup
     m_Metadata:
       m_Items: []
+  - m_Id: 2119845693755392
+    m_Key: effect_burn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2122526038560768
+    m_Key: effect_slow
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

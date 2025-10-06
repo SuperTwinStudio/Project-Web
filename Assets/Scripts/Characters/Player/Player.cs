@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,6 +48,13 @@ public class Player : Character, ISavable {
 
     private bool isControlled, isMoving;
 
+    //Effects
+    [Header("Effects")]
+    [SerializeField, Range(0, 1)] private float slowEffectAmount = 0.5f;
+
+    private readonly Dictionary<Effect, float> effects = new();
+    private float slowSpeedMultiplier = 1;
+
 
     //State
     private void Start() {
@@ -60,8 +69,12 @@ public class Player : Character, ISavable {
     }
 
     private void Update() {
-        //Game is paused | player is not controlled | menu is in transition
+        //Game is paused | player is not controlled | a menu is transitioning
         if (Game.IsPaused || !isControlled || MenuManager.InTransition) return;
+
+
+        //Update effects
+        UpdateEffects();
 
 
          /*$                           /$$      
@@ -130,7 +143,6 @@ public class Player : Character, ISavable {
         //Check if an action should be performed
         if (primaryCoyote.counting && Loadout.UsePrimary()) primaryCoyote.Reset();
         if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
-        
 
 
           /*$$$$$            /$$                           /$$              
@@ -154,6 +166,54 @@ public class Player : Character, ISavable {
     private void StartMovement() {
         isMoving = true;
         Animator.SetBool("IsMoving", isMoving);
+    }
+
+    //Effects
+    private void UpdateEffects() {
+        //Get current time
+        float nowTimestamp = Time.time;
+
+        //Reset slow multiplier
+        slowSpeedMultiplier = 1;
+
+        //Apply effects
+        foreach (var effect in effects.Keys.ToList()) {
+            //Get end timestamp
+            float endTimestamp = effects[effect];
+
+            //Apply effect
+            switch (effect.Action.Type) {
+                //Damage
+                case EffectType.Damage:
+                    Damage(Time.deltaTime * effect.Action.Points);  //Take points as damage per second
+                    break;
+                //Heal
+                case EffectType.Heal:
+                    Heal(Time.deltaTime * effect.Action.Points);    //Take points as healing per second
+                    break;
+                //Slow
+                case EffectType.Slow:
+                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Points));
+                    break;
+            }
+
+            //Check if effect finished
+            if (nowTimestamp > endTimestamp) effects.Remove(effect);
+        }
+    }
+
+    public void AddEffect(Effect effect, float duration) {
+        //Calculate effect end timestamp
+        float effectEndTimestamp = Time.time + duration;
+
+        //Check if player already has effect
+        if (effects.ContainsKey(effect)) {
+            //Already has effect -> Check to update duration
+            effects[effect] = Mathf.Max(effects[effect], effectEndTimestamp);
+        } else {
+            //Does not have effect -> Add it
+            effects[effect] = effectEndTimestamp;
+        }
     }
 
     //Health

@@ -1,28 +1,31 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
-[Serializable, CreateAssetMenu(fileName = "Item", menuName = "Paper/Item")]
-public class Item : ScriptableObject {
+[Serializable, CreateAssetMenu(fileName = "Effect", menuName = "Paper/Effect")]
+public class Effect : ScriptableObject {
 
     //Info
+    [SerializeField] private bool _show = true;
     [SerializeField] private Sprite _icon;
     [SerializeField] private LocalizedString _name;
-    [SerializeField, Min(0)] private int _value;
+    [SerializeField] private EffectAction _action;
 
+    public bool Show => _show;
     public Sprite Icon => _icon;
     public string Name => _name.GetLocalizedString();
-    public int Value => _value;
+    public EffectAction Action => _action;
     public string FileName => name; //"name" is the name of the object, aka the file
 
 
-    //Get item
-    public static Item GetFromName(string name) {
+    //Get effect
+    public static Effect GetFromName(string name) {
         //Invalid name
         if (string.IsNullOrEmpty(name)) return null;
 
-        //Look for item in resources
-        return Resources.Load<Item>($"Items/{name}");
+        //Look for effect in resources
+        return Resources.Load<Effect>($"Effects/{name}");
     }
 
     //Dictionary support
