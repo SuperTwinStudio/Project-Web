@@ -114,27 +114,23 @@ public class Player : Character, ISavable {
         isMoving = moveInput.sqrMagnitude > 0;
 
         //Moving
-        if (isMoving)
-        {
+        if (isMoving) {
             //Calculate move direction
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
 
             //Move in move direction
             controller.SimpleMove(moveSpeed * moveDirection);
-
-            StartMovement();
         }
-        else StopMovement();
 
 
           /*$$$$$              /$$     /$$
-       /$$__  $$            | $$    |__/
-      | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
-      | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
-      | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
-      | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
-      | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
-      |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
+         /$$__  $$            | $$    |__/
+        | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
+        | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
+        | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
+        | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
+        | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
+        |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
         //Check for action inputs
         if (primaryAction.Triggered()) primaryCoyote.Count(INPUT_COYOTE_DURATION);
@@ -155,16 +151,11 @@ public class Player : Character, ISavable {
         |__/  |__/|__/  |__/|__/|__/ |__/ |__/ \_______/   \___/   \______*/
 
         //Animate
-        //Animator.SetBool("isMoving", isMoving);
+        Animator.SetBool("IsMoving", isMoving);
     }
 
     private void StopMovement() {
         isMoving = false;
-        Animator.SetBool("IsMoving", isMoving);
-    }
-
-    private void StartMovement() {
-        isMoving = true;
         Animator.SetBool("IsMoving", isMoving);
     }
 
