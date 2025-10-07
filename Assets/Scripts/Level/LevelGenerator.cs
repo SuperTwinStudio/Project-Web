@@ -1,26 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGenerator : MonoBehaviour
+public class LevelGenerator
 {
-    [SerializeField] private LevelDefinition m_DefaultDefinition = null;
-    [SerializeField] private Transform m_LevelContainer = null;
+    private Transform m_LevelContainer = null;
     private bool m_Generated = false;
 
     private int[,] m_GenerationGrid;
 
-    void Start()
-    {
-        GenerateDefaultLevel();
-    }
-
-    public void GenerateDefaultLevel()
-    {
-        GenerateLevel(m_DefaultDefinition);
-    }
-
     public void GenerateLevel(LevelDefinition def)
     {
+		m_LevelContainer = GameObject.FindGameObjectWithTag("LevelContainer").transform;
+
         if (m_Generated) CleanLevel();
 
         m_GenerationGrid = new int[def.MapSize, def.MapSize];
@@ -124,7 +115,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 else if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_START))
                 {
-                    GameObject room = Instantiate(def.StartRoom, new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                    GameObject room = GameObject.Instantiate(def.StartRoom, new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
                     roomObjectMap[x, y] = room.GetComponent<Room>();
 
                     startRoomPos = new Vector2(x * def.RoomSize, -y * def.RoomSize);
@@ -132,7 +123,7 @@ public class LevelGenerator : MonoBehaviour
                 else
                 {
                     int roomId = Random.Range(0, def.StandardRooms.Length);
-                    GameObject room = Instantiate(def.StandardRooms[roomId], new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                    GameObject room = GameObject.Instantiate(def.StandardRooms[roomId], new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
                     roomObjectMap[x, y] = room.GetComponent<Room>();
                 }
             }
@@ -225,7 +216,7 @@ public class LevelGenerator : MonoBehaviour
 
         int bossRoom = Random.Range(0, def.BossRooms.Length);
         Vector2Int bossPos = endRooms[furthestRoom];
-        GameObject room = Instantiate(def.BossRooms[bossRoom], new Vector3(bossPos.x * def.RoomSize, 0, -bossPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+        GameObject room = GameObject.Instantiate(def.BossRooms[bossRoom], new Vector3(bossPos.x * def.RoomSize, 0, -bossPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
         room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[bossPos.x, bossPos.y]);
 
         // Remove boss room from further processing
@@ -242,7 +233,7 @@ public class LevelGenerator : MonoBehaviour
                 Vector2Int selRoom = endRooms[rand];
 
                 int roomObj = Random.Range(0, def.TreasureRooms.Length);
-                room = Instantiate(def.TreasureRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.TreasureRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
 
                 endRooms.RemoveAt(rand);
@@ -260,7 +251,7 @@ public class LevelGenerator : MonoBehaviour
                 Vector2Int selRoom = endRooms[rand];
 
                 int roomObj = Random.Range(0, def.ItemRooms.Length);
-                room = Instantiate(def.ItemRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.ItemRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
 
                 endRooms.RemoveAt(rand);
@@ -277,7 +268,7 @@ public class LevelGenerator : MonoBehaviour
                 int roomId = Random.Range(0, endRooms.Count);
                 Vector2Int roomPos = endRooms[roomId];
 
-                room = Instantiate(def.SecretRooms[roomObj], new Vector3(roomPos.x * def.RoomSize, 0, -roomPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.SecretRooms[roomObj], new Vector3(roomPos.x * def.RoomSize, 0, -roomPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[roomPos.x, roomPos.y]);
 
                 endRooms.RemoveAt(roomId);
