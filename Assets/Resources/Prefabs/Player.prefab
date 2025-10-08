@@ -267,16 +267,17 @@ MonoBehaviour:
   primarySlowDuration: 0.2
   primarySecondaryCooldown: 0.3
   primaryDamage: 30
-  primaryDamagePerTier: 10
-  primaryAttackRadius: 1
-  primaryAttackForward: 0
+  primaryDamagePerLevel: 10
+  primaryAttackSphereCast: {x: 1, y: 0}
   _secondaryCooldown: 2.5
   secondarySlowDuration: 0.2
   secondaryPrimaryCooldown: 0.5
   secondaryDamage: 50
-  secondaryDamagePerTier: 15
+  secondaryDamagePerLevel: 15
   secondarySpinRadius: 2.5
-  passiveHitCount: 4
+  passiveDamage: 20
+  passiveDamagePerLevel: 5
+  passiveHit: 4
   passiveDamageMult: 2
 --- !u!1 &2856207341596626414
 GameObject:
@@ -385,15 +386,22 @@ MonoBehaviour:
   _passiveIcon: {fileID: 21300000, guid: e5391dc3f92ea9d42b5b42951a550d10, type: 3}
   model: {fileID: 2856207341596626414}
   animator: {fileID: 8615814449503335222}
-  bulletPrefab: {fileID: 0}
-  maxAmmo: 10
-  reloadDuration: 2
+  bulletPrefab: {fileID: 2421915764250194293, guid: 2d69aa295ec53c94c8fa2221af2cc07b, type: 3}
+  maxAmmo: 12
+  reloadDuration: 1
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
+  primaryDamage: 10
+  primaryDamagePerLevel: 5
   _secondaryCooldown: 2
   secondaryPrimaryCooldown: 0.3
+  secondaryDamage: 10
+  secondaryDamagePerLevel: 5
   secondaryBurstAmount: 3
-  secondaryBurstDelay: 0.1
+  secondaryBurstDelay: 0.06
+  passiveDamage: 30
+  passiveDamagePerLevel: 10
+  passiveAttackSphereCast: {x: 1, y: 0}
 --- !u!1 &3698209227500789784
 GameObject:
   m_ObjectHideFlags: 0

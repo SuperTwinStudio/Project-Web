@@ -9,10 +9,10 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
-    [SerializeField, Min(0)] private float primaryDamagePerTier = 10f;
+    [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
     [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
 
-    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerTier;
+    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerLevel;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -22,20 +22,24 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
-    [SerializeField, Min(0)] private float secondaryDamagePerTier = 15f;
+    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerTier;
+    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerLevel;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
+    [SerializeField, Min(0)] private float passiveDamage = 20f;
+    [SerializeField, Min(0)] private float passiveDamagePerLevel = 5f;
     [SerializeField, Min(2)] private int passiveHit = 4;
     [SerializeField, Min(1)] private float passiveDamageMult = 2f;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
+
+    private float PassiveDamage => passiveDamage + (PassiveLevel - 1) * passiveDamagePerLevel;
 
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
@@ -63,7 +67,7 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackForward(
-            PrimaryDamage * (isPassiveHit ? passiveDamageMult : 1), 
+            PrimaryDamage + (isPassiveHit ? PassiveDamage : 0), 
             primaryAttackSphereCast.x, 
             primaryAttackSphereCast.y
         );

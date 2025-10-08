@@ -219,12 +219,12 @@ public class Weapon : MonoBehaviour {
     }
 
     //Actions
-    public bool AtackForward(float damage, float radius, float forward) {
+    protected bool AtackForward(float damage, float radius, float forward) {
+        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
+        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
+
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
         bool hit = false;
-
-        //Cast attack
-        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
 
         //Check collisions
         foreach (var collision in collisions) {
@@ -243,7 +243,7 @@ public class Weapon : MonoBehaviour {
         return hit;
     }
 
-    public bool AtackAround(float damage, float radius) {
+    protected bool AtackAround(float damage, float radius) {
         //Casts a sphere of <radius> radius around the player to check for collisions
         bool hit = false;
 
@@ -267,6 +267,8 @@ public class Weapon : MonoBehaviour {
         return hit;
     }
 
-    public bool SpawnProjectile(GameObject prefab) { return false; }
+    protected GameObject SpawnProjectile(GameObject prefab) {
+        return Instantiate(prefab, transform.position, Player.transform.rotation);
+    }
 
 }
