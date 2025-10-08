@@ -88,8 +88,12 @@ public class Weapon : MonoBehaviour {
         //Toggle model
         model.SetActive(show);
 
-        //Visible -> Update levels
-        if (show) UpdateLevels();
+        //Visible -> Update weapon attack levels
+        if (show) {
+            PrimaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Primary));
+            SecondaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Secondary));
+            PassiveLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Passive));
+        }
     }
 
     //Weapon
@@ -143,21 +147,18 @@ public class Weapon : MonoBehaviour {
         return $"{Item.FileName}_{attack}";
     }
 
-    private void UpdateLevels() {
-        //Update tier values
-        PrimaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Primary));
-        SecondaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Secondary));
-        PassiveLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Passive));
-    }
-
-    public bool Upgrade(WeaponAttack attack) {
-        //Get upgrade cost
-        int cost = attack switch {
+    private int GetUpgradeCost(WeaponAttack attack) {
+        return attack switch {
             WeaponAttack.Primary => PrimaryUpgradeCost,
             WeaponAttack.Secondary => SecondaryUpgradeCost,
             WeaponAttack.Passive => PassiveUpgradeCost,
             _ => 0
         };
+    }
+
+    public bool Upgrade(WeaponAttack attack) {
+        //Get upgrade cost
+        int cost = GetUpgradeCost(attack);
 
         //Pay for upgrade
         if (!Loadout.PayMoney(cost)) return false;

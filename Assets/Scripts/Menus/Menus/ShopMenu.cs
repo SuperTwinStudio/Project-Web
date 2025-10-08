@@ -1,11 +1,13 @@
+using System;
 using Botpa;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ShopMenu : Menu {
-  
+
     //Prefab
     public override string Name => MenusList.Shop;
 
@@ -22,15 +24,9 @@ public class ShopMenu : Menu {
 
     //Class
     [Header("Class")]
-    [SerializeField] private Image primaryIcon;
-    [SerializeField] private TMP_Text primaryUpgradeText;
-    [SerializeField] private TMP_Text primaryCostText;
-    [SerializeField] private Image secondaryIcon;
-    [SerializeField] private TMP_Text secondaryUpgradeText;
-    [SerializeField] private TMP_Text secondaryCostText;
-    [SerializeField] private Image passiveIcon;
-    [SerializeField] private TMP_Text passiveUpgradeText;
-    [SerializeField] private TMP_Text passiveCostText;
+    [SerializeField] private UpgradeItem primaryAttack;
+    [SerializeField] private UpgradeItem secondaryAttack;
+    [SerializeField] private UpgradeItem passiveAttack;
 
 
       /*$$$$$   /$$                 /$$
@@ -58,37 +54,61 @@ public class ShopMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     private void UpdateUI() {
-        //Update money
-        moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
+        //Update main
+        UpdateMainUI();
 
         //Update class tab
         UpdateClassUI();
+
+        //Update player tab
+        UpdatePlayerUI();
+    }
+
+    //Main
+    private void UpdateMainUI() {
+        //Update money
+        moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
     }
 
     //Weapons
     private void UpdateClassUI() {
+        //Prelocalize upgrade text & get current weapon
         string upgradeString = Util.Localize("shop_weapon_upgrade");
+        Weapon weapon = Loadout.CurrentWeapon;
 
-        //Primary
-        primaryIcon.sprite = Loadout.CurrentWeapon.PrimaryIcon;
-        primaryUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.PrimaryLevel + 1}");
-        primaryCostText.SetText($"{Loadout.CurrentWeapon.PrimaryUpgradeCost}G");
-
-        //Secondary
-        secondaryIcon.sprite = Loadout.CurrentWeapon.SecondaryIcon;
-        secondaryUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.SecondaryLevel + 1}");
-        secondaryCostText.SetText($"{Loadout.CurrentWeapon.SecondaryUpgradeCost}G");
-
-        //Passive
-        passiveIcon.sprite = Loadout.CurrentWeapon.PassiveIcon;
-        passiveUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.PassiveLevel + 1}");
-        passiveCostText.SetText($"{Loadout.CurrentWeapon.PassiveUpgradeCost}G");
+        //Update UI
+        primaryAttack.UpdateUI(weapon.PrimaryIcon, Loadout.Money, weapon.PrimaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PrimaryLevel + 1}");
+        secondaryAttack.UpdateUI(weapon.SecondaryIcon, Loadout.Money, weapon.SecondaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.SecondaryLevel + 1}");
+        passiveAttack.UpdateUI(weapon.PassiveIcon, Loadout.Money, weapon.PassiveUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PassiveLevel + 1}");
     }
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (Loadout.CurrentWeapon.Upgrade((WeaponAttack) type)) UpdateClassUI();
+        if (Loadout.CurrentWeapon.Upgrade((WeaponAttack) type)) {
+            UpdateMainUI();
+            UpdateClassUI();
+        }
     }
+
+    [Serializable]
+    private class UpgradeItem {
+
+        public Image icon;
+        public Button upgradeButton;
+        public TMP_Text upgradeText;
+        public TMP_Text upgradeCostText;
+
+        public void UpdateUI(Sprite weaponIcon, int money, int cost, string level) {
+            icon.sprite = weaponIcon;
+            upgradeButton.interactable = money >= cost;
+            upgradeText.SetText(level);
+            upgradeCostText.SetText($"{cost}G");
+        }
+
+    }
+
+    //Player
+    private void UpdatePlayerUI() {}
 
 
      /*$$$$$$$                            /$$

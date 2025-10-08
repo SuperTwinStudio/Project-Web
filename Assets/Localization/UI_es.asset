@@ -62,6 +62,10 @@ MonoBehaviour:
     m_Localized: Inventario vendido por
     m_Metadata:
       m_Items: []
+  - m_Id: 2942271885283328
+    m_Localized: Puedes obtener nuevas clases derrotando jefes
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

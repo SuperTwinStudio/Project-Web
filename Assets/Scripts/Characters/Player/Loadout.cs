@@ -110,7 +110,7 @@ public class Loadout : MonoBehaviour, ISavable {
     //Money
     public bool PayMoney(int amount) {
         //No enough money
-        if (Money <= amount) return false;
+        if (Money < amount) return false;
 
         //Pay
         Money -= amount;
