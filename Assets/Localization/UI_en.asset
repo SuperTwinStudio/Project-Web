@@ -23,11 +23,43 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1416883291951104
-    m_Localized: Empty
+    m_Localized: The inventory is empty
     m_Metadata:
       m_Items: []
   - m_Id: 1446249170341888
     m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902327242395648
+    m_Localized: 'Money:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902393453678592
+    m_Localized: 'Value:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902435426078720
+    m_Localized: 'Health:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903219903533056
+    m_Localized: Primary Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903269014638592
+    m_Localized: Secondary Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903287498936320
+    m_Localized: Passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904128704352256
+    m_Localized: Upgrade to level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904888255057920
+    m_Localized: Inventory sold for
     m_Metadata:
       m_Items: []
   references:

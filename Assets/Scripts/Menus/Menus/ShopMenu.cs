@@ -1,6 +1,8 @@
+using Botpa;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ShopMenu : Menu {
   
@@ -10,18 +12,40 @@ public class ShopMenu : Menu {
     //Components
     private Loadout Loadout => Player.Loadout;
 
+    //Input
+    [Header("Input")]
+    [SerializeField] private InputActionReference inventoryAction;
+
     //Shop
     [Header("Shop")]
     [SerializeField] private TMP_Text moneyText;
 
     //Class
     [Header("Class")]
+    [SerializeField] private Image primaryIcon;
     [SerializeField] private TMP_Text primaryUpgradeText;
     [SerializeField] private TMP_Text primaryCostText;
+    [SerializeField] private Image secondaryIcon;
     [SerializeField] private TMP_Text secondaryUpgradeText;
     [SerializeField] private TMP_Text secondaryCostText;
+    [SerializeField] private Image passiveIcon;
     [SerializeField] private TMP_Text passiveUpgradeText;
     [SerializeField] private TMP_Text passiveCostText;
+
+
+      /*$$$$$   /$$                 /$$
+     /$$__  $$ | $$                | $$
+    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+     \______/   \___/   \_______/   \___/   \______*/
+
+    public override void OnUpdate() {
+        //Close menu
+        if (inventoryAction.Triggered()) MenuManager.CloseLast();
+    }
 
 
       /*$$$$$              /$$     /$$
@@ -35,7 +59,7 @@ public class ShopMenu : Menu {
 
     private void UpdateUI() {
         //Update money
-        moneyText.SetText($"Money: {Loadout.Money}G");
+        moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
 
         //Update class tab
         UpdateClassUI();
@@ -43,22 +67,27 @@ public class ShopMenu : Menu {
 
     //Weapons
     private void UpdateClassUI() {
-        //
-        primaryUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.PrimaryTier + 1}");
+        string upgradeString = Util.Localize("shop_weapon_upgrade");
+
+        //Primary
+        primaryIcon.sprite = Loadout.CurrentWeapon.PrimaryIcon;
+        primaryUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.PrimaryLevel + 1}");
         primaryCostText.SetText($"{Loadout.CurrentWeapon.PrimaryUpgradeCost}G");
 
-        //
-        secondaryUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.SecondaryTier + 1}");
+        //Secondary
+        secondaryIcon.sprite = Loadout.CurrentWeapon.SecondaryIcon;
+        secondaryUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.SecondaryLevel + 1}");
         secondaryCostText.SetText($"{Loadout.CurrentWeapon.SecondaryUpgradeCost}G");
 
-        //
-        passiveUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.PassiveTier + 1}");
+        //Passive
+        passiveIcon.sprite = Loadout.CurrentWeapon.PassiveIcon;
+        passiveUpgradeText.SetText($"{upgradeString} {Loadout.CurrentWeapon.PassiveLevel + 1}");
         passiveCostText.SetText($"{Loadout.CurrentWeapon.PassiveUpgradeCost}G");
     }
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (Loadout.CurrentWeapon.Upgrade((WeaponType) type)) UpdateClassUI();
+        if (Loadout.CurrentWeapon.Upgrade((WeaponAttack) type)) UpdateClassUI();
     }
 
 

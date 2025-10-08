@@ -43,7 +43,7 @@ public class WeaponStapler : Weapon {
 
     private void SetAmmo(int newAmmo) {
         ammo = newAmmo;
-        SetValue(WeaponType.Primary, ammo);
+        SetValue(WeaponAttack.Primary, ammo);
     }
 
     private void Shoot() {
@@ -76,8 +76,8 @@ public class WeaponStapler : Weapon {
         isReloading = true;
         
         //Add reload cooldown to primary and secondary
-        SetCooldown(WeaponType.Primary, reloadDuration);
-        SetCooldown(WeaponType.Secondary, reloadDuration);
+        SetCooldown(WeaponAttack.Primary, reloadDuration);
+        SetCooldown(WeaponAttack.Secondary, reloadDuration);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
@@ -88,7 +88,7 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while using primary
-        SetCooldown(WeaponType.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
 
         //Shoot
         Shoot();
@@ -102,7 +102,7 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while using secondary
-        SetCooldown(WeaponType.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
 
         //Shoot burst
         for (int i = 0; i < secondaryBurstAmount; i++) {

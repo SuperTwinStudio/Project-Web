@@ -12,7 +12,7 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float primaryDamagePerTier = 10f;
     [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
 
-    private float PrimaryDamage => primaryDamage + (PrimaryTier - 1) * primaryDamagePerTier;
+    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerTier;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -25,7 +25,7 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondaryDamagePerTier = 15f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryTier - 1) * secondaryDamagePerTier;
+    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerTier;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -53,7 +53,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while spinning
-        SetCooldown(WeaponType.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), primarySlowDuration);
@@ -79,7 +79,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while spinning
-        SetCooldown(WeaponType.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
@@ -98,7 +98,7 @@ public class WeaponSword : Weapon {
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(WeaponType.Passive, passiveHit - hitCount - 1);
+        SetValue(WeaponAttack.Passive, passiveHit - hitCount - 1);
     }
 
 }

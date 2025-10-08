@@ -50,8 +50,8 @@ public class InventoryMenu : Menu {
 
     private void UpdateUI() {
         //Update money & inventory value
-        moneyText.SetText($"Money: {Loadout.Money}G");
-        valueText.SetText($"Value: {Loadout.InventoryValue}G");
+        moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
+        valueText.SetText($"{Util.Localize("indicator_value")} {Loadout.InventoryValue}G");
 
         //Clear old items
         Util.DestroyChildren(itemsGrid);

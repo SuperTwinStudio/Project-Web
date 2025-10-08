@@ -539,7 +539,7 @@ MonoBehaviour:
       m_KeyId: 1446249170341888
       m_Key: 
     m_FallbackState: 0
-    m_WaitForCompletion: 0
+    m_WaitForCompletion: 1
     m_LocalVariables: []
   m_FormatArguments: []
   m_UpdateString:
@@ -1482,6 +1482,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4388256943437884278}
     m_Modifications:
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2903269014638592
+      objectReference: {fileID: 0}
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99c271c4294dded488381bec0342cc95
+      objectReference: {fileID: 0}
     - target: {fileID: 512269244064039818, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1564,7 +1572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3107958559996638230, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_text
-      value: Secondary
+      value: Secondary Attack
       objectReference: {fileID: 0}
     - target: {fileID: 4432347246359421462, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_Name
@@ -1627,6 +1635,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5088559836759339405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4863339460600997953, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+  m_PrefabInstance: {fileID: 423407973425945036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7188040610443505792 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7359219989927045452, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
@@ -1646,6 +1665,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4388256943437884278}
     m_Modifications:
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2903219903533056
+      objectReference: {fileID: 0}
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99c271c4294dded488381bec0342cc95
+      objectReference: {fileID: 0}
     - target: {fileID: 512269244064039818, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1726,6 +1753,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3107958559996638230, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_text
+      value: Primary Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 4432347246359421462, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_Name
       value: Primary
@@ -1792,6 +1823,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8676293687671013718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4863339460600997953, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+  m_PrefabInstance: {fileID: 4257711835917805847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6519693107198010548
@@ -1916,11 +1958,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menus: {fileID: 0}
   _state: 0
+  inventoryAction: {fileID: -7972526189184036601, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moneyText: {fileID: 5997306446705685162}
+  primaryIcon: {fileID: 8676293687671013718}
   primaryUpgradeText: {fileID: 6716940500879097947}
   primaryCostText: {fileID: 1594885433032600576}
+  secondaryIcon: {fileID: 5088559836759339405}
   secondaryUpgradeText: {fileID: 7188040610443505792}
   secondaryCostText: {fileID: 2942111473869921499}
+  passiveIcon: {fileID: 3462662535881662635}
   passiveUpgradeText: {fileID: 1536545325379658150}
   passiveCostText: {fileID: 6793558820045295101}
 --- !u!224 &7480469518259031152 stripped
@@ -1936,6 +1982,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4388256943437884278}
     m_Modifications:
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2903287498936320
+      objectReference: {fileID: 0}
+    - target: {fileID: 449980889582554354, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99c271c4294dded488381bec0342cc95
+      objectReference: {fileID: 0}
     - target: {fileID: 512269244064039818, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2074,6 +2128,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3462662535881662635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4863339460600997953, guid: d734f4a6625acd04f8947e8941478b2f, type: 3}
+  m_PrefabInstance: {fileID: 8319226317002541290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6793558820045295101 stripped

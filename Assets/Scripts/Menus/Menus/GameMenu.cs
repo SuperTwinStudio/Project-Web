@@ -88,7 +88,7 @@ public class GameMenu : Menu {
     //Health
     private void UpdateHealthIndicator(float health) {
         //Update health UI
-        healthText.SetText($"Health: {health}");
+        healthText.SetText($"{Util.Localize("indicator_health")} {health}");
     }
 
     //Money
@@ -97,7 +97,7 @@ public class GameMenu : Menu {
         if (value <= 0) return;
 
         //Show animation
-        moneyText.SetText($"Items sold, +{value}G");
+        moneyText.SetText($"{Util.Localize("inventory_sold")} {value}G");
         moneyAnimator.SetTrigger("Show");
     }
 
@@ -120,25 +120,25 @@ public class GameMenu : Menu {
         passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
 
         //Update values
-        OnWeaponValueChanged(WeaponType.Primary, newWeapon.PrimaryValue);
-        OnWeaponValueChanged(WeaponType.Secondary, newWeapon.SecondaryValue);
-        OnWeaponValueChanged(WeaponType.Passive, newWeapon.PassiveValue);
+        OnWeaponValueChanged(WeaponAttack.Primary, newWeapon.PrimaryValue);
+        OnWeaponValueChanged(WeaponAttack.Secondary, newWeapon.SecondaryValue);
+        OnWeaponValueChanged(WeaponAttack.Passive, newWeapon.PassiveValue);
         if (oldWeapon) oldWeapon.RemoveOnValueChanged(OnWeaponValueChanged);
         if (newWeapon) newWeapon.AddOnValueChanged(OnWeaponValueChanged);
     }
 
-    private void OnWeaponValueChanged(WeaponType type, int value) {
+    private void OnWeaponValueChanged(WeaponAttack type, int value) {
         //Get badge
         GameObject badge = type switch {
-            WeaponType.Primary => primaryValueBadge,
-            WeaponType.Secondary => secondaryValueBadge,
+            WeaponAttack.Primary => primaryValueBadge,
+            WeaponAttack.Secondary => secondaryValueBadge,
             _ => passiveValueBadge,
         };
 
         //Get text
         TMP_Text text = type switch {
-            WeaponType.Primary => primaryValueText,
-            WeaponType.Secondary => secondaryValueText,
+            WeaponAttack.Primary => primaryValueText,
+            WeaponAttack.Secondary => secondaryValueText,
             _ => passiveValueText,
         };
 
