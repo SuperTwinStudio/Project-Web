@@ -9,8 +9,10 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
-    [SerializeField, Min(0)] private float primaryAttackRadius = 1f;
-    [SerializeField, Min(0)] private float primaryAttackForward = 0f;
+    [SerializeField, Min(0)] private float primaryDamagePerTier = 10f;
+    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+
+    private float PrimaryDamage => primaryDamage + (PrimaryTier - 1) * primaryDamagePerTier;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -20,13 +22,16 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
+    [SerializeField, Min(0)] private float secondaryDamagePerTier = 15f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
+
+    private float SecondaryDamage => secondaryDamage + (SecondaryTier - 1) * secondaryDamagePerTier;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
-    [SerializeField, Min(2)] private int passiveHitCount = 4;
+    [SerializeField, Min(2)] private int passiveHit = 4;
     [SerializeField, Min(1)] private float passiveDamageMult = 2f;
 
     private bool isPassiveHit = false;
@@ -58,14 +63,14 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackForward(
-            isPassiveHit ? primaryDamage * passiveDamageMult : primaryDamage, 
-            primaryAttackRadius, 
-            primaryAttackForward
+            PrimaryDamage * (isPassiveHit ? passiveDamageMult : 1), 
+            primaryAttackSphereCast.x, 
+            primaryAttackSphereCast.y
         );
         
         //Next hit
-        hitCount = (hitCount + 1) % passiveHitCount;
-        isPassiveHit = hitCount == passiveHitCount - 1;
+        hitCount = (hitCount + 1) % passiveHit;
+        isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
     }
 
@@ -85,7 +90,7 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackAround(
-            secondaryDamage, 
+            SecondaryDamage, 
             secondarySpinRadius
         );
     }
@@ -93,7 +98,7 @@ public class WeaponSword : Weapon {
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(WeaponType.Passive, passiveHitCount - hitCount - 1);
+        SetValue(WeaponType.Passive, passiveHit - hitCount - 1);
     }
 
 }

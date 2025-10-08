@@ -5,7 +5,7 @@ public class WeaponStapler : Weapon {
 
     //Ammo
     [Header("Ammo")]
-    [SerializeField, Min(0)] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField, Min(0)] private int maxAmmo = 10;
     [SerializeField, Min(0)] private float reloadDuration = 2f;
 

@@ -8,10 +8,14 @@ public enum WeaponType { Primary, Secondary, Passive }
 public class Weapon : MonoBehaviour {
 
     //Components
-    protected Player Player => Game.Current.Level.Player;
+    [Header("Components")]
+    [SerializeField] protected Loadout _loadout;
 
-    //Info
-    [Header("Info")]
+    public Loadout Loadout => _loadout;
+    public Player Player => Loadout.Player;
+
+    //Weapon
+    [Header("Weapon")]
     [SerializeField] private Item _item;
     [SerializeField] private Sprite _primaryIcon;
     [SerializeField] private Sprite _secondaryIcon;
@@ -34,6 +38,11 @@ public class Weapon : MonoBehaviour {
     public virtual bool PrimaryAvailable => !primaryTimer.counting;
     public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
+    public int PrimaryTier { get; private set; } = 1;
+    public virtual int PrimaryUpgradeCostBase => 10;
+    public virtual int PrimaryUpgradeCostVariation => 10;
+    public virtual int PrimaryUpgradeCost => PrimaryUpgradeCostBase + (PrimaryUpgradeCostVariation * PrimaryTier);
+
     public int PrimaryValue { get; private set; } = 0;
 
     //Secondary
@@ -44,6 +53,11 @@ public class Weapon : MonoBehaviour {
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
     public virtual float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
 
+    public int SecondaryTier { get; private set; } = 1;
+    public virtual int SecondaryUpgradeCostBase => 10;
+    public virtual int SecondaryUpgradeCostVariation => 10;
+    public virtual int SecondaryUpgradeCost => SecondaryUpgradeCostBase + (SecondaryUpgradeCostVariation * SecondaryTier);
+
     public int SecondaryValue { get; private set; } = 0;
 
     //Passive
@@ -53,6 +67,11 @@ public class Weapon : MonoBehaviour {
 
     public virtual bool PassiveAvailable => !passiveTimer.counting;
     public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
+
+    public int PassiveTier { get; private set; } = 1;
+    public virtual int PassiveUpgradeCostBase => 10;
+    public virtual int PassiveUpgradeCostVariation => 10;
+    public virtual int PassiveUpgradeCost => PassiveUpgradeCostBase + (PassiveUpgradeCostVariation * PassiveTier);
 
     public int PassiveValue { get; private set; } = 0;
 
@@ -68,9 +87,12 @@ public class Weapon : MonoBehaviour {
     public void Show(bool show) {
         //Toggle model
         model.SetActive(show);
+
+        //Visible -> Update tiers
+        if (show) UpdateTiers();
     }
 
-    //Class
+    //Weapon
     protected void SetCooldown(WeaponType type, float cooldown) {
         //Get timer
         Timer timer = type switch {
@@ -114,6 +136,51 @@ public class Weapon : MonoBehaviour {
 
     public void RemoveOnValueChanged(Action<WeaponType, int> action) {
         OnValueChanged -= action;
+    }
+
+    //Upgrades
+    private string GetUpgradeName(WeaponType type) {
+        return $"{Item.FileName}_{type}";
+    }
+
+    private void UpdateTiers() {
+        //Update tier values
+        PrimaryTier = Loadout.GetUpgrade(GetUpgradeName(WeaponType.Primary));
+        SecondaryTier = Loadout.GetUpgrade(GetUpgradeName(WeaponType.Secondary));
+        PassiveTier = Loadout.GetUpgrade(GetUpgradeName(WeaponType.Passive));
+    }
+
+    public bool Upgrade(WeaponType type) {
+        //Get upgrade cost
+        int cost = type switch {
+            WeaponType.Primary => PrimaryUpgradeCost,
+            WeaponType.Secondary => SecondaryUpgradeCost,
+            WeaponType.Passive => PassiveUpgradeCost,
+            _ => 0
+        };
+
+        //Pay for upgrade
+        if (!Loadout.PayMoney(cost)) return false;
+
+        //Upgrade
+        string name = GetUpgradeName(type);
+        switch (type) {
+            case WeaponType.Primary:
+                PrimaryTier += 1;
+                Loadout.SetUpgrade(name, PrimaryTier);
+                break;
+            case WeaponType.Secondary:
+                SecondaryTier += 1;
+                Loadout.SetUpgrade(name, SecondaryTier);
+                break;
+            case WeaponType.Passive:
+                PassiveTier += 1;
+                Loadout.SetUpgrade(name, PassiveTier);
+                break;
+        }
+
+        //Success
+        return true;
     }
 
     //Primary

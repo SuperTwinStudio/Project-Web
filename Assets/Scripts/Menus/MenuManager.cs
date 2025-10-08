@@ -339,6 +339,11 @@ public class MenuManager : MonoBehaviour {
         return menus.OfType<T>().FirstOrDefault();
     }
 
+    public bool TryGetMenu<T>(out T menu) where T : Menu {
+        menu = GetMenu<T>();
+        return menu != null;
+    }
+
     //Events
     public void AddOnMenuChanged(MenuEvent menuEvent) {
         OnMenuChanged += menuEvent;
