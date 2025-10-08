@@ -38,12 +38,12 @@ public class Weapon : MonoBehaviour {
     public virtual bool PrimaryAvailable => !primaryTimer.counting;
     public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
+    public int PrimaryValue { get; private set; } = 0;
     public int PrimaryTier { get; private set; } = 1;
+
     public virtual int PrimaryUpgradeCostBase => 10;
     public virtual int PrimaryUpgradeCostVariation => 10;
-    public virtual int PrimaryUpgradeCost => PrimaryUpgradeCostBase + (PrimaryUpgradeCostVariation * PrimaryTier);
-
-    public int PrimaryValue { get; private set; } = 0;
+    public int PrimaryUpgradeCost => PrimaryUpgradeCostBase + (PrimaryTier - 1) * PrimaryUpgradeCostVariation;
 
     //Secondary
     private readonly Timer secondaryTimer = new();
@@ -51,14 +51,14 @@ public class Weapon : MonoBehaviour {
     protected virtual float SecondaryCooldownDuration => 1;
 
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
-    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
-
-    public int SecondaryTier { get; private set; } = 1;
-    public virtual int SecondaryUpgradeCostBase => 10;
-    public virtual int SecondaryUpgradeCostVariation => 10;
-    public virtual int SecondaryUpgradeCost => SecondaryUpgradeCostBase + (SecondaryUpgradeCostVariation * SecondaryTier);
+    public float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
 
     public int SecondaryValue { get; private set; } = 0;
+    public int SecondaryTier { get; private set; } = 1;
+
+    public virtual int SecondaryUpgradeCostBase => 10;
+    public virtual int SecondaryUpgradeCostVariation => 10;
+    public int SecondaryUpgradeCost => SecondaryUpgradeCostBase + (SecondaryTier - 1) * SecondaryUpgradeCostVariation;
 
     //Passive
     private readonly Timer passiveTimer = new();
@@ -68,12 +68,12 @@ public class Weapon : MonoBehaviour {
     public virtual bool PassiveAvailable => !passiveTimer.counting;
     public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
+    public int PassiveValue { get; private set; } = 0;
     public int PassiveTier { get; private set; } = 1;
+
     public virtual int PassiveUpgradeCostBase => 10;
     public virtual int PassiveUpgradeCostVariation => 10;
-    public virtual int PassiveUpgradeCost => PassiveUpgradeCostBase + (PassiveUpgradeCostVariation * PassiveTier);
-
-    public int PassiveValue { get; private set; } = 0;
+    public int PassiveUpgradeCost => PassiveUpgradeCostBase + (PassiveTier - 1) * PassiveUpgradeCostVariation;
 
 
     //State

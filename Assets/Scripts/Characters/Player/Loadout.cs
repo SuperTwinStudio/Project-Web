@@ -176,12 +176,12 @@ public class Loadout : MonoBehaviour, ISavable {
         //Parse save
         var save = JsonUtility.FromJson<LoadoutSave>(saveJson);
 
-        //Load weapon
-        SelectWeapon(Item.GetFromName(save.currentWeapon));
-
-        //Load upgrades
+        //Load upgrades (need to do it before weapon)
         _upgrades.Clear();
         foreach (var pair in save.upgrades) _upgrades.Add(pair.Key, pair.Value);
+
+        //Load weapon
+        SelectWeapon(Item.GetFromName(save.currentWeapon));
 
         //Load money
         Money = save.money;

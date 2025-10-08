@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopMenu : Menu {
@@ -13,6 +14,15 @@ public class ShopMenu : Menu {
     [Header("Shop")]
     [SerializeField] private TMP_Text moneyText;
 
+    //Class
+    [Header("Class")]
+    [SerializeField] private TMP_Text primaryUpgradeText;
+    [SerializeField] private TMP_Text primaryCostText;
+    [SerializeField] private TMP_Text secondaryUpgradeText;
+    [SerializeField] private TMP_Text secondaryCostText;
+    [SerializeField] private TMP_Text passiveUpgradeText;
+    [SerializeField] private TMP_Text passiveCostText;
+
 
       /*$$$$$              /$$     /$$
      /$$__  $$            | $$    |__/
@@ -26,6 +36,29 @@ public class ShopMenu : Menu {
     private void UpdateUI() {
         //Update money
         moneyText.SetText($"Money: {Loadout.Money}G");
+
+        //Update class tab
+        UpdateClassUI();
+    }
+
+    //Weapons
+    private void UpdateClassUI() {
+        //
+        primaryUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.PrimaryTier + 1}");
+        primaryCostText.SetText($"{Loadout.CurrentWeapon.PrimaryUpgradeCost}G");
+
+        //
+        secondaryUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.SecondaryTier + 1}");
+        secondaryCostText.SetText($"{Loadout.CurrentWeapon.SecondaryUpgradeCost}G");
+
+        //
+        passiveUpgradeText.SetText($"Upgrade to tier {Loadout.CurrentWeapon.PassiveTier + 1}");
+        passiveCostText.SetText($"{Loadout.CurrentWeapon.PassiveUpgradeCost}G");
+    }
+
+    public void UpgradeWeapon(int type) {
+        //Try to upgrade weapon
+        if (Loadout.CurrentWeapon.Upgrade((WeaponType) type)) UpdateClassUI();
     }
 
 

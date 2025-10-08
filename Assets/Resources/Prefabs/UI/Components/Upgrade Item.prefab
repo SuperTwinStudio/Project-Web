@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7711567905247650684}
   - component: {fileID: 3257304858675447063}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 31513347774224951}
   - component: {fileID: 7359219989927045452}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Upgrade Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
