@@ -354,15 +354,14 @@ public class LevelGenerator
         LEFT,
         RIGHT
     }
-
-    public enum RoomFlags : int
-    {
-        HAS_UP = 0,
-        HAS_DOWN,
-        HAS_LEFT,
-        HAS_RIGHT,
-        IS_START,
-        IS_END,
-        IS_OCCUPIED
-    }
+}
+public enum RoomFlags : int
+{
+    HAS_UP = 0,
+    HAS_DOWN,
+    HAS_LEFT,
+    HAS_RIGHT,
+    IS_START,
+    IS_END,
+    IS_OCCUPIED
 }
