@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c46fc275a273cb4a92575d4a65e25f6, type: 3}
-  m_Name: Level
+  m_Name: Test
   m_EditorClassIdentifier: 
-  Name: Default
+  Name: Test
+  Layer: -1
   MapSize: 50
   RoomSize: 1
   MaxStep: 5
@@ -41,3 +42,9 @@ MonoBehaviour:
   - {fileID: 30979004110380592, guid: 0808ad2ff4b69224a9e1a5b5fee68fb1, type: 3}
   - {fileID: 2864965110499164247, guid: 9e7223c345cad59468972d6766bd959b, type: 3}
   - {fileID: 2472519995361220958, guid: 427d316166ff0964aadff8e1600cd380, type: 3}
+  RareEnemyChance: 25
+  FodderEnemies: []
+  RareEnemies: []
+  RareTreasureChance: 25
+  NormalTreasure: []
+  RareTreasure: []

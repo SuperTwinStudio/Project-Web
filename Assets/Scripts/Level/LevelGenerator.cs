@@ -115,7 +115,7 @@ public class LevelGenerator
                 }
                 else if (GetRoomFlag(m_GenerationGrid[x, y], RoomFlags.IS_START))
                 {
-                    GameObject room = GameObject.Instantiate(def.StartRoom, new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                    GameObject room = GameObject.Instantiate(def.StartRoom, GetRoomScenePos(new Vector2Int(x, y), def.RoomSize), Quaternion.identity, m_LevelContainer);
                     roomObjectMap[x, y] = room.GetComponent<Room>();
 
                     startRoomPos = new Vector2(x * def.RoomSize, -y * def.RoomSize);
@@ -123,7 +123,7 @@ public class LevelGenerator
                 else
                 {
                     int roomId = Random.Range(0, def.StandardRooms.Length);
-                    GameObject room = GameObject.Instantiate(def.StandardRooms[roomId], new Vector3(x * def.RoomSize, 0, -y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                    GameObject room = GameObject.Instantiate(def.StandardRooms[roomId], GetRoomScenePos(new Vector2Int(x, y), def.RoomSize), Quaternion.identity, m_LevelContainer);
                     roomObjectMap[x, y] = room.GetComponent<Room>();
                 }
             }
@@ -216,7 +216,7 @@ public class LevelGenerator
 
         int bossRoom = Random.Range(0, def.BossRooms.Length);
         Vector2Int bossPos = endRooms[furthestRoom];
-        GameObject room = GameObject.Instantiate(def.BossRooms[bossRoom], new Vector3(bossPos.x * def.RoomSize, 0, -bossPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+        GameObject room = GameObject.Instantiate(def.BossRooms[bossRoom], GetRoomScenePos(bossPos, def.RoomSize), Quaternion.identity, m_LevelContainer);
         room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[bossPos.x, bossPos.y]);
 
         // Remove boss room from further processing
@@ -233,7 +233,7 @@ public class LevelGenerator
                 Vector2Int selRoom = endRooms[rand];
 
                 int roomObj = Random.Range(0, def.TreasureRooms.Length);
-                room = GameObject.Instantiate(def.TreasureRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.TreasureRooms[roomObj], GetRoomScenePos(selRoom, def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
 
                 endRooms.RemoveAt(rand);
@@ -251,7 +251,7 @@ public class LevelGenerator
                 Vector2Int selRoom = endRooms[rand];
 
                 int roomObj = Random.Range(0, def.ItemRooms.Length);
-                room = GameObject.Instantiate(def.ItemRooms[roomObj], new Vector3(selRoom.x * def.RoomSize, 0, -selRoom.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.ItemRooms[roomObj], GetRoomScenePos(selRoom, def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
 
                 endRooms.RemoveAt(rand);
@@ -268,7 +268,7 @@ public class LevelGenerator
                 int roomId = Random.Range(0, endRooms.Count);
                 Vector2Int roomPos = endRooms[roomId];
 
-                room = GameObject.Instantiate(def.SecretRooms[roomObj], new Vector3(roomPos.x * def.RoomSize, 0, -roomPos.y * def.RoomSize), Quaternion.identity, m_LevelContainer);
+                room = GameObject.Instantiate(def.SecretRooms[roomObj], GetRoomScenePos(roomPos, def.RoomSize), Quaternion.identity, m_LevelContainer);
                 room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[roomPos.x, roomPos.y]);
 
                 endRooms.RemoveAt(roomId);
@@ -340,6 +340,11 @@ public class LevelGenerator
     private bool GetRoomFlag(int value, RoomFlags flag)
     {
         return ((value >> (int)flag) & 0b1) == 1;
+    }
+
+    private Vector3 GetRoomScenePos(Vector2Int roomPos, int roomSize)
+    {
+        return new Vector3(roomPos.x * roomSize, 0, -roomPos.y * roomSize);
     }
 
     private enum Directions : int
