@@ -23,11 +23,59 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1416883291951104
-    m_Localized: Vacio
+    m_Localized: "El inventario est\xE1 vac\xEDo"
     m_Metadata:
       m_Items: []
   - m_Id: 1446249170341888
     m_Localized: Tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902327242395648
+    m_Localized: 'Dinero:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902393453678592
+    m_Localized: 'Valor:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902435426078720
+    m_Localized: 'Vida:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903219903533056
+    m_Localized: Ataque Primario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903269014638592
+    m_Localized: Ataque Secundario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903287498936320
+    m_Localized: Pasiva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904128704352256
+    m_Localized: Mejorar a nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904888255057920
+    m_Localized: Inventario vendido por
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2942271885283328
+    m_Localized: Puedes obtener nuevas clases derrotando jefes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135052578914304
+    m_Localized: Arma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135097906757632
+    m_Localized: Personaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3137753219956736
+    m_Localized: Clase Seleccionada
     m_Metadata:
       m_Items: []
   references:

@@ -7,4 +7,11 @@ public class EnemyTest : EnemyBase {
         return base.Damage(amount);
     }
 
+    protected override void OnDeath(bool instant = false) {
+        base.OnDeath(instant);
+
+        //Destroy
+        Destroy(gameObject);
+    }
+
 }

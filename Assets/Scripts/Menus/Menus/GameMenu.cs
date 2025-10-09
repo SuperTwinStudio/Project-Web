@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameMenu : Menu {
-    
+
     //Prefab
     public override string Name => MenusList.Game;
 
@@ -16,7 +16,11 @@ public class GameMenu : Menu {
     //Health
     [Header("Health")]
     [SerializeField] private TMP_Text healthText;
-    [SerializeField] private Image damageIndicator;
+
+    //Money
+    [Header("Money")]
+    [SerializeField] private Animator moneyAnimator;
+    [SerializeField] private TMP_Text moneyText;
 
     //Weapon
     private Weapon currentWeapon;
@@ -53,9 +57,6 @@ public class GameMenu : Menu {
      \______/   \___/   \_______/   \___/   \______*/
 
     private void Update() {
-        //Update shaders that use unscaled time
-        damageIndicator.material.SetFloat("_UnscaledTime", Time.unscaledTime);
-
         //Update icons cooldown
         if (currentWeapon) {
             primaryCooldown.fillAmount = currentWeapon.PrimaryCooldown;
@@ -64,20 +65,16 @@ public class GameMenu : Menu {
         }
     }
 
-    private void OnDestroy() {
-        //Reset shaders that use unscaled time
-        damageIndicator.material.SetFloat("_UnscaledTime", 0);
-    }
-
     public override void OnUpdate() {
         //Open inventory
         if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
     }
-    
+
     public override bool OnBack() {
         MenuManager.Open(MenusList.Pause); //Pause game
         return false;
     }
+
 
       /*$$$$$              /$$     /$$
      /$$__  $$            | $$    |__/
@@ -91,12 +88,17 @@ public class GameMenu : Menu {
     //Health
     private void UpdateHealthIndicator(float health) {
         //Update health UI
-        healthText.SetText($"Health: {health}");
+        healthText.SetText($"{Util.Localize("indicator_health")} {health}");
+    }
 
-        //Damage indicator effect
-        Color color = damageIndicator.color;
-        color.a = Ease.OutCubic(1f - health / Character.MAX_HEALTH);
-        damageIndicator.color = color;
+    //Money
+    public void ShowItemsSold(int value) {
+        //No value
+        if (value <= 0) return;
+
+        //Show animation
+        moneyText.SetText($"{Util.Localize("inventory_sold")} {value}G");
+        moneyAnimator.SetTrigger("Show");
     }
 
     //Weapon
@@ -118,25 +120,25 @@ public class GameMenu : Menu {
         passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
 
         //Update values
-        OnWeaponValueChanged(WeaponType.Primary, newWeapon.PrimaryValue);
-        OnWeaponValueChanged(WeaponType.Secondary, newWeapon.SecondaryValue);
-        OnWeaponValueChanged(WeaponType.Passive, newWeapon.PassiveValue);
+        OnWeaponValueChanged(WeaponAttack.Primary, newWeapon.PrimaryValue);
+        OnWeaponValueChanged(WeaponAttack.Secondary, newWeapon.SecondaryValue);
+        OnWeaponValueChanged(WeaponAttack.Passive, newWeapon.PassiveValue);
         if (oldWeapon) oldWeapon.RemoveOnValueChanged(OnWeaponValueChanged);
         if (newWeapon) newWeapon.AddOnValueChanged(OnWeaponValueChanged);
     }
 
-    private void OnWeaponValueChanged(WeaponType type, int value) {
+    private void OnWeaponValueChanged(WeaponAttack type, int value) {
         //Get badge
         GameObject badge = type switch {
-            WeaponType.Primary => primaryValueBadge,
-            WeaponType.Secondary => secondaryValueBadge,
+            WeaponAttack.Primary => primaryValueBadge,
+            WeaponAttack.Secondary => secondaryValueBadge,
             _ => passiveValueBadge,
         };
 
         //Get text
         TMP_Text text = type switch {
-            WeaponType.Primary => primaryValueText,
-            WeaponType.Secondary => secondaryValueText,
+            WeaponAttack.Primary => primaryValueText,
+            WeaponAttack.Secondary => secondaryValueText,
             _ => passiveValueText,
         };
 

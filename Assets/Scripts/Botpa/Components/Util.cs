@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Settings;
 
 namespace Botpa {
 
@@ -76,24 +76,15 @@ namespace Botpa {
         | $$      | $$  | $$| $$       /$$__  $$| $$| $$_____/ \____  $$
         | $$$$$$$$|  $$$$$$/|  $$$$$$$|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/
         |________/ \______/  \_______/ \_______/|__/ \_______/|______*/
-        
-        /*
-        ///<summary>
-        ///Localizes a string <b>key</b> using the UI localization table.
-        ///</summary>
-        public static string Localize(string key) {
-            return Localize(key, "UI");
-        }
 
         ///<summary>
         ///Localizes a string <b>key</b> using the specified localization <b>table</b>.
         ///</summary>
-        public static string Localize(string key, string table) {
+        public static string Localize(string key, string table = "UI") {
             return LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
         }
-        */
-        
-        
+
+
 
           /*$$$$$                  /$$ /$$
          /$$__  $$                | $$|__/

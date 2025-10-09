@@ -45,6 +45,8 @@ public class EnemyBase : Character {
 
     //Health
     protected override void OnDeath(bool instant = false) {
+        base.OnDeath(instant);
+        
         //Disable collisions
         collider.enabled = false;
 
