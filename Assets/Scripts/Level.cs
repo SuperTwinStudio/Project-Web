@@ -28,7 +28,7 @@ public class Level : MonoBehaviour {
 
     //Level
     [Header("Level")]
-    [SerializeField] private bool _isLobby;
+    [SerializeField] private bool _isLobby = false;
     [SerializeField] private bool _isHandmade = true;
     [SerializeField] private LevelDefinition _levelDef;
 

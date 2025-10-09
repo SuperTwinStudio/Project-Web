@@ -83,6 +83,8 @@ MonoBehaviour:
   _cameraController: {fileID: 7048343673859228868}
   _player: {fileID: 3014555502683683044}
   _isLobby: 1
+  _isHandmade: 1
+  _levelDef: {fileID: 0}
 --- !u!1001 &2473047176644410090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,7 +305,7 @@ PrefabInstance:
     - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
       propertyPath: focusTarget
       value: 
-      objectReference: {fileID: 5341022149319632885}
+      objectReference: {fileID: 8008532760247884983}
     - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
       propertyPath: postproVolume
       value: 

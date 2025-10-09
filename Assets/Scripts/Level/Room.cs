@@ -83,7 +83,6 @@ public class Room : MonoBehaviour
         Collider[] signs = Physics.OverlapBox(transform.position, Vector3.one * (def.RoomSize / 2), Quaternion.identity, m_SignLayer);
         foreach (Collider sign in signs)
         {
-            Debug.Log($"Sign: {sign.name}");
             sign.transform.parent = transform.GetChild(0);
         }
 
