@@ -45,10 +45,9 @@ public class WeaponSword : Weapon {
 
 
     //State
-    protected override void Start() {
-        base.Start();
-
+    protected override void Init() {
         //Init passive
+        hitCount = 0;
         UpdatePassiveValue();
     }
 

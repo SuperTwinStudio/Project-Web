@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -9,6 +10,8 @@ public class Item : ScriptableObject {
     [SerializeField] private Sprite _icon;
     [SerializeField] private LocalizedString _name;
     [SerializeField, Min(0)] private int _value;
+
+    private readonly static Dictionary<string, Item> cache = new();
 
     public Sprite Icon => _icon;
     public string Name => _name.GetLocalizedString();
@@ -21,8 +24,13 @@ public class Item : ScriptableObject {
         //Invalid name
         if (string.IsNullOrEmpty(name)) return null;
 
-        //Look for item in resources
-        return Resources.Load<Item>($"Items/{name}");
+        //Check if its in cache
+        if (cache.ContainsKey(name)) return cache[name];
+
+        //Load from resources
+        var item = Resources.Load<Item>($"Items/{name}");
+        cache[name] = item;
+        return item;
     }
 
     //Dictionary support

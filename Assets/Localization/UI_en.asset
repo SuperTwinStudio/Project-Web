@@ -66,6 +66,18 @@ MonoBehaviour:
     m_Localized: You can obtain new classes by defeating bosses
     m_Metadata:
       m_Items: []
+  - m_Id: 3135052578914304
+    m_Localized: Weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135097906757632
+    m_Localized: Character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3137753219956736
+    m_Localized: Selected Class
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
