@@ -6,6 +6,7 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject[] m_Doors;
     [SerializeField, Range(0, 1)] private int m_ShowActiveDoors;
     [Space]
+    [SerializeField] private LayerMask m_SignLayer;
     [SerializeField] private GameObject[] m_DoorSigns;
     [SerializeField] private bool m_ShowDoorSigns;
     [Space]
@@ -14,6 +15,7 @@ public class Room : MonoBehaviour
     [Space]
     [SerializeField] private bool m_BossRoom;
     [SerializeField] private GameObject m_BossObject;
+    [SerializeField] private GameObject m_Elevator;
 
     private int m_Flags;
     private Transform m_GeometryTransform = null;
@@ -77,6 +79,14 @@ public class Room : MonoBehaviour
             }
         }
 
+        // Check for signs
+        Collider[] signs = Physics.OverlapBox(transform.position, Vector3.one * (def.RoomSize / 2), Quaternion.identity, m_SignLayer);
+        foreach (Collider sign in signs)
+        {
+            Debug.Log($"Sign: {sign.name}");
+            sign.transform.parent = transform.GetChild(0);
+        }
+
         // Spawn & initialize enemies
         if (m_EnemyRoom)
         {
@@ -133,6 +143,7 @@ public class Room : MonoBehaviour
         if (m_BossRoom)
         {
             // ALLOW ACCESS TO NEXT FLOOR
+            m_Elevator.SetActive(true);
             UnlockDoors();
             m_BossPresent = false;
 

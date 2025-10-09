@@ -347,14 +347,8 @@ public class LevelGenerator
         return new Vector3(roomPos.x * roomSize, 0, -roomPos.y * roomSize);
     }
 
-    private enum Directions : int
-    {
-        UP = 0,
-        DOWN,
-        LEFT,
-        RIGHT
-    }
 }
+
 public enum RoomFlags : int
 {
     HAS_UP = 0,
@@ -364,4 +358,12 @@ public enum RoomFlags : int
     IS_START,
     IS_END,
     IS_OCCUPIED
+}
+
+public enum Directions : int
+{
+    UP = 0,
+    DOWN,
+    LEFT,
+    RIGHT
 }
