@@ -231,11 +231,33 @@
                 },
                 {
                     "name": "",
+                    "id": "ef29bb9f-5ad1-4f58-aa90-3cbc2eee0dd3",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "32b3aa33-a8f7-49fc-a652-53dc784c6c66",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "Secondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "072704ae-9f16-49d2-82cb-67b5b11be6ab",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Secondary",
                     "isComposite": false,
                     "isPartOfComposite": false
