@@ -7,6 +7,10 @@ public class WorldItem : MonoBehaviour {
     [SerializeField] private Item item;
     [SerializeField, Min(1)] private int amount = 1;
 
+    public void SetItem(Item item)
+    {
+        this.item = item;
+    }
 
     //State
     private void OnTriggerEnter(Collider other) {

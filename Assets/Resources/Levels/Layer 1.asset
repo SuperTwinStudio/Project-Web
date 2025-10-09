@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c46fc275a273cb4a92575d4a65e25f6, type: 3}
+  m_Name: Layer 1
+  m_EditorClassIdentifier: 
+  Name: Layer 1
+  Layer: 1
+  MapSize: 5
+  RoomSize: 20
+  MaxStep: 2
+  BaseDoorChance: 80
+  StartRoom: {fileID: 2154439050273984560, guid: 53411621be473204e98eb7a5a2ef9103, type: 3}
+  StandardRooms:
+  - {fileID: 9134466352977747744, guid: 494567db75df3f94a876f4ad3a552a11, type: 3}
+  - {fileID: 8688106205890497510, guid: c974d59e9873c314e806ec3001e19315, type: 3}
+  TreasureRooms:
+  - {fileID: 4217590113031238487, guid: f8186cfefc810fb4eb85e120334052d0, type: 3}
+  ItemRooms:
+  - {fileID: 8446276735505682491, guid: 84679e119067e83408aad084f8fc90c1, type: 3}
+  BossRooms:
+  - {fileID: 6226402528476218175, guid: 7273e11163daf2c409ac7a395bdb5090, type: 3}
+  GenerateSecretRooms: 0
+  SecretRoomsHaveDoors: 1
+  SecretRoomChance: 10
+  SecretRooms: []
+  RareEnemyChance: 25
+  FodderEnemies:
+  - {fileID: 1849652033320938101, guid: d108d3f5ce3fa4c4a8b213b140da867f, type: 3}
+  RareEnemies:
+  - {fileID: 108002717470500082, guid: 1970843ed21a9e54eb5b953b9fae6296, type: 3}
+  RareTreasureChance: 25
+  NormalTreasure:
+  - {fileID: 11400000, guid: 479cbb78c4d45064c8f081f39e435add, type: 2}
+  RareTreasure:
+  - {fileID: 11400000, guid: 9fa0a8e99f6099f45a33f0f2f2facd71, type: 2}

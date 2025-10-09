@@ -7,7 +7,6 @@ public class DebugRegen : MonoBehaviour
 {
 	[SerializeField] private LevelDefinition m_RoomDonor;
 	[Space]
-	[SerializeField] private LevelGenerator m_Generator;
 	[SerializeField] private LevelDefinition m_DebugDefinition;
 	[SerializeField] private TMP_InputField m_SizeField;
 	[SerializeField] private TMP_InputField m_StepField;
@@ -18,15 +17,17 @@ public class DebugRegen : MonoBehaviour
 	[SerializeField] private Toggle m_SecretGenerationToggle;
 	[SerializeField] private Toggle m_SecretDoorGenerationToggle;
 
+	private LevelGenerator m_Generator;
+
 	void Start()
 	{
 		// Copy data from the donor
 		m_DebugDefinition.MapSize = m_RoomDonor.MapSize;
-        m_DebugDefinition.RoomSize = m_RoomDonor.RoomSize;
+		m_DebugDefinition.RoomSize = m_RoomDonor.RoomSize;
 		m_DebugDefinition.MaxStep = m_RoomDonor.MaxStep;
 		m_DebugDefinition.BaseDoorChance = m_RoomDonor.BaseDoorChance;
 
-        m_DebugDefinition.StartRoom = m_RoomDonor.StartRoom;
+		m_DebugDefinition.StartRoom = m_RoomDonor.StartRoom;
 		m_DebugDefinition.StandardRooms = m_RoomDonor.StandardRooms;
 		m_DebugDefinition.TreasureRooms = m_RoomDonor.TreasureRooms;
 		m_DebugDefinition.ItemRooms = m_RoomDonor.ItemRooms;
@@ -54,6 +55,9 @@ public class DebugRegen : MonoBehaviour
 			m_SecretGenerationToggle.isOn = m_DebugDefinition.GenerateSecretRooms;
 			m_SecretDoorGenerationToggle.isOn = m_DebugDefinition.SecretRoomsHaveDoors;
 		}
+
+		m_Generator = new LevelGenerator();
+		m_Generator.GenerateLevel(m_DebugDefinition);
 	}
 
 	void Update()

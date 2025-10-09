@@ -28,15 +28,32 @@ public class Level : MonoBehaviour {
 
     //Level
     [Header("Level")]
-    [SerializeField] private bool _isLobby;
+    [SerializeField] private bool _isLobby = false;
+    [SerializeField] private bool _isHandmade = true;
+    public LevelDefinition Definition;
 
     public bool IsLobby => _isLobby;
-
+    public bool IsHandmade => _isHandmade;
 
     //State
     private void Awake() {
         //Assign player to camera follow point
         CameraController.Follow = Player.transform;
+    }
+
+    private void Start()
+    {
+        if(!_isLobby && !_isHandmade) InitializeLevel();
+    }
+
+    private void InitializeLevel()
+    {
+        LevelGenerator generator = new LevelGenerator();
+        generator.GenerateLevel(Definition);
+
+        // Allow player interaction when level has generated
+        Player.gameObject.SetActive(true);
+        CameraController.gameObject.SetActive(true);
     }
 
     //Scene

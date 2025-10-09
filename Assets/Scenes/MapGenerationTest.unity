@@ -3874,7 +3874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RoomDonor: {fileID: 11400000, guid: 3231b9560000d03449ae1c26e78891c5, type: 2}
-  m_Generator: {fileID: 1205590335}
   m_DebugDefinition: {fileID: 11400000, guid: 5261d4ac6c026c841bda9a79a718e8c4, type: 2}
   m_SizeField: {fileID: 1324362445}
   m_StepField: {fileID: 786571286}
@@ -4582,52 +4581,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168039981}
   m_CullTransparentMesh: 1
---- !u!1 &1205590333
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1205590334}
-  - component: {fileID: 1205590335}
-  m_Layer: 0
-  m_Name: Level Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1205590334
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205590333}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1205590335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205590333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdafda918074e7644adda29b3d8c6b67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DefaultDefinition: {fileID: 11400000, guid: 3231b9560000d03449ae1c26e78891c5, type: 2}
-  m_LevelContainer: {fileID: 1815553184}
 --- !u!1 &1267585657
 GameObject:
   m_ObjectHideFlags: 0
@@ -6933,7 +6886,7 @@ GameObject:
   - component: {fileID: 1815553184}
   m_Layer: 0
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: LevelContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8198,7 +8151,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1433423552}
-  - {fileID: 1205590334}
   - {fileID: 1815553184}
   - {fileID: 285661158}
   - {fileID: 165346140}
