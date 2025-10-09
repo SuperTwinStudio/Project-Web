@@ -1,7 +1,6 @@
 using System;
 using Botpa;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -22,8 +21,9 @@ public class ShopMenu : Menu {
     [Header("Shop")]
     [SerializeField] private TMP_Text moneyText;
 
-    //Class
-    [Header("Class")]
+    //Weapon
+    [Header("Weapon")]
+    [SerializeField] private Image selectedClassIcon;
     [SerializeField] private UpgradeItem primaryAttack;
     [SerializeField] private UpgradeItem secondaryAttack;
     [SerializeField] private UpgradeItem passiveAttack;
@@ -77,6 +77,7 @@ public class ShopMenu : Menu {
         Weapon weapon = Loadout.CurrentWeapon;
 
         //Update UI
+        selectedClassIcon.sprite = weapon.Item.Icon;
         primaryAttack.UpdateUI(weapon.PrimaryIcon, Loadout.Money, weapon.PrimaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PrimaryLevel + 1}");
         secondaryAttack.UpdateUI(weapon.SecondaryIcon, Loadout.Money, weapon.SecondaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.SecondaryLevel + 1}");
         passiveAttack.UpdateUI(weapon.PassiveIcon, Loadout.Money, weapon.PassiveUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PassiveLevel + 1}");

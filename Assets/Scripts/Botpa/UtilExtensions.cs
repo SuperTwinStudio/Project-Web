@@ -106,7 +106,7 @@ namespace Botpa {
         ///<summary>
         ///Returns true if the list is empty.
         ///</summary>
-        public static bool IsEmpty<T>(this IList<T> list) {
+        public static bool IsEmpty<T>(this IReadOnlyList<T> list) {
             return list.Count == 0;
         }
 
@@ -120,7 +120,7 @@ namespace Botpa {
         ///<summary>
         ///Returns true if the dictionary is empty.
         ///</summary>
-        public static bool IsEmpty<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) {
+        public static bool IsEmpty<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary) {
             return dictionary.Count == 0;
         }
 
@@ -130,6 +130,13 @@ namespace Botpa {
         public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue fallback) {
             if (!dictionary.ContainsKey(key)) dictionary[key] = fallback;
             return dictionary[key];
+        }
+
+        ///<summary>
+        ///Returns true if the dictionary is empty.
+        ///</summary>
+        public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection) {
+            return collection.Count == 0;
         }
 
 

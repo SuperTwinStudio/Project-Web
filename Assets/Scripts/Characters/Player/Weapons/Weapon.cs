@@ -94,7 +94,12 @@ public class Weapon : MonoBehaviour {
             SecondaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Secondary));
             PassiveLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Passive));
         }
+
+        //Init weapon
+        Init();
     }
+
+    protected virtual void Init() {}
 
     //Weapon
     protected void SetCooldown(WeaponAttack attack, float cooldown) {

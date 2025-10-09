@@ -46,13 +46,12 @@ public class WeaponStapler : Weapon {
 
 
     //State
-    protected override void Start() {
-        base.Start();
-
+    protected override void Init() {
         //Init ammo
         SetAmmo(maxAmmo);
     }
 
+    //Helpers
     private void SetAmmo(int newAmmo) {
         ammo = newAmmo;
         SetValue(WeaponAttack.Passive, ammo);
@@ -73,17 +72,6 @@ public class WeaponStapler : Weapon {
         SetAmmo(ammo - 1);
     }
 
-    private IEnumerator ReloadCoroutine() {
-        //Wait
-        yield return new WaitForSeconds(reloadDuration);
-
-        //Refill ammo
-        SetAmmo(maxAmmo);
-
-        //Finish
-        isReloading = false;
-    }
-
     private void Reload() {
         //Already reloading
         if (isReloading) return;
@@ -95,6 +83,18 @@ public class WeaponStapler : Weapon {
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
+    }
+
+    //Reloading
+    private IEnumerator ReloadCoroutine() {
+        //Wait
+        yield return new WaitForSeconds(reloadDuration);
+
+        //Refill ammo
+        SetAmmo(maxAmmo);
+
+        //Finish
+        isReloading = false;
     }
 
     //Primary

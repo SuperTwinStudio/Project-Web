@@ -66,6 +66,18 @@ MonoBehaviour:
     m_Localized: Puedes obtener nuevas clases derrotando jefes
     m_Metadata:
       m_Items: []
+  - m_Id: 3135052578914304
+    m_Localized: Arma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135097906757632
+    m_Localized: Personaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3137753219956736
+    m_Localized: Clase Seleccionada
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

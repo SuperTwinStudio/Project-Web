@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -11,6 +12,8 @@ public class Effect : ScriptableObject {
     [SerializeField] private Sprite _icon;
     [SerializeField] private LocalizedString _name;
     [SerializeField] private EffectAction _action;
+
+    private readonly static Dictionary<string, Effect> cache = new();
 
     public bool Show => _show;
     public Sprite Icon => _icon;
@@ -24,8 +27,13 @@ public class Effect : ScriptableObject {
         //Invalid name
         if (string.IsNullOrEmpty(name)) return null;
 
-        //Look for effect in resources
-        return Resources.Load<Effect>($"Effects/{name}");
+        //Check if its in cache
+        if (cache.ContainsKey(name)) return cache[name];
+
+        //Load from resources
+        var effect = Resources.Load<Effect>($"Effects/{name}");
+        cache[name] = effect;
+        return effect;
     }
 
     //Dictionary support
