@@ -14,6 +14,8 @@ public class EnemyBase : Character {
     protected float playerDistance;
     protected Vector3 playerLastKnownPosition;
 
+    //Room
+    protected Room room;
 
     //State
     protected virtual void Start() {
@@ -50,4 +52,9 @@ public class EnemyBase : Character {
         enabled = false;
     }
 
+    //Room
+    public void SetRoom(Room room)
+    {
+        this.room = room;
+    }
 }

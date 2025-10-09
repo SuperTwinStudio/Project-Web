@@ -136,7 +136,7 @@ public class LevelGenerator
             for (int y = 0; y < def.MapSize; y++)
             {
                 if (roomObjectMap[x, y] == null) continue;
-                roomObjectMap[x, y].InitializeDoors(m_GenerationGrid[x, y]);
+                roomObjectMap[x, y].InitializeRoom(m_GenerationGrid[x, y], def);
             }
         }
 
@@ -217,7 +217,7 @@ public class LevelGenerator
         int bossRoom = Random.Range(0, def.BossRooms.Length);
         Vector2Int bossPos = endRooms[furthestRoom];
         GameObject room = GameObject.Instantiate(def.BossRooms[bossRoom], GetRoomScenePos(bossPos, def.RoomSize), Quaternion.identity, m_LevelContainer);
-        room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[bossPos.x, bossPos.y]);
+        room.GetComponent<Room>().InitializeRoom(m_GenerationGrid[bossPos.x, bossPos.y], def);
 
         // Remove boss room from further processing
         endRooms.RemoveAt(furthestRoom);
@@ -234,7 +234,7 @@ public class LevelGenerator
 
                 int roomObj = Random.Range(0, def.TreasureRooms.Length);
                 room = GameObject.Instantiate(def.TreasureRooms[roomObj], GetRoomScenePos(selRoom, def.RoomSize), Quaternion.identity, m_LevelContainer);
-                room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
+                room.GetComponent<Room>().InitializeRoom(m_GenerationGrid[selRoom.x, selRoom.y], def);
 
                 endRooms.RemoveAt(rand);
             }
@@ -252,7 +252,7 @@ public class LevelGenerator
 
                 int roomObj = Random.Range(0, def.ItemRooms.Length);
                 room = GameObject.Instantiate(def.ItemRooms[roomObj], GetRoomScenePos(selRoom, def.RoomSize), Quaternion.identity, m_LevelContainer);
-                room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[selRoom.x, selRoom.y]);
+                room.GetComponent<Room>().InitializeRoom(m_GenerationGrid[selRoom.x, selRoom.y], def);
 
                 endRooms.RemoveAt(rand);
             }
@@ -269,7 +269,7 @@ public class LevelGenerator
                 Vector2Int roomPos = endRooms[roomId];
 
                 room = GameObject.Instantiate(def.SecretRooms[roomObj], GetRoomScenePos(roomPos, def.RoomSize), Quaternion.identity, m_LevelContainer);
-                room.GetComponent<Room>().InitializeDoors(m_GenerationGrid[roomPos.x, roomPos.y]);
+                room.GetComponent<Room>().InitializeRoom(m_GenerationGrid[roomPos.x, roomPos.y], def);
 
                 endRooms.RemoveAt(roomId);
 
