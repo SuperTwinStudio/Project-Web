@@ -8,6 +8,13 @@ public class Loadout : MonoBehaviour, ISavable {
     //Events
     public delegate void ClassChanged(Weapon oldWeapon, Weapon newWeapon);
 
+    //Components
+    [Header("Components")]
+    [SerializeField] protected Player _player;
+
+    public Player Player => _player;
+    public Level Level => Player.Level;
+
     //Weapons
     [Header("Weapon")]
     [SerializeField] private List<Weapon> weapons = new();
@@ -26,6 +33,11 @@ public class Loadout : MonoBehaviour, ISavable {
 
     public IReadOnlyDictionary<Item, int> Inventory => _inventory;
 
+    //Upgrades
+    private readonly SerializableDictionary<string, int> _upgrades = new();
+
+    public IReadOnlyDictionary<string, int> Upgrades => _upgrades;
+
 
     //State
     private void Start() {
@@ -33,7 +45,7 @@ public class Loadout : MonoBehaviour, ISavable {
         if (!CurrentWeapon) SelectWeapon(weapons[0].Item);
     }
 
-    //Weapon
+    //Weapons
     private Weapon GetWeapon(Item item) {
         foreach (var weapon in weapons) {
             //Check weapon item
@@ -82,6 +94,29 @@ public class Loadout : MonoBehaviour, ISavable {
         return CurrentWeapon && CurrentWeapon.UseSecondary();
     }
 
+    //Upgrades
+    public int GetUpgrade(string key) {
+        //Not found -> Upgrade is in tier 1
+        if (!Upgrades.ContainsKey(key)) return 1;
+
+        //Found -> Return upgrade tier
+        return Upgrades[key];
+    }
+
+    public void SetUpgrade(string key, int tier) {
+        _upgrades[key] = Math.Max(tier, 1);
+    }
+
+    //Money
+    public bool PayMoney(int amount) {
+        //No enough money
+        if (Money < amount) return false;
+
+        //Pay
+        Money -= amount;
+        return true;
+    }
+
     //Inventory
     public void ClearInventory() {
         //Empty dictionary
@@ -105,9 +140,16 @@ public class Loadout : MonoBehaviour, ISavable {
         InventoryValue += item.Value * amount;
     }
 
-    public void SellInventory() {
-        Money += InventoryValue;
+    public int SellInventory() {
+        //Add inventory value to money
+        int addedValue = InventoryValue;
+        Money += addedValue;
+
+        //Clear inventory items & value
         ClearInventory();
+
+        //Return added value
+        return addedValue;
     }
 
     //Saving
@@ -120,6 +162,8 @@ public class Loadout : MonoBehaviour, ISavable {
         var save = new LoadoutSave() {
             //Weapon
             currentWeapon = CurrentWeapon ? CurrentWeapon.Item.FileName : "",
+            //Upgrades
+            upgrades = _upgrades,
             //Money
             money = Money,
             //Inventory
@@ -132,6 +176,10 @@ public class Loadout : MonoBehaviour, ISavable {
         //Parse save
         var save = JsonUtility.FromJson<LoadoutSave>(saveJson);
 
+        //Load upgrades (need to do it before weapon)
+        _upgrades.Clear();
+        foreach (var pair in save.upgrades) _upgrades.Add(pair.Key, pair.Value);
+
         //Load weapon
         SelectWeapon(Item.GetFromName(save.currentWeapon));
 
@@ -143,7 +191,13 @@ public class Loadout : MonoBehaviour, ISavable {
         foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value);
 
         //Sell inventory if in lobby
-        if (Game.Current.Level.IsLobby) SellInventory();
+        if (Level.IsLobby) {
+            //Sell inventory
+            int addedValue = SellInventory();
+
+            //Show items sold animation
+            if (Level.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowItemsSold(addedValue);
+        }
     }
 
     [Serializable]
@@ -151,6 +205,9 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Weapon
         public string currentWeapon = "";
+
+        //Upgrades
+        public SerializableDictionary<string, int> upgrades = new();
 
         //Money
         public int money = 0;

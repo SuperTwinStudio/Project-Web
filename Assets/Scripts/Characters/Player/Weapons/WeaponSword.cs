@@ -9,8 +9,10 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
-    [SerializeField, Min(0)] private float primaryAttackRadius = 1f;
-    [SerializeField, Min(0)] private float primaryAttackForward = 0f;
+    [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
+    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+
+    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerLevel;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -20,17 +22,24 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
+    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
+
+    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerLevel;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
-    [SerializeField, Min(2)] private int passiveHitCount = 4;
+    [SerializeField, Min(0)] private float passiveDamage = 20f;
+    [SerializeField, Min(0)] private float passiveDamagePerLevel = 5f;
+    [SerializeField, Min(2)] private int passiveHit = 4;
     [SerializeField, Min(1)] private float passiveDamageMult = 2f;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
+
+    private float PassiveDamage => passiveDamage + (PassiveLevel - 1) * passiveDamagePerLevel;
 
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
@@ -48,7 +57,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while spinning
-        SetCooldown(WeaponType.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), primarySlowDuration);
@@ -58,14 +67,14 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackForward(
-            isPassiveHit ? primaryDamage * passiveDamageMult : primaryDamage, 
-            primaryAttackRadius, 
-            primaryAttackForward
+            PrimaryDamage + (isPassiveHit ? PassiveDamage : 0), 
+            primaryAttackSphereCast.x, 
+            primaryAttackSphereCast.y
         );
         
         //Next hit
-        hitCount = (hitCount + 1) % passiveHitCount;
-        isPassiveHit = hitCount == passiveHitCount - 1;
+        hitCount = (hitCount + 1) % passiveHit;
+        isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
     }
 
@@ -74,7 +83,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while spinning
-        SetCooldown(WeaponType.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
@@ -85,7 +94,7 @@ public class WeaponSword : Weapon {
 
         //Attack
         AtackAround(
-            secondaryDamage, 
+            SecondaryDamage, 
             secondarySpinRadius
         );
     }
@@ -93,7 +102,7 @@ public class WeaponSword : Weapon {
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(WeaponType.Passive, passiveHitCount - hitCount - 1);
+        SetValue(WeaponAttack.Passive, passiveHit - hitCount - 1);
     }
 
 }

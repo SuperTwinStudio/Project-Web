@@ -3,15 +3,19 @@ using System.Collections;
 using Botpa;
 using UnityEngine;
 
-public enum WeaponType { Primary, Secondary, Passive }
+public enum WeaponAttack { Primary, Secondary, Passive }
 
 public class Weapon : MonoBehaviour {
 
     //Components
-    protected Player Player => Game.Current.Level.Player;
+    [Header("Components")]
+    [SerializeField] protected Loadout _loadout;
 
-    //Info
-    [Header("Info")]
+    public Loadout Loadout => _loadout;
+    public Player Player => Loadout.Player;
+
+    //Weapon
+    [Header("Weapon")]
     [SerializeField] private Item _item;
     [SerializeField] private Sprite _primaryIcon;
     [SerializeField] private Sprite _secondaryIcon;
@@ -19,7 +23,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private GameObject model;
     [SerializeField] protected Animator animator;
 
-    private event Action<WeaponType, int> OnValueChanged;
+    private event Action<WeaponAttack, int> OnValueChanged;
 
     public Item Item => _item;
     public Sprite PrimaryIcon => _primaryIcon;
@@ -35,6 +39,11 @@ public class Weapon : MonoBehaviour {
     public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
     public int PrimaryValue { get; private set; } = 0;
+    public int PrimaryLevel { get; private set; } = 1;
+
+    public virtual int PrimaryUpgradeCostBase => 10;
+    public virtual int PrimaryUpgradeCostVariation => 10;
+    public int PrimaryUpgradeCost => PrimaryUpgradeCostBase + (PrimaryLevel - 1) * PrimaryUpgradeCostVariation;
 
     //Secondary
     private readonly Timer secondaryTimer = new();
@@ -42,9 +51,14 @@ public class Weapon : MonoBehaviour {
     protected virtual float SecondaryCooldownDuration => 1;
 
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
-    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
+    public float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
 
     public int SecondaryValue { get; private set; } = 0;
+    public int SecondaryLevel { get; private set; } = 1;
+
+    public virtual int SecondaryUpgradeCostBase => 10;
+    public virtual int SecondaryUpgradeCostVariation => 10;
+    public int SecondaryUpgradeCost => SecondaryUpgradeCostBase + (SecondaryLevel - 1) * SecondaryUpgradeCostVariation;
 
     //Passive
     private readonly Timer passiveTimer = new();
@@ -55,6 +69,11 @@ public class Weapon : MonoBehaviour {
     public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
     public int PassiveValue { get; private set; } = 0;
+    public int PassiveLevel { get; private set; } = 1;
+
+    public virtual int PassiveUpgradeCostBase => 10;
+    public virtual int PassiveUpgradeCostVariation => 10;
+    public int PassiveUpgradeCost => PassiveUpgradeCostBase + (PassiveLevel - 1) * PassiveUpgradeCostVariation;
 
 
     //State
@@ -68,14 +87,21 @@ public class Weapon : MonoBehaviour {
     public void Show(bool show) {
         //Toggle model
         model.SetActive(show);
+
+        //Visible -> Update weapon attack levels
+        if (show) {
+            PrimaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Primary));
+            SecondaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Secondary));
+            PassiveLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Passive));
+        }
     }
 
-    //Class
-    protected void SetCooldown(WeaponType type, float cooldown) {
+    //Weapon
+    protected void SetCooldown(WeaponAttack attack, float cooldown) {
         //Get timer
-        Timer timer = type switch {
-            WeaponType.Primary => primaryTimer,
-            WeaponType.Secondary => secondaryTimer,
+        Timer timer = attack switch {
+            WeaponAttack.Primary => primaryTimer,
+            WeaponAttack.Secondary => secondaryTimer,
             _ => passiveTimer,
         };
 
@@ -90,30 +116,72 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    protected void SetValue(WeaponType type, int value) {
+    protected void SetValue(WeaponAttack attack, int value) {
         //Update value
-        switch (type) {
-            case WeaponType.Primary:
+        switch (attack) {
+            case WeaponAttack.Primary:
                 PrimaryValue = value;
                 break;
-            case WeaponType.Secondary:
+            case WeaponAttack.Secondary:
                 SecondaryValue = value;
                 break;
-            case WeaponType.Passive:
+            case WeaponAttack.Passive:
                 PassiveValue = value;
                 break;
         }
 
         //Call event
-        OnValueChanged?.Invoke(type, value);
+        OnValueChanged?.Invoke(attack, value);
     }
 
-    public void AddOnValueChanged(Action<WeaponType, int> action) {
+    public void AddOnValueChanged(Action<WeaponAttack, int> action) {
         OnValueChanged += action;
     }
 
-    public void RemoveOnValueChanged(Action<WeaponType, int> action) {
+    public void RemoveOnValueChanged(Action<WeaponAttack, int> action) {
         OnValueChanged -= action;
+    }
+
+    //Upgrades
+    private string GetUpgradeName(WeaponAttack attack) {
+        return $"{Item.FileName}_{attack}";
+    }
+
+    private int GetUpgradeCost(WeaponAttack attack) {
+        return attack switch {
+            WeaponAttack.Primary => PrimaryUpgradeCost,
+            WeaponAttack.Secondary => SecondaryUpgradeCost,
+            WeaponAttack.Passive => PassiveUpgradeCost,
+            _ => 0
+        };
+    }
+
+    public bool Upgrade(WeaponAttack attack) {
+        //Get upgrade cost
+        int cost = GetUpgradeCost(attack);
+
+        //Pay for upgrade
+        if (!Loadout.PayMoney(cost)) return false;
+
+        //Upgrade
+        string name = GetUpgradeName(attack);
+        switch (attack) {
+            case WeaponAttack.Primary:
+                PrimaryLevel += 1;
+                Loadout.SetUpgrade(name, PrimaryLevel);
+                break;
+            case WeaponAttack.Secondary:
+                SecondaryLevel += 1;
+                Loadout.SetUpgrade(name, SecondaryLevel);
+                break;
+            case WeaponAttack.Passive:
+                PassiveLevel += 1;
+                Loadout.SetUpgrade(name, PassiveLevel);
+                break;
+        }
+
+        //Success
+        return true;
     }
 
     //Primary
@@ -121,7 +189,7 @@ public class Weapon : MonoBehaviour {
 
     protected virtual void OnUsePrimary() {
         //Start cooldown
-        SetCooldown(WeaponType.Primary, PrimaryCooldownDuration);
+        SetCooldown(WeaponAttack.Primary, PrimaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUsePrimaryCoroutine());
@@ -138,7 +206,7 @@ public class Weapon : MonoBehaviour {
 
     protected virtual void OnUseSecondary() {
         //Start cooldown timer
-        SetCooldown(WeaponType.Secondary, SecondaryCooldownDuration);
+        SetCooldown(WeaponAttack.Secondary, SecondaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUseSecondaryCoroutine());
@@ -151,12 +219,12 @@ public class Weapon : MonoBehaviour {
     }
 
     //Actions
-    public bool AtackForward(float damage, float radius, float forward) {
+    protected bool AtackForward(float damage, float radius, float forward) {
+        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
+        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
+
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
         bool hit = false;
-
-        //Cast attack
-        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
 
         //Check collisions
         foreach (var collision in collisions) {
@@ -175,7 +243,7 @@ public class Weapon : MonoBehaviour {
         return hit;
     }
 
-    public bool AtackAround(float damage, float radius) {
+    protected bool AtackAround(float damage, float radius) {
         //Casts a sphere of <radius> radius around the player to check for collisions
         bool hit = false;
 
@@ -199,6 +267,8 @@ public class Weapon : MonoBehaviour {
         return hit;
     }
 
-    public bool SpawnProjectile(GameObject prefab) { return false; }
+    protected GameObject SpawnProjectile(GameObject prefab) {
+        return Instantiate(prefab, transform.position, Player.transform.rotation);
+    }
 
 }
