@@ -15,7 +15,7 @@ public class EnemyBase : Character {
     protected Vector3 playerLastKnownPosition;
 
     //Room
-    protected Room room;
+    protected Room room = null;
 
     //State
     protected virtual void Start() {
@@ -46,7 +46,9 @@ public class EnemyBase : Character {
     //Health
     protected override void OnDeath(bool instant = false) {
         base.OnDeath(instant);
-        
+
+        if (room != null) room.EnemyKilled();
+
         //Disable collisions
         collider.enabled = false;
 

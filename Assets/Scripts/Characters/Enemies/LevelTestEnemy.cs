@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class LevelTestEnemy : EnemyBase
 {
-    public override bool Damage(float amount)
+    protected override void OnDeath(bool instant = false)
     {
-        room.EnemyKilled();
+        base.OnDeath(instant);
+
+        //Destroy
         Destroy(gameObject);
-        return true;
     }
 }

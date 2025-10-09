@@ -16,7 +16,7 @@ MonoBehaviour:
   Layer: 1
   MapSize: 5
   RoomSize: 20
-  MaxStep: 5
+  MaxStep: 2
   BaseDoorChance: 80
   StartRoom: {fileID: 2154439050273984560, guid: 53411621be473204e98eb7a5a2ef9103, type: 3}
   StandardRooms:
@@ -38,5 +38,7 @@ MonoBehaviour:
   RareEnemies:
   - {fileID: 108002717470500082, guid: 1970843ed21a9e54eb5b953b9fae6296, type: 3}
   RareTreasureChance: 25
-  NormalTreasure: []
-  RareTreasure: []
+  NormalTreasure:
+  - {fileID: 11400000, guid: 479cbb78c4d45064c8f081f39e435add, type: 2}
+  RareTreasure:
+  - {fileID: 11400000, guid: 9fa0a8e99f6099f45a33f0f2f2facd71, type: 2}

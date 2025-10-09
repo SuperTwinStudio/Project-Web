@@ -7,7 +7,7 @@ public class Elevator : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Dungeon");
+            Game.Current.LoadScene("Dungeon");
         }
     }
 }

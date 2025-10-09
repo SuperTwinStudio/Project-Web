@@ -30,11 +30,10 @@ public class Level : MonoBehaviour {
     [Header("Level")]
     [SerializeField] private bool _isLobby = false;
     [SerializeField] private bool _isHandmade = true;
-    [SerializeField] private LevelDefinition _levelDef;
+    public LevelDefinition Definition;
 
     public bool IsLobby => _isLobby;
     public bool IsHandmade => _isHandmade;
-
 
     //State
     private void Awake() {
@@ -50,7 +49,7 @@ public class Level : MonoBehaviour {
     private void InitializeLevel()
     {
         LevelGenerator generator = new LevelGenerator();
-        generator.GenerateLevel(_levelDef);
+        generator.GenerateLevel(Definition);
 
         // Allow player interaction when level has generated
         Player.gameObject.SetActive(true);
