@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2904128704352256
-    m_Localized: Mejorar a nivel
+    m_Localized: Mejorar
     m_Metadata:
       m_Items: []
   - m_Id: 2904888255057920
@@ -76,6 +76,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3137753219956736
     m_Localized: Clase Seleccionada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3566097304260608
+    m_Localized: Mejora de Arma
     m_Metadata:
       m_Items: []
   references:

@@ -49,9 +49,6 @@ public class Player : Character, ISavable {
     private bool isControlled, isMoving;
 
     //Effects
-    [Header("Effects")]
-    [SerializeField, Range(0, 1)] private float slowEffectAmount = 0.5f;
-
     private readonly Dictionary<Effect, float> effects = new();
     private float slowSpeedMultiplier = 1;
 

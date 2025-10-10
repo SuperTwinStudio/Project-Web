@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: shop_weapon_selected
     m_Metadata:
       m_Items: []
+  - m_Id: 3566097304260608
+    m_Key: shop_weapon_title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

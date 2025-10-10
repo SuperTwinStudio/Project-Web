@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Botpa;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class ShopMenu : Menu {
@@ -23,10 +26,13 @@ public class ShopMenu : Menu {
 
     //Weapon
     [Header("Weapon")]
-    [SerializeField] private Image selectedClassIcon;
-    [SerializeField] private UpgradeItem primaryAttack;
-    [SerializeField] private UpgradeItem secondaryAttack;
-    [SerializeField] private UpgradeItem passiveAttack;
+    [SerializeField] private List<WeaponTab> weaponTabs;
+    [SerializeField] private TMP_Text weaponNameText;
+    [SerializeField] private WeaponUpgrade primaryAttack;
+    [SerializeField] private WeaponUpgrade secondaryAttack;
+    [SerializeField] private WeaponUpgrade passiveAttack;
+
+    private Weapon selectedWeapon;
 
 
       /*$$$$$   /$$                 /$$
@@ -53,12 +59,13 @@ public class ShopMenu : Menu {
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
+    //UI
     private void UpdateUI() {
         //Update main
         UpdateMainUI();
 
         //Update class tab
-        UpdateClassUI();
+        UpdateWeaponUI();
 
         //Update player tab
         UpdatePlayerUI();
@@ -71,39 +78,83 @@ public class ShopMenu : Menu {
     }
 
     //Weapons
-    private void UpdateClassUI() {
+    private void UpdateWeaponUI() {
         //Prelocalize upgrade text & get current weapon
-        string upgradeString = Util.Localize("shop_weapon_upgrade");
-        Weapon weapon = Loadout.CurrentWeapon;
+        if (!selectedWeapon) selectedWeapon = Loadout.CurrentWeapon;
 
         //Update UI
-        selectedClassIcon.sprite = weapon.Item.Icon;
-        primaryAttack.UpdateUI(weapon.PrimaryIcon, Loadout.Money, weapon.PrimaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PrimaryLevel + 1}");
-        secondaryAttack.UpdateUI(weapon.SecondaryIcon, Loadout.Money, weapon.SecondaryUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.SecondaryLevel + 1}");
-        passiveAttack.UpdateUI(weapon.PassiveIcon, Loadout.Money, weapon.PassiveUpgradeCost, $"{upgradeString} {Loadout.CurrentWeapon.PassiveLevel + 1}");
+        foreach (var tab in weaponTabs) tab.UpdateUI(Loadout);
+        weaponNameText.SetText(selectedWeapon.Item.Name);
+        primaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Primary, Loadout.Money);
+        secondaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Secondary, Loadout.Money);
+        passiveAttack.UpdateUI(selectedWeapon, WeaponAttack.Passive, Loadout.Money);
+    }
+
+    public void SelectWeaponTab(Item item) {
+        //Select weapon
+        selectedWeapon = Loadout.GetWeapon(item);
+
+        //Update UI
+        UpdateWeaponUI();
     }
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (Loadout.CurrentWeapon.Upgrade((WeaponAttack) type)) {
+        if (selectedWeapon.Upgrade((WeaponAttack) type)) {
             UpdateMainUI();
-            UpdateClassUI();
+            UpdateWeaponUI();
         }
     }
 
     [Serializable]
-    private class UpgradeItem {
+    private class WeaponTab {
+
+        public Item item;
+        public Button button;
+
+        public void UpdateUI(Loadout loadout) {
+            button.interactable = loadout.Unlocked.Contains(item);
+        }
+
+    }
+
+    [Serializable]
+    private class WeaponUpgrade {
 
         public Image icon;
-        public Button upgradeButton;
-        public TMP_Text upgradeText;
-        public TMP_Text upgradeCostText;
+        public TMP_Text nameText;
+        public LocalizedString nameLocale;
+        public TMP_Text descriptionText;
+        public Button button;
+        public TMP_Text buttonText;
 
-        public void UpdateUI(Sprite weaponIcon, int money, int cost, string level) {
-            icon.sprite = weaponIcon;
-            upgradeButton.interactable = money >= cost;
-            upgradeText.SetText(level);
-            upgradeCostText.SetText($"{cost}G");
+        public void UpdateUI(Weapon weapon, WeaponAttack attack, int money) {
+            //Info
+            int cost = attack switch {
+                WeaponAttack.Primary => weapon.PrimaryUpgradeCost,
+                WeaponAttack.Secondary => weapon.SecondaryUpgradeCost,
+                _ => weapon.PassiveUpgradeCost
+            };
+            int level = attack switch {
+                WeaponAttack.Primary => weapon.PrimaryLevel,
+                WeaponAttack.Secondary => weapon.SecondaryLevel,
+                _ => weapon.PassiveLevel
+            };
+        
+            //Icon
+            icon.sprite = attack switch {
+                WeaponAttack.Primary => weapon.PrimaryIcon,
+                WeaponAttack.Secondary => weapon.SecondaryIcon,
+                _ => weapon.PassiveIcon
+            };
+
+            //Name & description
+            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {level}");
+            //descriptionText
+
+            //Upgrade button
+            button.interactable = money >= cost;
+            buttonText.SetText($"{Util.Localize("shop_weapon_upgrade")}\n{cost}G");
         }
 
     }
@@ -126,6 +177,9 @@ public class ShopMenu : Menu {
 
     protected override void OnOpen(object args = null) {
         base.OnOpen();
+
+        //Select current weapon
+        selectedWeapon = Loadout.CurrentWeapon;
 
         //Update UI
         UpdateUI();

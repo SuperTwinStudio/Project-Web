@@ -34,7 +34,6 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float passiveDamage = 20f;
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 5f;
     [SerializeField, Min(2)] private int passiveHit = 4;
-    [SerializeField, Min(1)] private float passiveDamageMult = 2f;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
