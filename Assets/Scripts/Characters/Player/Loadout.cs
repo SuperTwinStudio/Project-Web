@@ -55,7 +55,7 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Weapons
-    private Weapon GetWeapon(Item item) {
+    public Weapon GetWeapon(Item item) {
         foreach (var weapon in weapons) {
             //Check weapon item
             if (weapon.Item != item) continue;
