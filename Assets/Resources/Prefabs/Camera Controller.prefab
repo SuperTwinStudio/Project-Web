@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: {fileID: 0}
   _camera: {fileID: 3906178916977583015}
+  focusTarget: {fileID: 0}
+  postproVolume: {fileID: 662604898179765590}
 --- !u!1 &6851129620146797947
 GameObject:
   m_ObjectHideFlags: 0

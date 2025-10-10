@@ -13,29 +13,32 @@ public class CameraController : MonoBehaviour {
     //Components
     [Header("Components")]
     [SerializeField] private Camera _camera;
-    [SerializeField] private Transform focusTarget;
     [SerializeField] private Volume postproVolume;
-    
+    [SerializeField] private Transform focusTarget;
 
-    private Transform cameraTransform;
+    private Transform controllerTransform, cameraTransform;
+    private DepthOfField DOF;
 
     public Transform Follow { get; set; }
-    public Camera Camera => _camera;
 
-    private DepthOfField DOF;
+    public Camera Camera => _camera;
 
 
     //State
     private void Start() {
-        cameraTransform = transform;    
-        if (postproVolume.profile.TryGet(out DepthOfField _DOF))
-        {
-            DOF = _DOF;
-        }
+        //Get transforms
+        controllerTransform = transform;
+        cameraTransform = Camera.transform;
+
+        //Get depth of field
+        postproVolume.profile.TryGet(out DOF);
     }
 
     private void LateUpdate() {
-        cameraTransform.position = Follow.position;
+        //Move to follow
+        controllerTransform.position = Follow.position;
+
+        //Update DOF
         DOF.focusDistance.value = Vector3.Distance(cameraTransform.position, focusTarget.position);
     }
 
