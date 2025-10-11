@@ -25,6 +25,8 @@ public class Weapon : MonoBehaviour {
 
     private event Action<WeaponAttack, int> OnValueChanged;
 
+    private bool isInit = false;
+
     public Item Item => _item;
     public Sprite PrimaryIcon => _primaryIcon;
     public Sprite SecondaryIcon => _secondaryIcon;
@@ -38,12 +40,9 @@ public class Weapon : MonoBehaviour {
     public virtual bool PrimaryAvailable => !primaryTimer.counting;
     public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
-    public int PrimaryValue { get; private set; } = 0;
-    public int PrimaryLevel { get; private set; } = 1;
+    public Upgrade PrimaryUpgrade { get; protected set; }
 
-    public virtual int PrimaryUpgradeCostBase => 10;
-    public virtual int PrimaryUpgradeCostVariation => 10;
-    public int PrimaryUpgradeCost => PrimaryUpgradeCostBase + (PrimaryLevel - 1) * PrimaryUpgradeCostVariation;
+    public int PrimaryValue { get; private set; } = 0;
 
     //Secondary
     private readonly Timer secondaryTimer = new();
@@ -53,12 +52,9 @@ public class Weapon : MonoBehaviour {
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
     public float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
 
-    public int SecondaryValue { get; private set; } = 0;
-    public int SecondaryLevel { get; private set; } = 1;
+    public Upgrade SecondaryUpgrade { get; protected set; }
 
-    public virtual int SecondaryUpgradeCostBase => 10;
-    public virtual int SecondaryUpgradeCostVariation => 10;
-    public int SecondaryUpgradeCost => SecondaryUpgradeCostBase + (SecondaryLevel - 1) * SecondaryUpgradeCostVariation;
+    public int SecondaryValue { get; private set; } = 0;
 
     //Passive
     private readonly Timer passiveTimer = new();
@@ -68,38 +64,57 @@ public class Weapon : MonoBehaviour {
     public virtual bool PassiveAvailable => !passiveTimer.counting;
     public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
 
-    public int PassiveValue { get; private set; } = 0;
-    public int PassiveLevel { get; private set; } = 1;
+    public Upgrade PassiveUpgrade { get; protected set; }
 
-    public virtual int PassiveUpgradeCostBase => 10;
-    public virtual int PassiveUpgradeCostVariation => 10;
-    public int PassiveUpgradeCost => PassiveUpgradeCostBase + (PassiveLevel - 1) * PassiveUpgradeCostVariation;
+    public int PassiveValue { get; private set; } = 0;
 
 
     //State
-    protected virtual void Start() {
+    private void Init() {
+        //Check if already init
+        if (isInit) return;
+        isInit = true;
+
         //Reset timers
         primaryTimer.Count(0);
         secondaryTimer.Count(0);
         passiveTimer.Count(0);
+
+        //Init upgrades
+        string name;
+        name = GetUpgradeName(WeaponAttack.Primary);
+        PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+        name = GetUpgradeName(WeaponAttack.Secondary);
+        SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+        name = GetUpgradeName(WeaponAttack.Passive);
+        PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+
+        //Weapon custom on init
+        OnInit();
     }
 
-    public void Show(bool show) {
-        //Toggle model
-        model.SetActive(show);
-
-        //Visible -> Update weapon attack levels
-        if (show) {
-            PrimaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Primary));
-            SecondaryLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Secondary));
-            PassiveLevel = Loadout.GetUpgrade(GetUpgradeName(WeaponAttack.Passive));
-        }
-
-        //Init weapon
+    private void Awake() {
+        //Init
         Init();
     }
 
-    protected virtual void Init() {}
+    protected virtual void OnInit() {}
+
+    public void Show(bool show) {
+        //Init
+        Init();
+
+        //Visible -> Refresh upgrade levels
+        if (show) RefreshUpgradeLevels();
+
+        //Toggle model
+        model.SetActive(show);
+
+        //Weapon custom on show
+        OnShow();
+    }
+
+    protected virtual void OnShow() {}
 
     //Weapon
     protected void SetCooldown(WeaponAttack attack, float cooldown) {
@@ -148,45 +163,26 @@ public class Weapon : MonoBehaviour {
     }
 
     //Upgrades
-    private string GetUpgradeName(WeaponAttack attack) {
+    private void RefreshUpgradeLevels() {
+        PrimaryUpgrade.SetLevel(Loadout.GetUpgrade(PrimaryUpgrade.Key));
+        SecondaryUpgrade.SetLevel(Loadout.GetUpgrade(SecondaryUpgrade.Key));
+        PassiveUpgrade.SetLevel(Loadout.GetUpgrade(PassiveUpgrade.Key));
+    }
+
+    protected string GetUpgradeName(WeaponAttack attack) {
         return $"{Item.FileName}_{attack}";
     }
 
-    private int GetUpgradeCost(WeaponAttack attack) {
+    public Upgrade GetUpgrade(WeaponAttack attack) {
         return attack switch {
-            WeaponAttack.Primary => PrimaryUpgradeCost,
-            WeaponAttack.Secondary => SecondaryUpgradeCost,
-            WeaponAttack.Passive => PassiveUpgradeCost,
-            _ => 0
+            WeaponAttack.Primary => PrimaryUpgrade,
+            WeaponAttack.Secondary => SecondaryUpgrade,
+            _ => PassiveUpgrade
         };
     }
 
-    public bool Upgrade(WeaponAttack attack) {
-        //Get upgrade cost
-        int cost = GetUpgradeCost(attack);
-
-        //Pay for upgrade
-        if (!Loadout.PayMoney(cost)) return false;
-
-        //Upgrade
-        string name = GetUpgradeName(attack);
-        switch (attack) {
-            case WeaponAttack.Primary:
-                PrimaryLevel += 1;
-                Loadout.SetUpgrade(name, PrimaryLevel);
-                break;
-            case WeaponAttack.Secondary:
-                SecondaryLevel += 1;
-                Loadout.SetUpgrade(name, SecondaryLevel);
-                break;
-            case WeaponAttack.Passive:
-                PassiveLevel += 1;
-                Loadout.SetUpgrade(name, PassiveLevel);
-                break;
-        }
-
-        //Success
-        return true;
+    public bool TryUpgrade(WeaponAttack attack) {
+        return GetUpgrade(attack).TryUpgrade(Loadout);
     }
 
     //Primary

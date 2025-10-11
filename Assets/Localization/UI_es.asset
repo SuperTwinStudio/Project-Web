@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3566097304260608
-    m_Localized: Mejora de Arma
+    m_Localized: Mejoras de Armas
     m_Metadata:
       m_Items: []
   - m_Id: 3896950483980288
@@ -112,6 +112,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3913677393498112
     m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4031849643773952
+    m_Localized: Mejoras de Personaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032281594171392
+    m_Localized: Las mejoras de personaje se aplican con todas las armas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051293178826752
+    m_Localized: Gramaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051312049000448
+    m_Localized: Rugosidad
     m_Metadata:
       m_Items: []
   references:

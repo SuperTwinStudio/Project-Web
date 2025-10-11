@@ -64,7 +64,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3135097906757632
-    m_Key: shop_player
+    m_Key: shop_character
     m_Metadata:
       m_Items: []
   - m_Id: 3137753219956736
@@ -109,6 +109,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3913752266018816
     m_Key: settings_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4031849643773952
+    m_Key: shop_character_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032281594171392
+    m_Key: shop_character_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051293178826752
+    m_Key: shop_character_gramaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051312049000448
+    m_Key: shop_character_rugosidad
     m_Metadata:
       m_Items: []
   m_Metadata:

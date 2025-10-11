@@ -12,7 +12,7 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
     [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
 
-    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerLevel;
+    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -25,7 +25,7 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerLevel;
+    private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -38,14 +38,14 @@ public class WeaponSword : Weapon {
     private bool isPassiveHit = false;
     private int hitCount = 0;
 
-    private float PassiveDamage => passiveDamage + (PassiveLevel - 1) * passiveDamagePerLevel;
+    private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
 
     //State
-    protected override void Init() {
-        //Init passive
+    protected override void OnShow() {
+        //Reset passive
         hitCount = 0;
         UpdatePassiveValue();
     }

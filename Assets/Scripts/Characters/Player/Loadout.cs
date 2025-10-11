@@ -131,7 +131,7 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Money
-    public bool PayMoney(int amount) {
+    public bool Expend(int amount) {
         //No enough money
         if (Money < amount) return false;
 

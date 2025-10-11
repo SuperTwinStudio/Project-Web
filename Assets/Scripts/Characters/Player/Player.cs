@@ -5,7 +5,15 @@ using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerUpgrade { 
+    Gramaje,    //Extra max health
+    Rugosidad   //Resists a % of damage
+}
+
 public class Player : Character, ISavable {
+
+    //Character
+    public override float HealthMax => HEALTH_MAX + GramajeUpgrade.Level * gramajeHealthPerLevel;
 
     //Level
     [Header("Level")]
@@ -48,6 +56,14 @@ public class Player : Character, ISavable {
 
     private bool isControlled, isMoving;
 
+    //Upgrades
+    [Header("Upgrades")]
+    [SerializeField] private float gramajeHealthPerLevel = 10;
+    [SerializeField] private float rugosidadResistancePerLevel = 0.1f;
+
+    public Upgrade GramajeUpgrade { get; private set; } = new("gramaje", 1, Upgrade.DEFAULT_MAX_LEVEL);
+    public Upgrade RugosidadUpgrade { get; private set; } = new("rugosidad", 1, Upgrade.DEFAULT_MAX_LEVEL);
+
     //Effects
     private readonly Dictionary<Effect, float> effects = new();
     private float slowSpeedMultiplier = 1;
@@ -58,6 +74,10 @@ public class Player : Character, ISavable {
         //Get transforms
         cameraTransform = CameraController.Camera.transform;
         playerTransform = transform;
+
+        //Refresh upgrade levels
+        GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
+        RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
 
         //Events
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
@@ -204,10 +224,25 @@ public class Player : Character, ISavable {
         }
     }
 
+    //Upgrades
+    public Upgrade GetUpgrade(PlayerUpgrade type) {
+        return type switch {
+            PlayerUpgrade.Gramaje => GramajeUpgrade,
+            _ => RugosidadUpgrade
+        };
+    }
+
+    public bool TryUpgrade(PlayerUpgrade type) {
+        return GetUpgrade(type).TryUpgrade(Loadout);
+    }
+
     //Health
     public override bool Damage(float amount) {
+        //Calculate resistance
+        float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
+
         //Damage
-        bool success = base.Damage(amount);
+        bool success = base.Damage(amount - resistance);
 
         //Died -> Open death menu
         if (success && !IsAlive) MenuManager.Open(MenusList.Death);
@@ -247,6 +282,9 @@ public class Player : Character, ISavable {
         return JsonUtility.ToJson(new PlayerSave() {
             //Health
             health = Health,
+            //Upgrades
+            levelGramaje = GramajeUpgrade.Level,
+            levelRugosidad = RugosidadUpgrade.Level,
             //Loadout
             loadout = Loadout.OnSave()
         });
@@ -259,6 +297,10 @@ public class Player : Character, ISavable {
         //Load health
         Health = save.health;
 
+        //Load upgrades
+        GramajeUpgrade.SetLevel(save.levelGramaje);
+        RugosidadUpgrade.SetLevel(save.levelRugosidad);
+
         //Load loadout
         Loadout.OnLoad(save.loadout);
     }
@@ -267,7 +309,11 @@ public class Player : Character, ISavable {
     private class PlayerSave {
 
         //Health
-        public float health = MAX_HEALTH;
+        public float health = HEALTH_MAX;
+
+        //Upgrades
+        public int levelGramaje = 1;
+        public int levelRugosidad = 1;
 
         //Loadout
         public string loadout = "{}";

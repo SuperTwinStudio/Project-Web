@@ -17,10 +17,10 @@ public class Character : MonoBehaviour, IDamageable {
     private event Action<float> OnHealthChanged;
 
     public bool IsAlive { get; protected set; } = true;
-    public float Health { get; protected set; } = MAX_HEALTH;
-    public virtual float MaxHealth { get ; protected set; } = MAX_HEALTH;
+    public float Health { get; protected set; } = HEALTH_MAX;
+    public virtual float HealthMax => HEALTH_MAX;
 
-    public const float MAX_HEALTH = 100;
+    public const float HEALTH_MAX = 100;
 
 
     //Visibility
@@ -74,7 +74,7 @@ public class Character : MonoBehaviour, IDamageable {
         if (amount <= 0) return false;
 
         //Heal character
-        Health = Mathf.Min(Health + amount, MaxHealth);
+        Health = Mathf.Min(Health + amount, HealthMax);
 
         //Call event
         OnHealthChanged?.Invoke(Health);

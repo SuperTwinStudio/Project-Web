@@ -24,6 +24,11 @@ public class ShopMenu : Menu {
     [Header("Shop")]
     [SerializeField] private TMP_Text moneyText;
 
+    //Character
+    [Header("Character")]
+    [SerializeField] private CharacterUpgrade characterGramaje;
+    [SerializeField] private CharacterUpgrade characterRugosidad;
+
     //Weapon
     [Header("Weapon")]
     [SerializeField] private List<WeaponTab> weaponTabs;
@@ -64,11 +69,11 @@ public class ShopMenu : Menu {
         //Update main
         UpdateMainUI();
 
-        //Update class tab
-        UpdateWeaponUI();
+        //Update character tab
+        UpdateCharacterUI();
 
-        //Update player tab
-        UpdatePlayerUI();
+        //Update weapons tab
+        UpdateWeaponUI();
     }
 
     //Main
@@ -77,13 +82,52 @@ public class ShopMenu : Menu {
         moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
     }
 
-    //Weapons
+    //Character
+    private void UpdateCharacterUI() {
+        //Update upgrades
+        characterGramaje.UpdateUI(Player.GramajeUpgrade, Loadout.Money);
+        characterRugosidad.UpdateUI(Player.RugosidadUpgrade, Loadout.Money);
+    }
+
+    public void UpgradeCharacter(int type) {
+        //Try to upgrade player
+        if (!Player.TryUpgrade((PlayerUpgrade) type)) return;
+
+        //Success -> Update UI
+        UpdateMainUI();
+        UpdateCharacterUI();
+    }
+
+    [Serializable]
+    private class CharacterUpgrade {
+
+        public TMP_Text nameText;
+        public LocalizedString nameLocale;
+        public TMP_Text descriptionText;
+        public Button button;
+        public TMP_Text buttonText;
+
+        public void UpdateUI(Upgrade upgrade, int money) {
+            //Name & description
+            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
+            //Update description text
+
+            //Upgrade button
+            button.interactable = upgrade.CanUpgrade && money >= upgrade.Cost;
+            buttonText.SetText(upgrade.CanUpgrade ? $"{Util.Localize("shop_weapon_upgrade")}\n{upgrade.Cost}G" : "MAX");
+        }
+
+    }
+
+    //Weapon
     private void UpdateWeaponUI() {
         //Prelocalize upgrade text & get current weapon
         if (!selectedWeapon) selectedWeapon = Loadout.CurrentWeapon;
 
-        //Update UI
+        //Update tabs
         foreach (var tab in weaponTabs) tab.UpdateUI(Loadout);
+
+        //Update upgrades
         weaponNameText.SetText(selectedWeapon.Item.Name);
         primaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Primary, Loadout.Money);
         secondaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Secondary, Loadout.Money);
@@ -100,10 +144,11 @@ public class ShopMenu : Menu {
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (selectedWeapon.Upgrade((WeaponAttack) type)) {
-            UpdateMainUI();
-            UpdateWeaponUI();
-        }
+        if (!selectedWeapon.TryUpgrade((WeaponAttack) type)) return;
+
+        //Success -> Update UI
+        UpdateMainUI();
+        UpdateWeaponUI();
     }
 
     [Serializable]
@@ -129,17 +174,8 @@ public class ShopMenu : Menu {
         public TMP_Text buttonText;
 
         public void UpdateUI(Weapon weapon, WeaponAttack attack, int money) {
-            //Info
-            int cost = attack switch {
-                WeaponAttack.Primary => weapon.PrimaryUpgradeCost,
-                WeaponAttack.Secondary => weapon.SecondaryUpgradeCost,
-                _ => weapon.PassiveUpgradeCost
-            };
-            int level = attack switch {
-                WeaponAttack.Primary => weapon.PrimaryLevel,
-                WeaponAttack.Secondary => weapon.SecondaryLevel,
-                _ => weapon.PassiveLevel
-            };
+            //Get upgrade
+            Upgrade upgrade = weapon.GetUpgrade(attack);
         
             //Icon
             icon.sprite = attack switch {
@@ -149,18 +185,15 @@ public class ShopMenu : Menu {
             };
 
             //Name & description
-            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {level}");
-            //descriptionText
+            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
+            //Update description text
 
             //Upgrade button
-            button.interactable = money >= cost;
-            buttonText.SetText($"{Util.Localize("shop_weapon_upgrade")}\n{cost}G");
+            button.interactable = upgrade.CanUpgrade && money >= upgrade.Cost;
+            buttonText.SetText(upgrade.CanUpgrade ? $"{Util.Localize("shop_weapon_upgrade")}\n{upgrade.Cost}G" : "MAX");
         }
 
     }
-
-    //Player
-    private void UpdatePlayerUI() {}
 
 
      /*$$$$$$$                            /$$

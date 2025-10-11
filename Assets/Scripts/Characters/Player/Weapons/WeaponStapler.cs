@@ -19,7 +19,7 @@ public class WeaponStapler : Weapon {
     [SerializeField, Min(0)] private float primaryDamage = 10f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryLevel - 1) * primaryDamagePerLevel;
+    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     protected override float PrimaryCooldownDuration => _primaryCooldown;
 
@@ -32,7 +32,7 @@ public class WeaponStapler : Weapon {
     [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
     [SerializeField, Min(0)] private float secondaryBurstDelay = 0.6f;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryLevel - 1) * secondaryDamagePerLevel;
+    private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
     protected override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -42,12 +42,12 @@ public class WeaponStapler : Weapon {
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 10f;
     [SerializeField, Min(0)] private Vector2 passiveAttackSphereCast = new(1f, 0f);
 
-    private float PassiveDamage => passiveDamage + (PassiveLevel - 1) * passiveDamagePerLevel;
+    private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
 
     //State
-    protected override void Init() {
-        //Init ammo
+    protected override void OnShow() {
+        //Reset ammo
         SetAmmo(maxAmmo);
     }
 

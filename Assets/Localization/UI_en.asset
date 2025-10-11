@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3566097304260608
-    m_Localized: Weapon Upgrade
+    m_Localized: Weapon Upgrades
     m_Metadata:
       m_Items: []
   - m_Id: 3896950483980288
@@ -112,6 +112,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3913677393498112
     m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4031849643773952
+    m_Localized: Character Upgrades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032281594171392
+    m_Localized: Character upgrades are applied with all weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051293178826752
+    m_Localized: Weight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4051312049000448
+    m_Localized: Rugosity
     m_Metadata:
       m_Items: []
   references:
