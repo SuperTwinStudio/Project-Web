@@ -1,7 +1,7 @@
 public class EndMenu : Menu {
 
     //Prefab
-    public override string Name => MenusList.Credits;
+    public override string Name => MenusList.End;
 
 
       /*$$$$$   /$$                 /$$
