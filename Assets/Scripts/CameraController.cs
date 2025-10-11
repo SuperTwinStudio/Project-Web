@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private Camera _camera;
     [SerializeField] private Volume postproVolume;
     [SerializeField] private Transform focusTarget;
+    [SerializeField] private Shader transparentShader;
 
     private Transform controllerTransform, cameraTransform;
     private DepthOfField DOF;
@@ -22,7 +23,6 @@ public class CameraController : MonoBehaviour {
     public Transform Follow { get; set; }
 
     public Camera Camera => _camera;
-
 
     //State
     private void Start() {
@@ -34,12 +34,16 @@ public class CameraController : MonoBehaviour {
         postproVolume.profile.TryGet(out DOF);
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         //Move to follow
         controllerTransform.position = Follow.position;
 
         //Update DOF
-        DOF.focusDistance.value = Vector3.Distance(cameraTransform.position, focusTarget.position);
+        float distance = Vector3.Distance(cameraTransform.position, focusTarget.position);
+        DOF.focusDistance.value = distance;
+
+        Shader.SetGlobalFloat("_PlayerDistance", distance);
     }
 
 }
