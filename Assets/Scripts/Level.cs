@@ -9,7 +9,7 @@ public class Level : MonoBehaviour {
         get {
             if (!_game) {
                 _game = FindFirstObjectByType<Game>();
-                if (!_game) Debug.LogError("Couldn't access Game from Level");
+                if (!_game) Debug.LogWarning("Couldn't access Game from Level");
             }
             return _game;
         }

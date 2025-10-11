@@ -88,7 +88,7 @@ public class GameMenu : Menu {
     //Health
     private void UpdateHealthIndicator(float health) {
         //Update health UI
-        healthText.SetText($"{Util.Localize("indicator_health")} {health}");
+        healthText.SetText($"{health}HP");
     }
 
     //Money
@@ -162,11 +162,11 @@ public class GameMenu : Menu {
 
     protected override void OnOpen(object args = null) {
         base.OnOpen();
-        
+
         //Add player health change event & update
         Player.AddOnHealthChanged(UpdateHealthIndicator);
         UpdateHealthIndicator(Player.Health);
-        
+
         //Add weapon change event
         Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);
     }

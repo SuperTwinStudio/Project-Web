@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour {
 
     public Canvas Canvas {
         get {
-            if (!TryGetComponent(out _canvas)) Debug.LogError("Couldn't access Canvas");
+            if (!TryGetComponent(out _canvas)) Debug.LogWarning("Couldn't access Canvas");
             return _canvas;
         }
         private set => _canvas = value;

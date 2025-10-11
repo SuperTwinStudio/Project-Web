@@ -38,10 +38,6 @@ MonoBehaviour:
     m_Localized: 'Valor:'
     m_Metadata:
       m_Items: []
-  - m_Id: 2902435426078720
-    m_Localized: 'Vida:'
-    m_Metadata:
-      m_Items: []
   - m_Id: 2903219903533056
     m_Localized: Ataque Primario
     m_Metadata:
@@ -80,6 +76,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3566097304260608
     m_Localized: Mejora de Arma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896950483980288
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896935858442240
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896915453153280
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896900982804480
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3909827865481216
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913752266018816
+    m_Localized: Efectos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913740526161920
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913703494651904
+    m_Localized: Maestro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913677393498112
+    m_Localized: Idioma
     m_Metadata:
       m_Items: []
   references:

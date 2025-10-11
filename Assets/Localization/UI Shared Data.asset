@@ -35,10 +35,6 @@ MonoBehaviour:
     m_Key: indicator_value
     m_Metadata:
       m_Items: []
-  - m_Id: 2902435426078720
-    m_Key: indicator_health
-    m_Metadata:
-      m_Items: []
   - m_Id: 2903219903533056
     m_Key: shop_weapon_primary
     m_Metadata:
@@ -77,6 +73,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3566097304260608
     m_Key: shop_weapon_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896900982804480
+    m_Key: home_play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896915453153280
+    m_Key: home_settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896935858442240
+    m_Key: home_credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896950483980288
+    m_Key: home_quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3909827865481216
+    m_Key: shop_return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913677393498112
+    m_Key: settings_language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913703494651904
+    m_Key: settings_master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913740526161920
+    m_Key: settings_music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913752266018816
+    m_Key: settings_sfx
     m_Metadata:
       m_Items: []
   m_Metadata:

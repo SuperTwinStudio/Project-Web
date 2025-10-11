@@ -1,10 +1,15 @@
 using Botpa;
+using TMPro;
 using UnityEngine;
 
 public class HomeMenu : Menu {
     
     //Prefab
     public override string Name => MenusList.Home;
+
+    //Version
+    [Header("Version")]
+    [SerializeField] private TMP_Text versionText;
 
 
       /*$$$$$   /$$                 /$$
@@ -31,7 +36,7 @@ public class HomeMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     public void Play() {
-        CloseFromUI();
+        Game.Current.LoadScene("Game");
     }
 
     public void OpenSettings() {
@@ -39,7 +44,7 @@ public class HomeMenu : Menu {
     }
 
     public void OpenCredits() {
-        Debug.Log("Menu");
+        MenuManager.Open(MenusList.Credits);
     }
 
     public void Quit() {
@@ -62,6 +67,9 @@ public class HomeMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Update version
+        versionText.SetText($"v{Application.version}");
+
         //Pause game
         Game.Pause(this);
     }
@@ -71,6 +79,24 @@ public class HomeMenu : Menu {
 
         //Unpause game
         Game.Unpause(this);
+    }
+
+
+      /*$$$$$
+     /$$__  $$
+    | $$  \__/  /$$$$$$  /$$    /$$ /$$$$$$   /$$$$$$
+    | $$       /$$__  $$|  $$  /$$//$$__  $$ /$$__  $$
+    | $$      | $$  \ $$ \  $$/$$/| $$$$$$$$| $$  \__/
+    | $$    $$| $$  | $$  \  $$$/ | $$_____/| $$
+    |  $$$$$$/|  $$$$$$/   \  $/  |  $$$$$$$| $$
+     \______/  \______/     \_/    \_______/|_*/
+
+    protected override void OnCovered() {
+        //Don't do nothin
+    }
+
+    protected override void OnUncovered() {
+        //Don't do nothin
     }
 
 }

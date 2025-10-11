@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShopTrigger : MonoBehaviour {
 
     //Components
-    private MenuManager MenuManager => Game.Current.Level.MenuManager;
+    private MenuManager MenuManager => Game.Current.MenuManager;
 
 
     //State

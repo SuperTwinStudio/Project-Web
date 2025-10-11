@@ -8,5 +8,6 @@ public class MenusList {
     public const string Pause = "Pause";
     public const string Settings = "Settings";
     public const string Death = "Death";
+    public const string Credits = "Credits";
 
 }

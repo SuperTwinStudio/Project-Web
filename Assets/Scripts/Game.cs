@@ -8,19 +8,24 @@ public class Game : MonoBehaviour, ISavable {
     //Singleton
     public static Game Current { get; private set; }
 
-    //Level
+    //Components
     private Level _level;
 
     public Level Level {
         get {
             if (!_level) {
                 _level = FindFirstObjectByType<Level>();
-                if (!_level) Debug.LogError("Couldn't access Level from Game");
+                if (!_level) Debug.LogWarning("Couldn't access Level from Game");
             }
             return _level;
         }
         private set => _level = value;
     }
+
+    public MenuManager MenuManager { get; private set; }
+
+    //Info
+    public static bool InGame { get; private set; }
 
     //Pause & Cursor
     private static readonly List<object> pause = new();
@@ -59,13 +64,23 @@ public class Game : MonoBehaviour, ISavable {
         UnhideCursor();
 
         //Check for a level
-        if (!Level) return;
+        InGame = Level;
+        if (InGame) {
+            //Update menu manager
+            MenuManager = Level.MenuManager;
 
-        //Init menus with new game menus
-        Level.MenuManager.Init(newGame.Level.MenuManager);
+            //Init menus with new game menus
+            MenuManager.Init(MenuManager);
 
-        //Load game state
-        OnLoad(save);
+            //Load game state
+            OnLoad(save);
+        } else {
+            //Update menu manager
+            MenuManager = FindFirstObjectByType<MenuManager>();
+
+            //Init menus with new game menus
+            MenuManager.Init(MenuManager);
+        }
     }
 
     //Pause & Cursor
@@ -113,7 +128,7 @@ public class Game : MonoBehaviour, ISavable {
     //Scenes
     public void LoadScene(string name) {
         //Save game so new scene keeps info
-        save = OnSave();
+        if (InGame) save = OnSave();
 
         //Load scene
         SceneManager.LoadScene(name);
@@ -121,10 +136,6 @@ public class Game : MonoBehaviour, ISavable {
 
     //Saving
     public string OnSave() {
-        //Check for a level
-        if (!Level) return "";
-
-        //Create save
         return JsonUtility.ToJson(new GameSave() {
             //Player
             player = Level.Player.OnSave()
@@ -134,9 +145,6 @@ public class Game : MonoBehaviour, ISavable {
     public void OnLoad(string saveJson) {
         //Parse save
         var save = JsonUtility.FromJson<GameSave>(saveJson);
-
-        //Check for a level
-        if (!Level) return;
 
         //Load player
         Level.Player.OnLoad(save.player);

@@ -38,10 +38,6 @@ MonoBehaviour:
     m_Localized: 'Value:'
     m_Metadata:
       m_Items: []
-  - m_Id: 2902435426078720
-    m_Localized: 'Health:'
-    m_Metadata:
-      m_Items: []
   - m_Id: 2903219903533056
     m_Localized: Primary Attack
     m_Metadata:
@@ -80,6 +76,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3566097304260608
     m_Localized: Weapon Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896950483980288
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896935858442240
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896915453153280
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3896900982804480
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3909827865481216
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913752266018816
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913740526161920
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913703494651904
+    m_Localized: Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3913677393498112
+    m_Localized: Language
     m_Metadata:
       m_Items: []
   references:

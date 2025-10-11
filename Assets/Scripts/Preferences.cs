@@ -65,7 +65,6 @@ public class Preferences : MonoBehaviour {
 
     //UI (Game)
     [Header("Game")]
-    [SerializeField] private Slider mouseSensitivitySlider;
     [SerializeField] private TMP_Dropdown languageDropdown;
 
 
