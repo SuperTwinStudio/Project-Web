@@ -35,12 +35,12 @@ Project Paper es un videojuego de acción rogue-lite en perspectiva isométrica 
 
 El juego sigue la historia de Washi, un pequeño origami que se embarca en una misión para rescatar a su gemelo Kami de las garras del Culto de la Llama. Durante su viaje deberá abrirse paso a través de las mazmorras hasta alcanzar y derrotar a cada uno de los miembros que forman la secta, y así recuperar los papiros que su hermano dejó atrás para truncar los malvados planes del culto.
 
-## Género
+### Género
 Project Paper combina los géneros acción y rogue-lite. Algunas características destacables de estos géneros presentes en el juego:
 - **Acción:** el juego es dinámico, requiere cierto grado de velocidad y destreza para despejar los mapas y derrotar a los jefes.
 - **Rogue-lite:** el juego cuenta con un sistema de mazmorras generadas procedimentalmente, y cada “run” es parcialmente aleatoria. La muerte en partida es permanente, pero hay ciertos elementos, como mejoras o armas que se conservan entre partidas para facilitar el avance del jugador (meta-progresión).  
 
-## Propósito, Público Objetivo y Plataformas
+### Propósito, Público Objetivo y Plataformas
 El propósito de este videojuego es crear un ciclo de juego dinámico en el que la sensación de progresión sea fluida y satisfactoria, además de ofrecer una experiencia visualmente atractiva. Se busca que los jugadores puedan disfrutar del juego independientemente de la duración de la sesión, y que mantengan el interés en completarlo. 
 
 Se identifican dos tipos de público objetivo para este juego:
@@ -59,15 +59,42 @@ Se plantea la posibilidad de lanzar la versión Release como una demo y diseñar
 
 Para el cálculo aproximado de Stretch goals se han tomado juegos como Hollow Knight o Shovel Knight.
 
+| **Cuantity** | **Stretch Goal**                                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| 30.000€      | Goal mínimo para comenzar el desarrollo, suponiendo que todos los integrantes del grupo participen en el proyecto. |
+| 35.000€      | Adición de una nueva zona                                                                                          |
+| 40.000€      | Adición de un segundo personaje jugable                                                                            |
+| 60.000€      | Adición del modo cooperativo                                                                                       |
+
 Para el apartado de tiers también se han tomado como referencia Hollow Knight y Shovel Knight, y se listan las recompensas en función de la cantidad donada por mecenas. Las recompensas son acumulativas, para cada tier se suman las recompensas de la propia tier y las de las anteriores. Se han diseñado priorizando en contenido digital para minimizar gastos del equipo.
+
+| **Price** | **Tier**                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| 10€       | Copia digital del juego para PC                                                                         |
+| 15€       | PDF del libro de instrucciones                                                                          |
+| 25€       | PDF del libro de arte                                                                                   |
+| 45€       | Banda sonora en digital                                                                                 |
+| 75€       | Acceso a la beta + 2 copias digitales del juego (3 en total)                                            |
+| 150€      | Deja tu propio mensaje dentro del juego                                                                 |
+| 200€      | Dibujo original en acuarela firmado por el grupo + 2 copias digitales del juego (5 en total)            |
+| 400€      | Aparece como NPC dentro del juego + 2 copias digitales del juego (7 en total) + libro de arte en físico |
+| 600€      | Diseña un jefe secreto + 3 copias digitales del juego (10 en total)                                     |
 
 #### Opción 2 - Publishers
 Se plantea la posibilidad de ofrecer el juego en ferias indie a nivel nacional y/o internacional, buscando la financiación de publishers. Algunos ejemplos de ferias a considerar podrían ser la TLP Tenerife, BIG e IndieDevDay a nivel nacional o la Gamescom de Colonia a nivel internacional.
 
 En el supuesto de lograr el apoyo de un publisher se consideraría desplegar soporte a otras plataformas como consolas (Switch, Switch 2). El listado de precios dependería de la editorial, pero se enumeran ejemplos orientativos de precios para los productos, tanto el videojuego como merchandising:
 
-###  Planificación
+| **Price** | **Product**                                                                         |
+| --------- | ----------------------------------------------------------------------------------- |
+| 13.99€    | Copia digital del juego en Steam, Humble Bundle o en Switch/ Switch 2               |
+| 5.99€     | Banda sonora en digital en Steam (válida para combinar en packs rebajados de Steam) |
+| 25.99€    | Copia en físico del juego para Switch/ Switch 2                                     |
+| 40€       | Libro de arte en físico (tapa dura)                                                 |
+| 20€       | Figura/s promocional/es de personajes relevantes del juego                          |
+| 4.99€     | Póster promocional                                                                  |
 
+###  Planificación
 #### Equipo de desarrollo
 El proyecto cuenta con un equipo de desarrollo polivalente, por lo que todos los miembros están capacitados para participar en todas las áreas del proyecto. El equipo funcionará de forma autogestionada utilizando un formato de trabajo similar al de las metodologías ágiles y escogiendo tareas en función de las áreas en las que destacan. El tracking de tareas se realizará mediante Github Projects, para garantizar la comunicación y evitar solapamientos. A continuación se muestra una tabla con los roles principales que desempeña cada miembro del equipo.
 
@@ -154,7 +181,7 @@ Clase de combate cuerpo a cuerpo que sacrifica área de daño por velocidad de a
 #### Clase Trabuco
 Clase de combate a rango que utiliza munición y tiene un estilo de juego balanceado.
 
-Grapadora
+**Grapadora**
 - **Ataque primario:** Dispara una grapa.
 	- Mejora: Aumenta el daño de la grapa.
 - **Ataque secundario:** Dispara una ráfaga de 3 grapas.
@@ -165,7 +192,7 @@ Grapadora
 #### Clase de Viento
 Clase de combate a rango que no utiliza munición y sacrifica daño por golpes en área.
 
-Abanico
+**Abanico**
 - **Ataque primario:** Bate el abanico para lanzar una rafaga de aire hacia el frente que daña a los enemigos en área.
 	- Mejora: Aumenta el daño de la rafaga de aire.
 - **Ataque secundario:** Bate el abanico para empujar a los enemigos que tiene enfrente.
@@ -176,7 +203,7 @@ Abanico
 #### Clase Mental
 Arma de rango centrada en provocar daño de forma indirecta, generando minions u obstáculos en el mapa.
 
-Canica
+**Canica**
 - **Ataque primario:** Invoca a un minion que ataca al enemigo más cercano.
 	- Mejora: Aumenta el daño de los minions.
 - **Ataque secundario:** Lanza la canica hacia el enemigo, le daña y regresa hacia el personaje.
@@ -201,6 +228,7 @@ En la tienda se podrán obtener mejoras de los atributos del personaje de índol
 	- **Azul:** inmunidad al agua
 	- **Verde:** inmunidad al pegamento
 	- **Morado:** inmunidad a la tinta    
+
 ### Tesoros
 Tesoros que sueltan los enemigos al morir que se pueden vender en la tienda. Son el principal motor de economía dentro del juego que permitirá el avance del jugador. Los tesoros se organizan en categorías o tiers, y a mayor categoría, más valor. 
 - **Tier 1:**
@@ -212,7 +240,7 @@ Tesoros que sueltan los enemigos al morir que se pueden vender en la tienda. Son
 	- Pedazos de origami.
     
 
-Ejemplos de posibles drops en niveles:
+**Ejemplos de posibles drops en niveles:**
 - **Nivel 1:** drops de tier 1 (100%)
 - **Nivel 2:** drops de tier 1 (70%) y 2 (30%)
 - **Nivel 3:** drops de tier 1 (30%), 2 (65%) y 3 (5%)
@@ -238,21 +266,23 @@ Al avanzar de sala en sala las puertas se irán cerrando, obligando al jugador a
 
 ### Enemigos
 Unidades inteligentes que se encontrarán repartidas por las mazmorras. Cada clase de enemigo tendrá un comportamiento único y algunos tendrán diferentes comportamientos en función de si actúan en solitario o en grupo. En función de la dificultad que supone derrotarlos se pueden clasificar en fácil, media y alta. 
-#### Duendecillos 
+
+#### **Duendecillos** 
 **Dificultad:** fácil.
 **Descripción:** pequeños duendes armados con lanzas que atacan al jugador desde la distancia.
 **Estados de los duendecillos:**
 - Si el jugador está muy lejos y no llega el rango de ataque, el duendecillo se acerca a una velocidad normal.
 - Si el jugador está muy cerca, el duendecillo se echa hacia atrás a una velocidad más lenta de lo normal mientras sigue atacando. 
 - Si el jugador está en rango, el duendecillo se queda quieto y le ataca lanzando lanzas.
-#### Ladronzuelos
+
+#### **Ladronzuelos**
 **Dificultad:** media.
 **Descripción:** pequeños bichos muy rápidos que actúan de manera diferente dependiendo de los enemigos que haya en la sala.
 **Estados de los ladronzuelos:**
 - Si solo hay ladronzuelos en la sala, vienen corriendo hacia el jugador, le atacan y se retractan lentamente para repetir el ataque. Los ladronzuelos se comunican entre ellos para coordinar atacar en diferentes momentos y no todos a la vez.
 - Si hay otros tipos de enemigos en la sala, se dedican a hacer de soporte a los demás acercándose al jugador para robarle un objeto, corriendo a la otra punta de la sala y dejándolo en el suelo. Robar objetos tendría cooldown y solo lo podría hacer un ladronzuelo a la vez, por lo que se tendrían que comunicar entre ellos para ver quien lo hace. Cuando robar está en cooldown, los ladronzuelos se dedican a escapar del jugador.
 
-#### Caballero 
+#### **Caballero** 
 **Dificultad:** alta.
 **Descripción:** Armadura poseída de tamaño medio que arrastra una espada gigante y realiza ataques lentos pero devastadores. Cuenta con un escudo que protege la parte frontal del personaje y deja la parte trasera al descubierto.
 **Estados de los caballeros:** 
@@ -263,7 +293,7 @@ Unidades inteligentes que se encontrarán repartidas por las mazmorras. Cada cla
 
 ### Bosses
 
-#### Mr. Beast
+#### **Mr. Beast**
 Un animal de origami con un tamaño mayor a lo normal con diferentes fases.
 
 **Fase 1**
@@ -358,15 +388,14 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 - **Manchado:** leve chapoteo viscoso al hacer cualquier movimiento.  
 
 #### Efectos de enemigos
-**Goblin:**
-- **Por defecto:** sonidos nasales y risas burlonas.
-- **Atacar:** efecto de Woosh al tirar una lanza
-- **Recibir daño/ morir:** sonidos nasales tristes.
-
-**Ladronzuelo**:
-- **Por defecto:** susurros y risas agudas.
-- **Atacar:** sonido de tirar o arañar tela.
-- **Recibir daño/ morir:** grito grave.
+- **Goblin:**
+	- **Por defecto:** sonidos nasales y risas burlonas.
+	- **Atacar:** efecto de Woosh al tirar una lanza
+	- **Recibir daño/ morir:** sonidos nasales tristes.
+- **Ladronzuelo**:
+	- **Por defecto:** susurros y risas agudas.
+	- **Atacar:** sonido de tirar o arañar tela.
+	- **Recibir daño/ morir:** grito grave.
     
 #### Efectos del entorno
 - **Sonido de puerta:** se reproducirá al internarse en la mazmorra. Sonará como una puerta pesada arrastrándose con efectos de eco.
@@ -377,3 +406,76 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 - **Al hacer clic sobre un botón**
 - **Al comprar un objeto:** sonido de monedas tintineando o sonido de caja registradora.
 - **Al abrir el inventario:** efecto de sonido de libro pasando una hoja de papel.
+
+## Interfaces
+
+### Menús
+
+#### Menú Principal
+Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Componentes del Menú Principal:
+- **Botón Play:** al pulsarlo conduce a la pantalla de juego. Usando el botón play de ejemplo, al hacer hover sobre un botón adquiere un fondo y se invierte el color del texto (por ejemplo, si el botón es blanco al hacer hover se volverá negro con borde blanco).
+- **Botón Settings:** conduce a la pantalla de configuración.
+- **Botón Credits:** conduce a los créditos del juego.
+- **Botón Quit:** cierra el juego.
+- **Fondo:** render del personaje principal, sobre fondo plano o escenario.
+- **Número de versión:** número correspondiente a la versión del juego.
+- **Dev Logo:** logo del estudio.
+
+#### Créditos
+Se accede desde el menú principal, y contendrá el logo del estudio, los nombres de cada miembro del equipo y su rol principal en el desarrollo del videojuego.
+- **Botón Return:** regresa a la pantalla Menú Principal.
+- **Dev Logo:** logo del estudio.
+
+#### Ajustes
+Pantalla de ajustes a la que se podrá acceder desde la pantalla Menú Principal. Contiene los siguientes elementos:
+- **Slider de música:** permite controlar el valor del volumen de la música del juego en un rango de cero a cien.
+- **Slider de sonidos:** permite controlar el valor del volumen de los efectos de sonido del juego y de la interfaz en un rango de cero a cien.
+- **Desplegable de idiomas:** desplegable que permite alternar el idioma del juego entre inglés (por defecto) y español.
+- **Botón Return:**  regresa a la pantalla Menú Principal.
+
+### Tienda
+Se podrá acceder a esta pantalla desde el Lobby, y se compondrá de dos secciones de elementos que el jugador podrá mejorar progresivamente. Las secciones están separadas por pestañas (a modo de archivador).
+#### Pestaña Armas
+- **Texto Weapon Upgrade:** título y descripción de la función de la pantalla.
+- **Selector de clases:** debajo del texto habrá una sección de botones que permitirá escoger qué clase se desea mejorar. La clase seleccionada aparecerá resaltada en colores más claros, y para las clases bloqueadas el botón estará desactivado hasta desbloquearlas.
+- **Mejoras:** para una clase existirán tres apartados a mejorar: el ataque primario, secundario y la pasiva. Estos contarán con los elementos:
+- **Cuadrado Icono:** representación visual del ataque/ pasiva.
+- **Nombre, nivel y descripción de la propiedad.**
+- **Botón Upgrade:** mejora la propiedad indicada. Al llegar al nivel máximo el botón queda bloqueado y se indica con la frase “Already Maxed”.
+- **Texto Equipped class:** con el nombre de la clase actualmente equipada
+- **Imagen Render:** render del personaje con el arma equipada.
+
+#### Pestaña Personaje
+Similar a la Pestaña Armas, contará con los siguientes elementos:
+- **Texto Character Upgrade:** título y descripción de la función de la pantalla.
+- **Mejoras:** mismo que para las armas. Para una característica existen los siguientes elementos:
+- **Cuadrado Icono:** representación visual de la propiedad
+- **Nombre, nivel y descripción de la propiedad.**
+- **Botón Upgrade:** misma función que en Pestaña Armas.
+- **Imagen Render:** render del personaje.  
+### Juego
+Pantalla que se mostrará durante el tiempo de juego dentro de las mazmorras. Contiene los siguientes elementos:
+- **Rectángulo Life:** espacio designado para representar la vida del personaje, en forma de barra o de contenedores con forma de corazón.
+- **Barra de Stamina:** situada debajo de la vida, limita la cantidad de dashes que se pueden realizar. Se recarga automáticamente.
+- **Cuadrado Primary Attack:** designa el ataque primario de la clase equipada. Tiene su propio cooldown que se mostrará en el icono.
+- **Cuadrado Secondary Attack:** mismo caso que el anterior pero para designar el ataque secundario.
+- **Cuadrado Other:** mismo caso que el anterior pero para designar la pasiva.
+- **Texto con la cantidad total de monedas adquiridas.**
+- **Cuadrado Inventory:** icono que designa el inventario. Al pulsar la tecla indicada se despliega la pantalla Menú Inventario.
+
+#### Menú Pausa (in game)
+Desde este menú se podrá detener la partida, realizar cambios menores en los ajustes y abandonar la partida. Contiene los mismos ajustes descritos en la pantalla de ajustes anterior. 
+- **Botón Return:** desactiva el modo pausa y continúa la partida.
+- **Botón Lobby:** activa un segundo panel con una advertencia. Si se pulsa sobre el botón Yes, el jugador abandonará la run y regresará al Lobby.
+
+### Pantallas de victoria y derrota
+La pantalla de victoria se mostrará al salir de la sala del boss tras haberlo derrotado, y mostrará estadísticas del jugador de dicho nivel, como las monedas e ítems recogidos y el tiempo invertido en superar dicho piso. 
+- **Botón Return to Castle:** devuelve al jugador al Hub.
+- **Botón Continue:** empieza un nuevo piso.
+
+La pantalla Game Over se mostrará siempre que el jugador muera en combate o abandone la partida a través del Menú de Pausa. En función de la causa, la sprite del personaje se mostrará de formas distintas. 
+- **Mensaje Game Over:** mensaje motivacional relacionado con la historia del juego que aparecerá debajo del letrero de Game Over.
+- **Sprite Broken Character:** sprite del personaje derrotado.
+- **Botón Return to Castle:** devuelve al jugador al Hub.
+
+### Diagrama de flujo
