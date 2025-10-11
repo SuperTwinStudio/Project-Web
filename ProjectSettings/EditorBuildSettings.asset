@@ -9,29 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 91189750b3495664e8e8193bffb0965e
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Lobby.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/ScenesCarlos/MenuPrincipal.unity
-    guid: 481f3b6fe921e2f488e5e23e33a7580a
-  - enabled: 1
-    path: Assets/Scenes/ScenesCarlos/Play.unity
-    guid: 3acd4ebd2214c2446a4faaf6cef0d0a0
-  - enabled: 1
-    path: Assets/Scenes/ScenesCarlos/Settings.unity
-    guid: 374a98f436c585146845b9bfd735f964
-  - enabled: 1
-    path: Assets/Scenes/ScenesCarlos/Credits.unity
-    guid: 5783700b3f323c04eae126950436badf
+    path: Assets/Scenes/Dungeon.unity
+    guid: f5f0c6568d2614d4e927859af9083fb8
   - enabled: 1
     path: Assets/Scenes/TestingAlex/AlexDungeon.unity
     guid: 7b84c9e62b691a14384ecfd9a8f4974c
   - enabled: 1
     path: Assets/Scenes/TestingAlex/AlexLobby.unity
     guid: b2707834cbd1660438d0d0c429e30c47
-  - enabled: 1
-    path: Assets/Scenes/Dungeon.unity
-    guid: f5f0c6568d2614d4e927859af9083fb8
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ae13fc00113098449b9f0e1698a32caf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
