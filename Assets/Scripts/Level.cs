@@ -58,7 +58,7 @@ public class Level : MonoBehaviour {
 
     //Scene
     public void EnterDungeon() {
-        Game.LoadScene("AlexDungeon");
+        Game.LoadScene("Dungeon");
     }
 
     public void ExitToLobby() {
