@@ -13,7 +13,7 @@ public enum PlayerUpgrade {
 public class Player : Character, ISavable {
 
     //Character
-    public override float HealthMax => HEALTH_MAX + GramajeUpgrade.Level * gramajeHealthPerLevel;
+    public override float HealthMax => HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
 
     //Level
     [Header("Level")]
@@ -29,6 +29,7 @@ public class Player : Character, ISavable {
     [SerializeField] private InputActionReference lookAction;
     [SerializeField] private InputActionReference primaryAction;
     [SerializeField] private InputActionReference secondaryAction;
+    [SerializeField] private InputActionReference testAction;
 
     private Vector2 moveInput, lookInput;
     private readonly Timer primaryCoyote = new();
@@ -86,12 +87,14 @@ public class Player : Character, ISavable {
     }
 
     private void Update() {
-        //Game is paused | player is not controlled | a menu is transitioning
-        if (Game.IsPaused || !isControlled || MenuManager.InTransition) return;
-
+        //Game is paused | player is dead | player is not controlled | a menu is transitioning
+        if (Game.IsPaused || !IsAlive || !isControlled || MenuManager.InTransition) return;
 
         //Update effects
         UpdateEffects();
+
+        //Test (damage player)
+        if (testAction.Triggered()) Damage(10);
 
 
          /*$                           /$$      
@@ -233,10 +236,27 @@ public class Player : Character, ISavable {
     }
 
     public bool TryUpgrade(PlayerUpgrade type) {
-        return GetUpgrade(type).TryUpgrade(Loadout);
+        //Try to upgrade
+        bool upgraded = GetUpgrade(type).TryUpgrade(Loadout);
+        if (!upgraded) return false;
+
+        //Check for upgrade changes
+        switch (type) {
+            //Reset player health
+            case PlayerUpgrade.Gramaje:
+                Heal(HealthMax);
+                break;
+        }
+
+        //Success
+        return true;
     }
 
     //Health
+    protected override void OnDeath(bool instant = false) {
+        MenuManager.Open(MenusList.Death);
+    }
+
     public override bool Damage(float amount) {
         //Calculate resistance
         float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
@@ -295,7 +315,10 @@ public class Player : Character, ISavable {
         var save = JsonUtility.FromJson<PlayerSave>(saveJson);
 
         //Load health
-        Health = save.health;
+        if (Level.IsLobby) 
+            Health = HealthMax;
+        else
+            Health = save.health;
 
         //Load upgrades
         GramajeUpgrade.SetLevel(save.levelGramaje);

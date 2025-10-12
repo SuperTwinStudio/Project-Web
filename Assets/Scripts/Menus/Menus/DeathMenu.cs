@@ -1,21 +1,7 @@
-using System.Collections;
-using Botpa;
-using UnityEngine;
-using UnityEngine.UI;
-
 public class DeathMenu : Menu {
 
     //Prefab
     public override string Name => MenusList.Death;
-
-    //Components
-    [Header("Components")]
-    [SerializeField] private Image transition;
-    [SerializeField] private Animator animator;
-
-    private readonly Timer transitionTimer = new(TimerScale.Unscaled);
-
-    private const float TRANSITION_DURATION = 2f;
 
 
       /*$$$$$   /$$                 /$$
@@ -26,20 +12,6 @@ public class DeathMenu : Menu {
      /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
     |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
      \______/   \___/   \_______/   \___/   \______*/
-
-    public override void OnUpdate() {
-        //Animation
-        if (transitionTimer.isActive) {
-            //Get animation percentage
-            float percent = Ease.InCubic(transitionTimer.percent);
-
-            //Update transition
-            transition.material.SetFloat("_Percent", percent);
-
-            //Check if animation finished
-            if (transitionTimer.finished) transitionTimer.Reset();
-        }
-    }
 
     public override bool OnBack() {
         return false; //Prevent close
@@ -55,29 +27,20 @@ public class DeathMenu : Menu {
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-    private IEnumerator ShowMenu() {
-        yield return null;
-        /*
-        //Reset
-        transition.material.SetFloat("_Percent", 0);
-        animator.gameObject.SetActive(false);
-
-        //Wait a bit
-        yield return new WaitForSecondsRealtime(1f);
-
-        //Start death animation
-        transitionTimer.Count(TRANSITION_DURATION);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
-
-        //Show text
-        Game.UnhideCursor(this);
-        animator.SetTrigger("Show");
-        animator.gameObject.SetActive(true);
-        */
+    private void OnDeath() {
+        //Empty inventory & lose half money
+        Player.Loadout.ClearInventory();
+        Player.Loadout.Expend(Player.Loadout.Money / 2);
     }
 
-    public void Quit() {
-        Util.Quit();
+    public void ReturnToHome() {
+        OnDeath();
+        Game.Current.LoadScene("Home");
+    }
+
+    public void ReturnToLobby() {
+        OnDeath();
+        Game.Current.LoadScene("Lobby");
     }
 
 
@@ -96,12 +59,8 @@ public class DeathMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
-        //Pause game & hide cursor
+        //Pause game
         Game.Pause(this);
-        Game.HideCursor(this);
-
-        //Show menu
-        StartCoroutine(ShowMenu());
     }
 
     protected override void OnClose() {

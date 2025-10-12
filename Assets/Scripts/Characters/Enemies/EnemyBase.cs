@@ -17,6 +17,7 @@ public class EnemyBase : Character {
     //Room
     protected Room room = null;
 
+
     //State
     protected virtual void Start() {
         //Save player reference
@@ -47,6 +48,7 @@ public class EnemyBase : Character {
     protected override void OnDeath(bool instant = false) {
         base.OnDeath(instant);
 
+        //Notify room that enemy was killed
         if (room != null) room.EnemyKilled();
 
         //Disable collisions
@@ -57,8 +59,8 @@ public class EnemyBase : Character {
     }
 
     //Room
-    public void SetRoom(Room room)
-    {
+    public void SetRoom(Room room) {
         this.room = room;
     }
+
 }

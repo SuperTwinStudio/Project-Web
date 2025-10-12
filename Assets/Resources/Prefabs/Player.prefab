@@ -56,12 +56,14 @@ MonoBehaviour:
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   primaryAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   secondaryAction: {fileID: -1424028098101527299, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  testAction: {fileID: -4352797778555733023, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   controller: {fileID: 3851105479952359991}
   _loadout: {fileID: 8538115829238214355}
   model: {fileID: 6960520357802286510}
   _animator: {fileID: 2393395648455993377}
   moveSpeed: 5
-  slowEffectAmount: 0.5
+  gramajeHealthPerLevel: 10
+  rugosidadResistancePerLevel: 0.1
 --- !u!114 &8538115829238214355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +280,6 @@ MonoBehaviour:
   passiveDamage: 20
   passiveDamagePerLevel: 5
   passiveHit: 4
-  passiveDamageMult: 2
 --- !u!1 &2856207341596626414
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Elevator : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Game.Current.LoadScene("Dungeon");
+            Game.Current.MenuManager.Open(MenusList.End);
         }
     }
 }
