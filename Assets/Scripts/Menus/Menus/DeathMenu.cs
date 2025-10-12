@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class DeathMenu : Menu {
 
     //Prefab
@@ -34,12 +36,18 @@ public class DeathMenu : Menu {
     }
 
     public void ReturnToHome() {
+        //Empty inventory & lose half money
         OnDeath();
+
+        //Return home
         Game.Current.LoadScene("Home");
     }
 
     public void ReturnToLobby() {
+        //Empty inventory & lose half money
         OnDeath();
+
+        //Return to lobby
         Game.Current.LoadScene("Lobby");
     }
 
@@ -59,12 +67,18 @@ public class DeathMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Not playing
+        if (!Application.isPlaying) return;
+
         //Pause game
         Game.Pause(this);
     }
 
     protected override void OnClose() {
         base.OnClose();
+
+        //Not playing
+        if (!Application.isPlaying) return;
 
         //Unpause game
         Game.Unpause(this);

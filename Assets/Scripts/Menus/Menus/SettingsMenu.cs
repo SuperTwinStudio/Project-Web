@@ -48,13 +48,19 @@ public class SettingsMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Get scene name
+        string scene = gameObject.scene.name;
+
         //Toggle return button
-        homeButton.SetActive(gameObject.scene.name == "Lobby");
-        lobbyButton.SetActive(gameObject.scene.name == "Dungeon");
+        homeButton.SetActive(scene == "Lobby");
+        lobbyButton.SetActive(scene == "Dungeon");
 
         //Toggle backgrounds
-        bgHome.SetActive(gameObject.scene.name == "Home");
-        bgGame.SetActive(!bgHome.activeSelf);
+        bgHome.SetActive(scene == "Home");
+        bgGame.SetActive(scene != "Home");
+
+        //Not playing
+        if (!Application.isPlaying) return;
 
         //Pause game
         Game.Pause(this);
@@ -62,6 +68,9 @@ public class SettingsMenu : Menu {
 
     protected override void OnClose() {
         base.OnClose();
+
+        //Not playing
+        if (!Application.isPlaying) return;
 
         //Unpause game
         Game.Unpause(this);

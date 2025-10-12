@@ -90,7 +90,11 @@ public class Preferences : MonoBehaviour {
 
     //Update values
     public void SetLanguage(int newLanguage) {
+        //Update locale
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[newLanguage];
+
+        //Update preferences
+        PlayerPrefs.SetString("Settings.Locale", LocalizationSettings.SelectedLocale.Identifier.Code);
     }
 
 }

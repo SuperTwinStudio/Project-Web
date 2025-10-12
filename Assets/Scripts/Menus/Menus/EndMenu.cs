@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EndMenu : Menu {
 
     //Prefab
@@ -51,12 +53,18 @@ public class EndMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Not playing
+        if (!Application.isPlaying) return;
+
         //Pause game
         Game.Pause(this);
     }
 
     protected override void OnClose() {
         base.OnClose();
+
+        //Not playing
+        if (!Application.isPlaying) return;
 
         //Unpause game
         Game.Unpause(this);

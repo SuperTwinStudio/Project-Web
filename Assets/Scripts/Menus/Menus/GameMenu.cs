@@ -163,6 +163,9 @@ public class GameMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Not playing
+        if (!Application.isPlaying) return;
+
         //Add player health change event & update
         Player.AddOnHealthChanged(UpdateHealthIndicator);
         UpdateHealthIndicator(Player.Health);
@@ -173,6 +176,9 @@ public class GameMenu : Menu {
 
     protected override void OnClose() {
         base.OnClose();
+
+        //Not playing
+        if (!Application.isPlaying) return;
         
         //Remove player health change event
         Player.AddOnHealthChanged(UpdateHealthIndicator);

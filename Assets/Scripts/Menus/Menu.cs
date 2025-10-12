@@ -1,26 +1,19 @@
-using System;
-using System.Collections.Generic;
-using UnityEditor.ProBuilder;
 using UnityEngine;
 
 public enum MenuState { Closed, Open, Covered }
 
 public class Menu : MonoBehaviour {
 
-    //Managers
-    [HideInInspector, SerializeField] private MenuManager _menus;
-
-    public MenuManager MenuManager { get => _menus; private set => _menus = value; }
-    public Level Level => MenuManager.Level;
-    public Player Player => MenuManager.Level.Player;
-
     //Prefab
     public virtual string Name => "";
     public GameObject Prefab => GetPrefabFromName(Name);
 
-    //Components
-    private Canvas _canvas;
+    //Menu Components
+    [Header("Menu Components")]
+    [SerializeField] private MenuManager _menuManager;
+    [SerializeField]  private Canvas _canvas;
 
+    public MenuManager MenuManager { get => _menuManager; private set => _menuManager = value; }
     public Canvas Canvas {
         get {
             if (!TryGetComponent(out _canvas)) Debug.LogWarning("Couldn't access Canvas");
@@ -29,11 +22,11 @@ public class Menu : MonoBehaviour {
         private set => _canvas = value;
     }
 
+    public Level Level => MenuManager.Level;
+    public Player Player => MenuManager.Level.Player;
+
     //State
     [HideInInspector, SerializeField] private MenuState _state = MenuState.Closed;
-
-    //Actions
-    List<IMenuAction> actions;
 
     public MenuState State { get => _state; private set => _state = value; }
 
@@ -70,12 +63,6 @@ public class Menu : MonoBehaviour {
         Canvas.sortingOrder = order;
         Canvas.worldCamera = menuManager.MainCanvas.worldCamera;
 
-        //Open arguments
-        if (args is List<IMenuAction> list)
-        {
-            actions = list;
-        }
-
         //Open
         State = MenuState.Open;
         OnOpen(args);
@@ -92,17 +79,12 @@ public class Menu : MonoBehaviour {
     }
 
     protected virtual void OnOpen(object args = null) {
+        //Show menu
         gameObject.SetActive(true);
     }
 
     protected virtual void OnClose() {
-        if (actions != null)
-        {
-            foreach(CloseAction action in actions)
-            {
-                action.Execute();
-            }
-        }
+        //Hide menu
         gameObject.SetActive(false);
     }
 
@@ -127,10 +109,12 @@ public class Menu : MonoBehaviour {
     }
 
     protected virtual void OnCovered() {
+        //Hide menu
         gameObject.SetActive(false);
     }
 
     protected virtual void OnUncovered() {
+        //Show menu
         gameObject.SetActive(true);
     }
 
@@ -145,7 +129,7 @@ public class Menu : MonoBehaviour {
      \______/    \___/  |__/  |__/ \_______/|_*/
 
     public static GameObject GetPrefabFromName(string name) {
-        return Resources.Load<GameObject>("Prefabs/UI/Menus/" + name);
+        return Resources.Load<GameObject>($"Prefabs/UI/Menus/{name}");
     }
 
 }

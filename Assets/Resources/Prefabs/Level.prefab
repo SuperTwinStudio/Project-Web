@@ -290,7 +290,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 275417671378692547, guid: 2464d22b142c71f42bc105b37818ecbb, type: 3}
   m_PrefabInstance: {fileID: 3434638960966169847}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6436575076592480918
+--- !u!1001 &7052077050675460158
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -299,20 +299,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 5033318519386116832}
     m_Modifications:
     - target: {fileID: 634557881476071427, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
-      propertyPath: _menus
-      value: 
-      objectReference: {fileID: 8532293889821563977}
-    - target: {fileID: 634557881476071427, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
       propertyPath: _state
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 634557881476071427, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
+      propertyPath: _canvas
+      value: 
+      objectReference: {fileID: 939450027517678447}
+    - target: {fileID: 634557881476071427, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
+      propertyPath: _menuManager
+      value: 
+      objectReference: {fileID: 8532293889821563977}
     - target: {fileID: 944703539788321147, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
       propertyPath: m_Name
       value: Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276894247881149199, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
-      propertyPath: m_text
-      value: 100HP
       objectReference: {fileID: 0}
     - target: {fileID: 7480469518259031152, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
       propertyPath: m_Pivot.x
@@ -399,15 +399,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
---- !u!224 &4511684932407066342 stripped
+--- !u!224 &437400921304364110 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7480469518259031152, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
-  m_PrefabInstance: {fileID: 6436575076592480918}
+  m_PrefabInstance: {fileID: 7052077050675460158}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5880902773291299477 stripped
+--- !u!223 &939450027517678447 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7842907031858965329, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
+  m_PrefabInstance: {fileID: 7052077050675460158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7570662785382594621 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 634557881476071427, guid: c490102ad2526f242a0db112fb830a5e, type: 3}
-  m_PrefabInstance: {fileID: 6436575076592480918}
+  m_PrefabInstance: {fileID: 7052077050675460158}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -434,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 693472642402150192, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
       propertyPath: 'menus.Array.data[0]'
       value: 
-      objectReference: {fileID: 5880902773291299477}
+      objectReference: {fileID: 7570662785382594621}
     - target: {fileID: 693472642402150192, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
       propertyPath: createdMenus.keys.Array.size
       value: 1
@@ -450,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 693472642402150192, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
       propertyPath: 'createdMenus.values.Array.data[0]'
       value: 
-      objectReference: {fileID: 5880902773291299477}
+      objectReference: {fileID: 7570662785382594621}
     - target: {fileID: 4710054940728452474, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -500,7 +505,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4192439078169323929, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4511684932407066342}
+      addedObject: {fileID: 437400921304364110}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9768ca7af4c8b48408c11b4646d49d20, type: 3}
 --- !u!4 &4515425583184305667 stripped

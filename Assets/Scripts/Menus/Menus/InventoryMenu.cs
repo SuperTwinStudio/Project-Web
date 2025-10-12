@@ -79,6 +79,9 @@ public class InventoryMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Not playing
+        if (!Application.isPlaying) return;
+
         //Update items
         UpdateUI();
 
@@ -88,6 +91,9 @@ public class InventoryMenu : Menu {
 
     protected override void OnClose() {
         base.OnClose();
+
+        //Not playing
+        if (!Application.isPlaying) return;
 
         //Unpause game
         Game.Unpause(this);
