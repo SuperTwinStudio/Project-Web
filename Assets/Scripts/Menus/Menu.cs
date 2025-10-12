@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using UnityEditor.ProBuilder;
 using UnityEngine;
 
 public enum MenuState { Closed, Open, Covered }
@@ -28,6 +31,9 @@ public class Menu : MonoBehaviour {
 
     //State
     [HideInInspector, SerializeField] private MenuState _state = MenuState.Closed;
+
+    //Actions
+    List<IMenuAction> actions;
 
     public MenuState State { get => _state; private set => _state = value; }
 
@@ -64,6 +70,12 @@ public class Menu : MonoBehaviour {
         Canvas.sortingOrder = order;
         Canvas.worldCamera = menuManager.MainCanvas.worldCamera;
 
+        //Open arguments
+        if (args is List<IMenuAction> list)
+        {
+            actions = list;
+        }
+
         //Open
         State = MenuState.Open;
         OnOpen(args);
@@ -84,6 +96,13 @@ public class Menu : MonoBehaviour {
     }
 
     protected virtual void OnClose() {
+        if (actions != null)
+        {
+            foreach(CloseAction action in actions)
+            {
+                action.Execute();
+            }
+        }
         gameObject.SetActive(false);
     }
 

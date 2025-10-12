@@ -36,9 +36,9 @@ public class Level : MonoBehaviour {
     public bool IsHandmade => _isHandmade;
 
     //State
-    private void Awake() {
-        //Assign player to camera follow point
-        CameraController.Follow = Player.transform;
+    private void Awake()
+    {
+        CameraController.playerTransform = Player.transform;
     }
 
     private void Start()

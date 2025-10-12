@@ -218,14 +218,14 @@ public class ShopMenu : Menu {
         UpdateUI();
 
         //Pause game
-        Game.Pause(this);
+        // Game.Pause(this);
     }
 
     protected override void OnClose() {
         base.OnClose();
 
         //Unpause game
-        Game.Unpause(this);
+        // Game.Unpause(this);
     }
 
 }
