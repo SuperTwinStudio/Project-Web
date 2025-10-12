@@ -29133,6 +29133,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a04d4526b503ad41b4f75c81c18e7e7, type: 3}
+--- !u!114 &1731097369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
+  m_PrefabInstance: {fileID: 836446842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394e5627db4a360438b3b4a650b6bca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1749312964
 Mesh:
   m_ObjectHideFlags: 0
@@ -31064,7 +31075,7 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1731097369}
         m_TargetAssemblyTypeName: Level, Assembly-CSharp
         m_MethodName: EnterDungeon
         m_Mode: 1
@@ -31075,7 +31086,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!54 &1918285200
 Rigidbody:
   m_ObjectHideFlags: 0
