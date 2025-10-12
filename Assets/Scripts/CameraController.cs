@@ -1,4 +1,7 @@
+using System.Collections;
 using Botpa;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -20,8 +23,8 @@ public class CameraController : MonoBehaviour {
     [Header("Components")]
     [SerializeField] private Camera _camera;
     [SerializeField] private Volume postproVolume;
-    [SerializeField] private Transform positionTarget;
     [SerializeField] private Transform viewTarget;
+    [SerializeField] private Transform positionTarget;
 
     private Transform controllerTransform, cameraTransform;
     private DepthOfField DOF;
@@ -33,9 +36,6 @@ public class CameraController : MonoBehaviour {
     public Camera Camera => _camera;
 
     private bool onCutScene = false;
-    private Transform sceneViewTarget;
-    private Transform scenePositionTarget;
-
     //State
     private void Start() {
 
@@ -48,9 +48,6 @@ public class CameraController : MonoBehaviour {
 
         //Update follow
         UpdateFollow(positionTarget, viewTarget);
-
-        //Unparenting camera from camera controller
-        Camera.gameObject.transform.parent = null;
     }
 
     private void LateUpdate()
@@ -58,9 +55,6 @@ public class CameraController : MonoBehaviour {
 
         controllerTransform.position = playerTransform.position;
 
-        //Update camera positioning
-        cameraTransform.position = Vector3.MoveTowards(cameraTransform.position, follow.position, cameraSpeed * Time.deltaTime);
-        cameraTransform.rotation = Quaternion.RotateTowards(cameraTransform.rotation, follow.rotation, cameraRotationSpeed * Time.deltaTime);
 
         //Update DOF
         float distance = Vector3.Distance(cameraTransform.position, viewTarget.position);
@@ -79,16 +73,36 @@ public class CameraController : MonoBehaviour {
     public void EnterCutScene(Transform _viewTarget, Transform _positionTarget)
     {
         UpdateFollow(_positionTarget, _viewTarget);
-        cameraSpeed = 5;
-        cameraRotationSpeed = 30;
+        float time = Vector3.Distance(follow.position, cameraTransform.position) / cameraSpeed;
+        StartCoroutine(Traveling(time, cameraTransform.position, cameraTransform.rotation));
         onCutScene = true;
     }
 
     public void ExitCutScene()
     {
         UpdateFollow(positionTarget, viewTarget);
-        cameraSpeed = 100;
-        cameraRotationSpeed = 1000;
-        onCutScene = true;
+        float time = Vector3.Distance(follow.position, cameraTransform.position) / cameraSpeed;
+        StartCoroutine(Traveling(time, cameraTransform.position, cameraTransform.rotation));
+        onCutScene = false;
+    }
+
+    private IEnumerator Traveling(float time, Vector3 ogPosition, Quaternion ogRotation, float percent = 0)
+    {
+        Vector3 move = follow.position - ogPosition;
+        percent += Time.deltaTime / time;
+        cameraTransform.position = ogPosition + (Ease.InOutCubic(percent) * move);
+        cameraTransform.rotation = Quaternion.Lerp(ogRotation, follow.rotation, percent);
+
+        yield return new WaitForNextFrameUnit();
+
+        if (percent > 1)
+        {
+            cameraTransform.position = follow.position;
+        }
+        else
+        {
+            
+            StartCoroutine(Traveling(time, ogPosition, ogRotation, percent));
+        }
     }
 }
