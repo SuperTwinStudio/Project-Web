@@ -71,7 +71,7 @@ public class GameMenu : Menu {
     }
 
     public override bool OnBack() {
-        MenuManager.Open(MenusList.Pause); //Pause game
+        MenuManager.Open(MenusList.Settings);
         return false;
     }
 
