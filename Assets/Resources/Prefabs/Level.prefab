@@ -150,6 +150,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3204367320352726324}
     - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
+      propertyPath: viewTarget
+      value: 
+      objectReference: {fileID: 2337878874145818734}
+    - target: {fileID: 5479597004360944812, guid: 234e122141942324dbae257553da3aab, type: 3}
       propertyPath: focusTarget
       value: 
       objectReference: {fileID: 2337878874145818734}

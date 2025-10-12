@@ -20,8 +20,8 @@ public class CameraController : MonoBehaviour {
     [Header("Components")]
     [SerializeField] private Camera _camera;
     [SerializeField] private Volume postproVolume;
-    [SerializeField] private Transform viewTarget;
     [SerializeField] private Transform positionTarget;
+    [SerializeField] private Transform viewTarget;
 
     private Transform controllerTransform, cameraTransform;
     private DepthOfField DOF;

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopTrigger : MonoBehaviour {
@@ -7,8 +5,10 @@ public class ShopTrigger : MonoBehaviour {
     //Components
     private MenuManager MenuManager => Game.Current.MenuManager;
 
-    [SerializeField] Transform viewTarget;
-    [SerializeField] Transform cameraTarget;
+    //Camera
+    [Header("Camera")]
+    [SerializeField] private Transform viewTarget;
+    [SerializeField] private Transform cameraTarget;
 
 
     //State
@@ -16,14 +16,11 @@ public class ShopTrigger : MonoBehaviour {
         //Check if player
         if (!other.CompareTag("Player")) return;
 
-        List<IMenuAction> actions = new List<IMenuAction>();
-
-        actions.Add(new CloseAction(() => Game.Current.Level.CameraController.ExitCutScene()));
-
         //Open shop
-        MenuManager.Open(MenusList.Shop, actions);
-
-        Game.Current.Level.CameraController.EnterCutScene(viewTarget, cameraTarget);
+        MenuManager.Open(MenusList.Shop, new ShopArgs() {
+            viewTarget = viewTarget,
+            cameraTarget = cameraTarget
+        });
     }
 
 }

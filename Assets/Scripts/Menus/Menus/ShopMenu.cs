@@ -211,21 +211,37 @@ public class ShopMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
+        //Not playing
+        if (!Application.isPlaying) return;
+
         //Select current weapon
         selectedWeapon = Loadout.CurrentWeapon;
 
         //Update UI
         UpdateUI();
 
-        //Pause game
-        // Game.Pause(this);
+        //Start camera cinematic
+        if (args != null) {
+            ShopArgs shopArgs = (ShopArgs) args;
+            Level.CameraController.EnterCutScene(shopArgs.viewTarget, shopArgs.cameraTarget);
+        }
     }
 
     protected override void OnClose() {
         base.OnClose();
 
-        //Unpause game
-        // Game.Unpause(this);
+        //Not playing
+        if (!Application.isPlaying) return;
+
+        //Stop camera cinematic
+        Level.CameraController.ExitCutScene();
     }
+
+}
+
+public class ShopArgs {
+    
+    public Transform viewTarget;
+    public Transform cameraTarget;
 
 }
