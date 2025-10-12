@@ -92,7 +92,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3909827865481216
-    m_Key: shop_return
+    m_Key: shop_close
     m_Metadata:
       m_Items: []
   - m_Id: 3913677393498112
@@ -125,6 +125,74 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4051312049000448
     m_Key: shop_character_rugosidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390404993454080
+    m_Key: credits_programmer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390471737413632
+    m_Key: credits_3d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391037469331456
+    m_Key: credits_2d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391069803220992
+    m_Key: credits_concept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4395589937532928
+    m_Key: credits_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396163907063808
+    m_Key: inventory_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396311194243072
+    m_Key: settings_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396488663633920
+    m_Key: settings_home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396490131640320
+    m_Key: settings_lobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396989241233408
+    m_Key: credits_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397184544804864
+    m_Key: death_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397426417733632
+    m_Key: death_home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397432436559872
+    m_Key: death_lobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398029558648832
+    m_Key: end_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398127306903552
+    m_Key: end_lobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398145094946816
+    m_Key: end_continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398969451843584
+    m_Key: settings_title
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -95,7 +95,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3909827865481216
-    m_Localized: Return
+    m_Localized: Close
     m_Metadata:
       m_Items: []
   - m_Id: 3913752266018816
@@ -128,6 +128,74 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4051312049000448
     m_Localized: Rugosity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390404993454080
+    m_Localized: Programmer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390471737413632
+    m_Localized: 3D Artist
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391037469331456
+    m_Localized: 2D Artist
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391069803220992
+    m_Localized: Concept Artist
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4395589937532928
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396163907063808
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396311194243072
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396490131640320
+    m_Localized: Return to Castle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396488663633920
+    m_Localized: Return to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396989241233408
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397184544804864
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397426417733632
+    m_Localized: Return to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397432436559872
+    m_Localized: Return to Castle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398029558648832
+    m_Localized: Dungeon Cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398145094946816
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398127306903552
+    m_Localized: Return to Castle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398969451843584
+    m_Localized: Settings
     m_Metadata:
       m_Items: []
   references:

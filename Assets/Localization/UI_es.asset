@@ -95,7 +95,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3909827865481216
-    m_Localized: Volver
+    m_Localized: Cerrar
     m_Metadata:
       m_Items: []
   - m_Id: 3913752266018816
@@ -128,6 +128,74 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4051312049000448
     m_Localized: Rugosidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390471737413632
+    m_Localized: Artista 3D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4390404993454080
+    m_Localized: Programador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391037469331456
+    m_Localized: Artista 2D
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4391069803220992
+    m_Localized: Artista de Concept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4395589937532928
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396163907063808
+    m_Localized: Cerrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396311194243072
+    m_Localized: Cerrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396488663633920
+    m_Localized: Volver al Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396490131640320
+    m_Localized: Volver al Castillo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396989241233408
+    m_Localized: Cerrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397184544804864
+    m_Localized: Fin del Juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397426417733632
+    m_Localized: Volver al Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397432436559872
+    m_Localized: Volver al Castillo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398029558648832
+    m_Localized: Mazmorra Completada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398145094946816
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398127306903552
+    m_Localized: Volver al Castillo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4398969451843584
+    m_Localized: Ajustes
     m_Metadata:
       m_Items: []
   references:

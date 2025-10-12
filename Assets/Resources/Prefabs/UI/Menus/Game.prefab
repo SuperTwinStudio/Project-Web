@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Health: 100'
+  m_text: 100HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 6679063048733635665}
   - component: {fileID: 1898882849555454888}
   m_Layer: 5
-  m_Name: Money
+  m_Name: Money Sold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1813,10 +1813,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7156003251894462027}
+      addedObject: {fileID: 6679063048733635665}
     - targetCorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6679063048733635665}
+      addedObject: {fileID: 7156003251894462027}
     - targetCorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3129732243241319278}
@@ -1842,7 +1842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd560225cffbc244b100e8c5f3d4d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menus: {fileID: 0}
+  _menuManager: {fileID: 0}
+  _canvas: {fileID: 0}
   _state: 0
   inventoryAction: {fileID: -7972526189184036601, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   healthText: {fileID: 1276894247881149199}

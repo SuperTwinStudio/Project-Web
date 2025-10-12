@@ -23,12 +23,20 @@ public class SettingsMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     public void ReturnToHome() {
+        //Show confirmation that player will lose all their items
+        //For now it clears inventory directly
+        Player.Loadout.ClearInventory();
+
+        //Return to home
         Game.Current.LoadScene("Home");
     }
 
     public void ReturnToLobby() {
-        //Show confirmation that player will lose all their items and half the money
-        //For now it only returns to lobby and does not remove anything
+        //Show confirmation that player will lose all their items
+        //For now it clears inventory directly
+        Player.Loadout.ClearInventory();
+
+        //Return to lobby
         Game.Current.LoadScene("Lobby");
     }
 

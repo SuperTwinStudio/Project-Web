@@ -13,14 +13,14 @@ public class GameMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference inventoryAction;
 
-    //Health
-    [Header("Health")]
-    [SerializeField] private TMP_Text healthText;
-
     //Money
     [Header("Money")]
     [SerializeField] private Animator moneyAnimator;
     [SerializeField] private TMP_Text moneyText;
+
+    //Health
+    [Header("Health")]
+    [SerializeField] private TMP_Text healthText;
 
     //Weapon
     private Weapon currentWeapon;
