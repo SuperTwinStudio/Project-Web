@@ -6,8 +6,8 @@ Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y d
 ## Twin Studio  
 - **Portfolio:** http://supertwinstudio.github.io/Portfolio/
 - **Linktree:** https://linktr.ee/supertwinstudio
-- **Instagram:** https://www.youtube.com/channel/UCM0e2jlFCd7-0KNh0ZPc3mA
-- **Youtube:** https://www.instagram.com/supertwinstudio/
+- **Instagram:** https://www.instagram.com/supertwinstudio/
+- **Youtube:** https://www.youtube.com/@superTwinStudio
 - **X (Twitter):** https://x.com/superTwinStudio
 
 ## Equipo de desarrollo
