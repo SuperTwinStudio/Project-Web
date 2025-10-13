@@ -7,7 +7,7 @@ Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y d
 - **Portfolio:**
 - **Linktree**
 - **Youtube:** 
-- **X (Twitter):**
+- **X (Twitter):** https://x.com/superTwinStudio
 
 ## Equipo de desarrollo
 - Alejandro Paniagua Moreno (@BOTPanzer) -> a.paniagua.2022@alumnos.urjc.es
