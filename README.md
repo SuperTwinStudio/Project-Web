@@ -338,6 +338,18 @@ Los distintos elementos interactuables también incluirán la estética de escri
 
 ### Arte conceptual
 
+![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Armas.jpg?raw=true)
+
+![Columnas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Columnas.jpg?raw=true)
+
+![Arte del concepto general](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/ConceptGeneral.jpg?raw=true)
+
+![Escenario detallado](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/DetallesEscenario.jpg?raw=true)
+
+![Ejemplo enfermería](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Enfermeria.jpg?raw=true)
+
+![Ejemplo vendedor](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Vendedor.jpg?raw=true)
+
 ### Cámara e iluminación
 Uso de una cámara isométrica, en 3º persona, con una distancia focal alta y profundidad de campo para dar efecto de que los personajes son miniaturas.
 
