@@ -1,1 +1,0 @@
-Archivo auxiliar para crear la carpeta, se borrará en próximos commits.
