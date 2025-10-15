@@ -44,6 +44,9 @@ public class Loadout : MonoBehaviour, ISavable {
 
     public IReadOnlyDictionary<Item, int> Inventory => _inventory;
 
+    //Passive items
+    private readonly SerializableDictionary<PassiveItem, int> _passiveItems = new();
+    public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
 
     //State
     private void Awake() {
@@ -100,11 +103,31 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public bool UsePrimary() {
-        return CurrentWeapon && CurrentWeapon.UsePrimary();
+        if(CurrentWeapon && CurrentWeapon.UsePrimary())
+        {
+            foreach (var item in _passiveItems)
+            {
+                item.Key.OnPrimaryHook(_player, item.Value);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public bool UseSecondary() {
-        return CurrentWeapon && CurrentWeapon.UseSecondary();
+        if (CurrentWeapon && CurrentWeapon.UseSecondary())
+        {
+            foreach (var item in _passiveItems)
+            {
+                item.Key.OnSecondaryHook(_player, item.Value);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     //Unlocked weapons
@@ -173,6 +196,19 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Return added value
         return addedValue;
+    }
+
+    //Passive items
+    public void AddToPassiveItems(PassiveItem item)
+    {
+        //Invalid item
+        if (!item) return;
+
+        //Add item
+        if (PassiveItems.ContainsKey(item))
+            _passiveItems[item]++;
+        else
+            _passiveItems[item] = 1;
     }
 
     //Saving
