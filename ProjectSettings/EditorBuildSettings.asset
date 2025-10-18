@@ -14,12 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon.unity
     guid: f5f0c6568d2614d4e927859af9083fb8
-  - enabled: 0
-    path: Assets/Scenes/TestingAlex/AlexDungeon.unity
-    guid: 7b84c9e62b691a14384ecfd9a8f4974c
-  - enabled: 0
-    path: Assets/Scenes/TestingAlex/AlexLobby.unity
-    guid: b2707834cbd1660438d0d0c429e30c47
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ae13fc00113098449b9f0e1698a32caf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
