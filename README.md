@@ -4,6 +4,7 @@ Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño
 Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y desarrollo de videojuegos* de la URJC.
 
 ## Twin Studio  
+- **Itch.io:** https://supertwinstudio.itch.io/
 - **Portfolio:** http://supertwinstudio.github.io/Portfolio/
 - **Linktree:** https://linktr.ee/supertwinstudio
 - **Instagram:** https://www.instagram.com/supertwinstudio/
@@ -425,6 +426,7 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 ### Menús
 
 #### Menú Principal
+
 Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Componentes del Menú Principal:
 - **Botón Play:** al pulsarlo conduce a la pantalla de juego. Usando el botón play de ejemplo, al hacer hover sobre un botón adquiere un fondo y se invierte el color del texto (por ejemplo, si el botón es blanco al hacer hover se volverá negro con borde blanco).
 - **Botón Settings:** conduce a la pantalla de configuración.
