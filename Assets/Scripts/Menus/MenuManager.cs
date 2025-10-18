@@ -314,7 +314,7 @@ public class MenuManager : MonoBehaviour {
         //Check if object exists
         if (!createdMenus.ContainsKey(name) || !createdMenus[name]) {
             //Missing -> Create it
-            GameObject obj;
+            GameObject obj = null;
             if (!Application.isPlaying) {
                 //Instantiate prefab (in editor)
                 #if UNITY_EDITOR
