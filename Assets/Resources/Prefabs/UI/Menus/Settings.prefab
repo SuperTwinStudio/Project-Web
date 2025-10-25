@@ -2064,6 +2064,7 @@ MonoBehaviour:
   bgGame: {fileID: 8963449449173657482}
   homeButton: {fileID: 7644117318593956028}
   lobbyButton: {fileID: 4107061002802530348}
+  _pauseAction: {fileID: -1347841085879655019, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &4622304044106915799
 MonoBehaviour:
   m_ObjectHideFlags: 0

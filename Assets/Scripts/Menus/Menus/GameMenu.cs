@@ -71,7 +71,6 @@ public class GameMenu : Menu {
     }
 
     public override bool OnBack() {
-        MenuManager.Open(MenusList.Settings);
         return false;
     }
 

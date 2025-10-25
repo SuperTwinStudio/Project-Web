@@ -109,44 +109,6 @@ public class Player : Character, ISavable
         }
 
 
-        /*$                           /$$      
-       | $$                          | $$      
-       | $$        /$$$$$$   /$$$$$$ | $$   /$$
-       | $$       /$$__  $$ /$$__  $$| $$  /$$/
-       | $$      | $$  \ $$| $$  \ $$| $$$$$$/ 
-       | $$      | $$  | $$| $$  | $$| $$_  $$ 
-       | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$
-       |________/ \______/  \______/ |__/  \_*/
-
-
-        if (isLastInputGamepad) // Using gamepad
-        {
-            //Get look input
-            lookInput = spinAction.ReadValue<Vector2>();
-
-            if (lookInput != Vector2.zero)
-            {
-                float angle = Vector2.SignedAngle(Vector2.up, lookInput);
-                playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.eulerAngles.x, angle, playerTransform.rotation.eulerAngles.z);
-            }
-        }
-        else // Using Keyboard & mouse
-        {
-            //Get look input
-            lookInput = lookAction.ReadValue<Vector2>();
-
-            //Try to get mouse world point in player plane
-            var plane = new Plane(Vector3.up, playerTransform.position + new Vector3(0, controller.height / 2, 0));
-            var ray = CameraController.Camera.ScreenPointToRay(lookInput);
-            if (plane.Raycast(ray, out float distance))
-            {
-                //Success -> Get point & look towards it
-                var hitPoint = ray.GetPoint(distance);
-                hitPoint.y = playerTransform.position.y;
-                playerTransform.LookAt(hitPoint, Vector3.up);
-            }
-        }
-
         /*$      /$$                              
        | $$$    /$$$                              
        | $$$$  /$$$$  /$$$$$$  /$$    /$$ /$$$$$$ 
@@ -168,6 +130,50 @@ public class Player : Character, ISavable
 
             //Move in move direction
             controller.SimpleMove(moveSpeed * moveDirection);
+        }
+
+
+        /*$                           /$$      
+       | $$                          | $$      
+       | $$        /$$$$$$   /$$$$$$ | $$   /$$
+       | $$       /$$__  $$ /$$__  $$| $$  /$$/
+       | $$      | $$  \ $$| $$  \ $$| $$$$$$/ 
+       | $$      | $$  | $$| $$  | $$| $$_  $$ 
+       | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$
+       |________/ \______/  \______/ |__/  \_*/
+
+
+        if (isLastInputGamepad) // Using gamepad
+        {
+            //Get look input
+            lookInput = spinAction.ReadValue<Vector2>();
+
+            if (lookInput != Vector2.zero)
+            {
+                float angle = Vector2.SignedAngle(Vector2.up, lookInput);
+                playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.eulerAngles.x, angle, playerTransform.rotation.eulerAngles.z);
+            }
+            else if (isMoving)
+            {
+                float angle = Vector2.SignedAngle(Vector2.up, moveInput * new Vector2(-1, 1));
+                playerTransform.rotation = Quaternion.Euler(playerTransform.rotation.eulerAngles.x, angle, playerTransform.rotation.eulerAngles.z);
+            }
+        }
+        else // Using Keyboard & mouse
+        {
+            //Get look input
+            lookInput = lookAction.ReadValue<Vector2>();
+
+            //Try to get mouse world point in player plane
+            var plane = new Plane(Vector3.up, playerTransform.position + new Vector3(0, controller.height / 2, 0));
+            var ray = CameraController.Camera.ScreenPointToRay(lookInput);
+            if (plane.Raycast(ray, out float distance))
+            {
+                //Success -> Get point & look towards it
+                var hitPoint = ray.GetPoint(distance);
+                hitPoint.y = playerTransform.position.y;
+                playerTransform.LookAt(hitPoint, Vector3.up);
+            }
         }
 
 
