@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Slowed
     m_Metadata:
       m_Items: []
+  - m_Id: 5451330203123712
+    m_Localized: Concealed Blade
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
