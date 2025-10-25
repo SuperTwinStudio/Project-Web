@@ -1,6 +1,7 @@
 using Botpa;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HomeMenu : Menu {
     
@@ -11,15 +12,17 @@ public class HomeMenu : Menu {
     [Header("Version")]
     [SerializeField] private TMP_Text versionText;
 
+    [Header("Components")]
+    [SerializeField] private Selectable _defaultSelected;
 
-      /*$$$$$   /$$                 /$$
-     /$$__  $$ | $$                | $$
-    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-     \______/   \___/   \_______/   \___/   \______*/
+    /*$$$$$   /$$                 /$$
+   /$$__  $$ | $$                | $$
+  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+   \______/   \___/   \_______/   \___/   \______*/
 
     public override bool OnBack() {
         return false; //Block closing menu
@@ -72,6 +75,9 @@ public class HomeMenu : Menu {
 
         //Update version
         versionText.SetText($"v{Application.version}");
+
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
 
         //Pause game
         Game.Pause(this);

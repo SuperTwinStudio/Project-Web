@@ -1,4 +1,6 @@
+using Botpa;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Level : MonoBehaviour {
 
@@ -21,6 +23,9 @@ public class Level : MonoBehaviour {
     [SerializeField] private MenuManager _menuManager;
     [SerializeField] private CameraController _cameraController;
     [SerializeField] private Player _player;
+
+    [Header("Input")]
+    [SerializeField] private InputActionReference _pauseAction;
 
     public MenuManager MenuManager => _menuManager;
     public CameraController CameraController => _cameraController;
@@ -46,6 +51,11 @@ public class Level : MonoBehaviour {
         if(!_isLobby && !_isHandmade) InitializeLevel();
     }
 
+    private void Update()
+    {
+        if (_pauseAction.Triggered() && !Game.IsPaused) PauseLevel();
+    }
+
     private void InitializeLevel()
     {
         LevelGenerator generator = new LevelGenerator();
@@ -65,4 +75,8 @@ public class Level : MonoBehaviour {
         Game.LoadScene("AlexLobby");
     }
 
+    public void PauseLevel()
+    {
+        MenuManager.Open(MenusList.Settings);
+    }
 }

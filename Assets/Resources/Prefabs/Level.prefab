@@ -81,6 +81,7 @@ MonoBehaviour:
   _menuManager: {fileID: 8532293889821563977}
   _cameraController: {fileID: 7048343673859228868}
   _player: {fileID: 3014555502683683044}
+  _pauseAction: {fileID: -1347841085879655019, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _isLobby: 1
   _isHandmade: 1
   Definition: {fileID: 0}

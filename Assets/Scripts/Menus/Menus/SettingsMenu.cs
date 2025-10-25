@@ -1,4 +1,8 @@
+using Botpa;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 
 public class SettingsMenu : Menu {
     
@@ -11,16 +15,21 @@ public class SettingsMenu : Menu {
     [SerializeField] private GameObject bgGame;
     [SerializeField] private GameObject homeButton;
     [SerializeField] private GameObject lobbyButton;
+    [SerializeField] private Selectable _defaultSelected;
+
+    //Input
+    [Header("Input")]
+    [SerializeField] private InputActionReference _pauseAction;
 
 
-      /*$$$$$              /$$     /$$
-     /$$__  $$            | $$    |__/
-    | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
-    | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
-    | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
-    | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
-    | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
-    |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
+    /*$$$$$              /$$     /$$
+   /$$__  $$            | $$    |__/
+  | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
+  | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
+  | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
+  | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
+  | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
+  |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     public void ReturnToHome() {
         //Show confirmation that player will lose all their items
@@ -67,8 +76,13 @@ public class SettingsMenu : Menu {
         bgHome.SetActive(scene == "Home");
         bgGame.SetActive(scene != "Home");
 
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
+
         //Not playing
         if (!Application.isPlaying) return;
+
+        _pauseAction.Disable();
 
         //Pause game
         Game.Pause(this);
@@ -79,6 +93,8 @@ public class SettingsMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
+
+        _pauseAction.Enable();
 
         //Unpause game
         Game.Unpause(this);
