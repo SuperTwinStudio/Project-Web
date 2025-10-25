@@ -2,6 +2,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using Botpa;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventoryMenu : Menu {
 
@@ -23,15 +24,17 @@ public class InventoryMenu : Menu {
     [SerializeField] private TMP_Text valueText;
     [SerializeField] private GameObject itemPrefab;
 
+    [Header("Components")]
+    [SerializeField] private Selectable _defaultSelected;
 
-      /*$$$$$   /$$                 /$$
-     /$$__  $$ | $$                | $$
-    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-     \______/   \___/   \_______/   \___/   \______*/
+    /*$$$$$   /$$                 /$$
+   /$$__  $$ | $$                | $$
+  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+   \______/   \___/   \_______/   \___/   \______*/
 
     public override void OnUpdate() {
         //Close menu
@@ -55,6 +58,9 @@ public class InventoryMenu : Menu {
 
         //Clear old items
         Util.DestroyChildren(itemsGrid);
+
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
 
         //Add new items
         foreach (var pair in Loadout.Inventory) Instantiate(itemPrefab, itemsGrid).GetComponent<InventoryItem>().Init(pair.Key, pair.Value);

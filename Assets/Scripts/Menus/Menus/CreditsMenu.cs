@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreditsMenu : Menu {
 
     //Prefab
     public override string Name => MenusList.Credits;
+
+    [Header("Components")]
+    [SerializeField] private Selectable _defaultSelected;
 
 
       /*$$$$$   /$$                 /$$
@@ -37,6 +41,9 @@ public class CreditsMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
+
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
 
         //Pause game
         Game.Pause(this);

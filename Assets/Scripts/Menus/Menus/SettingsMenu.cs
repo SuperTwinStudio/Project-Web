@@ -1,6 +1,7 @@
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static UnityEngine.Timeline.DirectorControlPlayable;
 
 public class SettingsMenu : Menu {
@@ -14,6 +15,7 @@ public class SettingsMenu : Menu {
     [SerializeField] private GameObject bgGame;
     [SerializeField] private GameObject homeButton;
     [SerializeField] private GameObject lobbyButton;
+    [SerializeField] private Selectable _defaultSelected;
 
     //Input
     [Header("Input")]
@@ -73,6 +75,9 @@ public class SettingsMenu : Menu {
         //Toggle backgrounds
         bgHome.SetActive(scene == "Home");
         bgGame.SetActive(scene != "Home");
+
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
 
         //Not playing
         if (!Application.isPlaying) return;

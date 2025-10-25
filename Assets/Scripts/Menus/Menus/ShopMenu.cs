@@ -39,15 +39,17 @@ public class ShopMenu : Menu {
 
     private Weapon selectedWeapon;
 
+    [Header("Components")]
+    [SerializeField] private Selectable _defaultSelected;
 
-      /*$$$$$   /$$                 /$$
-     /$$__  $$ | $$                | $$
-    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-     \______/   \___/   \_______/   \___/   \______*/
+    /*$$$$$   /$$                 /$$
+   /$$__  $$ | $$                | $$
+  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+   \______/   \___/   \_______/   \___/   \______*/
 
     public override void OnUpdate() {
         //Close menu
@@ -91,7 +93,11 @@ public class ShopMenu : Menu {
 
     public void UpgradeCharacter(int type) {
         //Try to upgrade player
-        if (!Player.TryUpgrade((PlayerUpgrade) type)) return;
+        if (!Player.TryUpgrade((PlayerUpgrade) type)) 
+        {
+            _defaultSelected.Select();
+            return; 
+        }
 
         //Success -> Update UI
         UpdateMainUI();
@@ -216,6 +222,9 @@ public class ShopMenu : Menu {
 
         //Select current weapon
         selectedWeapon = Loadout.CurrentWeapon;
+
+        //Select default button (for controller navigation)
+        _defaultSelected.Select();
 
         //Update UI
         UpdateUI();
