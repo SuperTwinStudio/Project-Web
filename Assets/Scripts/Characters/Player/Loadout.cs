@@ -130,6 +130,18 @@ public class Loadout : MonoBehaviour, ISavable {
         return false;
     }
 
+    public void OnDamageableHit(GameObject damagedObject)
+    {
+        Character character = damagedObject.GetComponent<Character>();
+        if (character != null)
+        {
+            foreach (var item in _passiveItems)
+            {
+                item.Key.OnEnemyHurtHook(_player, item.Value, character);
+            }
+        }
+    }
+
     //Unlocked weapons
     public void UnlockWeapon(Item item) {
         //Add item to unlocked weapons
@@ -209,6 +221,21 @@ public class Loadout : MonoBehaviour, ISavable {
             _passiveItems[item]++;
         else
             _passiveItems[item] = 1;
+
+        item.OnPickup(Player, _passiveItems[item]);
+    }
+
+    public void RemovePassiveItem(PassiveItem item)
+    {
+        //Invalid item or we don't have it yet
+        if (!item || !PassiveItems.ContainsKey(item)) return;
+
+        _passiveItems[item] -= 1;
+
+        if (_passiveItems[item] == 0)
+        {
+            _passiveItems.Remove(item);
+        }
     }
 
     //Saving

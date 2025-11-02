@@ -6,7 +6,7 @@ public interface IDamageable {
 
     public bool Heal(float amount);     //Returns true if success
 
-    public bool Damage(float amount);   //Returns true if success
+    public bool Damage(float amount, object source);   //Returns true if success
 
     protected void OnDeath() {}
 
