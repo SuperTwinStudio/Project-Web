@@ -68,6 +68,8 @@ public class Weapon : MonoBehaviour {
 
     public int PassiveValue { get; private set; } = 0;
 
+    [HideInInspector] public GameObject LastHit { get; protected set; }
+
 
     //State
     private void Init() {
@@ -236,7 +238,8 @@ public class Weapon : MonoBehaviour {
             if (damageable is Player) continue;
 
             //Damage
-            damageable.Damage(damage);
+            Loadout.OnDamageableHit(collision.collider.gameObject);
+            damageable.Damage(damage, Player);
             hit = true;
         }
 
@@ -260,7 +263,8 @@ public class Weapon : MonoBehaviour {
             if (damageable is Player) continue;
 
             //Damage
-            damageable.Damage(damage);
+            Loadout.OnDamageableHit(collision.collider.gameObject);
+            damageable.Damage(damage, Player);
             hit = true;
         }
 

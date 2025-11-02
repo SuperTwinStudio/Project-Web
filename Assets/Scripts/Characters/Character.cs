@@ -17,6 +17,8 @@ public class Character : MonoBehaviour, IDamageable {
     private event Action<float> OnHealthChanged;
 
     public bool IsAlive { get; protected set; } = true;
+    public bool IgnoreNextDamage = false;
+    public bool IsInvulnerable { get; protected set; } = false;
     public float Health { get; protected set; } = HEALTH_MAX;
     public virtual float HealthMax => HEALTH_MAX;
 
@@ -83,9 +85,16 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    public virtual bool Damage(float amount) {
-        //Character is already dead -> Ignore damage
-        if (!IsAlive) return false;
+    public virtual bool Damage(float amount, object source) {
+        //Character is already dead or invulnerable-> Ignore damage
+        if (!IsAlive || IsInvulnerable) return false;
+
+        // Ignore this tick of damage
+        if (IgnoreNextDamage)
+        {
+            IgnoreNextDamage = false;
+            return false;
+        }
 
         //Ignore negative damage
         if (amount <= 0) return false;

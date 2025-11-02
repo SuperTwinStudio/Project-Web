@@ -100,7 +100,7 @@ public class Player : Character, ISavable
         UpdateEffects();
 
         //Test (damage player)
-        if (testAction.Triggered()) Damage(10);
+        if (testAction.Triggered()) Damage(10, this);
 
         //Check if switched to gamepad
         if (moveAction.action.activeControl != null)
@@ -234,7 +234,7 @@ public class Player : Character, ISavable
             {
                 //Damage
                 case EffectType.Damage:
-                    Damage(Time.deltaTime * effect.Action.Points);  //Take points as damage per second
+                    Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
                     break;
                 //Heal
                 case EffectType.Heal:
@@ -304,16 +304,30 @@ public class Player : Character, ISavable
         MenuManager.Open(MenusList.Death);
     }
 
-    public override bool Damage(float amount)
+    public override bool Damage(float amount, object source)
     {
         //Calculate resistance
         float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
 
+        foreach (var item in Loadout.PassiveItems)
+        {
+            item.Key.OnHurtHook(this, item.Value, (source is Character character) ? character : null);
+        }
+
         //Damage
-        bool success = base.Damage(amount - resistance);
+        bool success = base.Damage(amount - resistance, source);
 
         //Died -> Open death menu
-        if (success && !IsAlive) MenuManager.Open(MenusList.Death);
+        if (success && !IsAlive) 
+        {
+            foreach (var item in Loadout.PassiveItems)
+            {
+                item.Key.OnDeathHook(this, item.Value);
+            }
+
+            // Run the alive check again since items could have altered that outcome
+            if(!IsAlive) MenuManager.Open(MenusList.Death); 
+        }
 
         //Return success
         return success;

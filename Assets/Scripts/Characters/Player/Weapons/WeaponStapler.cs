@@ -67,6 +67,7 @@ public class WeaponStapler : Weapon {
         //Shoot
         Projectile projectile = SpawnProjectile(bulletPrefab).GetComponent<Projectile>();
         projectile.damage = damage;
+        projectile.SetLoadout(Loadout);
 
         //Update ammo
         SetAmmo(ammo - 1);
