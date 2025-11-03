@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class EnemyBase : Character {
@@ -7,6 +8,7 @@ public class EnemyBase : Character {
 
     //Enemy
     [Header("Enemy")]
+    [SerializeField] protected GameObject damageIndicatorPrefab;
     [SerializeField] protected new Collider collider;
     [SerializeField] protected new Renderer renderer;
     [SerializeField] protected float viewDistance = 5;
@@ -55,6 +57,17 @@ public class EnemyBase : Character {
 
         //Update color
         if (renderer) renderer.material.SetColor("_Color", Color.white);
+    }
+
+    public override bool Damage(float amount, object source) {
+        //Damage
+        bool damaged = base.Damage(amount, source);
+
+        //Show damage indicator
+        if (damaged) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<TMP_Text>().SetText($"{amount}");
+
+        //Return if damaged
+        return damaged;
     }
 
     protected override void OnDeath(bool instant = false) {
