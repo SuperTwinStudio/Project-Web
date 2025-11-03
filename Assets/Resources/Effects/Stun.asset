@@ -24,8 +24,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _action:
-    _type: 0
-    _points: 0
+    _type: 2
+    _points: 1
   references:
     version: 2
     RefIds: []
