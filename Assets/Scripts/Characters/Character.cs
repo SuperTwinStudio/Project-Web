@@ -16,7 +16,7 @@ public class Character : MonoBehaviour, IDamageable {
     //Health
     private event Action<float> OnHealthChanged;
 
-    public bool IsAlive { get; protected set; } = true;
+    public bool IsAlive { get; set; } = true;
     public bool IgnoreNextDamage = false;
     public bool IsInvulnerable { get; protected set; } = false;
     public float Health { get; protected set; } = HEALTH_MAX;
