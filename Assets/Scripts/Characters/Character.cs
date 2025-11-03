@@ -68,7 +68,7 @@ public class Character : MonoBehaviour, IDamageable {
     //Health
     private IEnumerator DamageFeedbackCoroutine() {
         OnDamageFeedbackStart();
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.08f);
         OnDamageFeedbackEnd();
     }
 

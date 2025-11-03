@@ -82,11 +82,11 @@ public class Game : MonoBehaviour, ISavable {
         //Check for a level
         InGame = Level;
 
-        //Load game state
-        if (InGame) OnLoad(save);
-
         //Init menus with new game menus
         MenuManager.Init(newGame.MenuManager);
+
+        //Load game state
+        if (InGame) OnLoad(save);
     }
 
     //Cursor
