@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable {
@@ -15,10 +16,12 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Health
     private event Action<float> OnHealthChanged;
+    private Coroutine damageFeedbackCoroutine = null;
+
+    public bool IgnoreNextDamage { get; protected set; } = false;
+    public bool IsInvulnerable { get; protected set; } = false;
 
     public bool IsAlive { get; protected set; } = true;
-    public bool IgnoreNextDamage = false;
-    public bool IsInvulnerable { get; protected set; } = false;
     public float Health { get; protected set; } = HEALTH_MAX;
     public virtual float HealthMax => HEALTH_MAX;
 
@@ -63,13 +66,21 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     //Health
-    public void AddOnHealthChanged(Action<float> action) {
-        OnHealthChanged += action;
+    private IEnumerator DamageFeedbackCoroutine() {
+        OnDamageFeedbackStart();
+        yield return new WaitForSeconds(0.05f);
+        OnDamageFeedbackEnd();
     }
 
-    public void RemoveOnHealthChanged(Action<float> action) {
-        OnHealthChanged -= action;
+    protected virtual void OnDamageFeedbackStart() {
+        Game.SlowTime(this);
     }
+
+    protected virtual void OnDamageFeedbackEnd() {
+        Game.UnslowTime(this);
+    }
+
+    protected virtual void OnDeath(bool instant = false) {}
 
     public virtual bool Heal(float amount) {
         //Ignore negative healing
@@ -89,9 +100,8 @@ public class Character : MonoBehaviour, IDamageable {
         //Character is already dead or invulnerable-> Ignore damage
         if (!IsAlive || IsInvulnerable) return false;
 
-        // Ignore this tick of damage
-        if (IgnoreNextDamage)
-        {
+        //Ignore this tick of damage
+        if (IgnoreNextDamage) {
             IgnoreNextDamage = false;
             return false;
         }
@@ -101,6 +111,10 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Damage character
         Health = Mathf.Max(Health - amount, 0);
+
+        //Start damage feedback coroutine
+        if (damageFeedbackCoroutine != null) StopCoroutine(damageFeedbackCoroutine);
+        damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine()); //Start coroutine in game cause it will never get destroyed
 
         //Check if character died
         if (Health <= 0) {
@@ -116,6 +130,12 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    protected virtual void OnDeath(bool instant = false) {}
+    public void AddOnHealthChanged(Action<float> action) {
+        OnHealthChanged += action;
+    }
+
+    public void RemoveOnHealthChanged(Action<float> action) {
+        OnHealthChanged -= action;
+    }
 
 }

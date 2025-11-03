@@ -29,12 +29,17 @@ public class Game : MonoBehaviour, ISavable {
 
     public MenuManager MenuManager => _menuManager;
 
-    //Pause & Cursor
-    private static readonly List<object> pause = new();
-    private static readonly List<object> cursor = new();
+    //Cursor
+    private static readonly List<object> cursorLock = new();
+
+    public static bool HasCursor { get; private set; } = true;
+
+    //Time (pause & slow)
+    private static readonly List<object> pauseLock = new();
+    private static readonly List<object> timeSlowLock = new();
 
     public static bool IsPaused { get; private set; } = false;
-    public static bool HasCursor { get; private set; } = true;
+    public static bool IsTimeSlowed { get; private set; } = false;
 
     //Info
     private static event Action<bool> OnLoadingChanged;
@@ -70,9 +75,9 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     private void OnNewGame(Game newGame) {
-        //Unpause game & show cursor
-        Unpause();
-        UnhideCursor();
+        //Reset cursor & time
+        ResetHasCursor();
+        ResetTime();
 
         //Check for a level
         InGame = Level;
@@ -84,46 +89,59 @@ public class Game : MonoBehaviour, ISavable {
         MenuManager.Init(newGame.MenuManager);
     }
 
-    //Pause & Cursor
-    private static void UpdateIsPaused() {
-        IsPaused = pause.Count > 0;
-        Time.timeScale = IsPaused ? 0 : 1;
-    }
-
-    private static void UpdateCursorVisibility() {
-        HasCursor = cursor.Count == 0;
+    //Cursor
+    private static void UpdateHasCursor() {
+        HasCursor = cursorLock.Count == 0;
         Cursor.visible = HasCursor;
         Cursor.lockState = HasCursor ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    private static void Unpause() {
-        pause.Clear();
-        UpdateIsPaused();
-    }
-
-    private static void UnhideCursor() {
-        cursor.Clear();
-        UpdateCursorVisibility();
-    }
-
-    public static void Pause(object obj) {
-        if (!pause.Contains(obj)) pause.Add(obj);
-        UpdateIsPaused();
-    }
-
-    public static void Unpause(object obj) {
-        pause.Remove(obj);
-        UpdateIsPaused();
+    private static void ResetHasCursor() {
+        cursorLock.Clear();
+        UpdateHasCursor();
     }
 
     public static void HideCursor(object obj) {
-        if (!cursor.Contains(obj)) cursor.Add(obj);
-        UpdateCursorVisibility();
+        if (!cursorLock.Contains(obj)) cursorLock.Add(obj);
+        UpdateHasCursor();
     }
 
     public static void UnhideCursor(object obj) {
-        cursor.Remove(obj);
-        UpdateCursorVisibility();
+        cursorLock.Remove(obj);
+        UpdateHasCursor();
+    }
+
+    //Time (pause & slow)
+    private static void UpdateTime() {
+        IsPaused = pauseLock.Count > 0;
+        IsTimeSlowed = timeSlowLock.Count > 0;
+        Time.timeScale = IsPaused ? 0 : IsTimeSlowed ? 0.5f : 1;
+    }
+
+    private static void ResetTime() {
+        pauseLock.Clear();
+        timeSlowLock.Clear();
+        UpdateTime();
+    }
+
+    public static void Pause(object obj) {
+        if (!pauseLock.Contains(obj)) pauseLock.Add(obj);
+        UpdateTime();
+    }
+
+    public static void Unpause(object obj) {
+        pauseLock.Remove(obj);
+        UpdateTime();
+    }
+
+    public static void SlowTime(object obj) {
+        if (!timeSlowLock.Contains(obj)) timeSlowLock.Add(obj);
+        UpdateTime();
+    }
+
+    public static void UnslowTime(object obj) {
+        timeSlowLock.Remove(obj);
+        UpdateTime();
     }
 
     //Scenes
