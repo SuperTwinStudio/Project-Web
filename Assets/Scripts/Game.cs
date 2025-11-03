@@ -9,6 +9,9 @@ public class Game : MonoBehaviour, ISavable {
     public static Game Current { get; private set; }
 
     //Components
+    [Header("Components")]
+    [SerializeField] private MenuManager _menuManager;
+
     private Level _level;
 
     public Level Level {
@@ -22,7 +25,7 @@ public class Game : MonoBehaviour, ISavable {
         private set => _level = value;
     }
 
-    public MenuManager MenuManager { get; private set; }
+    public MenuManager MenuManager => _menuManager;
 
     //Info
     public static bool InGame { get; private set; }
@@ -65,22 +68,12 @@ public class Game : MonoBehaviour, ISavable {
 
         //Check for a level
         InGame = Level;
-        if (InGame) {
-            //Update menu manager
-            MenuManager = Level.MenuManager;
 
-            //Init menus with new game menus
-            MenuManager.Init(MenuManager);
+        //Load game state
+        if (InGame) OnLoad(save);
 
-            //Load game state
-            OnLoad(save);
-        } else {
-            //Update menu manager
-            MenuManager = FindFirstObjectByType<MenuManager>();
-
-            //Init menus with new game menus
-            MenuManager.Init(MenuManager);
-        }
+        //Init menus with new game menus
+        MenuManager.Init(newGame.MenuManager);
     }
 
     //Pause & Cursor

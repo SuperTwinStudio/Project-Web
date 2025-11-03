@@ -48,6 +48,7 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<PassiveItem, int> _passiveItems = new();
     public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
 
+
     //State
     private void Awake() {
         //Unlock first weapon
@@ -103,10 +104,8 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public bool UsePrimary() {
-        if(CurrentWeapon && CurrentWeapon.UsePrimary())
-        {
-            foreach (var item in _passiveItems)
-            {
+        if (CurrentWeapon && CurrentWeapon.UsePrimary()) {
+            foreach (var item in _passiveItems) {
                 item.Key.OnPrimaryHook(_player, item.Value);
             }
 
@@ -117,10 +116,8 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public bool UseSecondary() {
-        if (CurrentWeapon && CurrentWeapon.UseSecondary())
-        {
-            foreach (var item in _passiveItems)
-            {
+        if (CurrentWeapon && CurrentWeapon.UseSecondary()) {
+            foreach (var item in _passiveItems) {
                 item.Key.OnSecondaryHook(_player, item.Value);
             }
 
@@ -130,13 +127,10 @@ public class Loadout : MonoBehaviour, ISavable {
         return false;
     }
 
-    public void OnDamageableHit(GameObject damagedObject)
-    {
+    public void OnDamageableHit(GameObject damagedObject) {
         Character character = damagedObject.GetComponent<Character>();
-        if (character != null)
-        {
-            foreach (var item in _passiveItems)
-            {
+        if (character) {
+            foreach (var item in _passiveItems) {
                 item.Key.OnEnemyHurtHook(_player, item.Value, character);
             }
         }
@@ -211,8 +205,7 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Passive items
-    public void AddToPassiveItems(PassiveItem item)
-    {
+    public void AddToPassiveItems(PassiveItem item) {
         //Invalid item
         if (!item) return;
 
@@ -225,17 +218,13 @@ public class Loadout : MonoBehaviour, ISavable {
         item.OnPickup(Player, _passiveItems[item]);
     }
 
-    public void RemovePassiveItem(PassiveItem item)
-    {
+    public void RemovePassiveItem(PassiveItem item) {
         //Invalid item or we don't have it yet
         if (!item || !PassiveItems.ContainsKey(item)) return;
 
         _passiveItems[item] -= 1;
 
-        if (_passiveItems[item] == 0)
-        {
-            _passiveItems.Remove(item);
-        }
+        if (_passiveItems[item] == 0) _passiveItems.Remove(item);
     }
 
     //Saving
@@ -283,7 +272,7 @@ public class Loadout : MonoBehaviour, ISavable {
             int addedValue = SellInventory();
 
             //Show items sold animation
-            if (Level.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowItemsSold(addedValue);
+            if (Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowItemsSold(addedValue);
         }
 
         //Load weapon

@@ -22,8 +22,8 @@ public class Menu : MonoBehaviour {
         private set => _canvas = value;
     }
 
-    public Level Level => MenuManager.Level;
-    public Player Player => MenuManager.Level.Player;
+    public Level Level => Game.Current.Level;
+    public Player Player => Level.Player;
 
     //State
     [HideInInspector, SerializeField] private MenuState _state = MenuState.Closed;

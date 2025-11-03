@@ -11,22 +11,16 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-public enum MenuTransition { None, Fade }
+public enum MenuTransition { None, Fade, Circle }
 
 public class MenuManager : MonoBehaviour {
 
     //Events
     public delegate void MenuEvent(string oldMenu, string newMenu);
-    
+
     private event MenuEvent OnMenuChanged;
     private event MenuEvent OnTransitionStart;
     private event MenuEvent OnTransitionEnd;
-
-    //Level
-    [Header("Level")]
-    [SerializeField] private Level _level;
-
-    public Level Level => _level;
 
     //Input
     [Header("Input")]
@@ -46,7 +40,7 @@ public class MenuManager : MonoBehaviour {
     //Menus
     [Header("Menus")]
     [SerializeField] private Transform menusParent;
-    
+
     [HideInInspector, SerializeField] private List<Menu> menus = new();
     [HideInInspector, SerializeField] private SerializableDictionary<string, Menu> createdMenus = new();
 
@@ -87,8 +81,40 @@ public class MenuManager : MonoBehaviour {
     }
 
     //Open
-    public void Open(string name, object args = null) {
-        Open(name, MenuTransition.None, args);
+    private void OnOpen(string newMenu, object args) {
+        //Events
+        string oldMenu = CurrentMenuName;
+
+        //Get current menu
+        CurrentMenu?.Cover();
+
+        //Add new menu
+        Menu menu = GetMenu(newMenu);
+        menus.Add(menu);
+        menu.Open(this, CurrentMenuIndex, args);
+
+        //Events
+        OnMenuChanged?.Invoke(oldMenu, newMenu);
+    }
+
+    private IEnumerator OpenCoroutine(string newMenu, MenuTransition transition, object args) {
+        //Events
+        string oldMenu = CurrentMenuName;
+        OnTransitionStart?.Invoke(oldMenu, newMenu);
+
+        //Get transition keys
+        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+
+        //Transition
+        menuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        OnOpen(newMenu, args);
+        menuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        InTransition = false;
+
+        //Events
+        OnTransitionEnd?.Invoke(oldMenu, newMenu);
     }
 
     public void Open(string name, MenuTransition transition, object args = null) {
@@ -113,42 +139,8 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator OpenCoroutine(string newMenu, MenuTransition transition, object args) {
-        //Events
-        string oldMenu = CurrentMenuName;
-        OnTransitionStart?.Invoke(oldMenu, newMenu);
-
-        //Transition
-        switch (transition) {
-            //Fade
-            case MenuTransition.Fade:
-                menuTransitions.SetTrigger("FadeOut");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                OnOpen(newMenu, args);
-                menuTransitions.SetTrigger("FadeIn");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                break;
-        }
-        InTransition = false;
-
-        //Events
-        OnTransitionEnd?.Invoke(oldMenu, newMenu);
-    }
-
-    private void OnOpen(string newMenu, object args) {
-        //Events
-        string oldMenu = CurrentMenuName;
-
-        //Get current menu
-        CurrentMenu?.Cover();
-
-        //Add new menu
-        Menu menu = GetMenu(newMenu);
-        menus.Add(menu);
-        menu.Open(this, CurrentMenuIndex, args);
-
-        //Events
-        OnMenuChanged?.Invoke(oldMenu, newMenu);
+    public void Open(string name, object args = null) {
+        Open(name, MenuTransition.None, args);
     }
 
     public bool IsOpen(string name) {
@@ -159,33 +151,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     //Close
-    public void CloseLast(MenuTransition transition = MenuTransition.None) {
-        CloseLast(false, transition);
-    }
-
-    private void CloseLast(bool force, MenuTransition transition = MenuTransition.None) {
-        //In transition -> Can't change menus
-        if (!force && InTransition) return;
-
-        //No menus -> Nothing to close
-        if (!HasMenu) return;
-
-        //Close last
-        switch (transition) {
-            //No transition
-            case MenuTransition.None:
-                OnCloseLast(transition);
-                break;
-
-            //Transition
-            default:
-                InTransition = true;
-                StartCoroutine(CloseLastCoroutine(transition));
-                break;
-        }
-    }
-
-    private void OnCloseLast(MenuTransition transition = MenuTransition.None) {
+    private void OnCloseLast() {
         //Events
         string oldMenu = CurrentMenuName;
 
@@ -211,21 +177,45 @@ public class MenuManager : MonoBehaviour {
         string newMenu = menus.Count >= 2 ? menus[CurrentMenuIndex - 1].Name : "";
         OnTransitionStart?.Invoke(oldMenu, newMenu);
 
+        //Get transition keys
+        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+
         //Transition
-        switch (transition) {
-            //Fade
-            case MenuTransition.Fade:
-                menuTransitions.SetTrigger("FadeOut");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                OnCloseLast(transition);
-                menuTransitions.SetTrigger("FadeIn");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                break;
-        }
+        menuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        OnCloseLast();
+        menuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
         InTransition = false;
 
         //Events
         OnTransitionEnd?.Invoke(oldMenu, newMenu);
+    }
+
+    private void CloseLast(bool force, MenuTransition transition = MenuTransition.None) {
+        //In transition -> Can't change menus
+        if (!force && InTransition) return;
+
+        //No menus -> Nothing to close
+        if (!HasMenu) return;
+
+        //Close last
+        switch (transition) {
+            //No transition
+            case MenuTransition.None:
+                OnCloseLast();
+                break;
+
+            //Transition
+            default:
+                InTransition = true;
+                StartCoroutine(CloseLastCoroutine(transition));
+                break;
+        }
+    }
+
+    public void CloseLast(MenuTransition transition = MenuTransition.None) {
+        CloseLast(false, transition);
     }
 
     public void CloseAll() {
@@ -241,8 +231,44 @@ public class MenuManager : MonoBehaviour {
     }
 
     //Swap (close current & open new)
-    public void Swap(string name, object args = null) {
-        Swap(name, MenuTransition.None, args);
+    private void OnSwap(string newMenu, object args) {
+        //Events
+        string oldMenu = CurrentMenuName;
+
+        //Close last menu
+        if (HasMenu) {
+            int menuIndex = CurrentMenuIndex;
+            menus[menuIndex].Close();
+            menus.RemoveAt(menuIndex);
+        }
+
+        //Open new menu
+        Menu menu = GetMenu(newMenu);
+        menus.Add(menu);
+        menu.Open(this, CurrentMenuIndex, args);
+
+        //Events
+        OnMenuChanged?.Invoke(oldMenu, newMenu);
+    }
+
+    private IEnumerator SwapCoroutine(string newMenu, MenuTransition transition, object args) {
+        //Events
+        string oldMenu = CurrentMenuName;
+        OnTransitionStart?.Invoke(oldMenu, newMenu);
+
+        //Get transition info
+        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+
+        //Transition
+        menuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        OnSwap(newMenu, args);
+        menuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        InTransition = false;
+
+        //Events
+        OnTransitionEnd?.Invoke(oldMenu, newMenu);
     }
 
     public void Swap(string name, MenuTransition transition, object args = null) {
@@ -267,49 +293,11 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator SwapCoroutine(string newMenu, MenuTransition transition, object args) {
-        //Events
-        string oldMenu = CurrentMenuName;
-        OnTransitionStart?.Invoke(oldMenu, newMenu);
-
-        //Transition
-        switch (transition) {
-            //Fade
-            case MenuTransition.Fade:
-                menuTransitions.SetTrigger("FadeOut");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                OnSwap(newMenu, args);
-                menuTransitions.SetTrigger("FadeIn");
-                yield return new WaitForSeconds(TRANSITION_DURATION);
-                break;
-        }
-        InTransition = false;
-
-        //Events
-        OnTransitionEnd?.Invoke(oldMenu, newMenu);
+    public void Swap(string name, object args = null) {
+        Swap(name, MenuTransition.None, args);
     }
 
-    private void OnSwap(string newMenu, object args) {
-        //Events
-        string oldMenu = CurrentMenuName;
-
-        //Close last menu
-        if (HasMenu) {
-            int menuIndex = CurrentMenuIndex;
-            menus[menuIndex].Close();
-            menus.RemoveAt(menuIndex);
-        }
-
-        //Open new menu
-        Menu menu = GetMenu(newMenu);
-        menus.Add(menu);
-        menu.Open(this, CurrentMenuIndex, args);
-
-        //Events
-        OnMenuChanged?.Invoke(oldMenu, newMenu);
-    }
-
-    //Menu GameObjects
+    //Menu components
     public Menu GetMenu(string name) {
         //Check if object exists
         if (!createdMenus.ContainsKey(name) || !createdMenus[name]) {
@@ -342,6 +330,18 @@ public class MenuManager : MonoBehaviour {
     public bool TryGetMenu<T>(out T menu) where T : Menu {
         menu = GetMenu<T>();
         return menu != null;
+    }
+
+    //Transitions
+    private (string triggerIn, string triggerOut) GetTransitionInfo(MenuTransition transition) {
+        return transition switch {
+            //Fade
+            MenuTransition.Fade => ("FadeIn", "FadeOut"),
+            //Circle
+            MenuTransition.Circle => ("CircleIn", "CircleOut"),
+            //Other
+            _ => ("", ""),
+        };
     }
 
     //Events
@@ -469,5 +469,5 @@ public class MenuManager : MonoBehaviour {
         }
     }
     #endif
-    
+
 }

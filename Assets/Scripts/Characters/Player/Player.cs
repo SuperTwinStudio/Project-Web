@@ -5,14 +5,12 @@ using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum PlayerUpgrade
-{
+public enum PlayerUpgrade {
     Gramaje,    //Extra max health
     Rugosidad   //Resists a % of damage
 }
 
-public class Player : Character, ISavable
-{
+public class Player : Character, ISavable {
 
     //Character
     public override float HealthMax => HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
@@ -22,8 +20,8 @@ public class Player : Character, ISavable
     [SerializeField] private Level _level;
 
     public Level Level => _level;
-    public MenuManager MenuManager => Level.MenuManager;
     public CameraController CameraController => Level.CameraController;
+    public MenuManager MenuManager => Game.Current.MenuManager;
 
     //Input
     [Header("Input")]
@@ -75,8 +73,7 @@ public class Player : Character, ISavable
 
 
     //State
-    private void Start()
-    {
+    private void Start() {
         //Get transforms
         cameraTransform = CameraController.Camera.transform;
         playerTransform = transform;
@@ -91,8 +88,7 @@ public class Player : Character, ISavable
         MenuManager.AddOnTransitionStart(OnMenuTransitionStart);
     }
 
-    private void Update()
-    {
+    private void Update() {
         //Game is paused | player is dead | player is not controlled | a menu is transitioning
         if (Game.IsPaused || !IsAlive || !isControlled || MenuManager.InTransition) return;
 
@@ -103,28 +99,26 @@ public class Player : Character, ISavable
         if (testAction.Triggered()) Damage(10, this);
 
         //Check if switched to gamepad
-        if (moveAction.action.activeControl != null)
-        {
+        if (moveAction.action.activeControl != null) {
             isLastInputGamepad = moveAction.action.activeControl?.device is Gamepad;
         }
 
 
-        /*$      /$$                              
-       | $$$    /$$$                              
-       | $$$$  /$$$$  /$$$$$$  /$$    /$$ /$$$$$$ 
-       | $$ $$/$$ $$ /$$__  $$|  $$  /$$//$$__  $$
-       | $$  $$$| $$| $$  \ $$ \  $$/$$/| $$$$$$$$
-       | $$\  $ | $$| $$  | $$  \  $$$/ | $$_____/
-       | $$ \/  | $$|  $$$$$$/   \  $/  |  $$$$$$$
-       |__/     |__/ \______/     \_/    \______*/
+         /*$      /$$                              
+        | $$$    /$$$                              
+        | $$$$  /$$$$  /$$$$$$  /$$    /$$ /$$$$$$ 
+        | $$ $$/$$ $$ /$$__  $$|  $$  /$$//$$__  $$
+        | $$  $$$| $$| $$  \ $$ \  $$/$$/| $$$$$$$$
+        | $$\  $ | $$| $$  | $$  \  $$$/ | $$_____/
+        | $$ \/  | $$|  $$$$$$/   \  $/  |  $$$$$$$
+        |__/     |__/ \______/     \_/    \______*/
 
         //Get move input
         moveInput = moveAction.ReadValue<Vector2>();
         isMoving = moveInput.sqrMagnitude > 0;
 
         //Moving
-        if (isMoving)
-        {
+        if (isMoving) {
             //Calculate move direction
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
 
@@ -133,14 +127,14 @@ public class Player : Character, ISavable
         }
 
 
-        /*$                           /$$      
-       | $$                          | $$      
-       | $$        /$$$$$$   /$$$$$$ | $$   /$$
-       | $$       /$$__  $$ /$$__  $$| $$  /$$/
-       | $$      | $$  \ $$| $$  \ $$| $$$$$$/ 
-       | $$      | $$  | $$| $$  | $$| $$_  $$ 
-       | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$
-       |________/ \______/  \______/ |__/  \_*/
+         /*$                           /$$      
+        | $$                          | $$      
+        | $$        /$$$$$$   /$$$$$$ | $$   /$$
+        | $$       /$$__  $$ /$$__  $$| $$  /$$/
+        | $$      | $$  \ $$| $$  \ $$| $$$$$$/ 
+        | $$      | $$  | $$| $$  | $$| $$_  $$ 
+        | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$
+        |________/ \______/  \______/ |__/  \_*/
 
 
         if (isLastInputGamepad) // Using gamepad
@@ -177,14 +171,14 @@ public class Player : Character, ISavable
         }
 
 
-        /*$$$$$              /$$     /$$
-       /$$__  $$            | $$    |__/
-      | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
-      | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
-      | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
-      | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
-      | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
-      |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
+          /*$$$$$              /$$     /$$
+         /$$__  $$            | $$    |__/
+        | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
+        | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
+        | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
+        | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
+        | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
+        |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
         //Check for action inputs
         if (primaryAction.Triggered()) primaryCoyote.Count(INPUT_COYOTE_DURATION);
@@ -195,28 +189,26 @@ public class Player : Character, ISavable
         if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
 
 
-        /*$$$$$            /$$                           /$$              
-       /$$__  $$          |__/                          | $$              
-      | $$  \ $$ /$$$$$$$  /$$ /$$$$$$/$$$$   /$$$$$$  /$$$$$$    /$$$$$$ 
-      | $$$$$$$$| $$__  $$| $$| $$_  $$_  $$ |____  $$|_  $$_/   /$$__  $$
-      | $$__  $$| $$  \ $$| $$| $$ \ $$ \ $$  /$$$$$$$  | $$    | $$$$$$$$
-      | $$  | $$| $$  | $$| $$| $$ | $$ | $$ /$$__  $$  | $$ /$$| $$_____/
-      | $$  | $$| $$  | $$| $$| $$ | $$ | $$|  $$$$$$$  |  $$$$/|  $$$$$$$
-      |__/  |__/|__/  |__/|__/|__/ |__/ |__/ \_______/   \___/   \______*/
+          /*$$$$$            /$$                           /$$              
+         /$$__  $$          |__/                          | $$              
+        | $$  \ $$ /$$$$$$$  /$$ /$$$$$$/$$$$   /$$$$$$  /$$$$$$    /$$$$$$ 
+        | $$$$$$$$| $$__  $$| $$| $$_  $$_  $$ |____  $$|_  $$_/   /$$__  $$
+        | $$__  $$| $$  \ $$| $$| $$ \ $$ \ $$  /$$$$$$$  | $$    | $$$$$$$$
+        | $$  | $$| $$  | $$| $$| $$ | $$ | $$ /$$__  $$  | $$ /$$| $$_____/
+        | $$  | $$| $$  | $$| $$| $$ | $$ | $$|  $$$$$$$  |  $$$$/|  $$$$$$$
+        |__/  |__/|__/  |__/|__/|__/ |__/ |__/ \_______/   \___/   \______*/
 
         //Animate
         Animator.SetBool("IsMoving", isMoving);
     }
 
-    private void StopMovement()
-    {
+    private void StopMovement() {
         isMoving = false;
         Animator.SetBool("IsMoving", isMoving);
     }
 
     //Effects
-    private void UpdateEffects()
-    {
+    private void UpdateEffects() {
         //Get current time
         float nowTimestamp = Time.time;
 
@@ -224,14 +216,12 @@ public class Player : Character, ISavable
         slowSpeedMultiplier = 1;
 
         //Apply effects
-        foreach (var effect in effects.Keys.ToList())
-        {
+        foreach (var effect in effects.Keys.ToList()) {
             //Get end timestamp
             float endTimestamp = effects[effect];
 
             //Apply effect
-            switch (effect.Action.Type)
-            {
+            switch (effect.Action.Type) {
                 //Damage
                 case EffectType.Damage:
                     Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
@@ -251,43 +241,35 @@ public class Player : Character, ISavable
         }
     }
 
-    public void AddEffect(Effect effect, float duration)
-    {
+    public void AddEffect(Effect effect, float duration) {
         //Calculate effect end timestamp
         float effectEndTimestamp = Time.time + duration;
 
         //Check if player already has effect
-        if (effects.ContainsKey(effect))
-        {
+        if (effects.ContainsKey(effect)) {
             //Already has effect -> Check to update duration
             effects[effect] = Mathf.Max(effects[effect], effectEndTimestamp);
-        }
-        else
-        {
+        } else {
             //Does not have effect -> Add it
             effects[effect] = effectEndTimestamp;
         }
     }
 
     //Upgrades
-    public Upgrade GetUpgrade(PlayerUpgrade type)
-    {
-        return type switch
-        {
+    public Upgrade GetUpgrade(PlayerUpgrade type) {
+        return type switch {
             PlayerUpgrade.Gramaje => GramajeUpgrade,
             _ => RugosidadUpgrade
         };
     }
 
-    public bool TryUpgrade(PlayerUpgrade type)
-    {
+    public bool TryUpgrade(PlayerUpgrade type) {
         //Try to upgrade
         bool upgraded = GetUpgrade(type).TryUpgrade(Loadout);
         if (!upgraded) return false;
 
         //Check for upgrade changes
-        switch (type)
-        {
+        switch (type) {
             //Reset player health
             case PlayerUpgrade.Gramaje:
                 Heal(HealthMax);
@@ -299,18 +281,15 @@ public class Player : Character, ISavable
     }
 
     //Health
-    protected override void OnDeath(bool instant = false)
-    {
+    protected override void OnDeath(bool instant = false) {
         MenuManager.Open(MenusList.Death);
     }
 
-    public override bool Damage(float amount, object source)
-    {
+    public override bool Damage(float amount, object source) {
         //Calculate resistance
         float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
 
-        foreach (var item in Loadout.PassiveItems)
-        {
+        foreach (var item in Loadout.PassiveItems) {
             item.Key.OnHurtHook(this, item.Value, (source is Character character) ? character : null);
         }
 
@@ -318,10 +297,8 @@ public class Player : Character, ISavable
         bool success = base.Damage(amount - resistance, source);
 
         //Died -> Open death menu
-        if (success && !IsAlive) 
-        {
-            foreach (var item in Loadout.PassiveItems)
-            {
+        if (success && !IsAlive) {
+            foreach (var item in Loadout.PassiveItems) {
                 item.Key.OnDeathHook(this, item.Value);
             }
 
@@ -334,11 +311,9 @@ public class Player : Character, ISavable
     }
 
     //Events (other)
-    private void OnMenuChanged(string oldMenu, string newMenu)
-    {
+    private void OnMenuChanged(string oldMenu, string newMenu) {
         //Change POV depending on menu
-        switch (newMenu)
-        {
+        switch (newMenu) {
             //Escapist
             case MenusList.Game:
                 //Control player
@@ -356,17 +331,14 @@ public class Player : Character, ISavable
         }
     }
 
-    private void OnMenuTransitionStart(string oldMenu, string newMenu)
-    {
+    private void OnMenuTransitionStart(string oldMenu, string newMenu) {
         //Menu transition started -> Stop player
         StopMovement();
     }
 
     //Saving
-    public string OnSave()
-    {
-        return JsonUtility.ToJson(new PlayerSave()
-        {
+    public string OnSave() {
+        return JsonUtility.ToJson(new PlayerSave() {
             //Health
             health = Health,
             //Upgrades
@@ -377,8 +349,7 @@ public class Player : Character, ISavable
         });
     }
 
-    public void OnLoad(string saveJson)
-    {
+    public void OnLoad(string saveJson) {
         //Parse save
         var save = JsonUtility.FromJson<PlayerSave>(saveJson);
 
@@ -397,8 +368,7 @@ public class Player : Character, ISavable
     }
 
     [Serializable]
-    private class PlayerSave
-    {
+    private class PlayerSave {
 
         //Health
         public float health = HEALTH_MAX;
