@@ -24,8 +24,6 @@ public class Character : MonoBehaviour, IDamageable {
     public bool IsInvulnerable { get; protected set; } = false;
 
     public bool IsAlive { get; set; } = true;
-    public bool IgnoreNextDamage = false;
-    public bool IsInvulnerable { get; protected set; } = false;
     public float Health { get; protected set; } = HEALTH_MAX;
     public virtual float HealthMax => HEALTH_MAX;
 
