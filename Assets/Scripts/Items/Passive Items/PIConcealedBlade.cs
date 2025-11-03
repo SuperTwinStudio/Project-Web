@@ -7,10 +7,7 @@ public class PIConcealedBlade : PassiveItem
 
     public override void OnPrimaryHook(Player player, int itemCount)
     {
-        int rand = Random.Range(0, 100);
-        int chance = 10 + (5 * (itemCount - 1));
-
-        if (rand < chance)
+        if (GetScaledChance(itemCount, 10, 5))
         {
             GameObject leftBlade = Instantiate(m_Blade);
             leftBlade.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles - (Vector3.up * -m_BladeAngle));

@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: effect_slow
     m_Metadata:
       m_Items: []
+  - m_Id: 12388082734039040
+    m_Key: effect_stun
+    m_Metadata:
+      m_Items: []
   - m_Id: 5451330203123712
     m_Key: passive_conblade
     m_Metadata:

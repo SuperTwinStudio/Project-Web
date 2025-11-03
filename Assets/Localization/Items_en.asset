@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: Broken fountain pen
     m_Metadata:
       m_Items: []
+  - m_Id: 12388082734039040
+    m_Localized: Stunned
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

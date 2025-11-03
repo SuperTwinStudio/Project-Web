@@ -20,8 +20,8 @@ public class Character : MonoBehaviour, IDamageable {
     private event Action<float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
-    public bool IgnoreNextDamage { get; protected set; } = false;
-    public bool IsInvulnerable { get; protected set; } = false;
+    public bool IgnoreNextDamage = false;
+    public bool IsInvulnerable = false;
 
     public bool IsAlive { get; set; } = true;
     public float Health { get; protected set; } = HEALTH_MAX;
