@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,14 +29,20 @@ public class Game : MonoBehaviour, ISavable {
 
     public MenuManager MenuManager => _menuManager;
 
-    //Info
-    public static bool InGame { get; private set; }
-
     //Pause & Cursor
     private static readonly List<object> pause = new();
     private static readonly List<object> cursor = new();
 
     public static bool IsPaused { get; private set; } = false;
+    public static bool HasCursor { get; private set; } = true;
+
+    //Info
+    private static event Action<bool> OnLoadingChanged;
+
+    public static bool InGame { get; private set; } = true;
+    public static bool IsLoading { get; private set; } = false;
+
+    public static bool IsPlaying => !IsPaused && !IsLoading;
 
     //Saving
     private string save = "{}";
@@ -83,9 +91,9 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     private static void UpdateCursorVisibility() {
-        bool hide = cursor.Count > 0;
-        Cursor.visible = !hide;
-        Cursor.lockState = hide ? CursorLockMode.Locked : CursorLockMode.None;
+        HasCursor = cursor.Count == 0;
+        Cursor.visible = HasCursor;
+        Cursor.lockState = HasCursor ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     private static void Unpause() {
@@ -119,12 +127,46 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     //Scenes
+    private IEnumerator LoadSceneCoroutine(string name) {
+        //Get transition info
+        (string triggerIn, string triggerOut, float duration) = MenuManager.GetTransitionInfo(MenuTransition.Circle);
+
+        //Animate out
+        MenuManager.MenuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(duration);
+
+        //Load scene
+        SceneManager.LoadScene(name);
+        yield return new WaitForNextFrameUnit();
+
+        //Animate in
+        MenuManager.MenuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(duration);
+
+        //Finish loading
+        IsLoading = false;
+        OnLoadingChanged?.Invoke(IsLoading);
+    }
+
     public void LoadScene(string name) {
+        //Already loading
+        if (IsLoading) return;
+
         //Save game so new scene keeps info
         if (InGame) save = OnSave();
 
         //Load scene
-        SceneManager.LoadScene(name);
+        IsLoading = true;
+        OnLoadingChanged?.Invoke(IsLoading);
+        StartCoroutine(LoadSceneCoroutine(name));
+    }
+
+    public static void AddOnLoadingChanged(Action<bool> action) {
+        OnLoadingChanged += action;
+    }
+
+    public static void RemoveOnLoadingChanged(Action<bool> action) {
+        OnLoadingChanged -= action;
     }
 
     //Saving

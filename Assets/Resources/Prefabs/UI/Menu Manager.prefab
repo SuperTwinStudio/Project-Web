@@ -298,7 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backAction: {fileID: 7727032971491509709, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _mainCanvas: {fileID: 2688550502737858014}
-  menuTransitions: {fileID: 816144696993337994}
+  _menuTransitions: {fileID: 816144696993337994}
   menusParent: {fileID: 4192439078169323929}
   menus: []
   createdMenus:
@@ -393,3 +393,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: b49107a8c67277649a28a7fcc70e04cd, type: 2}
+  percent: 0

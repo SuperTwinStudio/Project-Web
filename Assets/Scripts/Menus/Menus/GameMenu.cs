@@ -11,6 +11,7 @@ public class GameMenu : Menu {
 
     //Input
     [Header("Input")]
+    [SerializeField] private InputActionReference pauseAction;
     [SerializeField] private InputActionReference inventoryAction;
 
     //Money
@@ -66,8 +67,10 @@ public class GameMenu : Menu {
     }
 
     public override void OnUpdate() {
+        //Open pause
+        if (pauseAction.Triggered()) MenuManager.Open(MenusList.Settings);
         //Open inventory
-        if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
+        else if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
     }
 
     public override bool OnBack() {

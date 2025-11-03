@@ -55,9 +55,13 @@ public class Player : Character, ISavable {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
 
+    private bool isMoving;
     private Transform playerTransform;
 
-    private bool isControlled, isMoving;
+    //Controls
+    private readonly HashSet<object> controlBlockers = new();
+
+    public bool IsControlled => controlBlockers.Count == 0;
 
     //Upgrades
     [Header("Upgrades")]
@@ -83,14 +87,22 @@ public class Player : Character, ISavable {
         RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
 
         //Events
+        Game.AddOnLoadingChanged(OnGameLoadingChanged);
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
         MenuManager.AddOnMenuChanged(OnMenuChanged);
         MenuManager.AddOnTransitionStart(OnMenuTransitionStart);
     }
 
+    private void OnDestroy() {
+        //Events
+        Game.RemoveOnLoadingChanged(OnGameLoadingChanged);
+        MenuManager.RemoveOnMenuChanged(OnMenuChanged);
+        MenuManager.RemoveOnTransitionStart(OnMenuTransitionStart);
+    }
+
     private void Update() {
         //Game is paused | player is dead | player is not controlled | a menu is transitioning
-        if (Game.IsPaused || !IsAlive || !isControlled || MenuManager.InTransition) return;
+        if (Game.IsPaused || !IsAlive || !IsControlled || MenuManager.InTransition) return;
 
         //Update effects
         UpdateEffects();
@@ -202,9 +214,20 @@ public class Player : Character, ISavable {
         Animator.SetBool("IsMoving", isMoving);
     }
 
+    //Movement
     private void StopMovement() {
         isMoving = false;
         Animator.SetBool("IsMoving", isMoving);
+    }
+
+    //Controls
+    public void BlockControls(object obj) {
+        controlBlockers.Add(obj);
+        StopMovement();
+    }
+
+    public void UnblockControls(object obj) {
+        controlBlockers.Remove(obj);
     }
 
     //Effects
@@ -311,19 +334,26 @@ public class Player : Character, ISavable {
     }
 
     //Events (other)
+    private void OnGameLoadingChanged(bool IsLoading) {
+        if (IsLoading)
+            BlockControls("LOADING");
+        else
+            UnblockControls("LOADING");
+    }
+
     private void OnMenuChanged(string oldMenu, string newMenu) {
         //Change POV depending on menu
         switch (newMenu) {
             //Escapist
             case MenusList.Game:
                 //Control player
-                isControlled = true;
+                UnblockControls("MENU_TRANSITION");
                 break;
 
             //Other
             default:
                 //Don't control player
-                isControlled = false;
+                BlockControls("MENU_TRANSITION");
 
                 //Stop animations
                 StopMovement();

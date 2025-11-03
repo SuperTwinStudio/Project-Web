@@ -25,9 +25,9 @@ public class EnemyBase : Character {
     }
 
     protected virtual void Update() {
-        //Game is paused
-        if (Game.IsPaused) return;
-        
+        //Game is not playing
+        if (!Game.IsPlaying) return;
+
         //Check if player is visible
         CheckPlayerVisible();
     }

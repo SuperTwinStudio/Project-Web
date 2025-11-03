@@ -29,13 +29,15 @@ public class MenuManager : MonoBehaviour {
     //Master
     [Header("UI")]
     [SerializeField] private Canvas _mainCanvas;
-    [SerializeField] private Animator menuTransitions;
+    [SerializeField] private Animator _menuTransitions;
 
     public Canvas MainCanvas => _mainCanvas;
+    public Animator MenuTransitions => _menuTransitions;
 
     public bool InTransition { get; private set; }
 
-    public const float TRANSITION_DURATION = 1/3f;
+    public const float SHORT_TRANSITION_DURATION = 1/3f;
+    public const float LONG_TRANSITION_DURATION = 1f;
 
     //Menus
     [Header("Menus")]
@@ -103,14 +105,14 @@ public class MenuManager : MonoBehaviour {
         OnTransitionStart?.Invoke(oldMenu, newMenu);
 
         //Get transition keys
-        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+        (string triggerIn, string triggerOut, float duration) = GetTransitionInfo(transition);
 
         //Transition
-        menuTransitions.SetTrigger(triggerOut);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(duration);
         OnOpen(newMenu, args);
-        menuTransitions.SetTrigger(triggerIn);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(duration);
         InTransition = false;
 
         //Events
@@ -178,14 +180,14 @@ public class MenuManager : MonoBehaviour {
         OnTransitionStart?.Invoke(oldMenu, newMenu);
 
         //Get transition keys
-        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+        (string triggerIn, string triggerOut, float duration) = GetTransitionInfo(transition);
 
         //Transition
-        menuTransitions.SetTrigger(triggerOut);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(duration);
         OnCloseLast();
-        menuTransitions.SetTrigger(triggerIn);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(duration);
         InTransition = false;
 
         //Events
@@ -257,14 +259,14 @@ public class MenuManager : MonoBehaviour {
         OnTransitionStart?.Invoke(oldMenu, newMenu);
 
         //Get transition info
-        (string triggerIn, string triggerOut) = GetTransitionInfo(transition);
+        (string triggerIn, string triggerOut, float duration) = GetTransitionInfo(transition);
 
         //Transition
-        menuTransitions.SetTrigger(triggerOut);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerOut);
+        yield return new WaitForSecondsRealtime(duration);
         OnSwap(newMenu, args);
-        menuTransitions.SetTrigger(triggerIn);
-        yield return new WaitForSecondsRealtime(TRANSITION_DURATION);
+        MenuTransitions.SetTrigger(triggerIn);
+        yield return new WaitForSecondsRealtime(duration);
         InTransition = false;
 
         //Events
@@ -333,14 +335,14 @@ public class MenuManager : MonoBehaviour {
     }
 
     //Transitions
-    private (string triggerIn, string triggerOut) GetTransitionInfo(MenuTransition transition) {
+    public (string triggerIn, string triggerOut, float duration) GetTransitionInfo(MenuTransition transition) {
         return transition switch {
             //Fade
-            MenuTransition.Fade => ("FadeIn", "FadeOut"),
+            MenuTransition.Fade => ("FadeIn", "FadeOut", SHORT_TRANSITION_DURATION),
             //Circle
-            MenuTransition.Circle => ("CircleIn", "CircleOut"),
-            //Other
-            _ => ("", ""),
+            MenuTransition.Circle => ("CircleIn", "CircleOut", LONG_TRANSITION_DURATION),
+            //Not implemented
+            _ => ("", "", SHORT_TRANSITION_DURATION)
         };
     }
 

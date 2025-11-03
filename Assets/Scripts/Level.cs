@@ -23,9 +23,6 @@ public class Level : MonoBehaviour {
     [SerializeField] private CameraController _cameraController;
     [SerializeField] private Player _player;
 
-    [Header("Input")]
-    [SerializeField] private InputActionReference _pauseAction;
-
     public CameraController CameraController => _cameraController;
     public Player Player => _player;
 
@@ -46,10 +43,6 @@ public class Level : MonoBehaviour {
 
     private void Start() {
         if (!_isLobby && !_isHandmade) InitializeLevel();
-    }
-
-    private void Update() {
-        if (_pauseAction.Triggered() && !Game.IsPaused) PauseLevel();
     }
 
     private void InitializeLevel() {

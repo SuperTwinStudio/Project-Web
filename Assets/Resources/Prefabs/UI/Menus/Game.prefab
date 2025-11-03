@@ -1845,10 +1845,11 @@ MonoBehaviour:
   _menuManager: {fileID: 0}
   _canvas: {fileID: 0}
   _state: 0
+  pauseAction: {fileID: -1347841085879655019, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   inventoryAction: {fileID: -7972526189184036601, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  healthText: {fileID: 1276894247881149199}
   moneyAnimator: {fileID: 1898882849555454888}
   moneyText: {fileID: 1023927689889716564}
+  healthText: {fileID: 1276894247881149199}
   primaryIcon: {fileID: 5352836449925438635}
   primaryValueBadge: {fileID: 4402598449234748590}
   primaryValueText: {fileID: 4480118285726283315}
