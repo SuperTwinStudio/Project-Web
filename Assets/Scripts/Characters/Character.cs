@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable {
@@ -27,6 +29,27 @@ public class Character : MonoBehaviour, IDamageable {
 
     public const float HEALTH_MAX = 100;
 
+    //Effects
+    protected readonly Dictionary<Effect, float> effects = new();
+    protected float slowSpeedMultiplier = 1;
+
+
+    //State
+    private void Update() {
+        //Game is paused | Character is dead | A menu is transitioning
+        if (Game.IsPaused || !IsAlive || Game.Current.MenuManager.InTransition) return;
+
+        //Update effects
+        UpdateEffects();
+
+        //Character is dead
+        if (!IsAlive) return;
+
+        //Update character
+        OnUpdate();
+    }
+
+    protected virtual void OnUpdate() {}
 
     //Visibility
     public bool IsVisible(Vector3 origin, float viewDistance, LayerMask layers) {
@@ -136,6 +159,54 @@ public class Character : MonoBehaviour, IDamageable {
 
     public void RemoveOnHealthChanged(Action<float> action) {
         OnHealthChanged -= action;
+    }
+
+    //Effects
+    protected void UpdateEffects() {
+        //Get current time
+        float nowTimestamp = Time.time;
+
+        //Reset slow multiplier
+        slowSpeedMultiplier = 1;
+
+        //Apply effects
+        foreach (var effect in effects.Keys.ToList()) {
+            //Get end timestamp
+            float endTimestamp = effects[effect];
+
+            //Apply effect
+            switch (effect.Action.Type) {
+                //Damage
+                case EffectType.Damage:
+                    Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
+                    break;
+                //Heal
+                case EffectType.Heal:
+                    Heal(Time.deltaTime * effect.Action.Points);    //Take points as healing per second
+                    break;
+                //Slow
+                case EffectType.Slow:
+                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Points));
+                    break;
+            }
+
+            //Check if effect finished
+            if (nowTimestamp > endTimestamp) effects.Remove(effect);
+        }
+    }
+
+    public void AddEffect(Effect effect, float duration) {
+        //Calculate effect end timestamp
+        float effectEndTimestamp = Time.time + duration;
+
+        //Check if player already has effect
+        if (effects.ContainsKey(effect)) {
+            //Already has effect -> Check to update duration
+            effects[effect] = Mathf.Max(effects[effect], effectEndTimestamp);
+        } else {
+            //Does not have effect -> Add it
+            effects[effect] = effectEndTimestamp;
+        }
     }
 
 }

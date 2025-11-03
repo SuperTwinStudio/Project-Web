@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public class Upgrade {
@@ -17,7 +16,8 @@ public class Upgrade {
     public int LevelMax => levelMax;
     public bool CanUpgrade => Level < LevelMax;
 
-    public const int DEFAULT_MAX_LEVEL = 5;
+    public const int DEFAULT_LEVEL_MIN = 1;
+    public const int DEFAULT_LEVEL_MAX = 5;
 
     //Cost
     private int costBase;
@@ -25,17 +25,20 @@ public class Upgrade {
 
     public int Cost => costBase + (level - 1) * costPerLevel;
 
+    public const int DEFAULT_COST_BASE = 10;
+    public const int DEFAULT_COST_PER_LEVEL = 10;
+
 
     //Constructor
     public Upgrade(
         //Upgrade
         string key,
         //Level
-        int level,
-        int levelMax,
+        int level = DEFAULT_LEVEL_MIN,
+        int levelMax = DEFAULT_LEVEL_MAX,
         //Cost
-        int costBase = 10,
-        int costPerLevel = 10
+        int costBase = DEFAULT_COST_BASE,
+        int costPerLevel = DEFAULT_COST_PER_LEVEL
     ) {
         //Upgrade
         this.key = key;

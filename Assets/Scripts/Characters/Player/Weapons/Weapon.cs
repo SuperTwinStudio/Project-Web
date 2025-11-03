@@ -85,11 +85,11 @@ public class Weapon : MonoBehaviour {
         //Init upgrades
         string name;
         name = GetUpgradeName(WeaponAttack.Primary);
-        PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+        PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
         name = GetUpgradeName(WeaponAttack.Secondary);
-        SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+        SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
         name = GetUpgradeName(WeaponAttack.Passive);
-        PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_MAX_LEVEL);
+        PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
 
         //Weapon custom on init
         OnInit();

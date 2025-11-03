@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1193385400993538501, guid: 0d01c6e461263a445a4f4d43551dbe70, type: 3}
       propertyPath: m_Name
-      value: Boss Test
+      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 1193385400993538501, guid: 0d01c6e461263a445a4f4d43551dbe70, type: 3}
       propertyPath: m_TagString
@@ -99,7 +99,7 @@ PrefabInstance:
       addedObject: {fileID: 1609620817021266767}
     - targetCorrespondingSourceObject: {fileID: 1193385400993538501, guid: 0d01c6e461263a445a4f4d43551dbe70, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1841939971573290085}
+      addedObject: {fileID: 7936614047366723881}
   m_SourcePrefab: {fileID: 100100000, guid: 0d01c6e461263a445a4f4d43551dbe70, type: 3}
 --- !u!1 &108002717470500082 stripped
 GameObject:
@@ -127,7 +127,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1841939971573290085
+--- !u!114 &7936614047366723881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 108002717470500082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c069108caa229ca40ab44226699c40db, type: 3}
+  m_Script: {fileID: 11500000, guid: d9ee5d644fb3bd041b2209e15f97c34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _top: {fileID: 6863287918812988235}

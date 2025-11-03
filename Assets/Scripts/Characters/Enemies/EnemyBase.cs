@@ -25,10 +25,7 @@ public class EnemyBase : Character {
         player = Game.Current.Level.Player;
     }
 
-    protected virtual void Update() {
-        //Game is not playing
-        if (!Game.IsPlaying) return;
-
+    protected override void OnUpdate() {
         //Check if player is visible
         CheckPlayerVisible();
     }
