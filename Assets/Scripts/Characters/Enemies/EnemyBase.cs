@@ -8,6 +8,7 @@ public class EnemyBase : Character {
     //Enemy
     [Header("Enemy")]
     [SerializeField] protected new Collider collider;
+    [SerializeField] protected new Renderer renderer;
     [SerializeField] protected float viewDistance = 5;
 
     protected bool playerIsVisible;
@@ -24,10 +25,7 @@ public class EnemyBase : Character {
         player = Game.Current.Level.Player;
     }
 
-    protected virtual void Update() {
-        //Game is not playing
-        if (!Game.IsPlaying) return;
-
+    protected override void OnUpdate() {
         //Check if player is visible
         CheckPlayerVisible();
     }
@@ -45,6 +43,20 @@ public class EnemyBase : Character {
     }
 
     //Health
+    protected override void OnDamageFeedbackStart() {
+        base.OnDamageFeedbackStart();
+
+        //Update color
+        if (renderer) renderer.material.SetColor("_Color", Color.red);
+    }
+
+    protected override void OnDamageFeedbackEnd() {
+        base.OnDamageFeedbackEnd();
+
+        //Update color
+        if (renderer) renderer.material.SetColor("_Color", Color.white);
+    }
+
     protected override void OnDeath(bool instant = false) {
         base.OnDeath(instant);
 

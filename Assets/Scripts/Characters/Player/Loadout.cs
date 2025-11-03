@@ -95,35 +95,29 @@ public class Loadout : MonoBehaviour, ISavable {
         SelectWeapon(GetWeapon(item));
     }
 
-    public void AddOnWeaponChanged(ClassChanged action) {
-        OnWeaponChanged += action;
-    }
-
-    public void RemoveOnWeaponChanged(ClassChanged action) {
-        OnWeaponChanged -= action;
-    }
-
     public bool UsePrimary() {
         if (CurrentWeapon && CurrentWeapon.UsePrimary()) {
-            foreach (var item in _passiveItems) {
-                item.Key.OnPrimaryHook(_player, item.Value);
-            }
+            //Use item
+            foreach (var item in _passiveItems) item.Key.OnPrimaryHook(_player, item.Value);
 
+            //Used
             return true;
         }
 
+        //Not used
         return false;
     }
 
     public bool UseSecondary() {
         if (CurrentWeapon && CurrentWeapon.UseSecondary()) {
-            foreach (var item in _passiveItems) {
-                item.Key.OnSecondaryHook(_player, item.Value);
-            }
+            //Use item
+            foreach (var item in _passiveItems) item.Key.OnSecondaryHook(_player, item.Value);
 
+            //Used
             return true;
         }
 
+        //Not used
         return false;
     }
 
@@ -134,6 +128,14 @@ public class Loadout : MonoBehaviour, ISavable {
                 item.Key.OnEnemyHurtHook(_player, item.Value, character);
             }
         }
+    }
+
+    public void AddOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged += action;
+    }
+
+    public void RemoveOnWeaponChanged(ClassChanged action) {
+        OnWeaponChanged -= action;
     }
 
     //Unlocked weapons

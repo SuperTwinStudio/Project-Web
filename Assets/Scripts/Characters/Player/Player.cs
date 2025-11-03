@@ -68,12 +68,8 @@ public class Player : Character, ISavable {
     [SerializeField] private float gramajeHealthPerLevel = 10;
     [SerializeField] private float rugosidadResistancePerLevel = 0.1f;
 
-    public Upgrade GramajeUpgrade { get; private set; } = new("gramaje", 1, Upgrade.DEFAULT_MAX_LEVEL);
-    public Upgrade RugosidadUpgrade { get; private set; } = new("rugosidad", 1, Upgrade.DEFAULT_MAX_LEVEL);
-
-    //Effects
-    private readonly Dictionary<Effect, float> effects = new();
-    private float slowSpeedMultiplier = 1;
+    public Upgrade GramajeUpgrade { get; private set; } = new("GRAMAJE");
+    public Upgrade RugosidadUpgrade { get; private set; } = new("RUGOSIDAD");
 
 
     //State
@@ -100,12 +96,9 @@ public class Player : Character, ISavable {
         MenuManager.RemoveOnTransitionStart(OnMenuTransitionStart);
     }
 
-    private void Update() {
-        //Game is paused | player is dead | player is not controlled | a menu is transitioning
-        if (Game.IsPaused || !IsAlive || !IsControlled || MenuManager.InTransition) return;
-
-        //Update effects
-        UpdateEffects();
+    protected override void OnUpdate() {
+        //Player not controlled
+        if (!IsControlled) return;
 
         //Test (damage player)
         if (testAction.Triggered()) Damage(10, this);
@@ -228,54 +221,6 @@ public class Player : Character, ISavable {
 
     public void UnblockControls(object obj) {
         controlBlockers.Remove(obj);
-    }
-
-    //Effects
-    private void UpdateEffects() {
-        //Get current time
-        float nowTimestamp = Time.time;
-
-        //Reset slow multiplier
-        slowSpeedMultiplier = 1;
-
-        //Apply effects
-        foreach (var effect in effects.Keys.ToList()) {
-            //Get end timestamp
-            float endTimestamp = effects[effect];
-
-            //Apply effect
-            switch (effect.Action.Type) {
-                //Damage
-                case EffectType.Damage:
-                    Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
-                    break;
-                //Heal
-                case EffectType.Heal:
-                    Heal(Time.deltaTime * effect.Action.Points);    //Take points as healing per second
-                    break;
-                //Slow
-                case EffectType.Slow:
-                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Points));
-                    break;
-            }
-
-            //Check if effect finished
-            if (nowTimestamp > endTimestamp) effects.Remove(effect);
-        }
-    }
-
-    public void AddEffect(Effect effect, float duration) {
-        //Calculate effect end timestamp
-        float effectEndTimestamp = Time.time + duration;
-
-        //Check if player already has effect
-        if (effects.ContainsKey(effect)) {
-            //Already has effect -> Check to update duration
-            effects[effect] = Mathf.Max(effects[effect], effectEndTimestamp);
-        } else {
-            //Does not have effect -> Add it
-            effects[effect] = effectEndTimestamp;
-        }
     }
 
     //Upgrades
