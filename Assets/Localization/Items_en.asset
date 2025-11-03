@@ -47,7 +47,59 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5451330203123712
-    m_Localized: Concealed Blade
+    m_Localized: Hidden blade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12371992335319040
+    m_Localized: Inverse shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372065039384576
+    m_Localized: Kindling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372118625812480
+    m_Localized: Orbital buddy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372185998917632
+    m_Localized: Unfolded sheet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372254135386112
+    m_Localized: Aerodinamic design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372331805507584
+    m_Localized: Paper fan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372395693146112
+    m_Localized: Cardboard soles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372451712270336
+    m_Localized: Box cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372500366196736
+    m_Localized: Card stock skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372573741350912
+    m_Localized: Sparkling glitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372644847386624
+    m_Localized: Glue stick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372701139140608
+    m_Localized: Wet sponge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372764393439232
+    m_Localized: Broken fountain pen
     m_Metadata:
       m_Items: []
   references:

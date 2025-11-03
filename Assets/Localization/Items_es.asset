@@ -47,7 +47,59 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5451330203123712
-    m_Localized: Filo Secreto
+    m_Localized: Filo oculto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12371992335319040
+    m_Localized: Escudo inverso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372065039384576
+    m_Localized: Yesca
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372118625812480
+    m_Localized: "Compa\xF1ero orbital"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372185998917632
+    m_Localized: Folio sin doblar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372254135386112
+    m_Localized: "Dise\xF1o aerodinamico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372331805507584
+    m_Localized: Abanico de papel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372395693146112
+    m_Localized: "Suelas de cart\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372451712270336
+    m_Localized: Cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372500366196736
+    m_Localized: Piel de cartulina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372573741350912
+    m_Localized: Purpurina brillante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372644847386624
+    m_Localized: Pegamento de barra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372701139140608
+    m_Localized: Esponja mojada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372764393439232
+    m_Localized: Pluma rota
     m_Metadata:
       m_Items: []
   references:
