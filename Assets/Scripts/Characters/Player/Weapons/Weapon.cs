@@ -240,57 +240,50 @@ public class Weapon : MonoBehaviour {
     }
 
     //Actions
-    protected bool MeleeForward(float damage, float radius, float forward) {
+    private bool DamageHits(RaycastHit[] hits, float damage, Action<IDamageable> onHit = null) {
+        //Bool to check if anything was hit
+        bool somethingHit = false;
+
+        //Check hits
+        foreach (var hit in hits) {
+            //Check if collision is a damageable
+            if (!hit.collider.TryGetComponent(out IDamageable damageable)) continue;
+
+            //Ignore player
+            if (damageable is Player) continue;
+
+            //Damage
+            if (damage > 0) {
+                Loadout.OnDamageableHit(hit.collider.gameObject);
+                damageable.Damage(damage, Player, DamageType.Melee);
+            }
+
+            //Mark as hit
+            onHit?.Invoke(damageable);
+            somethingHit = true;
+        }
+
+        //Return if anything was hit
+        return somethingHit;
+    }
+
+    protected bool MeleeForward(float damage, float radius, float forward, Action<IDamageable> onHit = null) {
         //Get forward direction
         Vector3 forwardDirection = transform.forward;
 
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        var collisions = Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
+        var hits = Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
 
-        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        bool hit = false;
-
-        //Check collisions
-        foreach (var collision in collisions) {
-            //Check if collision is a damageable
-            if (!collision.collider.TryGetComponent(out IDamageable damageable)) continue;
-
-            //Ignore player
-            if (damageable is Player) continue;
-
-            //Damage
-            Loadout.OnDamageableHit(collision.collider.gameObject);
-            damageable.Damage(damage, Player, DamageType.Melee);
-            hit = true;
-        }
-
-        //Return if anything was hit
-        return hit;
+        //Damage hits
+        return DamageHits(hits, damage, onHit);
     }
 
-    protected bool MeleeAround(float damage, float radius) {
-        //Casts a sphere of <radius> radius around the player to check for collisions
-        bool hit = false;
-
+    protected bool MeleeAround(float damage, float radius, Action<IDamageable> onHit = null) {
         //Cast attack
-        var collisions = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
+        var hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
 
-        //Check collisions
-        foreach (var collision in collisions) {
-            //Check if collision is a damageable
-            if (!collision.collider.TryGetComponent(out IDamageable damageable)) continue;
-
-            //Ignore player
-            if (damageable is Player) continue;
-
-            //Damage
-            Loadout.OnDamageableHit(collision.collider.gameObject);
-            damageable.Damage(damage, Player, DamageType.Melee);
-            hit = true;
-        }
-
-        //Return if anything was hit
-        return hit;
+        //Damage hits
+        return DamageHits(hits, damage, onHit);
     }
 
     protected GameObject SpawnProjectile(GameObject prefab) {

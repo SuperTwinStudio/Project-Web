@@ -57,8 +57,8 @@ public class DamageTextIndicator : MonoBehaviour {
     }
 
     //Text
-    public void SetText(string t) {
-        text.SetText(t);
+    public void SetDamage(float damage, DamageType type) {
+        text.SetText($"{type switch {DamageType.Melee => "🔪", DamageType.Ranged => "🏹", _ => ""}}{damage}");
     }
 
 }

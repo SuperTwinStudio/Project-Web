@@ -181,11 +181,11 @@ public class Character : MonoBehaviour, IDamageable {
             switch (effect.Action.Type) {
                 //Damage
                 case EffectType.Damage:
-                    Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
+                    Damage(Time.deltaTime * effect.Action.Points, this, DamageType.Burn); //Take points as damage per second
                     break;
                 //Heal
                 case EffectType.Heal:
-                    Heal(Time.deltaTime * effect.Action.Points);    //Take points as healing per second
+                    Heal(Time.deltaTime * effect.Action.Points); //Take points as healing per second
                     break;
                 //Slow
                 case EffectType.Slow:
