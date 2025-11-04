@@ -135,15 +135,17 @@ public class Character : MonoBehaviour, IDamageable {
         //Damage character
         Health = Mathf.Max(Health - amount, 0);
 
-        //Start damage feedback coroutine
-        if (damageFeedbackCoroutine != null) StopCoroutine(damageFeedbackCoroutine);
-        damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine()); //Start coroutine in game cause it will never get destroyed
-
         //Check if character died
         if (Health <= 0) {
             //Character died -> Call OnDeath
             IsAlive = false;
             OnDeath();
+        }
+
+        //Start damage feedback coroutine (if object was not destroyed)
+        if (this) {
+            if (damageFeedbackCoroutine != null) StopCoroutine(damageFeedbackCoroutine);
+            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine()); //Start coroutine in game cause it will never get destroyed
         }
 
         //Call event

@@ -16,12 +16,14 @@ public class CameraController : MonoBehaviour {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Camera _camera;
     [SerializeField] private Volume postproVolume;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Animator cameraAnimator;
     [SerializeField] private Transform playerPositionTarget;
     [SerializeField] private Transform playerViewTarget;
 
-    private Transform controllerTransform, cameraTransform, playerTransform;
+    private Transform controllerTransform, playerTransform;
     private DepthOfField DOF;
 
     public Camera Camera => _camera;
@@ -38,16 +40,20 @@ public class CameraController : MonoBehaviour {
 
     //Knockback
     [Header("Knockback")]
-    [SerializeField] private float maxKnockbackDistance = 1;
+    [SerializeField] private float knockbackMultiplier = 1;
+    [SerializeField] private float knockbackDeceleration = 2;
+
+    private Vector3 knockbackDirection = Vector3.zero;
+    private float currentKnockbackDeceleration = 0;
 
     private readonly List<KnockbackController> knockbacks = new();
+    private readonly List<Botpa.Timer> shakes = new();
 
 
     //State
     private void Start() {
         //Get transforms
         controllerTransform = transform;
-        cameraTransform = Camera.transform;
         playerTransform = Level.Player.transform;
 
         //Get depth of field
@@ -58,27 +64,33 @@ public class CameraController : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        //Calculate knockback direction
-        int knockbackActors = 0;
-        Vector3 knockbackDirection = Vector3.zero;
+        //Update shake
+        for (int i = shakes.Count - 1; i >= 0; i--)
+            if (shakes[i].finished)
+                shakes.RemoveAt(i);
+        cameraAnimator.SetBool("IsShaking", !shakes.IsEmpty());
+
+        //Apply knockback acceleration to direction
+        float currentKnockbackDistance = Mathf.Max(knockbackDirection.magnitude, 1);
         for (int i = knockbacks.Count - 1; i >= 0; i--) {
             //Get knockback
             var knockback = knockbacks[i];
 
-            //Check if knockback finished
-            if (knockback.Timer.finished) {
-                knockbacks.RemoveAt(i);
-                continue;
-            }
-
             //Add direction
-            knockbackActors++;
-            knockbackDirection += knockback.LengthPercent * knockback.Strength * knockback.Direction;
+            knockbackDirection += knockback.Strength * knockbackMultiplier / currentKnockbackDistance * Time.deltaTime / knockback.Duration * knockback.Direction;
+
+            //Check if knockback acceleration finished
+            if (knockback.Finished) knockbacks.RemoveAt(i);
         }
-        //if (knockbackActors != 0) knockbackDirection /= knockbackActors;
+
+        //Decelerate knockback
+        if (!knockbackDirection.IsEmpty() && knockbacks.IsEmpty()) {
+            currentKnockbackDeceleration += Time.deltaTime * knockbackMultiplier * knockbackDeceleration;
+            knockbackDirection = Vector3.MoveTowards(knockbackDirection, Vector3.zero, Time.deltaTime * currentKnockbackDeceleration);
+        }
 
         //Move controller to player position applying knockback
-        controllerTransform.position = playerTransform.position + /*maxKnockbackDistance * */knockbackDirection;
+        controllerTransform.position = playerTransform.position + knockbackDirection;
 
         //Update DOF
         float distance = Vector3.Distance(cameraTransform.position, playerViewTarget.position);
@@ -139,27 +151,39 @@ public class CameraController : MonoBehaviour {
     //Camera knockback
     private class KnockbackController {
 
-        public Botpa.Timer Timer { get; private set; } = new();
+        private readonly Botpa.Timer timer = new();
+
         public Vector3 Direction { get; private set; }
         public float Strength { get; private set; }
 
-        public float LengthPercent {
-            get {
-                float percent = Timer.percent;
-                return Ease.OutCubic(Ease.Cliff(percent));
-            }
-        }
+        public float Duration => timer.duration;
+        public bool Finished => timer.finished;
 
-        public KnockbackController(Vector3 direction, float strength) {
-            Timer.Count(2);
+        public KnockbackController(Vector3 direction, float strength, float duration) {
+            //Save values
             Direction = direction;
-            Strength = Mathf.Clamp01(strength);
+            Strength = Mathf.Max(strength, 0);
+
+            //Start knockback duration count
+            timer.Count(duration);
         }
 
     }
 
-    public void AddKnockback(Vector3 direction, float strength = 1) {
-        knockbacks.Add(new(direction, strength));
+    public void AddKnockback(Vector3 direction, float strength = 0.1f, float duration = 0.05f) {
+        //Add knockback
+        knockbacks.Add(new(direction, strength, duration));
+
+        //Reset deceleration
+        currentKnockbackDeceleration = 0;
+    }
+
+    public void AddShake(float duration = 0.4f) {
+        //Add shake
+        shakes.Add(new(duration));
+
+        //Start shake animation
+        cameraAnimator.SetBool("IsShaking", true);
     }
 
 }

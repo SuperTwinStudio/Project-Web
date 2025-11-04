@@ -90,7 +90,7 @@ public class WeaponSword : Weapon {
         Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
 
         //Animate
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("AttackSpin");
         Player.Animator.SetTrigger("SwordSpin");
 
         //Attack
@@ -100,7 +100,7 @@ public class WeaponSword : Weapon {
         );
 
         //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
+        CameraController.AddShake();
     }
 
     //Passive
