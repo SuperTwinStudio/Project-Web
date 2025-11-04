@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class WeaponStapler : Weapon {
 
-    //Ammo
-    [Header("Ammo")]
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField, Min(0)] private int maxAmmo = 12;
-    [SerializeField, Min(0)] private float reloadDuration = 1f;
-
-    private int ammo = 0;
-    private bool isReloading = false;
-
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
@@ -46,10 +37,13 @@ public class WeaponStapler : Weapon {
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
     //Reload
-    private readonly Timer reloadTimer = new();
+    [Header("Reload")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField, Min(0)] private int maxAmmo = 12;
+    [SerializeField, Min(0)] private float reloadDuration = 1f;
 
-    public override bool IsReloading => reloadTimer.counting;
-    public override float ReloadProgress => reloadTimer.percent;
+    private readonly Timer reloadTimer = new();
+    private int ammo = 0;
 
 
     //State
@@ -58,10 +52,22 @@ public class WeaponStapler : Weapon {
         SetAmmo(maxAmmo);
     }
 
+    private void Update() {
+        //Update reload
+        if (reloadTimer.counting) {
+            //Update value
+            SetValue(WeaponAction.Reload, (int) (reloadTimer.percent * 100));
+        } else if (reloadTimer.finished) {
+            //Reset value
+            SetValue(WeaponAction.Reload, -1);
+            reloadTimer.Reset();
+        }
+    }
+
     //Helpers
     private void SetAmmo(int newAmmo) {
         ammo = newAmmo;
-        SetValue(WeaponAttack.Passive, ammo);
+        SetValue(WeaponAction.Passive, ammo);
     }
 
     private void Shoot(float damage) {
@@ -84,15 +90,15 @@ public class WeaponStapler : Weapon {
 
     protected override bool OnReload() {
         //Already reloading
-        if (isReloading) return false;
-        isReloading = true;
+        if (IsReloading || ammo >= maxAmmo) return false;
 
         //Start reload timer
         reloadTimer.Count(reloadDuration);
+        SetValue(WeaponAction.Reload, 0);
 
         //Add reload cooldown to primary and secondary
-        SetCooldown(WeaponAttack.Primary, reloadDuration);
-        SetCooldown(WeaponAttack.Secondary, reloadDuration);
+        SetCooldown(WeaponAction.Primary, reloadDuration);
+        SetCooldown(WeaponAction.Secondary, reloadDuration);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
@@ -106,9 +112,6 @@ public class WeaponStapler : Weapon {
 
         //Refill ammo
         SetAmmo(maxAmmo);
-
-        //Finish
-        isReloading = false;
     }
 
     //Primary
@@ -116,7 +119,7 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while using primary
-        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack melee (passive)
         bool hit = MeleeForward(
@@ -143,7 +146,7 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while using secondary
-        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Shoot burst
         for (int i = 0; i < secondaryBurstAmount; i++) {

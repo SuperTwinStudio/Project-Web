@@ -3,7 +3,7 @@ using System.Collections;
 using Botpa;
 using UnityEngine;
 
-public enum WeaponAttack { Primary, Secondary, Passive }
+public enum WeaponAction { Primary, Secondary, Passive, Reload }
 
 public class Weapon : MonoBehaviour {
 
@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private GameObject model;
     [SerializeField] protected Animator animator;
 
-    private event Action<WeaponAttack, int> OnValueChanged;
+    private event Action<WeaponAction, int> OnValueChanged;
 
     private bool isInit = false;
 
@@ -72,8 +72,9 @@ public class Weapon : MonoBehaviour {
     public int PassiveValue { get; private set; } = 0;
 
     //Reload
-    public virtual bool IsReloading => false;
-    public virtual float ReloadProgress => 0;
+    public int ReloadValue { get; private set; } = -1;
+
+    public virtual bool IsReloading => ReloadValue >= 0;
 
 
     //State
@@ -89,11 +90,11 @@ public class Weapon : MonoBehaviour {
 
         //Init upgrades
         string name;
-        name = GetUpgradeName(WeaponAttack.Primary);
+        name = GetUpgradeName(WeaponAction.Primary);
         PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
-        name = GetUpgradeName(WeaponAttack.Secondary);
+        name = GetUpgradeName(WeaponAction.Secondary);
         SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
-        name = GetUpgradeName(WeaponAttack.Passive);
+        name = GetUpgradeName(WeaponAction.Passive);
         PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
 
         //Weapon custom on init
@@ -124,11 +125,11 @@ public class Weapon : MonoBehaviour {
     protected virtual void OnShow() {}
 
     //Weapon
-    protected void SetCooldown(WeaponAttack attack, float cooldown) {
+    protected void SetCooldown(WeaponAction attack, float cooldown) {
         //Get timer
         Timer timer = attack switch {
-            WeaponAttack.Primary => primaryTimer,
-            WeaponAttack.Secondary => secondaryTimer,
+            WeaponAction.Primary => primaryTimer,
+            WeaponAction.Secondary => secondaryTimer,
             _ => passiveTimer,
         };
 
@@ -136,24 +137,27 @@ public class Weapon : MonoBehaviour {
         if (timer.counting) {
             //Already counting -> Check if count is needed
             float remaining = timer.duration - timer.counted;
-            if (remaining < cooldown) timer.Extend(cooldown - remaining);
+            if (remaining < cooldown) timer.Count(cooldown);//timer.Extend(cooldown - remaining);
         } else {
             //Not counting -> Count
             timer.Count(cooldown);
         }
     }
 
-    protected void SetValue(WeaponAttack attack, int value) {
+    protected void SetValue(WeaponAction attack, int value) {
         //Update value
         switch (attack) {
-            case WeaponAttack.Primary:
+            case WeaponAction.Primary:
                 PrimaryValue = value;
                 break;
-            case WeaponAttack.Secondary:
+            case WeaponAction.Secondary:
                 SecondaryValue = value;
                 break;
-            case WeaponAttack.Passive:
+            case WeaponAction.Passive:
                 PassiveValue = value;
+                break;
+            case WeaponAction.Reload:
+                ReloadValue = value;
                 break;
         }
 
@@ -161,11 +165,11 @@ public class Weapon : MonoBehaviour {
         OnValueChanged?.Invoke(attack, value);
     }
 
-    public void AddOnValueChanged(Action<WeaponAttack, int> action) {
+    public void AddOnValueChanged(Action<WeaponAction, int> action) {
         OnValueChanged += action;
     }
 
-    public void RemoveOnValueChanged(Action<WeaponAttack, int> action) {
+    public void RemoveOnValueChanged(Action<WeaponAction, int> action) {
         OnValueChanged -= action;
     }
 
@@ -176,19 +180,19 @@ public class Weapon : MonoBehaviour {
         PassiveUpgrade.SetLevel(Loadout.GetUpgrade(PassiveUpgrade.Key));
     }
 
-    protected string GetUpgradeName(WeaponAttack attack) {
+    protected string GetUpgradeName(WeaponAction attack) {
         return $"{Item.FileName}_{attack}";
     }
 
-    public Upgrade GetUpgrade(WeaponAttack attack) {
+    public Upgrade GetUpgrade(WeaponAction attack) {
         return attack switch {
-            WeaponAttack.Primary => PrimaryUpgrade,
-            WeaponAttack.Secondary => SecondaryUpgrade,
+            WeaponAction.Primary => PrimaryUpgrade,
+            WeaponAction.Secondary => SecondaryUpgrade,
             _ => PassiveUpgrade
         };
     }
 
-    public bool TryUpgrade(WeaponAttack attack) {
+    public bool TryUpgrade(WeaponAction attack) {
         return GetUpgrade(attack).TryUpgrade(Loadout);
     }
 
@@ -197,7 +201,7 @@ public class Weapon : MonoBehaviour {
 
     protected virtual void OnUsePrimary() {
         //Start cooldown
-        SetCooldown(WeaponAttack.Primary, PrimaryCooldownDuration);
+        SetCooldown(WeaponAction.Primary, PrimaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUsePrimaryCoroutine());
@@ -214,7 +218,7 @@ public class Weapon : MonoBehaviour {
 
     protected virtual void OnUseSecondary() {
         //Start cooldown timer
-        SetCooldown(WeaponAttack.Secondary, SecondaryCooldownDuration);
+        SetCooldown(WeaponAction.Secondary, SecondaryCooldownDuration);
 
         //Start use coroutine
         StartCoroutine(OnUseSecondaryCoroutine());

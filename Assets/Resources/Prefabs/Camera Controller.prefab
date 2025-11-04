@@ -191,8 +191,9 @@ MonoBehaviour:
   playerViewTarget: {fileID: 0}
   cameraSpeed: 10
   cameraRotationSpeed: 30
-  knockbackMultiplier: 3
-  knockbackDeceleration: 5
+  knockbackEnabled: 1
+  knockbackMultiplier: 0.25
+  knockbackDeceleration: 50
 --- !u!1 &6851129620146797947
 GameObject:
   m_ObjectHideFlags: 0

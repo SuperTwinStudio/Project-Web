@@ -135,9 +135,9 @@ public class ShopMenu : Menu {
 
         //Update upgrades
         weaponNameText.SetText(selectedWeapon.Item.Name);
-        primaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Primary, Loadout.Money);
-        secondaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Secondary, Loadout.Money);
-        passiveAttack.UpdateUI(selectedWeapon, WeaponAttack.Passive, Loadout.Money);
+        primaryAttack.UpdateUI(selectedWeapon, WeaponAction.Primary, Loadout.Money);
+        secondaryAttack.UpdateUI(selectedWeapon, WeaponAction.Secondary, Loadout.Money);
+        passiveAttack.UpdateUI(selectedWeapon, WeaponAction.Passive, Loadout.Money);
     }
 
     public void SelectWeaponTab(Item item) {
@@ -150,7 +150,7 @@ public class ShopMenu : Menu {
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (!selectedWeapon.TryUpgrade((WeaponAttack) type)) return;
+        if (!selectedWeapon.TryUpgrade((WeaponAction) type)) return;
 
         //Success -> Update UI
         UpdateMainUI();
@@ -179,14 +179,14 @@ public class ShopMenu : Menu {
         public Button button;
         public TMP_Text buttonText;
 
-        public void UpdateUI(Weapon weapon, WeaponAttack attack, int money) {
+        public void UpdateUI(Weapon weapon, WeaponAction attack, int money) {
             //Get upgrade
             Upgrade upgrade = weapon.GetUpgrade(attack);
         
             //Icon
             icon.sprite = attack switch {
-                WeaponAttack.Primary => weapon.PrimaryIcon,
-                WeaponAttack.Secondary => weapon.SecondaryIcon,
+                WeaponAction.Primary => weapon.PrimaryIcon,
+                WeaponAction.Secondary => weapon.SecondaryIcon,
                 _ => weapon.PassiveIcon
             };
 

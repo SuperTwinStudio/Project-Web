@@ -40,6 +40,7 @@ public class CameraController : MonoBehaviour {
 
     //Knockback
     [Header("Knockback")]
+    [SerializeField] private bool knockbackEnabled = true;
     [SerializeField] private float knockbackMultiplier = 1;
     [SerializeField] private float knockbackDeceleration = 2;
 
@@ -170,7 +171,10 @@ public class CameraController : MonoBehaviour {
 
     }
 
-    public void AddKnockback(Vector3 direction, float strength = 0.1f, float duration = 0.05f) {
+    public void AddKnockback(Vector3 direction, float strength = 1f, float duration = 0.05f) {
+        //Ignore knockback
+        if (!knockbackEnabled) return;
+
         //Add knockback
         knockbacks.Add(new(direction, strength, duration));
 
@@ -179,6 +183,9 @@ public class CameraController : MonoBehaviour {
     }
 
     public void AddShake(float duration = 0.4f) {
+        //Ignore knockback
+        if (!knockbackEnabled) return;
+
         //Add shake
         shakes.Add(new(duration));
 

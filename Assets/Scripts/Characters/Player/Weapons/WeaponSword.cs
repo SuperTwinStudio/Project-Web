@@ -55,7 +55,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while spinning
-        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), primarySlowDuration);
@@ -84,7 +84,7 @@ public class WeaponSword : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while spinning
-        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Slow player
         Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
@@ -106,7 +106,7 @@ public class WeaponSword : Weapon {
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(WeaponAttack.Passive, passiveHit - hitCount - 1);
+        SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
     }
 
 }

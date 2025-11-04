@@ -30,15 +30,20 @@ public class Projectile : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        //Collided with trigger
+        if (other.isTrigger) return;
+
         //Ignore player/other
         if (other.CompareTag("Player") == isPlayer) return;
 
         //Check if damageable
-        if (!other.TryGetComponent(out IDamageable damageable)) return;
+        if (other.TryGetComponent(out IDamageable damageable)) {
+            //Deal damage
+            if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
+            damageable.Damage(damage, source, DamageType.Ranged);
+        }
 
-        //Deal damage & destroy self
-        if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
-        damageable.Damage(damage, source, DamageType.Ranged);
+        //Destroy self
         Destroy(gameObject);
     }
 
