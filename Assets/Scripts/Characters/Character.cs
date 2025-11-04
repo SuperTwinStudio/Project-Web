@@ -103,8 +103,6 @@ public class Character : MonoBehaviour, IDamageable {
         Game.UnslowTime(this);
     }
 
-    protected virtual void OnDeath(bool instant = false) {}
-
     public virtual bool Heal(float amount) {
         //Ignore negative healing
         if (amount <= 0) return false;
@@ -119,7 +117,7 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    public virtual bool Damage(float amount, object source) {
+    public virtual bool Damage(float amount, object source, DamageType type = DamageType.None) {
         //Character is already dead or invulnerable-> Ignore damage
         if (!IsAlive || IsInvulnerable) return false;
 
@@ -144,8 +142,9 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Start damage feedback coroutine (if object was not destroyed)
         if (this) {
-            if (damageFeedbackCoroutine != null) StopCoroutine(damageFeedbackCoroutine);
-            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine()); //Start coroutine in game cause it will never get destroyed
+            //Use game for coroutine cause it will never get destroyed
+            if (damageFeedbackCoroutine != null) Game.Current.StopCoroutine(damageFeedbackCoroutine);
+            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine());
         }
 
         //Call event
@@ -154,6 +153,8 @@ public class Character : MonoBehaviour, IDamageable {
         //Damaged
         return true;
     }
+
+    protected virtual void OnDeath(bool instant = false) {}
 
     public void AddOnHealthChanged(Action<float> action) {
         OnHealthChanged += action;

@@ -57,6 +57,7 @@ MonoBehaviour:
   spinAction: {fileID: 8950489090758601431, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   primaryAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   secondaryAction: {fileID: -1424028098101527299, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  reloadAction: {fileID: 8363650257003998890, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   testAction: {fileID: -4352797778555733023, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   controller: {fileID: 3851105479952359991}
   _loadout: {fileID: 8538115829238214355}
@@ -393,12 +394,12 @@ MonoBehaviour:
   reloadDuration: 1
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
-  primaryDamage: 10
-  primaryDamagePerLevel: 5
+  primaryDamage: 25
+  primaryDamagePerLevel: 8
   _secondaryCooldown: 2
   secondaryPrimaryCooldown: 0.3
-  secondaryDamage: 10
-  secondaryDamagePerLevel: 5
+  secondaryDamage: 25
+  secondaryDamagePerLevel: 8
   secondaryBurstAmount: 3
   secondaryBurstDelay: 0.06
   passiveDamage: 30

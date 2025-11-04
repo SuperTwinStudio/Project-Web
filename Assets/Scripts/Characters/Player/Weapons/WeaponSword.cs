@@ -64,7 +64,7 @@ public class WeaponSword : Weapon {
         animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
         //Attack
-        AtackForward(
+        MeleeForward(
             PrimaryDamage + (isPassiveHit ? PassiveDamage : 0), 
             primaryAttackSphereCast.x, 
             primaryAttackSphereCast.y
@@ -94,7 +94,7 @@ public class WeaponSword : Weapon {
         Player.Animator.SetTrigger("SwordSpin");
 
         //Attack
-        AtackAround(
+        MeleeAround(
             SecondaryDamage, 
             secondarySpinRadius
         );

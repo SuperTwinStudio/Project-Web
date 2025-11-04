@@ -11,7 +11,7 @@ public class DamageTextIndicator : MonoBehaviour {
     //Animation
     [Header("Animation")]
     [SerializeField] private float duration = 2;
-    [SerializeField, Min(0)] private float coneAngle = 15;
+    [SerializeField, Min(0)] private float coneAngle = 25;
     [SerializeField] private float endScale = 2;
     [SerializeField] private float endDistance = 1;
 
@@ -25,7 +25,8 @@ public class DamageTextIndicator : MonoBehaviour {
         spawn = transform.position;
 
         //Create move direction
-        moveDirection = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.up) * Quaternion.AngleAxis(Random.Range(0f, coneAngle), Vector3.right) * Vector3.up;
+        moveDirection = Quaternion.AngleAxis(Random.Range(-coneAngle, coneAngle), Vector3.forward) * Vector3.up;
+        Debug.Log(moveDirection);
 
         //Start animation timer
         animationTimer.Count(duration);
@@ -53,6 +54,11 @@ public class DamageTextIndicator : MonoBehaviour {
     private void LateUpdate() {
         //Look towards camera
         transform.rotation = Quaternion.LookRotation(transform.position - Game.Current.Level.CameraController.Camera.transform.position, Vector3.up);
+    }
+
+    //Text
+    public void SetText(string t) {
+        text.SetText(t);
     }
 
 }

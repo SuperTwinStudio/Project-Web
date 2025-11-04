@@ -121,6 +121,16 @@ public class Loadout : MonoBehaviour, ISavable {
         return false;
     }
 
+    public bool Reload() {
+        if (CurrentWeapon && CurrentWeapon.Reload()) {
+            //Used
+            return true;
+        }
+
+        //Not used
+        return false;
+    }
+
     public void OnDamageableHit(GameObject damagedObject) {
         Character character = damagedObject.GetComponent<Character>();
         if (character) {

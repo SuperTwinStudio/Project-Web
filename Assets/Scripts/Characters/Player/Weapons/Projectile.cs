@@ -5,13 +5,14 @@ public class Projectile : MonoBehaviour {
     //Components
     [Header("Components")]
     [SerializeField] private new Rigidbody rigidbody;
-    private Loadout _loadout;
+
+    private object source = null;
 
     //Projectile
     [Header("Projectile")]
-    public bool isPlayer = true;
-    public float speed = 10;
-    public float damage = 10;
+    [SerializeField] private bool isPlayer = true;
+    [SerializeField] private float speed = 20;
+    [SerializeField] private float damage = 25;
 
 
     //State
@@ -20,9 +21,12 @@ public class Projectile : MonoBehaviour {
         rigidbody.linearVelocity = speed * transform.forward;
     }
 
-    public void SetLoadout(Loadout loadout)
-    {
-        _loadout = loadout;
+    public void Init(object source, float damage = -1) {
+        //Save origin
+        this.source = source;
+
+        //Update damage
+        if (damage > 0) this.damage = damage;
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -33,8 +37,8 @@ public class Projectile : MonoBehaviour {
         if (!other.TryGetComponent(out IDamageable damageable)) return;
 
         //Deal damage & destroy self
-        _loadout.OnDamageableHit(other.gameObject);
-        damageable.Damage(damage, _loadout.Player);
+        if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
+        damageable.Damage(damage, source, DamageType.Ranged);
         Destroy(gameObject);
     }
 

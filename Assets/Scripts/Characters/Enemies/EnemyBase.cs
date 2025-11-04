@@ -59,12 +59,21 @@ public class EnemyBase : Character {
         if (renderer) renderer.material.SetColor("_Color", Color.white);
     }
 
-    public override bool Damage(float amount, object source) {
+    public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
         //Damage
-        bool damaged = base.Damage(amount, source);
+        bool damaged = base.Damage(amount, source, type);
 
         //Show damage indicator
-        if (damaged) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<TMP_Text>().SetText($"{amount}");
+        if (damaged) {
+            var indicator = Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>();
+            string icon = type switch {
+                DamageType.Melee => "🔪",
+                DamageType.Ranged => "🏹",
+                DamageType.Burn => "🔥",
+                _ => ""
+            };
+            indicator.SetText($"{icon}{amount}");
+        }
 
         //Return if damaged
         return damaged;

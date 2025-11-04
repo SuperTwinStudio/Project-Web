@@ -1,4 +1,5 @@
 using System.Collections;
+using Botpa;
 using UnityEngine;
 
 public class WeaponStapler : Weapon {
@@ -44,6 +45,12 @@ public class WeaponStapler : Weapon {
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
+    //Reload
+    private readonly Timer reloadTimer = new();
+
+    public override bool IsReloading => reloadTimer.counting;
+    public override float ReloadProgress => reloadTimer.percent;
+
 
     //State
     protected override void OnShow() {
@@ -66,8 +73,7 @@ public class WeaponStapler : Weapon {
 
         //Shoot
         Projectile projectile = SpawnProjectile(bulletPrefab).GetComponent<Projectile>();
-        projectile.damage = damage;
-        projectile.SetLoadout(Loadout);
+        projectile.Init(Player, damage);
 
         //Update ammo
         SetAmmo(ammo - 1);
@@ -76,17 +82,21 @@ public class WeaponStapler : Weapon {
         CameraController.AddKnockback(-transform.forward);
     }
 
-    private void Reload() {
+    protected override bool OnReload() {
         //Already reloading
-        if (isReloading) return;
+        if (isReloading) return false;
         isReloading = true;
-        
+
+        //Start reload timer
+        reloadTimer.Count(reloadDuration);
+
         //Add reload cooldown to primary and secondary
         SetCooldown(WeaponAttack.Primary, reloadDuration);
         SetCooldown(WeaponAttack.Secondary, reloadDuration);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
+        return true;
     }
 
     //Reloading
@@ -109,7 +119,7 @@ public class WeaponStapler : Weapon {
         SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
 
         //Attack melee (passive)
-        bool hit = AtackForward(
+        bool hit = MeleeForward(
             PassiveDamage, 
             passiveAttackSphereCast.x, 
             passiveAttackSphereCast.y

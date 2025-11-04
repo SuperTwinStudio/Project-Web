@@ -33,13 +33,15 @@ public class Weapon : MonoBehaviour {
     public Sprite SecondaryIcon => _secondaryIcon;
     public Sprite PassiveIcon => _passiveIcon;
 
+    [HideInInspector] public GameObject LastHit { get; protected set; }
+
     //Primary
     private readonly Timer primaryTimer = new();
 
     protected virtual float PrimaryCooldownDuration => 1;
 
     public virtual bool PrimaryAvailable => !primaryTimer.counting;
-    public virtual float PrimaryCooldown => 1 - primaryTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float PrimaryCooldown => 1 - primaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public Upgrade PrimaryUpgrade { get; protected set; }
 
@@ -51,7 +53,7 @@ public class Weapon : MonoBehaviour {
     protected virtual float SecondaryCooldownDuration => 1;
 
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
-    public float SecondaryCooldown => 1 - secondaryTimer.percent;   //0 -> No cooldown, 1 -> Full cooldown
+    public float SecondaryCooldown => 1 - secondaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public Upgrade SecondaryUpgrade { get; protected set; }
 
@@ -63,13 +65,15 @@ public class Weapon : MonoBehaviour {
     protected virtual float PassiveCooldownDuration => 1;
 
     public virtual bool PassiveAvailable => !passiveTimer.counting;
-    public virtual float PassiveCooldown => 1 - passiveTimer.percent;       //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float PassiveCooldown => 1 - passiveTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public Upgrade PassiveUpgrade { get; protected set; }
 
     public int PassiveValue { get; private set; } = 0;
 
-    [HideInInspector] public GameObject LastHit { get; protected set; }
+    //Reload
+    public virtual bool IsReloading => false;
+    public virtual float ReloadProgress => 0;
 
 
     //State
@@ -222,8 +226,17 @@ public class Weapon : MonoBehaviour {
         return true;
     }
 
+    //Reload
+    protected virtual bool OnReload() {
+        return false;
+    }
+
+    public bool Reload() {
+        return OnReload();
+    }
+
     //Actions
-    protected bool AtackForward(float damage, float radius, float forward) {
+    protected bool MeleeForward(float damage, float radius, float forward) {
         //Get forward direction
         Vector3 forwardDirection = transform.forward;
 
@@ -243,7 +256,7 @@ public class Weapon : MonoBehaviour {
 
             //Damage
             Loadout.OnDamageableHit(collision.collider.gameObject);
-            damageable.Damage(damage, Player);
+            damageable.Damage(damage, Player, DamageType.Melee);
             hit = true;
         }
 
@@ -251,7 +264,7 @@ public class Weapon : MonoBehaviour {
         return hit;
     }
 
-    protected bool AtackAround(float damage, float radius) {
+    protected bool MeleeAround(float damage, float radius) {
         //Casts a sphere of <radius> radius around the player to check for collisions
         bool hit = false;
 
@@ -268,7 +281,7 @@ public class Weapon : MonoBehaviour {
 
             //Damage
             Loadout.OnDamageableHit(collision.collider.gameObject);
-            damageable.Damage(damage, Player);
+            damageable.Damage(damage, Player, DamageType.Melee);
             hit = true;
         }
 

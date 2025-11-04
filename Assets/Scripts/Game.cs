@@ -115,7 +115,7 @@ public class Game : MonoBehaviour, ISavable {
     private static void UpdateTime() {
         IsPaused = pauseLock.Count > 0;
         IsTimeSlowed = timeSlowLock.Count > 0;
-        Time.timeScale = IsPaused ? 0 : IsTimeSlowed ? 0.5f : 1;
+        Time.timeScale = IsPaused ? 0 : IsTimeSlowed ? 0.8f : 1;
     }
 
     private static void ResetTime() {
