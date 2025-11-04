@@ -153,7 +153,7 @@ MonoBehaviour:
   rigidbody: {fileID: 921343144809111436}
   isPlayer: 1
   speed: 15
-  damage: 10
+  damage: 15
 --- !u!114 &7926148660051566330
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -71,6 +71,9 @@ public class WeaponStapler : Weapon {
 
         //Update ammo
         SetAmmo(ammo - 1);
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
     private void Reload() {

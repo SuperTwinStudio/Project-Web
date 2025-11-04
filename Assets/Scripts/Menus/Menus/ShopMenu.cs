@@ -232,7 +232,7 @@ public class ShopMenu : Menu {
         //Start camera cinematic
         if (args != null) {
             ShopArgs shopArgs = (ShopArgs) args;
-            Level.CameraController.EnterCutScene(shopArgs.viewTarget, shopArgs.cameraTarget);
+            Level.CameraController.EnterCutscene(shopArgs.positionTarget, shopArgs.viewTarget);
         }
     }
 
@@ -243,14 +243,14 @@ public class ShopMenu : Menu {
         if (!Application.isPlaying) return;
 
         //Stop camera cinematic
-        Level.CameraController.ExitCutScene();
+        Level.CameraController.ExitCutscene();
     }
 
 }
 
 public class ShopArgs {
     
+    public Transform positionTarget;
     public Transform viewTarget;
-    public Transform cameraTarget;
 
 }

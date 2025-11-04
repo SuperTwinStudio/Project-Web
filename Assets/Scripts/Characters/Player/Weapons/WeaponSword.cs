@@ -74,6 +74,9 @@ public class WeaponSword : Weapon {
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
@@ -95,6 +98,9 @@ public class WeaponSword : Weapon {
             SecondaryDamage, 
             secondarySpinRadius
         );
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
     //Passive

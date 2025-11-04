@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour {
 
     public Loadout Loadout => _loadout;
     public Player Player => Loadout.Player;
+    public CameraController CameraController => Player.CameraController;
 
     //Weapon
     [Header("Weapon")]
@@ -223,8 +224,11 @@ public class Weapon : MonoBehaviour {
 
     //Actions
     protected bool AtackForward(float damage, float radius, float forward) {
+        //Get forward direction
+        Vector3 forwardDirection = transform.forward;
+
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        var collisions = Physics.SphereCastAll(transform.position + radius * transform.forward, radius, transform.forward, forward);
+        var collisions = Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
 
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
         bool hit = false;
