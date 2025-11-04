@@ -6,6 +6,6 @@ public class PIKindling : PassiveItem
 
     public override void OnEnemyHurtHook(Player player, int itemCount, Character enemy)
     {
-        if(GetScaledChance(itemCount, 15, 5)) enemy.AddEffect(m_Burn, 10);
+        if (GetScaledChance(itemCount, 15, 5)) enemy.AddEffect(m_Burn, 10);
     }
 }
