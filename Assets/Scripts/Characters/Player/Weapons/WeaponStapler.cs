@@ -65,55 +65,6 @@ public class WeaponStapler : Weapon {
         }
     }
 
-    //Helpers
-    private void SetAmmo(int newAmmo) {
-        ammo = newAmmo;
-        SetValue(WeaponAction.Passive, ammo);
-    }
-
-    private void Shoot(float damage) {
-        //No ammo
-        if (ammo <= 0) return;
-
-        //Shoot
-        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage);
-
-        //Update ammo
-        SetAmmo(ammo - 1);
-
-        //Animate
-        animator.SetTrigger("Shoot");
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
-    }
-
-    protected override bool OnReload() {
-        //Already reloading
-        if (IsReloading || ammo >= maxAmmo) return false;
-
-        //Start reload timer
-        reloadTimer.Count(reloadDuration);
-        SetValue(WeaponAction.Reload, 0);
-
-        //Add reload cooldown to primary and secondary
-        SetCooldown(WeaponAction.Primary, reloadDuration);
-        SetCooldown(WeaponAction.Secondary, reloadDuration);
-
-        //Start reload coroutine
-        StartCoroutine(ReloadCoroutine());
-        return true;
-    }
-
-    //Reloading
-    private IEnumerator ReloadCoroutine() {
-        //Wait
-        yield return new WaitForSeconds(reloadDuration);
-
-        //Refill ammo
-        SetAmmo(maxAmmo);
-    }
-
     //Primary
     protected override IEnumerator OnUsePrimaryCoroutine() {
         yield return null;
@@ -159,6 +110,55 @@ public class WeaponStapler : Weapon {
 
         //Reload
         if (ammo <= 0) Reload();
+    }
+
+    //Reloading
+    private void SetAmmo(int newAmmo) {
+        ammo = newAmmo;
+        SetValue(WeaponAction.Passive, ammo);
+    }
+
+    private IEnumerator ReloadCoroutine() {
+        //Wait
+        yield return new WaitForSeconds(reloadDuration);
+
+        //Refill ammo
+        SetAmmo(maxAmmo);
+    }
+
+    protected override bool OnReload() {
+        //Already reloading
+        if (IsReloading || ammo >= maxAmmo) return false;
+
+        //Start reload timer
+        reloadTimer.Count(reloadDuration);
+        SetValue(WeaponAction.Reload, 0);
+
+        //Add reload cooldown to primary and secondary
+        SetCooldown(WeaponAction.Primary, reloadDuration);
+        SetCooldown(WeaponAction.Secondary, reloadDuration);
+
+        //Start reload coroutine
+        StartCoroutine(ReloadCoroutine());
+        return true;
+    }
+
+    //Helpers
+    private void Shoot(float damage) {
+        //No ammo
+        if (ammo <= 0) return;
+
+        //Shoot
+        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage);
+
+        //Update ammo
+        SetAmmo(ammo - 1);
+
+        //Animate
+        animator.SetTrigger("Shoot");
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
 }

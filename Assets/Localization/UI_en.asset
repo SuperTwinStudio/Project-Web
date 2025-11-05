@@ -207,11 +207,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13035009775374336
-    m_Localized: Rugosity description
+    m_Localized: Increases the percentage of damage resisted.
     m_Metadata:
       m_Items: []
   - m_Id: 13035064179691520
-    m_Localized: Weight description
+    m_Localized: Grants additional maximum health.
     m_Metadata:
       m_Items: []
   references:

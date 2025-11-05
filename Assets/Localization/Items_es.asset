@@ -127,63 +127,79 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13031383011037184
-    m_Localized: Pasiva
+    m_Localized: "Tras dar tres golpes, el siguiente golpe realiza da\xF1o extra
+      (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13031348479332352
-    m_Localized: Primaria
+    m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE9n
+      en su rango (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13031367097847808
-    m_Localized: Secundaria
+    m_Localized: "Golpea girando sobre s\xED mismo, da\xF1ando a los enemigos que
+      est\xE9n en el \xE1rea de corte (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033482478292992
-    m_Localized: Primaria
+    m_Localized: "Dispara una grapa hacia el frente (mejorar esta habilidad aumenta
+      su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033561209573376
-    m_Localized: Primaria
+    m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE9n
+      en su rango (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033653618479104
-    m_Localized: Primaria
+    m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE9n
+      en su rango y clavando una chincheta hasta un m\xE1ximo de 5 (mejorar esta
+      habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033719343222784
-    m_Localized: Primaria
+    m_Localized: "Bate el abanico para lanzar una rafaga de aire hacia el frente
+      que da\xF1a a los enemigos en \xE1rea (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033501151334400
-    m_Localized: Secundaria
+    m_Localized: "Dispara una r\xE1faga de 3 grapas hacia el frente (mejorar esta
+      habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033586727718912
-    m_Localized: Secundaria
+    m_Localized: "Crea una explosi\xF3n que quema un \xE1rea a su alrededor (mejorar
+      esta habilidad aumenta la duraci\xF3n de la quemadura)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033666406912000
-    m_Localized: Secundaria
+    m_Localized: "Realiza un plunge attack con da\xF1o en \xE1rea (mejorar esta habilidad
+      aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033731905163264
-    m_Localized: Secundaria
+    m_Localized: Bate el abanico para empujar a los enemigos que tiene enfrente (mejorar
+      esta habilidad aumenta la fuerza del empuje).
     m_Metadata:
       m_Items: []
   - m_Id: 13033750657896448
-    m_Localized: Pasiva
+    m_Localized: "Tras lanzar 4 r\xE1fagas de aire, la siguiente empuja a los enemigos
+      con los que colisiona (mejorar esta habilidad aumenta la fuerza del empuje)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033520835203072
-    m_Localized: Pasiva
+    m_Localized: "Si un enemigo est\xE1 cerca, le pega con la grapadora cuerpo a
+      cuerpo en vez de dispararle (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033605694361600
-    m_Localized: Pasiva
+    m_Localized: "Tras dar tres golpes, el siguiente quema a los enemigos (mejorar
+      esta habilidad aumenta la duraci\xF3n de la quemadura)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033681376382976
-    m_Localized: Pasiva
+    m_Localized: "Cada chincheta clavada en un enemigo aumenta el da\xF1o del ataque
+      primario (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13074380935364608

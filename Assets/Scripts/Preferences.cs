@@ -1,3 +1,4 @@
+using System;
 using Botpa;
 using TMPro;
 using UnityEngine;
@@ -6,56 +7,24 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class Preferences : MonoBehaviour {
-    
+
     //Audio
     private static AudioMixer _audioMixer;
+    private static readonly FloatPreference volumeMasterPreference = new("Game.VolumeMaster", 1.0f, (value) => AudioMixer.SetFloat("Master", Util.VolumeToDB(value)));
+    private static readonly FloatPreference volumeMusicPreference = new("Game.VolumeMusic", 0.8f, (value) => AudioMixer.SetFloat("Music", Util.VolumeToDB(value)));
+    private static readonly FloatPreference volumeSFXPreference = new("Game.VolumeSFX", 0.8f, (value) => AudioMixer.SetFloat("SFX", Util.VolumeToDB(value)));
+
     private static AudioMixer AudioMixer {
         get {
             if (!_audioMixer) AudioMixer = Resources.Load<AudioMixer>("AudioMixer");
             return _audioMixer;
         }
-        set {
-            _audioMixer = value;
-        }
+        set => _audioMixer = value;
     }
-    
-    private static float _volumeMaster = -1;
-    private static float _volumeMusic = -1;
-    private static float _volumeSFX = -1;
 
-    public static float VolumeMaster {
-        get {
-            if (_volumeMaster < 0) VolumeMaster = PlayerPrefs.GetFloat("Audio.volumeMaster", 1f);
-            return _volumeMaster;
-        }
-        set {
-            _volumeMaster = value;
-            AudioMixer.SetFloat("Master", Util.VolumeToDB(value));
-            PlayerPrefs.SetFloat("Audio.volumeMaster", _volumeMaster);
-        }
-    }
-    public static float VolumeMusic {
-        get {
-            if (_volumeMusic < 0) VolumeMusic = PlayerPrefs.GetFloat("Audio.volumeMusic", 0.8f);
-            return _volumeMusic;
-        }
-        set {
-            _volumeMusic = value;
-            AudioMixer.SetFloat("Music", Util.VolumeToDB(value));
-            PlayerPrefs.SetFloat("Audio.volumeMusic", _volumeMusic);
-        }
-    }
-    public static float VolumeSFX {
-        get {
-            if (_volumeSFX < 0) VolumeSFX = PlayerPrefs.GetFloat("Audio.volumeSFX", 0.8f);
-            return _volumeSFX;
-        }
-        set {
-            _volumeSFX = value;
-            AudioMixer.SetFloat("SFX", Util.VolumeToDB(value));
-            PlayerPrefs.SetFloat("Audio.volumeSFX", _volumeSFX);
-        }
-    }
+    public static float VolumeMaster { get => volumeMasterPreference.Value; set => volumeMasterPreference.Value = value; }
+    public static float VolumeMusic { get => volumeMusicPreference.Value; set => volumeMusicPreference.Value = value; }
+    public static float VolumeSFX { get => volumeSFXPreference.Value; set => volumeSFXPreference.Value = value; }
 
     //UI (Audio)
     [Header("Audio")]
@@ -95,6 +64,105 @@ public class Preferences : MonoBehaviour {
 
         //Update preferences
         PlayerPrefs.SetString("Settings.Locale", LocalizationSettings.SelectedLocale.Identifier.Code);
+    }
+
+
+    //Preferences
+    public abstract class Preference<T> {
+
+        //State
+        private bool isLoaded = false;
+
+        //Info
+        private T value;
+        protected readonly string key;
+        protected readonly T defaultValue;
+        protected Action<T> onValueChanged;
+
+        public T Value {
+            get {
+                //Init
+                if (!isLoaded) {
+                    value = LoadValue();
+                    onValueChanged?.Invoke(value);
+                    isLoaded = true;
+                }
+
+                //Return value
+                return value;
+            }
+            set {
+                //Save value
+                this.value = value;
+                SaveValue(value);
+                onValueChanged?.Invoke(value);
+
+                //Init
+                isLoaded = true;
+            }
+        }
+
+
+        //Constructor
+        public Preference(string key, T defaultValue, Action<T> onValueChanged = null) {
+            this.key = key;
+            this.defaultValue = defaultValue;
+            this.onValueChanged = onValueChanged;
+        }
+
+        //Load/Save
+        protected abstract T LoadValue();
+
+        protected abstract void SaveValue(T value);
+
+    }
+
+    public class FloatPreference : Preference<float> {
+
+        //Constructor
+        public FloatPreference(string key, float defaultValue, Action<float> onValueChanged = null) : base(key, defaultValue, onValueChanged) {}
+
+        //Load/Save
+        protected override float LoadValue() {
+            return PlayerPrefs.GetFloat(key, defaultValue);
+        }
+
+        protected override void SaveValue(float value) {
+            PlayerPrefs.SetFloat(key, value);
+        }
+
+    }
+
+    public class IntPreference : Preference<int> {
+
+        //Constructor
+        public IntPreference(string key, int defaultValue, Action<int> onValueChanged = null) : base(key, defaultValue, onValueChanged) {}
+
+        //Load/Save
+        protected override int LoadValue() {
+            return PlayerPrefs.GetInt(key, defaultValue);
+        }
+
+        protected override void SaveValue(int value) {
+            PlayerPrefs.SetInt(key, value);
+        }
+
+    }
+
+    public class StringPreference : Preference<string> {
+
+        //Constructor
+        public StringPreference(string key, string defaultValue, Action<string> onValueChanged = null) : base(key, defaultValue, onValueChanged) {}
+
+        //Load/Save
+        protected override string LoadValue() {
+            return PlayerPrefs.GetString(key, defaultValue);
+        }
+
+        protected override void SaveValue(string value) {
+            PlayerPrefs.SetString(key, value);
+        }
+
     }
 
 }

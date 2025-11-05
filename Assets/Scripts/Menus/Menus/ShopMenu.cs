@@ -163,6 +163,7 @@ public class ShopMenu : Menu {
 
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private LocalizedString nameLocale;
         [SerializeField] private TMP_Text descriptionText;
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text buttonText;
@@ -179,7 +180,7 @@ public class ShopMenu : Menu {
             };
 
             //Name & description
-            nameText.SetText($"{weapon.Item.Name} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
+            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
             descriptionText.SetText(action switch { 
                 WeaponAction.Primary => weapon.PrimaryDescription, 
                 WeaponAction.Secondary => weapon.SecondaryDescription, 

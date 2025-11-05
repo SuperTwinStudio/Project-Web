@@ -207,11 +207,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13035009775374336
-    m_Localized: Rugosidad description
+    m_Localized: "Aumenta el porcentaje de da\xF1o resistido."
     m_Metadata:
       m_Items: []
   - m_Id: 13035064179691520
-    m_Localized: Gramaje description
+    m_Localized: "Otorga salud m\xE1xima adicional."
     m_Metadata:
       m_Items: []
   references:

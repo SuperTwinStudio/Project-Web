@@ -155,7 +155,7 @@ Clase de combate cuerpo a cuerpo genérica con un estilo de juego balanceado.
 	- Mejora: Aumenta el daño.
 - **Ataque secundario:** Golpea girando sobre sí mismo, dañando a los enemigos que estén en el área de corte.
 	- Mejora: Aumenta el daño.
-- **Pasiva:** Tras dar tres golpes, el cuarto realiza daño extra.
+- **Pasiva:** Tras dar tres golpes, el siguiente golpe realiza daño extra.
 	- Mejora: Aumenta el daño.
 
 #### Clase Lanza
@@ -166,29 +166,29 @@ Clase de combate cuerpo a cuerpo que sacrifica velocidad por potencia y algo má
 	- Mejora: Aumenta el daño.
 - **Ataque secundario:** Crea una explosión que quema un área a su alrededor.
 	- Mejora: Aumenta la duración de la quemadura.
-- **Pasiva:** Tras cierta cantidad de ataques, el siguiente suelta una brasa que quema a los enemigos en su dirección.
+- **Pasiva:** Tras dar tres golpes, el siguiente quema a los enemigos.
 	- Mejora: Aumenta la duración de la quemadura.    
 
 #### Clase Garra
 Clase de combate cuerpo a cuerpo que sacrifica área de daño por velocidad de ataque.
 
 **Guantelete de chinchetas**
-- **Ataque primario:** Golpea hacia el frente, dañando a los enemigos que estén en su rango.
+- **Ataque primario:** Golpea hacia el frente, dañando a los enemigos que estén en su rango y clavando una chincheta hasta un máximo de 5.
 	- Mejora: Aumenta el daño del golpe.
-- **Ataque secundario:** Permite hacer un plunge attack con daño en área.
-	- Mejora: Aumenta el daño del plunge attack.
-- **Pasiva:** Tras clavar cierta cantidad de chinchetas, aumenta el daño infligido al enemigo que las tenga clavadas.
+- **Ataque secundario:** Realiza un plunge attack con daño en área.
+	- Mejora: Aumenta el daño del golpe.
+- **Pasiva:** Cada chincheta clavada en un enemigo aumenta el daño del ataque primario.
 	- Mejora: Aumenta el daño extra.
 
 #### Clase Trabuco
 Clase de combate a rango que utiliza munición y tiene un estilo de juego balanceado.
 
 **Grapadora**
-- **Ataque primario:** Dispara una grapa.
+- **Ataque primario:** Dispara una grapa hacia el frente.
 	- Mejora: Aumenta el daño de la grapa.
-- **Ataque secundario:** Dispara una ráfaga de 3 grapas.
+- **Ataque secundario:** Dispara una ráfaga de 3 grapas hacia el frente.
 	- Mejora: Aumenta el daño de la rafaga.
-- **Pasiva:** Al apuntar a un enemigo cerca, le pega con la grapadora en vez de dispararle.
+- **Pasiva:** Si un enemigo está cerca, le pega con la grapadora cuerpo a cuerpo en vez de dispararle.
 	- Mejora: Aumenta el daño del golpe melee.
 
 #### Clase de Viento
@@ -199,8 +199,8 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
 	- Mejora: Aumenta el daño de la rafaga de aire.
 - **Ataque secundario:** Bate el abanico para empujar a los enemigos que tiene enfrente.
 	- Mejora: Aumenta la distancia de empuje.
-- **Pasiva:** Pegar por la espalda a un enemigo hace daño crítico.
-	- Mejora: Aumenta el porcentaje de crítico.
+- **Pasiva:** Tras lanzar 4 ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
+	- Mejora: Aumenta la distancia de empuje.
 
 #### Clase Mental
 Arma de rango centrada en provocar daño de forma indirecta, generando minions u obstáculos en el mapa.

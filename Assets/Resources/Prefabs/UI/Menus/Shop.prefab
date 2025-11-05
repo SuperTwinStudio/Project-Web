@@ -3864,18 +3864,45 @@ MonoBehaviour:
   primaryAttack:
     icon: {fileID: 8676293687671013718}
     nameText: {fileID: 1168615438702124289}
+    nameLocale:
+      m_TableReference:
+        m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+      m_TableEntryReference:
+        m_KeyId: 2903219903533056
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     descriptionText: {fileID: 2862720960065282664}
     button: {fileID: 5057997421978606153}
     buttonText: {fileID: 6716940500879097947}
   secondaryAttack:
     icon: {fileID: 5088559836759339405}
     nameText: {fileID: 3369132983090212314}
+    nameLocale:
+      m_TableReference:
+        m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+      m_TableEntryReference:
+        m_KeyId: 2903269014638592
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     descriptionText: {fileID: 1822898600611795635}
     button: {fileID: 8703149992722049682}
     buttonText: {fileID: 7188040610443505792}
   passiveAttack:
     icon: {fileID: 3462662535881662635}
     nameText: {fileID: 6364285107305413884}
+    nameLocale:
+      m_TableReference:
+        m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+      m_TableEntryReference:
+        m_KeyId: 2903287498936320
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     descriptionText: {fileID: 8061398882549908373}
     button: {fileID: 1032493930685381556}
     buttonText: {fileID: 1536545325379658150}

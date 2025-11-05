@@ -127,63 +127,77 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13031383011037184
-    m_Localized: Passive
+    m_Localized: After three hits, the next hit deals bonus damage (upgrading this
+      skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13031348479332352
-    m_Localized: Primary
+    m_Localized: Strikes forward, damaging enemies within range (upgrading this skill
+      increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13031367097847808
-    m_Localized: Secondary
+    m_Localized: "Strikes while spinning, damaging enemies within the area of \u200B\u200Beffect
+      (upgrading this skill increases its damage)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033482478292992
-    m_Localized: Primary
+    m_Localized: Fires a staple forward (upgrading this skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033561209573376
-    m_Localized: Primary
+    m_Localized: Strikes forward, damaging enemies within range (upgrading this skill
+      increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033653618479104
-    m_Localized: Primary
+    m_Localized: Strikes forward, damaging enemies within range and driving up to
+      5 pins into the enemies (upgrading this skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033719343222784
-    m_Localized: Primary
+    m_Localized: Waves the fan to unleash a gust of air forward, damaging enemies
+      in an area (upgrading this skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033501151334400
-    m_Localized: Secondary
+    m_Localized: Fires a burst of 3 staples forward (upgrading this skill increases
+      its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033586727718912
-    m_Localized: Secondary
+    m_Localized: Creates an explosion that burns an area around it (upgrading this
+      skill increases the burn duration).
     m_Metadata:
       m_Items: []
   - m_Id: 13033666406912000
-    m_Localized: Secondary
+    m_Localized: Performs a plunge attack with area-of-effect damage (upgrading this
+      skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033731905163264
-    m_Localized: Secondary
+    m_Localized: Waves the fan to push back enemies in front of you (upgrading this
+      skill increases the force of the push).
     m_Metadata:
       m_Items: []
   - m_Id: 13033750657896448
-    m_Localized: Passive
+    m_Localized: After four gusts of air, the next one pushes back the enemies it
+      collides with (upgrading this skill increases the force of the push).
     m_Metadata:
       m_Items: []
   - m_Id: 13033520835203072
-    m_Localized: Passive
+    m_Localized: If an enemy is nearby, it attacks them with the stapler in melee
+      range instead of firing (upgrading this skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033605694361600
-    m_Localized: Passive
+    m_Localized: After three hits, the next hit burns enemies (upgrading this skill
+      increases the burn duration).
     m_Metadata:
       m_Items: []
   - m_Id: 13033681376382976
-    m_Localized: Passive
+    m_Localized: Each pushpin driven into an enemy increases the damage of the primary
+      attack (upgrading this skill increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13074380935364608
