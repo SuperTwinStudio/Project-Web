@@ -15,88 +15,116 @@ MonoBehaviour:
   m_TableCollectionName: UI
   m_TableCollectionNameGuidString: 99c271c4294dded488381bec0342cc95
   m_Entries:
-  - m_Id: 1416761367728128
-    m_Key: inventory_title
+  - m_Id: 4391037469331456
+    m_Key: credits_2d
     m_Metadata:
       m_Items: []
-  - m_Id: 1416883291951104
-    m_Key: inventory_empty
+  - m_Id: 4390471737413632
+    m_Key: credits_3d
     m_Metadata:
       m_Items: []
-  - m_Id: 1446249170341888
-    m_Key: shop_title
+  - m_Id: 13011419369705472
+    m_Key: credits_additional
     m_Metadata:
       m_Items: []
-  - m_Id: 2902327242395648
-    m_Key: indicator_money
+  - m_Id: 4396989241233408
+    m_Key: credits_close
     m_Metadata:
       m_Items: []
-  - m_Id: 2902393453678592
-    m_Key: indicator_value
+  - m_Id: 4391069803220992
+    m_Key: credits_concept
     m_Metadata:
       m_Items: []
-  - m_Id: 2903219903533056
-    m_Key: shop_weapon_primary
+  - m_Id: 4390404993454080
+    m_Key: credits_programmer
     m_Metadata:
       m_Items: []
-  - m_Id: 2903269014638592
-    m_Key: shop_weapon_secondary
+  - m_Id: 4395589937532928
+    m_Key: credits_title
     m_Metadata:
       m_Items: []
-  - m_Id: 2903287498936320
-    m_Key: shop_weapon_passive
+  - m_Id: 4397426417733632
+    m_Key: death_home
     m_Metadata:
       m_Items: []
-  - m_Id: 2904128704352256
-    m_Key: shop_weapon_upgrade
+  - m_Id: 4397432436559872
+    m_Key: death_lobby
     m_Metadata:
       m_Items: []
-  - m_Id: 2904888255057920
-    m_Key: inventory_sold
+  - m_Id: 4397184544804864
+    m_Key: death_title
     m_Metadata:
       m_Items: []
-  - m_Id: 2942271885283328
-    m_Key: shop_weapon_info
+  - m_Id: 4398145094946816
+    m_Key: end_continue
     m_Metadata:
       m_Items: []
-  - m_Id: 3135052578914304
-    m_Key: shop_weapon
+  - m_Id: 4398127306903552
+    m_Key: end_lobby
     m_Metadata:
       m_Items: []
-  - m_Id: 3135097906757632
-    m_Key: shop_character
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3137753219956736
-    m_Key: shop_weapon_selected
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3566097304260608
-    m_Key: shop_weapon_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3896900982804480
-    m_Key: home_play
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3896915453153280
-    m_Key: home_settings
+  - m_Id: 4398029558648832
+    m_Key: end_title
     m_Metadata:
       m_Items: []
   - m_Id: 3896935858442240
     m_Key: home_credits
     m_Metadata:
       m_Items: []
+  - m_Id: 3896900982804480
+    m_Key: home_play
+    m_Metadata:
+      m_Items: []
   - m_Id: 3896950483980288
     m_Key: home_quit
     m_Metadata:
       m_Items: []
-  - m_Id: 3909827865481216
-    m_Key: shop_close
+  - m_Id: 3896915453153280
+    m_Key: home_settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902327242395648
+    m_Key: indicator_money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13015460753575936
+    m_Key: indicator_reloading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2902393453678592
+    m_Key: indicator_value
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396163907063808
+    m_Key: inventory_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1416883291951104
+    m_Key: inventory_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904888255057920
+    m_Key: inventory_sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1416761367728128
+    m_Key: inventory_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396311194243072
+    m_Key: settings_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396488663633920
+    m_Key: settings_home
     m_Metadata:
       m_Items: []
   - m_Id: 3913677393498112
     m_Key: settings_language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396490131640320
+    m_Key: settings_lobby
     m_Metadata:
       m_Items: []
   - m_Id: 3913703494651904
@@ -111,104 +139,76 @@ MonoBehaviour:
     m_Key: settings_sfx
     m_Metadata:
       m_Items: []
-  - m_Id: 4031849643773952
-    m_Key: shop_character_title
+  - m_Id: 4398969451843584
+    m_Key: settings_title
     m_Metadata:
       m_Items: []
-  - m_Id: 4032281594171392
-    m_Key: shop_character_info
+  - m_Id: 3135097906757632
+    m_Key: shop_character
     m_Metadata:
       m_Items: []
   - m_Id: 4051293178826752
     m_Key: shop_character_gramaje
     m_Metadata:
       m_Items: []
+  - m_Id: 13035064179691520
+    m_Key: shop_character_gramaje_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032281594171392
+    m_Key: shop_character_info
+    m_Metadata:
+      m_Items: []
   - m_Id: 4051312049000448
     m_Key: shop_character_rugosidad
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4390404993454080
-    m_Key: credits_programmer
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4390471737413632
-    m_Key: credits_3d
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4391037469331456
-    m_Key: credits_2d
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4391069803220992
-    m_Key: credits_concept
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4395589937532928
-    m_Key: credits_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4396163907063808
-    m_Key: inventory_close
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4396311194243072
-    m_Key: settings_close
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4396488663633920
-    m_Key: settings_home
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4396490131640320
-    m_Key: settings_lobby
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4396989241233408
-    m_Key: credits_close
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4397184544804864
-    m_Key: death_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4397426417733632
-    m_Key: death_home
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4397432436559872
-    m_Key: death_lobby
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4398029558648832
-    m_Key: end_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4398127306903552
-    m_Key: end_lobby
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4398145094946816
-    m_Key: end_continue
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4398969451843584
-    m_Key: settings_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13011419369705472
-    m_Key: credits_additional
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13015460753575936
-    m_Key: indicator_reloading
     m_Metadata:
       m_Items: []
   - m_Id: 13035009775374336
     m_Key: shop_character_rugosidad_description
     m_Metadata:
       m_Items: []
-  - m_Id: 13035064179691520
-    m_Key: shop_character_gramaje_description
+  - m_Id: 4031849643773952
+    m_Key: shop_character_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3909827865481216
+    m_Key: shop_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446249170341888
+    m_Key: shop_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3135052578914304
+    m_Key: shop_weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2942271885283328
+    m_Key: shop_weapon_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903287498936320
+    m_Key: shop_weapon_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903219903533056
+    m_Key: shop_weapon_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903269014638592
+    m_Key: shop_weapon_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3137753219956736
+    m_Key: shop_weapon_selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3566097304260608
+    m_Key: shop_weapon_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2904128704352256
+    m_Key: shop_weapon_upgrade
     m_Metadata:
       m_Items: []
   m_Metadata:

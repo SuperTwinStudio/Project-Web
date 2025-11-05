@@ -14,125 +14,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: es
-  m_SharedData: {fileID: 11400000, guid: 99c271c4294dded488381bec0342cc95, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 0195ed0b25fa14d4f8ed14a678101c29, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 5625636327424
-    m_Localized: Espada
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5642983968768
-    m_Localized: Cerilla
-    m_Metadata:
-      m_Items: []
-  - m_Id: 767371087056896
-    m_Localized: Grapadora
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1381918873358336
-    m_Localized: Bolsa de Dinero
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1381933679251456
-    m_Localized: Copa Dorada
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2119845693755392
-    m_Localized: Quemado
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2122526038560768
-    m_Localized: Realentizado
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5451330203123712
-    m_Localized: Filo oculto
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12371992335319040
-    m_Localized: Escudo inverso
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372065039384576
-    m_Localized: Yesca
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372118625812480
-    m_Localized: "Compa\xF1ero orbital"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372185998917632
-    m_Localized: Folio sin doblar
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372254135386112
-    m_Localized: "Dise\xF1o aerodinamico"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372331805507584
-    m_Localized: Abanico de papel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372395693146112
-    m_Localized: "Suelas de cart\xF3n"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372451712270336
-    m_Localized: Cutter
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372500366196736
-    m_Localized: Piel de cartulina
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372573741350912
-    m_Localized: Purpurina brillante
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372644847386624
-    m_Localized: Pegamento de barra
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372701139140608
-    m_Localized: Esponja mojada
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12372764393439232
-    m_Localized: Pluma rota
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12388082734039040
-    m_Localized: Aturdido
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12943447938924544
-    m_Localized: Chincheta
+  - m_Id: 12969046891921408
+    m_Localized: Abanico
     m_Metadata:
       m_Items: []
   - m_Id: 12946958567178240
     m_Localized: Guantelete
     m_Metadata:
       m_Items: []
-  - m_Id: 12969046891921408
-    m_Localized: Abanico
+  - m_Id: 767371087056896
+    m_Localized: Grapadora
     m_Metadata:
       m_Items: []
-  - m_Id: 13044225118535680
-    m_Localized: Pegado
+  - m_Id: 5642983968768
+    m_Localized: Cerilla
     m_Metadata:
       m_Items: []
-  - m_Id: 13046186966482944
-    m_Localized: Mojado
+  - m_Id: 5625636327424
+    m_Localized: Espada
     m_Metadata:
       m_Items: []
-  - m_Id: 13031383011037184
-    m_Localized: "Tras dar tres golpes, el siguiente golpe realiza da\xF1o extra
-      (mejorar esta habilidad aumenta su da\xF1o)."
+  - m_Id: 12388082734039040
+    m_Localized: Aturdido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2122526038560768
+    m_Localized: Realentizado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12943447938924544
+    m_Localized: Chincheta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2119845693755392
+    m_Localized: Quemado
     m_Metadata:
       m_Items: []
   - m_Id: 13031348479332352
-    m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE9n
+    m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE1n
       en su rango (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
@@ -172,19 +95,9 @@ MonoBehaviour:
       esta habilidad aumenta la duraci\xF3n de la quemadura)."
     m_Metadata:
       m_Items: []
-  - m_Id: 13033666406912000
-    m_Localized: "Realiza un plunge attack con da\xF1o en \xE1rea (mejorar esta habilidad
-      aumenta su da\xF1o)."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13033731905163264
-    m_Localized: Bate el abanico para empujar a los enemigos que tiene enfrente (mejorar
-      esta habilidad aumenta la fuerza del empuje).
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13033750657896448
-    m_Localized: "Tras lanzar 4 r\xE1fagas de aire, la siguiente empuja a los enemigos
-      con los que colisiona (mejorar esta habilidad aumenta la fuerza del empuje)."
+  - m_Id: 13033605694361600
+    m_Localized: "Tras dar tres golpes, el siguiente quema a los enemigos (mejorar
+      esta habilidad aumenta la duraci\xF3n de la quemadura)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033520835203072
@@ -192,9 +105,19 @@ MonoBehaviour:
       cuerpo en vez de dispararle (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
-  - m_Id: 13033605694361600
-    m_Localized: "Tras dar tres golpes, el siguiente quema a los enemigos (mejorar
-      esta habilidad aumenta la duraci\xF3n de la quemadura)."
+  - m_Id: 13033750657896448
+    m_Localized: "Tras lanzar 4 r\xE1fagas de aire, la siguiente empuja a los enemigos
+      con los que colisiona (mejorar esta habilidad aumenta la fuerza del empuje)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033731905163264
+    m_Localized: Bate el abanico para empujar a los enemigos que tiene enfrente (mejorar
+      esta habilidad aumenta la fuerza del empuje).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033666406912000
+    m_Localized: "Realiza un plunge attack con da\xF1o en \xE1rea (mejorar esta habilidad
+      aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033681376382976
@@ -202,60 +125,137 @@ MonoBehaviour:
       primario (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
-  - m_Id: 13074380935364608
-    m_Localized: Probabilidad de disparar cuchillos al usar la habilidad primaria.
+  - m_Id: 13031383011037184
+    m_Localized: "Tras dar tres golpes, el siguiente golpe realiza da\xF1o extra
+      (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
-  - m_Id: 13074920163475456
-    m_Localized: "Lleva un escudo a tu espalda para bloquear da\xF1o."
+  - m_Id: 13046186966482944
+    m_Localized: Mojado
     m_Metadata:
       m_Items: []
-  - m_Id: 13075061758984192
-    m_Localized: Probabilidad de quemar a un enemigo al atacar.
+  - m_Id: 13044225118535680
+    m_Localized: Pegado
     m_Metadata:
       m_Items: []
-  - m_Id: 13075191862099968
-    m_Localized: Un compi orbita alrededor tuya mientras dispara a enemigos.
+  - m_Id: 1381918873358336
+    m_Localized: Bolsa de Dinero
     m_Metadata:
       m_Items: []
-  - m_Id: 13075437560233984
-    m_Localized: Al morir, revive con algo de vida.
+  - m_Id: 1381933679251456
+    m_Localized: Copa Dorada
     m_Metadata:
       m_Items: []
-  - m_Id: 13076043255480320
-    m_Localized: Gana velocidad de movimiento.
+  - m_Id: 12372701139140608
+    m_Localized: Esponja mojada
     m_Metadata:
       m_Items: []
-  - m_Id: 13076328237465600
-    m_Localized: Empuja enemigos al esquivar.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13076458839703552
-    m_Localized: Los ataques te empujan menos.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13076683096555520
-    m_Localized: "Haz m\xE1s da\xF1o."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13076786658115584
-    m_Localized: Incrementa tu cantidad de vida.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13076944665935872
-    m_Localized: Probabilidad de aturdir a un enemigo.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13077065373810688
-    m_Localized: Probabilidad de pegar enemigos al suelo.
+  - m_Id: 13077334115450880
+    m_Localized: Probabilidad de manchar de tinta a un enemigo.
     m_Metadata:
       m_Items: []
   - m_Id: 13077240817352704
     m_Localized: Probabilidad de debilitar a un enemigo.
     m_Metadata:
       m_Items: []
-  - m_Id: 13077334115450880
-    m_Localized: Probabilidad de manchar de tinta a un enemigo.
+  - m_Id: 13077065373810688
+    m_Localized: Probabilidad de pegar enemigos al suelo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076944665935872
+    m_Localized: Probabilidad de aturdir a un enemigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076786658115584
+    m_Localized: Incrementa tu cantidad de vida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076683096555520
+    m_Localized: "Haz m\xE1s da\xF1o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076458839703552
+    m_Localized: Los ataques te empujan menos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076328237465600
+    m_Localized: Empuja enemigos al esquivar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076043255480320
+    m_Localized: Gana velocidad de movimiento.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075437560233984
+    m_Localized: Al morir, revive con algo de vida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075191862099968
+    m_Localized: Un compi orbita alrededor tuya mientras dispara a enemigos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075061758984192
+    m_Localized: Probabilidad de quemar a un enemigo al atacar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13074920163475456
+    m_Localized: "Lleva un escudo a tu espalda para bloquear da\xF1o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13074380935364608
+    m_Localized: Probabilidad de disparar cuchillos al usar la habilidad primaria.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372764393439232
+    m_Localized: Pluma rota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372644847386624
+    m_Localized: Pegamento de barra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372573741350912
+    m_Localized: Purpurina brillante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372500366196736
+    m_Localized: Piel de cartulina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372451712270336
+    m_Localized: Cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372395693146112
+    m_Localized: "Suelas de cart\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372331805507584
+    m_Localized: Abanico de papel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372254135386112
+    m_Localized: "Dise\xF1o aerodin\xE1mico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372185998917632
+    m_Localized: Folio sin doblar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372118625812480
+    m_Localized: "Compa\xF1ero orbital"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372065039384576
+    m_Localized: Yesca
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12371992335319040
+    m_Localized: Escudo inverso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5451330203123712
+    m_Localized: Filo oculto
     m_Metadata:
       m_Items: []
   references:
