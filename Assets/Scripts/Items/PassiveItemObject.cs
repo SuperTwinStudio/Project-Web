@@ -7,6 +7,9 @@ public class PassiveItemObject : ScriptableObject
     [SerializeField] private LocalizedString _name;
     public string Name => _name.GetLocalizedString();
 
+    [SerializeField] private LocalizedString _desc;
+    public string Description => _desc.GetLocalizedString();
+
     public Sprite Icon;
     public ItemRarity Rarity;
     

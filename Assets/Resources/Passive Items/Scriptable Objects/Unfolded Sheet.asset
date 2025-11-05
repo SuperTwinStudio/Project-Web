@@ -21,6 +21,15 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  _desc:
+    m_TableReference:
+      m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
+    m_TableEntryReference:
+      m_KeyId: 13075437560233984
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
   Rarity: 2
   Logic: {fileID: 7428910323846230569, guid: d2f1632af1df53843a1665fef53b6228, type: 3}

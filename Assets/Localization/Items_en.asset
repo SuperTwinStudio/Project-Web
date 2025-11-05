@@ -186,6 +186,62 @@ MonoBehaviour:
     m_Localized: Passive
     m_Metadata:
       m_Items: []
+  - m_Id: 13074380935364608
+    m_Localized: Chance to fire blades forward when using your primary ability.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13074920163475456
+    m_Localized: Carry a shield on your back to block damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075061758984192
+    m_Localized: Chance to light enemies on fire when attacking.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075191862099968
+    m_Localized: A little buddy orbits around you while firing at enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075437560233984
+    m_Localized: On death, return to life with some health.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076043255480320
+    m_Localized: Gain movement speed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076328237465600
+    m_Localized: Push enemies when dashing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076458839703552
+    m_Localized: Receive less knockback.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076683096555520
+    m_Localized: Deal extra damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076786658115584
+    m_Localized: Increase base health.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076944665935872
+    m_Localized: Chance to stun struck enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077065373810688
+    m_Localized: Chance to stick struck enemies to the ground.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077240817352704
+    m_Localized: Chance to weaken struck enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077334115450880
+    m_Localized: Chance to stain struck enemy.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
