@@ -14,6 +14,9 @@ public class ShopMenu : Menu {
     public override string Name => MenusList.Shop;
 
     //Components
+    [Header("Components")]
+    [SerializeField] private Selectable _defaultSelected;
+
     private Loadout Loadout => Player.Loadout;
 
     //Input
@@ -39,17 +42,15 @@ public class ShopMenu : Menu {
 
     private Weapon selectedWeapon;
 
-    [Header("Components")]
-    [SerializeField] private Selectable _defaultSelected;
 
-    /*$$$$$   /$$                 /$$
-   /$$__  $$ | $$                | $$
-  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-   \______/   \___/   \_______/   \___/   \______*/
+      /*$$$$$   /$$                 /$$
+     /$$__  $$ | $$                | $$
+    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+     \______/   \___/   \_______/   \___/   \______*/
 
     public override void OnUpdate() {
         //Close menu
@@ -93,8 +94,7 @@ public class ShopMenu : Menu {
 
     public void UpgradeCharacter(int type) {
         //Try to upgrade player
-        if (!Player.TryUpgrade((PlayerUpgrade) type)) 
-        {
+        if (!Player.TryUpgrade((PlayerUpgrade) type)) {
             _defaultSelected.Select();
             return; 
         }
@@ -135,9 +135,9 @@ public class ShopMenu : Menu {
 
         //Update upgrades
         weaponNameText.SetText(selectedWeapon.Item.Name);
-        primaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Primary, Loadout.Money);
-        secondaryAttack.UpdateUI(selectedWeapon, WeaponAttack.Secondary, Loadout.Money);
-        passiveAttack.UpdateUI(selectedWeapon, WeaponAttack.Passive, Loadout.Money);
+        primaryAttack.UpdateUI(selectedWeapon, WeaponAction.Primary, Loadout.Money);
+        secondaryAttack.UpdateUI(selectedWeapon, WeaponAction.Secondary, Loadout.Money);
+        passiveAttack.UpdateUI(selectedWeapon, WeaponAction.Passive, Loadout.Money);
     }
 
     public void SelectWeaponTab(Item item) {
@@ -150,7 +150,7 @@ public class ShopMenu : Menu {
 
     public void UpgradeWeapon(int type) {
         //Try to upgrade weapon
-        if (!selectedWeapon.TryUpgrade((WeaponAttack) type)) return;
+        if (!selectedWeapon.TryUpgrade((WeaponAction) type)) return;
 
         //Success -> Update UI
         UpdateMainUI();
@@ -179,14 +179,14 @@ public class ShopMenu : Menu {
         public Button button;
         public TMP_Text buttonText;
 
-        public void UpdateUI(Weapon weapon, WeaponAttack attack, int money) {
+        public void UpdateUI(Weapon weapon, WeaponAction attack, int money) {
             //Get upgrade
             Upgrade upgrade = weapon.GetUpgrade(attack);
         
             //Icon
             icon.sprite = attack switch {
-                WeaponAttack.Primary => weapon.PrimaryIcon,
-                WeaponAttack.Secondary => weapon.SecondaryIcon,
+                WeaponAction.Primary => weapon.PrimaryIcon,
+                WeaponAction.Secondary => weapon.SecondaryIcon,
                 _ => weapon.PassiveIcon
             };
 
@@ -232,7 +232,7 @@ public class ShopMenu : Menu {
         //Start camera cinematic
         if (args != null) {
             ShopArgs shopArgs = (ShopArgs) args;
-            Level.CameraController.EnterCutScene(shopArgs.viewTarget, shopArgs.cameraTarget);
+            Level.CameraController.EnterCutscene(shopArgs.positionTarget, shopArgs.viewTarget);
         }
     }
 
@@ -243,14 +243,14 @@ public class ShopMenu : Menu {
         if (!Application.isPlaying) return;
 
         //Stop camera cinematic
-        Level.CameraController.ExitCutScene();
+        Level.CameraController.ExitCutscene();
     }
 
 }
 
 public class ShopArgs {
     
+    public Transform positionTarget;
     public Transform viewTarget;
-    public Transform cameraTarget;
 
 }

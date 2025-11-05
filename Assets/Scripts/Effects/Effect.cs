@@ -10,6 +10,8 @@ public class Effect : ScriptableObject {
     [SerializeField] private bool _show = true;
     [SerializeField] private Sprite _icon;
     [SerializeField] private LocalizedString _name;
+    [SerializeField] private bool _hasLevels = false;
+    [SerializeField] private int _maxLevel = 5;
     [SerializeField] private EffectAction _action;
 
     private readonly static Dictionary<string, Effect> cache = new();
@@ -17,6 +19,8 @@ public class Effect : ScriptableObject {
     public bool Show => _show;
     public Sprite Icon => _icon;
     public string Name => _name.GetLocalizedString();
+    public bool HasLevels => _hasLevels;
+    public int MaxLevel => _maxLevel;
     public EffectAction Action => _action;
     public string FileName => name; //"name" is the name of the object, aka the file
 

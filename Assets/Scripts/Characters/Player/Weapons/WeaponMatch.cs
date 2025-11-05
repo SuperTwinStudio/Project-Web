@@ -1,0 +1,128 @@
+using System.Collections;
+using UnityEngine;
+
+public class WeaponMatch : Weapon {
+
+    //Effects
+    [Header("Effects")]
+    [SerializeField] private Effect attackSlowEffect;
+    [SerializeField] private Effect burnEffect;
+
+    //Primary
+    [Header("Primary")]
+    [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
+    [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
+    [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
+    [SerializeField, Min(0)] private float primaryDamage = 30f;
+    [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
+    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(0.5f, 1.5f);
+
+    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+
+    protected override float PrimaryCooldownDuration => _primaryCooldown;
+
+    //Secondary
+    [Header("Secondary")]
+    [SerializeField, Min(0)] private float _secondaryCooldown = 4f;
+    [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
+    [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
+    [SerializeField, Min(0)] private float secondaryDuration = 3f;
+    [SerializeField, Min(0)] private float secondaryDurationPerLevel = 1f;
+    [SerializeField, Min(0)] private float secondaryRadius = 3f;
+
+    private float SecondaryBurnDuration => secondaryDuration + (SecondaryUpgrade.Level - 1) * secondaryDurationPerLevel;
+
+    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+
+    //Passive
+    [Header("Passive")]
+    [SerializeField, Min(0)] private float passiveDuration = 1f;
+    [SerializeField, Min(0)] private float passiveDurationPerLevel = 1f;
+    [SerializeField, Min(2)] private int passiveHit = 4;
+
+    private bool isPassiveHit = false;
+    private int hitCount = 0;
+
+    private float PassiveBurnDuration => passiveDuration + (PassiveUpgrade.Level - 1) * passiveDurationPerLevel;
+
+    public override float PassiveCooldown => isPassiveHit ? 0 : 1;
+
+
+    //State
+    protected override void OnShow() {
+        //Reset passive
+        hitCount = 0;
+        UpdatePassiveValue();
+    }
+
+    //Primary
+    protected override IEnumerator OnUsePrimaryCoroutine() {
+        yield return null;
+
+        //Set cooldown on secondary so it can't be used while using primary
+        SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
+
+        //Attack
+        MeleeForward(
+            primaryAttackSphereCast.x, 
+            primaryAttackSphereCast.y,
+            PrimaryDamage,
+            isPassiveHit ? (damageable) => ApplyBurn(damageable, PassiveBurnDuration) : null
+        );
+
+        //Next hit
+        hitCount = (hitCount + 1) % passiveHit;
+        isPassiveHit = hitCount == passiveHit - 1;
+        UpdatePassiveValue();
+
+        //Animate
+        animator.SetTrigger("Attack");
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
+    }
+
+    //Secondary
+    protected override IEnumerator OnUseSecondaryCoroutine() {
+        yield return null;
+
+        //Set cooldown on primary so it can't be used while using secondary
+        SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
+
+        //Attack
+        MeleeAround(
+            secondaryRadius,
+            0, 
+            (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
+        );
+
+        //Animate
+        //animator.SetTrigger("AttackSpin");
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
+
+        //Apply camera knockback
+        CameraController.AddShake();
+    }
+
+    //Passive
+    private void UpdatePassiveValue() {
+        //Update passive value
+        SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
+    }
+
+    //Effects
+    private void ApplyBurn(IDamageable damageable, float duration) {
+        //Not a character
+        if (damageable is not Character) return;
+
+        //Get character
+        Character character = damageable as Character;
+        character.AddEffect(burnEffect, duration);
+    }
+
+}

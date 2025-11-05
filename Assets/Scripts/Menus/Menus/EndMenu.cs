@@ -7,7 +7,7 @@ public class EndMenu : Menu {
     public override string Name => MenusList.End;
 
     [Header("Components")]
-    [SerializeField] private Selectable _defaultSelected;
+    [SerializeField] private Selectable defaultSelectable;
 
     /*$$$$$   /$$                 /$$
    /$$__  $$ | $$                | $$
@@ -60,7 +60,7 @@ public class EndMenu : Menu {
         if (!Application.isPlaying) return;
 
         //Select default button (for controller navigation)
-        _defaultSelected.Select();
+        defaultSelectable.Select();
 
         //Pause game
         Game.Pause(this);

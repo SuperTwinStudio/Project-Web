@@ -358,8 +358,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Logo
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8edda0e83b4f9164a8331cc063cab0f3, type: 2}
+  m_sharedMaterial: {fileID: -7321117228339591122, guid: 8edda0e83b4f9164a8331cc063cab0f3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1259,7 +1259,7 @@ MonoBehaviour:
   _canvas: {fileID: 0}
   _state: 0
   versionText: {fileID: 4445587222178282448}
-  _defaultSelected: {fileID: 5453439554788545724}
+  defaultSelectable: {fileID: 5453439554788545724}
 --- !u!224 &7480469518259031152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}

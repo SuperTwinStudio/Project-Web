@@ -103,6 +103,18 @@ MonoBehaviour:
     m_Key: passive_pen
     m_Metadata:
       m_Items: []
+  - m_Id: 12943447938924544
+    m_Key: effect_chincheta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12946958567178240
+    m_Key: weapon_gauntlet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12969046891921408
+    m_Key: weapon_abanico
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

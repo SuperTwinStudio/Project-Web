@@ -16,6 +16,10 @@ public class InventoryMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference inventoryAction;
 
+    //Components
+    [Header("Components")]
+    [SerializeField] private Selectable defaultSelectable;
+
     //Inventory
     [Header("Inventory")]
     [SerializeField] private TMP_Text moneyText;
@@ -23,9 +27,6 @@ public class InventoryMenu : Menu {
     [SerializeField] private RectTransform itemsGrid;
     [SerializeField] private TMP_Text valueText;
     [SerializeField] private GameObject itemPrefab;
-
-    [Header("Components")]
-    [SerializeField] private Selectable _defaultSelected;
 
     /*$$$$$   /$$                 /$$
    /$$__  $$ | $$                | $$
@@ -59,9 +60,6 @@ public class InventoryMenu : Menu {
         //Clear old items
         Util.DestroyChildren(itemsGrid);
 
-        //Select default button (for controller navigation)
-        _defaultSelected.Select();
-
         //Add new items
         foreach (var pair in Loadout.Inventory) Instantiate(itemPrefab, itemsGrid).GetComponent<InventoryItem>().Init(pair.Key, pair.Value);
 
@@ -87,6 +85,9 @@ public class InventoryMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
+
+        //Select default button (for controller navigation)
+        defaultSelectable.Select();
 
         //Update items
         UpdateUI();

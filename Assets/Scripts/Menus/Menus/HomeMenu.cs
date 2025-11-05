@@ -13,7 +13,7 @@ public class HomeMenu : Menu {
     [SerializeField] private TMP_Text versionText;
 
     [Header("Components")]
-    [SerializeField] private Selectable _defaultSelected;
+    [SerializeField] private Selectable defaultSelectable;
 
     /*$$$$$   /$$                 /$$
    /$$__  $$ | $$                | $$
@@ -77,7 +77,7 @@ public class HomeMenu : Menu {
         versionText.SetText($"v{Application.version}");
 
         //Select default button (for controller navigation)
-        _defaultSelected.Select();
+        defaultSelectable.Select();
 
         //Pause game
         Game.Pause(this);
@@ -108,7 +108,8 @@ public class HomeMenu : Menu {
     }
 
     protected override void OnUncovered() {
-        //Don't do nothin
+        //Select default button (for controller navigation)
+        defaultSelectable.Select();
     }
 
 }

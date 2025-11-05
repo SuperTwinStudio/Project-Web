@@ -47,6 +47,11 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text passiveValueText;
     [SerializeField] private Image passiveCooldown;
 
+    //Reload
+    [Header("Reload")]
+    [SerializeField] private GameObject reloadIndicator;
+    [SerializeField] private Slider reloadSlider;
+
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -121,32 +126,49 @@ public class GameMenu : Menu {
         secondaryCooldown.fillAmount = newWeapon.SecondaryCooldown;
         passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
 
+        //Update reload
+        reloadIndicator.SetActive(newWeapon.IsReloading);
+        reloadSlider.value = newWeapon.ReloadValue;
+
         //Update values
-        OnWeaponValueChanged(WeaponAttack.Primary, newWeapon.PrimaryValue);
-        OnWeaponValueChanged(WeaponAttack.Secondary, newWeapon.SecondaryValue);
-        OnWeaponValueChanged(WeaponAttack.Passive, newWeapon.PassiveValue);
+        OnWeaponValueChanged(WeaponAction.Primary, newWeapon.PrimaryValue);
+        OnWeaponValueChanged(WeaponAction.Secondary, newWeapon.SecondaryValue);
+        OnWeaponValueChanged(WeaponAction.Passive, newWeapon.PassiveValue);
         if (oldWeapon) oldWeapon.RemoveOnValueChanged(OnWeaponValueChanged);
         if (newWeapon) newWeapon.AddOnValueChanged(OnWeaponValueChanged);
     }
 
-    private void OnWeaponValueChanged(WeaponAttack type, int value) {
-        //Get badge
-        GameObject badge = type switch {
-            WeaponAttack.Primary => primaryValueBadge,
-            WeaponAttack.Secondary => secondaryValueBadge,
-            _ => passiveValueBadge,
-        };
+    private void OnWeaponValueChanged(WeaponAction action, int value) {
+        switch (action) {
+            //Reload
+            case WeaponAction.Reload: {
+                reloadIndicator.SetActive(value >= 0);
+                reloadSlider.value = value;
+                break;   
+            }
 
-        //Get text
-        TMP_Text text = type switch {
-            WeaponAttack.Primary => primaryValueText,
-            WeaponAttack.Secondary => secondaryValueText,
-            _ => passiveValueText,
-        };
+            //Abilities
+            default: {
+                //Get badge
+                GameObject badge = action switch {
+                    WeaponAction.Primary => primaryValueBadge,
+                    WeaponAction.Secondary => secondaryValueBadge,
+                    _ => passiveValueBadge,
+                };
 
-        //Update value
-        badge.SetActive(value > 0);
-        text.SetText($"{value}");
+                //Get text
+                TMP_Text text = action switch {
+                    WeaponAction.Primary => primaryValueText,
+                    WeaponAction.Secondary => secondaryValueText,
+                    _ => passiveValueText,
+                };
+
+                //Update value
+                badge.SetActive(value > 0);
+                text.SetText($"{value}");
+                break;
+            }
+        }
     }
 
 
@@ -181,7 +203,10 @@ public class GameMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
-        
+
+        //Not in game
+        if (!Game.InGame) return;
+
         //Remove player health change event
         Player.AddOnHealthChanged(UpdateHealthIndicator);
 

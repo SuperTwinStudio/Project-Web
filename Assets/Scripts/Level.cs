@@ -37,10 +37,6 @@ public class Level : MonoBehaviour {
 
 
     //State
-    private void Awake() {
-        CameraController.playerTransform = Player.transform;
-    }
-
     private void Start() {
         if (!_isLobby && !_isHandmade) InitializeLevel();
     }

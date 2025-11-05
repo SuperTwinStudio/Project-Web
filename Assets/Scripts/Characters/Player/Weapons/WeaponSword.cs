@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class WeaponSword : Weapon {
 
+    //Effects
+    [Header("Effects")]
+    [SerializeField] private Effect attackSlowEffect;
+
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
-    [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
+    [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
-    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0.5f);
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -54,53 +58,59 @@ public class WeaponSword : Weapon {
     protected override IEnumerator OnUsePrimaryCoroutine() {
         yield return null;
 
-        //Set cooldown on secondary so it can't be used while spinning
-        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
-
-        //Slow player
-        Player.AddEffect(Effect.GetFromName("AttackSlow"), primarySlowDuration);
-
-        //Animate
-        animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
+        //Set cooldown on secondary so it can't be used while using primary
+        SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack
-        AtackForward(
-            PrimaryDamage + (isPassiveHit ? PassiveDamage : 0), 
-            primaryAttackSphereCast.x, 
-            primaryAttackSphereCast.y
+        MeleeForward(
+            primaryAttackSphereCast.x,
+            primaryAttackSphereCast.y,
+            PrimaryDamage + (isPassiveHit ? PassiveDamage : 0)
         );
-        
+
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
+
+        //Animate
+        animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
     protected override IEnumerator OnUseSecondaryCoroutine() {
         yield return null;
 
-        //Set cooldown on primary so it can't be used while spinning
-        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
-
-        //Slow player
-        Player.AddEffect(Effect.GetFromName("AttackSlow"), secondarySlowDuration);
-
-        //Animate
-        animator.SetTrigger("Attack");
-        Player.Animator.SetTrigger("SwordSpin");
+        //Set cooldown on primary so it can't be used while using secondary
+        SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Attack
-        AtackAround(
-            SecondaryDamage, 
-            secondarySpinRadius
+        MeleeAround(
+            secondarySpinRadius,
+            SecondaryDamage
         );
+
+        //Animate
+        animator.SetTrigger("AttackSpin");
+        Player.Animator.SetTrigger("SwordSpin");
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
+
+        //Apply camera knockback
+        CameraController.AddShake(secondaryPrimaryCooldown);
     }
 
     //Passive
     private void UpdatePassiveValue() {
         //Update passive value
-        SetValue(WeaponAttack.Passive, passiveHit - hitCount - 1);
+        SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
     }
 
 }

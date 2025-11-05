@@ -30,11 +30,13 @@ public class Player : Character, ISavable {
     [SerializeField] private InputActionReference spinAction;
     [SerializeField] private InputActionReference primaryAction;
     [SerializeField] private InputActionReference secondaryAction;
+    [SerializeField] private InputActionReference reloadAction;
     [SerializeField] private InputActionReference testAction;
 
     private Vector2 moveInput, lookInput;
     private readonly Timer primaryCoyote = new();
     private readonly Timer secondaryCoyote = new();
+    private readonly Timer reloadCoyote = new();
 
     private const float INPUT_COYOTE_DURATION = 0.25f;
     private bool isLastInputGamepad = false;
@@ -188,10 +190,12 @@ public class Player : Character, ISavable {
         //Check for action inputs
         if (primaryAction.Triggered()) primaryCoyote.Count(INPUT_COYOTE_DURATION);
         if (secondaryAction.Triggered()) secondaryCoyote.Count(INPUT_COYOTE_DURATION);
+        if (reloadAction.Triggered()) reloadCoyote.Count(INPUT_COYOTE_DURATION);
 
         //Check if an action should be performed
         if (primaryCoyote.counting && Loadout.UsePrimary()) primaryCoyote.Reset();
         if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
+        if (reloadCoyote.counting && Loadout.Reload()) reloadCoyote.Reset();
 
 
           /*$$$$$            /$$                           /$$              
@@ -249,11 +253,7 @@ public class Player : Character, ISavable {
     }
 
     //Health
-    protected override void OnDeath(bool instant = false) {
-        MenuManager.Open(MenusList.Death);
-    }
-
-    public override bool Damage(float amount, object source) {
+    public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
         //Calculate resistance
         float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
 
@@ -262,7 +262,7 @@ public class Player : Character, ISavable {
         }
 
         //Damage
-        bool success = base.Damage(amount - resistance, source);
+        bool success = base.Damage(amount - resistance, source, type);
 
         //Died -> Open death menu
         if (success && !IsAlive) {
@@ -276,6 +276,10 @@ public class Player : Character, ISavable {
 
         //Return success
         return success;
+    }
+
+    protected override void OnDeath(bool instant = false) {
+        MenuManager.Open(MenusList.Death);
     }
 
     //Events (other)

@@ -30,7 +30,7 @@ public class Character : MonoBehaviour, IDamageable {
     public const float HEALTH_MAX = 100;
 
     //Effects
-    protected readonly Dictionary<Effect, float> effects = new();
+    protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
     protected float slowSpeedMultiplier = 1;
 
 
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour, IDamageable {
         OnUpdate();
     }
 
-    protected virtual void OnUpdate() {}
+    protected virtual void OnUpdate() { }
 
     //Visibility
     public bool IsVisible(Vector3 origin, float viewDistance, LayerMask layers) {
@@ -103,8 +103,6 @@ public class Character : MonoBehaviour, IDamageable {
         Game.UnslowTime(this);
     }
 
-    protected virtual void OnDeath(bool instant = false) {}
-
     public virtual bool Heal(float amount) {
         //Ignore negative healing
         if (amount <= 0) return false;
@@ -119,7 +117,7 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    public virtual bool Damage(float amount, object source) {
+    public virtual bool Damage(float amount, object source, DamageType type = DamageType.None) {
         //Character is already dead or invulnerable-> Ignore damage
         if (!IsAlive || IsInvulnerable) return false;
 
@@ -135,15 +133,18 @@ public class Character : MonoBehaviour, IDamageable {
         //Damage character
         Health = Mathf.Max(Health - amount, 0);
 
-        //Start damage feedback coroutine
-        if (damageFeedbackCoroutine != null) StopCoroutine(damageFeedbackCoroutine);
-        damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine()); //Start coroutine in game cause it will never get destroyed
-
         //Check if character died
         if (Health <= 0) {
             //Character died -> Call OnDeath
             IsAlive = false;
             OnDeath();
+        }
+
+        //Start damage feedback coroutine (if object was not destroyed)
+        if (this) {
+            //Use game for coroutine cause it will never get destroyed
+            if (damageFeedbackCoroutine != null) Game.Current.StopCoroutine(damageFeedbackCoroutine);
+            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine());
         }
 
         //Call event
@@ -152,6 +153,8 @@ public class Character : MonoBehaviour, IDamageable {
         //Damaged
         return true;
     }
+
+    protected virtual void OnDeath(bool instant = false) { }
 
     public void AddOnHealthChanged(Action<float> action) {
         OnHealthChanged += action;
@@ -172,21 +175,21 @@ public class Character : MonoBehaviour, IDamageable {
         //Apply effects
         foreach (var effect in effects.Keys.ToList()) {
             //Get end timestamp
-            float endTimestamp = effects[effect];
+            (float endTimestamp, int level) = effects[effect];
 
             //Apply effect
             switch (effect.Action.Type) {
                 //Damage
                 case EffectType.Damage:
-                    Damage(Time.deltaTime * effect.Action.Points, this);  //Take points as damage per second
+                    Damage(Time.deltaTime * level * effect.Action.Value, this, DamageType.Burn); //Take value as damage per second
                     break;
                 //Heal
                 case EffectType.Heal:
-                    Heal(Time.deltaTime * effect.Action.Points);    //Take points as healing per second
+                    Heal(Time.deltaTime * level * effect.Action.Value); //Take value as healing per second
                     break;
                 //Slow
                 case EffectType.Slow:
-                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Points));
+                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
                     break;
             }
 
@@ -201,11 +204,30 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Check if player already has effect
         if (effects.ContainsKey(effect)) {
-            //Already has effect -> Check to update duration
-            effects[effect] = Mathf.Max(effects[effect], effectEndTimestamp);
+            //Already has effect -> Update it
+            (float currentEndTimestamp, int currentLevel) = effects[effect];
+            effects[effect] = (
+                Mathf.Max(currentEndTimestamp, effectEndTimestamp),                             //End timestamp
+                effect.HasLevels ? Mathf.Min(currentLevel + 1, effect.MaxLevel) : currentLevel  //Level
+            );
         } else {
             //Does not have effect -> Add it
-            effects[effect] = effectEndTimestamp;
+            effects[effect] = (
+                effectEndTimestamp, //End timestamp
+                1                   //Level
+            );
+        }
+    }
+
+    public bool TryGetEffect(Effect effect, out float endTimestamp, out int level) {
+        if (effects.ContainsKey(effect)) {
+            //Has effect
+            (endTimestamp, level) = effects[effect];
+            return true;
+        } else {
+            //Does not have effect
+            (endTimestamp, level) = (0, 0);
+            return true;
         }
     }
 

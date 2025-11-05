@@ -1,16 +1,8 @@
 using System.Collections;
+using Botpa;
 using UnityEngine;
 
 public class WeaponStapler : Weapon {
-
-    //Ammo
-    [Header("Ammo")]
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField, Min(0)] private int maxAmmo = 12;
-    [SerializeField, Min(0)] private float reloadDuration = 1f;
-
-    private int ammo = 0;
-    private bool isReloading = false;
 
     //Primary
     [Header("Primary")]
@@ -44,6 +36,16 @@ public class WeaponStapler : Weapon {
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
+    //Reload
+    [Header("Reload")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletOrigin;
+    [SerializeField, Min(0)] private int maxAmmo = 12;
+    [SerializeField, Min(0)] private float reloadDuration = 1f;
+
+    private readonly Timer reloadTimer = new();
+    private int ammo = 0;
+
 
     //State
     protected override void OnShow() {
@@ -51,39 +53,56 @@ public class WeaponStapler : Weapon {
         SetAmmo(maxAmmo);
     }
 
+    private void Update() {
+        //Update reload
+        if (reloadTimer.counting) {
+            //Update value
+            SetValue(WeaponAction.Reload, (int) (reloadTimer.percent * 100));
+        } else if (reloadTimer.finished) {
+            //Reset value
+            SetValue(WeaponAction.Reload, -1);
+            reloadTimer.Reset();
+        }
+    }
+
     //Helpers
     private void SetAmmo(int newAmmo) {
         ammo = newAmmo;
-        SetValue(WeaponAttack.Passive, ammo);
+        SetValue(WeaponAction.Passive, ammo);
     }
 
     private void Shoot(float damage) {
         //No ammo
         if (ammo <= 0) return;
 
-        //Animate
-        animator.SetTrigger("Shoot");
-
         //Shoot
-        Projectile projectile = SpawnProjectile(bulletPrefab).GetComponent<Projectile>();
-        projectile.damage = damage;
-        projectile.SetLoadout(Loadout);
+        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage);
 
         //Update ammo
         SetAmmo(ammo - 1);
+
+        //Animate
+        animator.SetTrigger("Shoot");
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
     }
 
-    private void Reload() {
+    protected override bool OnReload() {
         //Already reloading
-        if (isReloading) return;
-        isReloading = true;
-        
+        if (IsReloading || ammo >= maxAmmo) return false;
+
+        //Start reload timer
+        reloadTimer.Count(reloadDuration);
+        SetValue(WeaponAction.Reload, 0);
+
         //Add reload cooldown to primary and secondary
-        SetCooldown(WeaponAttack.Primary, reloadDuration);
-        SetCooldown(WeaponAttack.Secondary, reloadDuration);
+        SetCooldown(WeaponAction.Primary, reloadDuration);
+        SetCooldown(WeaponAction.Secondary, reloadDuration);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());
+        return true;
     }
 
     //Reloading
@@ -93,9 +112,6 @@ public class WeaponStapler : Weapon {
 
         //Refill ammo
         SetAmmo(maxAmmo);
-
-        //Finish
-        isReloading = false;
     }
 
     //Primary
@@ -103,13 +119,13 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on secondary so it can't be used while using primary
-        SetCooldown(WeaponAttack.Secondary, primarySecondaryCooldown);
+        SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack melee (passive)
-        bool hit = AtackForward(
-            PassiveDamage, 
+        bool hit = MeleeForward(
             passiveAttackSphereCast.x, 
-            passiveAttackSphereCast.y
+            passiveAttackSphereCast.y,
+            PassiveDamage
         );
 
         //Check if melee attack hit something
@@ -130,7 +146,7 @@ public class WeaponStapler : Weapon {
         yield return null;
 
         //Set cooldown on primary so it can't be used while using secondary
-        SetCooldown(WeaponAttack.Primary, secondaryPrimaryCooldown);
+        SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Shoot burst
         for (int i = 0; i < secondaryBurstAmount; i++) {

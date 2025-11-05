@@ -115,6 +115,7 @@ MonoBehaviour:
   _top: {fileID: 7083242373027378059}
   _eyes: {fileID: 3623070733990231656}
   _bot: {fileID: 7385548414414953436}
+  damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
   collider: {fileID: 6284840120969268591}
   renderer: {fileID: 7466353185237692936}
   viewDistance: 5

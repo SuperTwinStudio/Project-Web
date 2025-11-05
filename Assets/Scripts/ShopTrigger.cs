@@ -7,8 +7,8 @@ public class ShopTrigger : MonoBehaviour {
 
     //Camera
     [Header("Camera")]
+    [SerializeField] private Transform positionTarget;
     [SerializeField] private Transform viewTarget;
-    [SerializeField] private Transform cameraTarget;
 
 
     //State
@@ -18,8 +18,8 @@ public class ShopTrigger : MonoBehaviour {
 
         //Open shop
         MenuManager.Open(MenusList.Shop, new ShopArgs() {
-            viewTarget = viewTarget,
-            cameraTarget = cameraTarget
+            positionTarget = positionTarget,
+            viewTarget = viewTarget
         });
     }
 
