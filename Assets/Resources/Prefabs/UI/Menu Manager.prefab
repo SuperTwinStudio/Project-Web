@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7735708510598263774}
   - component: {fileID: 2688550502737858014}
   - component: {fileID: 1430678274154939459}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Main Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4192439078169323929}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Menus Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7051617889851333893}
   - component: {fileID: 4413544788045083309}
   - component: {fileID: 7724610444619520377}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8157093823025142452}
   - component: {fileID: 816144696993337994}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Menu Transitions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710054940728452474}
   - component: {fileID: 693472642402150192}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Menu Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 1909970632730211249}
   - component: {fileID: 8488792257931492300}
   - component: {fileID: 3211172145892070299}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}

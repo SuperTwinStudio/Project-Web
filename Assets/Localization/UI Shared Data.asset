@@ -195,6 +195,14 @@ MonoBehaviour:
     m_Key: settings_title
     m_Metadata:
       m_Items: []
+  - m_Id: 13011419369705472
+    m_Key: credits_additional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13015460753575936
+    m_Key: indicator_reloading
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

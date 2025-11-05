@@ -203,7 +203,10 @@ public class GameMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
-        
+
+        //Not in game
+        if (!Game.InGame) return;
+
         //Remove player health change event
         Player.AddOnHealthChanged(UpdateHealthIndicator);
 

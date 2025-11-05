@@ -1,8 +1,6 @@
-using Botpa;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.Timeline.DirectorControlPlayable;
 
 public class SettingsMenu : Menu {
     
@@ -11,25 +9,22 @@ public class SettingsMenu : Menu {
 
     //Components
     [Header("Components")]
-    [SerializeField] private GameObject bgHome;
-    [SerializeField] private GameObject bgGame;
-    [SerializeField] private GameObject homeButton;
-    [SerializeField] private GameObject lobbyButton;
-    [SerializeField] private Selectable _defaultSelected;
-
-    //Input
-    [Header("Input")]
-    [SerializeField] private InputActionReference _pauseAction;
+    [SerializeField] private Selectable defaultSelection;
+    [SerializeField] private GameObject backgroundGame;
+    [SerializeField] private GameObject backgroundHome;
+    [SerializeField] private GameObject buttonsHome;
+    [SerializeField] private GameObject buttonsLobby;
+    [SerializeField] private GameObject buttonsDungeon;
 
 
-    /*$$$$$              /$$     /$$
-   /$$__  $$            | $$    |__/
-  | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
-  | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
-  | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
-  | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
-  | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
-  |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
+      /*$$$$$              /$$     /$$
+     /$$__  $$            | $$    |__/
+    | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
+    | $$$$$$$$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$ /$$_____/
+    | $$__  $$| $$        | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$
+    | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
+    | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
+    |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     public void ReturnToHome() {
         //Show confirmation that player will lose all their items
@@ -41,8 +36,7 @@ public class SettingsMenu : Menu {
     }
 
     public void ReturnToLobby() {
-        //Show confirmation that player will lose all their items
-        //For now it clears inventory directly
+        //Show confirmation that player will lose all their items (for now it clears inventory directly)
         Player.Loadout.ClearInventory();
 
         //Return to lobby
@@ -65,24 +59,40 @@ public class SettingsMenu : Menu {
     protected override void OnOpen(object args = null) {
         base.OnOpen();
 
-        //Get scene name
-        string scene = gameObject.scene.name;
-
-        //Toggle return button
-        homeButton.SetActive(scene == "Lobby");
-        lobbyButton.SetActive(scene == "Dungeon");
-
-        //Toggle backgrounds
-        bgHome.SetActive(scene == "Home");
-        bgGame.SetActive(scene != "Home");
-
-        //Select default button (for controller navigation)
-        _defaultSelected.Select();
-
         //Not playing
         if (!Application.isPlaying) return;
 
-        _pauseAction.Disable();
+        //Select default button (for controller navigation)
+        defaultSelection.Select();
+
+        //Get scene name
+        string scene = SceneManager.GetActiveScene().name;
+
+        //Toggle backgrounds
+        backgroundHome.SetActive(scene == "Home");
+        backgroundGame.SetActive(scene != "Home");
+
+        //Toggle buttons
+        switch (scene) {
+            //Castle (lobby)
+            case "Lobby":
+                buttonsHome.SetActive(false);
+                buttonsLobby.SetActive(true);
+                buttonsDungeon.SetActive(false);
+                break;
+            //Dungeon
+            case "Dungeon":
+                buttonsHome.SetActive(false);
+                buttonsLobby.SetActive(false);
+                buttonsDungeon.SetActive(true);
+                break;
+            //Other (home)
+            default:
+                buttonsHome.SetActive(true);
+                buttonsLobby.SetActive(false);
+                buttonsDungeon.SetActive(false);
+                break;
+        }
 
         //Pause game
         Game.Pause(this);
@@ -93,8 +103,6 @@ public class SettingsMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
-
-        _pauseAction.Enable();
 
         //Unpause game
         Game.Unpause(this);

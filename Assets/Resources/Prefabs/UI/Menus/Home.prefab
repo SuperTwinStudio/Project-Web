@@ -1259,7 +1259,7 @@ MonoBehaviour:
   _canvas: {fileID: 0}
   _state: 0
   versionText: {fileID: 4445587222178282448}
-  _defaultSelected: {fileID: 5453439554788545724}
+  defaultSelectable: {fileID: 5453439554788545724}
 --- !u!224 &7480469518259031152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
