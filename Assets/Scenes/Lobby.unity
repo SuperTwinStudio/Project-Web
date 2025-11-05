@@ -23726,6 +23726,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 324811497}
   m_SourcePrefab: {fileID: 100100000, guid: 272d97250d4276d45a2241719e3a324b, type: 3}
+--- !u!1001 &1397845880
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.539444
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -29.383904
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710695
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710665
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377852009309206282, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363051510386220625, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
+      propertyPath: m_Name
+      value: FireParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 45f4379fd464bd84798c3840c76945cf, type: 3}
 --- !u!43 &1416958218
 Mesh:
   m_ObjectHideFlags: 0
@@ -33764,3 +33821,4 @@ SceneRoots:
   - {fileID: 1044364788}
   - {fileID: 939791058}
   - {fileID: 2093236238}
+  - {fileID: 1397845880}
