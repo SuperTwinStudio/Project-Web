@@ -315,6 +315,7 @@ Transform:
   m_Children:
   - {fileID: 1055706530}
   - {fileID: 1785928877}
+  - {fileID: 947623949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &72017406
@@ -11291,7 +11292,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 32872770}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
       propertyPath: m_LocalScale.x
@@ -11303,7 +11304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11319,7 +11320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
       propertyPath: m_LocalRotation.y
@@ -17828,6 +17829,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6692290496178104961, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
+--- !u!4 &947623949 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dbffe311aa508944baf7cdeffa9b8290, type: 3}
+  m_PrefabInstance: {fileID: 458904608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &992277408
 GameObject:
   m_ObjectHideFlags: 0
@@ -29926,7 +29932,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 0abbd7ecc2a01a645b2c0c21970ccac7, type: 3}
+  - {fileID: -876546973899608171, guid: fb89261592530c04298e3d3d5b98cde0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33439,4 +33445,3 @@ SceneRoots:
   - {fileID: 1044364788}
   - {fileID: 939791058}
   - {fileID: 2093236238}
-  - {fileID: 458904608}
