@@ -21,7 +21,7 @@ public class CreditsMenu : Menu {
 
     private float translation, translationMin, translationMax;
     private bool movingUp, isScrolling = true;
-    private readonly Timer delayTimer = new();
+    private readonly Timer delayTimer = new(TimerScale.Unscaled);
 
 
       /*$$$$$   /$$                 /$$
