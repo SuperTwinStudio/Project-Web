@@ -59,20 +59,14 @@ public class WeaponMatch : Weapon {
     protected override IEnumerator OnUsePrimaryCoroutine() {
         yield return null;
 
-        //Set cooldown on secondary so it can't be used while spinning
+        //Set cooldown on secondary so it can't be used while using primary
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
-
-        //Slow player
-        Player.AddEffect(attackSlowEffect, primarySlowDuration);
-
-        //Animate
-        animator.SetTrigger("Attack");
 
         //Attack
         MeleeForward(
-            PrimaryDamage, 
             primaryAttackSphereCast.x, 
             primaryAttackSphereCast.y,
+            PrimaryDamage,
             isPassiveHit ? (damageable) => ApplyBurn(damageable, PassiveBurnDuration) : null
         );
 
@@ -80,6 +74,12 @@ public class WeaponMatch : Weapon {
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
+
+        //Animate
+        animator.SetTrigger("Attack");
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);
@@ -89,21 +89,21 @@ public class WeaponMatch : Weapon {
     protected override IEnumerator OnUseSecondaryCoroutine() {
         yield return null;
 
-        //Set cooldown on primary so it can't be used while spinning
+        //Set cooldown on primary so it can't be used while using secondary
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
-        //Slow player
-        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
+        //Attack
+        MeleeAround(
+            secondaryRadius,
+            0, 
+            (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
+        );
 
         //Animate
         //animator.SetTrigger("AttackSpin");
 
-        //Attack
-        MeleeAround(
-            0, 
-            secondaryRadius,
-            (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
-        );
+        //Slow player
+        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
         //Apply camera knockback
         CameraController.AddShake();

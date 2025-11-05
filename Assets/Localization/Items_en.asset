@@ -50,6 +50,14 @@ MonoBehaviour:
     m_Localized: Concealed Blade
     m_Metadata:
       m_Items: []
+  - m_Id: 12943447938924544
+    m_Localized: Pushpin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12946958567178240
+    m_Localized: Pushpin Gauntlet
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

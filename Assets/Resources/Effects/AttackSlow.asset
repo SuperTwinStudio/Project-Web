@@ -23,9 +23,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  _hasLevels: 0
+  _maxLevel: 5
   _action:
-    _type: 2
-    _points: 0.5
+    _type: 3
+    _value: 0.5
   references:
     version: 2
     RefIds: []

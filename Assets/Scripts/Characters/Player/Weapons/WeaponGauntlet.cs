@@ -1,20 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaponSword : Weapon {
+public class WeaponGauntlet : Weapon {
 
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
+    [SerializeField] private Effect chinchetaEffect;
 
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float primaryDamage = 30f;
-    [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
-    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0.5f);
+    [SerializeField, Min(0)] private float primaryDamage = 20f;
+    [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
+    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -27,7 +28,7 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
-    [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
+    [SerializeField, Min(0)] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
 
     private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
@@ -35,24 +36,12 @@ public class WeaponSword : Weapon {
 
     //Passive
     [Header("Passive")]
-    [SerializeField, Min(0)] private float passiveDamage = 20f;
+    [SerializeField, Min(0)] private float passiveDamage = 5f;
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 5f;
-    [SerializeField, Min(2)] private int passiveHit = 4;
-
-    private bool isPassiveHit = false;
-    private int hitCount = 0;
+    [SerializeField, Min(0)] private float passiveDuration = 3f;
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
-    public override float PassiveCooldown => isPassiveHit ? 0 : 1;
-
-
-    //State
-    protected override void OnShow() {
-        //Reset passive
-        hitCount = 0;
-        UpdatePassiveValue();
-    }
 
     //Primary
     protected override IEnumerator OnUsePrimaryCoroutine() {
@@ -65,16 +54,12 @@ public class WeaponSword : Weapon {
         MeleeForward(
             primaryAttackSphereCast.x,
             primaryAttackSphereCast.y,
-            PrimaryDamage + (isPassiveHit ? PassiveDamage : 0)
+            0,
+            ApplyChincheta
         );
 
-        //Next hit
-        hitCount = (hitCount + 1) % passiveHit;
-        isPassiveHit = hitCount == passiveHit - 1;
-        UpdatePassiveValue();
-
         //Animate
-        animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
+        animator.SetTrigger("Attack");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, primarySlowDuration);
@@ -91,26 +76,45 @@ public class WeaponSword : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Attack
-        MeleeAround(
-            secondarySpinRadius,
+        MeleeForward(
+            secondaryAttackSphereCast.x,
+            secondaryAttackSphereCast.y,
             SecondaryDamage
         );
 
         //Animate
-        animator.SetTrigger("AttackSpin");
-        Player.Animator.SetTrigger("SwordSpin");
+        animator.SetTrigger("AttackDown");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
         //Apply camera knockback
-        CameraController.AddShake();
+        CameraController.AddKnockback(-transform.forward);
     }
 
     //Passive
-    private void UpdatePassiveValue() {
-        //Update passive value
-        SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
+    private void ApplyChincheta(IDamageable damageable) {
+        //Check type
+        if (damageable is not Character) {
+            //Not a character -> Default damage
+            damageable.Damage(PrimaryDamage, this, DamageType.Melee);
+            return;
+        }
+
+        //Get character
+        Character character = damageable as Character;
+
+        //Apply damage taking effect into account
+        damageable.Damage(
+            character.TryGetEffect(chinchetaEffect, out float endTimestamp, out int level) ?
+                PrimaryDamage + PassiveDamage * level :
+                PrimaryDamage,
+            this,
+            DamageType.Melee
+        );
+
+        //Add a new chincheta effect
+        character.AddEffect(chinchetaEffect, passiveDuration);
     }
 
 }

@@ -50,6 +50,14 @@ MonoBehaviour:
     m_Localized: Filo Secreto
     m_Metadata:
       m_Items: []
+  - m_Id: 12943447938924544
+    m_Localized: Chincheta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12946958567178240
+    m_Localized: Guantelete de Chinchetas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

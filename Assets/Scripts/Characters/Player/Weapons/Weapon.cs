@@ -267,23 +267,25 @@ public class Weapon : MonoBehaviour {
         return somethingHit;
     }
 
-    protected bool MeleeForward(float damage, float radius, float forward, Action<IDamageable> onHit = null) {
+    protected RaycastHit[] MeleeForwardCheck(float radius, float forward) {
         //Get forward direction
         Vector3 forwardDirection = transform.forward;
 
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        var hits = Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
-
-        //Damage hits
-        return DamageHits(hits, damage, onHit);
+        return Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
     }
 
-    protected bool MeleeAround(float damage, float radius, Action<IDamageable> onHit = null) {
-        //Cast attack
-        var hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
+    protected RaycastHit[] MeleeAroundCheck(float radius) {
+        //Casts a sphere of <radius> radius around the player
+        return Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
+    }
 
-        //Damage hits
-        return DamageHits(hits, damage, onHit);
+    protected bool MeleeForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(MeleeForwardCheck(radius, forward), damage, onHit);
+    }
+
+    protected bool MeleeAround(float radius, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(MeleeAroundCheck(radius), damage, onHit);
     }
 
     protected GameObject SpawnProjectile(GameObject prefab) {

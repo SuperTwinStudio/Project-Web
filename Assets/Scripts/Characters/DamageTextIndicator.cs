@@ -18,6 +18,12 @@ public class DamageTextIndicator : MonoBehaviour {
     private Vector3 spawn, moveDirection;
     private readonly Timer animationTimer = new();
 
+    //Colors
+    [Header("Colors")]
+    [SerializeField] private Color colorDefault;
+    [SerializeField] private Color colorMelee;
+    [SerializeField] private Color colorRanged;
+
 
     //State
     private void Start() {
@@ -26,7 +32,6 @@ public class DamageTextIndicator : MonoBehaviour {
 
         //Create move direction
         moveDirection = Quaternion.AngleAxis(Random.Range(-coneAngle, coneAngle), Vector3.forward) * Vector3.up;
-        Debug.Log(moveDirection);
 
         //Start animation timer
         animationTimer.Count(duration);
@@ -59,6 +64,11 @@ public class DamageTextIndicator : MonoBehaviour {
     //Text
     public void SetDamage(float damage, DamageType type) {
         text.SetText($"{type switch {DamageType.Melee => "🔪", DamageType.Ranged => "🏹", _ => ""}}{damage}");
+        text.color = type switch {
+            DamageType.Melee => colorMelee,
+            DamageType.Ranged => colorRanged,
+            _ => colorDefault
+        };
     }
 
 }

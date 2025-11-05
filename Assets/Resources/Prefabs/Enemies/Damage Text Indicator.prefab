@@ -194,3 +194,6 @@ MonoBehaviour:
   coneAngle: 25
   endScale: 1.5
   endDistance: 1
+  colorDefault: {r: 0.87058824, g: 0.48235294, b: 0.2627451, a: 1}
+  colorMelee: {r: 0.87169814, g: 0.4837924, b: 0.26150936, a: 1}
+  colorRanged: {r: 0.2980392, g: 0.6346574, b: 1, a: 1}

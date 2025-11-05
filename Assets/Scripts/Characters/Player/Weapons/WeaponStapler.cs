@@ -123,9 +123,9 @@ public class WeaponStapler : Weapon {
 
         //Attack melee (passive)
         bool hit = MeleeForward(
-            PassiveDamage, 
             passiveAttackSphereCast.x, 
-            passiveAttackSphereCast.y
+            passiveAttackSphereCast.y,
+            PassiveDamage
         );
 
         //Check if melee attack hit something
