@@ -64,7 +64,7 @@ public class EnemyBase : Character {
         bool damaged = base.Damage(amount, source, type);
 
         //Show damage indicator
-        if (damaged && type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount, type);
+        if (damaged && type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount * damageTakenMultiplier, type);
 
         //Return if damaged
         return damaged;

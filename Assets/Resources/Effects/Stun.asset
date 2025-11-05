@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23cc99f797bd0d84b980522cba2e1f9d, type: 3}
+  m_Name: Stun
+  m_EditorClassIdentifier: 
+  _show: 1
+  _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
+    m_TableEntryReference:
+      m_KeyId: 12388082734039040
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _hasLevels: 0
+  _maxLevel: 5
+  _action:
+    _type: 3
+    _value: 1
+  references:
+    version: 2
+    RefIds: []

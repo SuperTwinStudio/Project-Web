@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9083cae6529521c4ab2bea7c5c2a9220, type: 3}
+  m_Name: Glue Stick
+  m_EditorClassIdentifier: 
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
+    m_TableEntryReference:
+      m_KeyId: 12372644847386624
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Icon: {fileID: 0}
+  Rarity: 0
+  Logic: {fileID: 2364223807639071620, guid: 62765d866a9aa814dade273d3ee3a2fd, type: 3}
+  references:
+    version: 2
+    RefIds: []

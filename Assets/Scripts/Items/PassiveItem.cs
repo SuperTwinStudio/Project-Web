@@ -59,4 +59,12 @@ public class PassiveItem : MonoBehaviour
     /// <param name="player"></param>
     /// <param name="itemCount"></param>
     public virtual void OnPickup(Player player, int itemCount) { }
+
+    protected bool GetScaledChance(int itemCount, int baseChance, int chanceScaling)
+    {
+        int rand = Random.Range(0, 100);
+        int chance = baseChance + (chanceScaling * (itemCount - 1));
+
+        return rand < chance;
+    }
 }

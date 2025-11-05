@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fde8438619b634fb485231919ce329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8643215186e8f3246928c0000c212727, type: 2}
+  item: {fileID: 11400000, guid: 88465e390d6f75a459420d10183d5962, type: 2}
 --- !u!23 &1807491687
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fde8438619b634fb485231919ce329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8643215186e8f3246928c0000c212727, type: 2}
+  item: {fileID: 11400000, guid: f2d7f349d6611804e910c0e52df0e5b6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -27,8 +27,68 @@ MonoBehaviour:
     m_Key: effect_slow
     m_Metadata:
       m_Items: []
+  - m_Id: 12388082734039040
+    m_Key: effect_stun
+    m_Metadata:
+      m_Items: []
   - m_Id: 5451330203123712
     m_Key: passive_conblade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12371992335319040
+    m_Key: passive_shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372065039384576
+    m_Key: passive_kindling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372118625812480
+    m_Key: passive_orbbud
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372185998917632
+    m_Key: passive_sheet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372254135386112
+    m_Key: passive_design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372331805507584
+    m_Key: passive_fan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372395693146112
+    m_Key: passive_soles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372451712270336
+    m_Key: passive_cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372500366196736
+    m_Key: passive_cardstock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372573741350912
+    m_Key: passive_glitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372644847386624
+    m_Key: passive_glue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372701139140608
+    m_Key: passive_sponge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12372764393439232
+    m_Key: passive_pen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12943447938924544
+    m_Key: effect_chincheta
     m_Metadata:
       m_Items: []
   - m_Id: 1381918873358336
@@ -117,6 +177,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13033750657896448
     m_Key: weapon_abanico_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13044225118535680
+    m_Key: effect_glue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13046186966482944
+    m_Key: effect_water
     m_Metadata:
       m_Items: []
   m_Metadata:
