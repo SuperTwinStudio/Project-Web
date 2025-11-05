@@ -15,28 +15,12 @@ MonoBehaviour:
   m_TableCollectionName: Items
   m_TableCollectionNameGuidString: 0195ed0b25fa14d4f8ed14a678101c29
   m_Entries:
-  - m_Id: 5625636327424
-    m_Key: weapon_sword
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5642983968768
-    m_Key: weapon_match
-    m_Metadata:
-      m_Items: []
-  - m_Id: 767371087056896
-    m_Key: weapon_stapler
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1381918873358336
-    m_Key: treasure_bag
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1381933679251456
-    m_Key: treasure_cup
-    m_Metadata:
-      m_Items: []
   - m_Id: 2119845693755392
     m_Key: effect_burn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12943447938924544
+    m_Key: effect_chincheta
     m_Metadata:
       m_Items: []
   - m_Id: 2122526038560768
@@ -47,16 +31,92 @@ MonoBehaviour:
     m_Key: passive_conblade
     m_Metadata:
       m_Items: []
-  - m_Id: 12943447938924544
-    m_Key: effect_chincheta
+  - m_Id: 1381918873358336
+    m_Key: treasure_bag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1381933679251456
+    m_Key: treasure_cup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12969046891921408
+    m_Key: weapon_abanico
     m_Metadata:
       m_Items: []
   - m_Id: 12946958567178240
     m_Key: weapon_gauntlet
     m_Metadata:
       m_Items: []
-  - m_Id: 12969046891921408
-    m_Key: weapon_abanico
+  - m_Id: 5642983968768
+    m_Key: weapon_match
+    m_Metadata:
+      m_Items: []
+  - m_Id: 767371087056896
+    m_Key: weapon_stapler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5625636327424
+    m_Key: weapon_sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031383011037184
+    m_Key: weapon_sword_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031348479332352
+    m_Key: weapon_sword_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031367097847808
+    m_Key: weapon_sword_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033482478292992
+    m_Key: weapon_stapler_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033501151334400
+    m_Key: weapon_stapler_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033520835203072
+    m_Key: weapon_stapler_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033561209573376
+    m_Key: weapon_match_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033586727718912
+    m_Key: weapon_match_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033605694361600
+    m_Key: weapon_match_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033653618479104
+    m_Key: weapon_gauntlet_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033666406912000
+    m_Key: weapon_gauntlet_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033681376382976
+    m_Key: weapon_gauntlet_passive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033719343222784
+    m_Key: weapon_abanico_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033731905163264
+    m_Key: weapon_abanico_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033750657896448
+    m_Key: weapon_abanico_passive
     m_Metadata:
       m_Items: []
   m_Metadata:

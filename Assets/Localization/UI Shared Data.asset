@@ -203,6 +203,14 @@ MonoBehaviour:
     m_Key: indicator_reloading
     m_Metadata:
       m_Items: []
+  - m_Id: 13035009775374336
+    m_Key: shop_character_rugosidad_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13035064179691520
+    m_Key: shop_character_gramaje_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

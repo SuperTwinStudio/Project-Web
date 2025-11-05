@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Botpa;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public enum WeaponAction { Primary, Secondary, Passive, Reload }
 
@@ -19,8 +20,11 @@ public class Weapon : MonoBehaviour {
     [Header("Weapon")]
     [SerializeField] private Item _item;
     [SerializeField] private Sprite _primaryIcon;
+    [SerializeField] private LocalizedString _primaryDescription;
     [SerializeField] private Sprite _secondaryIcon;
+    [SerializeField] private LocalizedString _secondaryDescription;
     [SerializeField] private Sprite _passiveIcon;
+    [SerializeField] private LocalizedString _passiveDescription;
     [SerializeField] private GameObject model;
     [SerializeField] protected Animator animator;
 
@@ -30,8 +34,11 @@ public class Weapon : MonoBehaviour {
 
     public Item Item => _item;
     public Sprite PrimaryIcon => _primaryIcon;
+    public string PrimaryDescription => _primaryDescription.GetLocalizedString();
     public Sprite SecondaryIcon => _secondaryIcon;
+    public string SecondaryDescription => _secondaryDescription.GetLocalizedString();
     public Sprite PassiveIcon => _passiveIcon;
+    public string PassiveDescription => _passiveDescription.GetLocalizedString();
 
     [HideInInspector] public GameObject LastHit { get; protected set; }
 
