@@ -104,7 +104,7 @@ public class WeaponSword : Weapon {
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
         //Apply camera knockback
-        CameraController.AddShake();
+        CameraController.AddShake(secondaryPrimaryCooldown);
     }
 
     //Passive

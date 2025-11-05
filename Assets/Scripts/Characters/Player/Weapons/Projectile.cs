@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour {
 
     //Projectile
     [Header("Projectile")]
+    [SerializeField] private bool destroyOnHit = true;
     [SerializeField] private bool isPlayer = true;
     [SerializeField] private float speed = 20;
     [SerializeField] private float damage = 25;
@@ -44,7 +45,7 @@ public class Projectile : MonoBehaviour {
         }
 
         //Destroy self
-        Destroy(gameObject);
+        if (destroyOnHit) Destroy(gameObject);
     }
 
 }

@@ -288,8 +288,8 @@ public class Weapon : MonoBehaviour {
         return DamageHits(MeleeAroundCheck(radius), damage, onHit);
     }
 
-    protected GameObject SpawnProjectile(GameObject prefab) {
-        return Instantiate(prefab, transform.position, Player.transform.rotation);
+    protected GameObject SpawnProjectile(GameObject prefab, Transform origin = null) {
+        return Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation);
     }
 
 }

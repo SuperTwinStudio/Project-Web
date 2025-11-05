@@ -132,8 +132,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The inventory is empty
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
-  m_sharedMaterial: {fileID: -4920092850103206224, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
+  m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -309,8 +309,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
-  m_sharedMaterial: {fileID: -4920092850103206224, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
+  m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -741,8 +741,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Value: 50G'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
-  m_sharedMaterial: {fileID: -4920092850103206224, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
+  m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1010,8 +1010,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Money: 50G'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
-  m_sharedMaterial: {fileID: -4920092850103206224, guid: 4569fe5500078e74891665cb09e94c2a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
+  m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

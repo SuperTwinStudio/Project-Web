@@ -89,7 +89,7 @@ public class WeaponGauntlet : Weapon {
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
         //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
+        CameraController.AddShake(secondaryPrimaryCooldown / 2);
     }
 
     //Passive

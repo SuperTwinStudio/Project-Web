@@ -39,6 +39,7 @@ public class WeaponStapler : Weapon {
     //Reload
     [Header("Reload")]
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletOrigin;
     [SerializeField, Min(0)] private int maxAmmo = 12;
     [SerializeField, Min(0)] private float reloadDuration = 1f;
 
@@ -78,7 +79,7 @@ public class WeaponStapler : Weapon {
         animator.SetTrigger("Shoot");
 
         //Shoot
-        Projectile projectile = SpawnProjectile(bulletPrefab).GetComponent<Projectile>();
+        Projectile projectile = SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>();
         projectile.Init(Player, damage);
 
         //Update ammo

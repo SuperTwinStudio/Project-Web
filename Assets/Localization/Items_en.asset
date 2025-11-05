@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5625636327424
-    m_Localized: Paper Sword
+    m_Localized: Sword
     m_Metadata:
       m_Items: []
   - m_Id: 5642983968768
-    m_Localized: Sparkling Match
+    m_Localized: Match
     m_Metadata:
       m_Items: []
   - m_Id: 767371087056896
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12946958567178240
-    m_Localized: Pushpin Gauntlet
+    m_Localized: Gauntlet
     m_Metadata:
       m_Items: []
   references:

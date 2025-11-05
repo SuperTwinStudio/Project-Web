@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5625636327424
-    m_Localized: Espada de Papel
+    m_Localized: Papel
     m_Metadata:
       m_Items: []
   - m_Id: 5642983968768
-    m_Localized: Cerilla Centelleante
+    m_Localized: Cerilla
     m_Metadata:
       m_Items: []
   - m_Id: 767371087056896
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12946958567178240
-    m_Localized: Guantelete de Chinchetas
+    m_Localized: Guantelete
     m_Metadata:
       m_Items: []
   references:
