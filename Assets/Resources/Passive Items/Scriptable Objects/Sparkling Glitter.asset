@@ -21,7 +21,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 36177b6c6f3509a4d93bfb545f7f037d, type: 3}
   Rarity: 1
   Logic: {fileID: 1544362072649781083, guid: 6fc5d95bb497c344fae97d64a8cf40a4, type: 3}
   references:

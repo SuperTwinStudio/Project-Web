@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: 9dfc8393adc19ea4d9ac7bfb0efdf333
   m_SerializeEntries:
   - m_GUID: 19d67b0b3e766734c9bb27b2489be661
-    m_Address: Items_es
+    m_Address: UI_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es

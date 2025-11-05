@@ -49,7 +49,7 @@ public class OrbitalBuddy : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(transform.position, m_DetectionRadius);
             foreach (Collider collider in colliders)
             {
-                if (collider.CompareTag("Enemy"))
+                if (collider.CompareTag("Enemy") || collider.CompareTag("Boss"))
                 {
                     Debug.Log($"Added {collider.name}");
                     m_TargetEnemy = collider.GetComponent<Character>();
