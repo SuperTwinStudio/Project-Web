@@ -186,6 +186,62 @@ MonoBehaviour:
     m_Localized: Pasiva
     m_Metadata:
       m_Items: []
+  - m_Id: 13074380935364608
+    m_Localized: Probabilidad de disparar cuchillos al usar la habilidad primaria.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13074920163475456
+    m_Localized: "Lleva un escudo a tu espalda para bloquear da\xF1o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075061758984192
+    m_Localized: Probabilidad de quemar a un enemigo al atacar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075191862099968
+    m_Localized: Un compi orbita alrededor tuya mientras dispara a enemigos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075437560233984
+    m_Localized: Al morir, revive con algo de vida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076043255480320
+    m_Localized: Gana velocidad de movimiento.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076328237465600
+    m_Localized: Empuja enemigos al esquivar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076458839703552
+    m_Localized: Los ataques te empujan menos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076683096555520
+    m_Localized: "Haz m\xE1s da\xF1o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076786658115584
+    m_Localized: Incrementa tu cantidad de vida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076944665935872
+    m_Localized: Probabilidad de aturdir a un enemigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077065373810688
+    m_Localized: Probabilidad de pegar enemigos al suelo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077240817352704
+    m_Localized: Probabilidad de debilitar a un enemigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077334115450880
+    m_Localized: Probabilidad de manchar de tinta a un enemigo.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

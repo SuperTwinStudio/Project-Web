@@ -8,6 +8,7 @@ public class Loadout : MonoBehaviour, ISavable {
 
     //Events
     public delegate void ClassChanged(Weapon oldWeapon, Weapon newWeapon);
+    public delegate void ObtainedItem(PassiveItemObject item);
 
     //Components
     [Header("Components")]
@@ -48,6 +49,7 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<PassiveItem, int> _passiveItems = new();
     public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
 
+    private event ObtainedItem OnObtainItem;
 
     //State
     private void Awake() {
@@ -217,17 +219,31 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Passive items
-    public void AddToPassiveItems(PassiveItem item) {
+    public void AddToPassiveItems(PassiveItemObject item) {
         //Invalid item
         if (!item) return;
 
-        //Add item
-        if (PassiveItems.ContainsKey(item))
-            _passiveItems[item]++;
-        else
-            _passiveItems[item] = 1;
+        PassiveItem logic = item.Logic;
 
-        item.OnPickup(Player, _passiveItems[item]);
+        OnObtainItem?.Invoke(item);
+
+        //Add item
+        if (PassiveItems.ContainsKey(logic))
+            _passiveItems[logic]++;
+        else
+            _passiveItems[logic] = 1;
+
+        logic.OnPickup(Player, _passiveItems[logic]);
+    }
+
+    public void AddOnObtainItem(ObtainedItem action)
+    {
+        OnObtainItem += action;
+    }
+
+    public void RemoveOnObtainItem(ObtainedItem action)
+    {
+        OnObtainItem -= action;
     }
 
     public void RemovePassiveItem(PassiveItem item) {

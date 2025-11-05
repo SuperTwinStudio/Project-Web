@@ -52,6 +52,13 @@ public class GameMenu : Menu {
     [SerializeField] private GameObject reloadIndicator;
     [SerializeField] private Slider reloadSlider;
 
+    //Item
+    [Header("Passive Item")]
+    [SerializeField] private GameObject passiveItemPanel;
+    [SerializeField] private Image itemIcon;
+    [SerializeField] private TMP_Text itemName;
+    [SerializeField] private TMP_Text itemDesc;
+
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -171,6 +178,15 @@ public class GameMenu : Menu {
         }
     }
 
+    private void OnObtainItem(PassiveItemObject item)
+    {
+        itemIcon.sprite = item.Icon;
+        itemName.text = item.Name;
+        itemDesc.text = item.Description;
+
+        passiveItemPanel.GetComponent<Animator>().SetTrigger("Show");
+    }
+
 
      /*$$$$$$$                            /$$
     |__  $$__/                           | $$
@@ -196,6 +212,9 @@ public class GameMenu : Menu {
 
         //Add weapon change event
         Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);
+
+        //Add item obtain event
+        Player.Loadout.AddOnObtainItem(OnObtainItem);
     }
 
     protected override void OnClose() {
@@ -212,6 +231,9 @@ public class GameMenu : Menu {
 
         //Remove weapon change event
         Player.Loadout.RemoveOnWeaponChanged(OnWeaponChanged);
+
+        //Add item obtain event
+        Player.Loadout.RemoveOnObtainItem(OnObtainItem);
     }
 
 

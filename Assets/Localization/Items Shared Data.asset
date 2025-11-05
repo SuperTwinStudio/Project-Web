@@ -187,6 +187,62 @@ MonoBehaviour:
     m_Key: effect_water
     m_Metadata:
       m_Items: []
+  - m_Id: 13074380935364608
+    m_Key: desc_passive_conblade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13074920163475456
+    m_Key: desc_passive_shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075061758984192
+    m_Key: desc_passive_kindling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075191862099968
+    m_Key: desc_passive_buddy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13075437560233984
+    m_Key: desc_passive_sheet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076043255480320
+    m_Key: desc_passive_design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076328237465600
+    m_Key: desc_passive_fan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076458839703552
+    m_Key: desc_passive_soles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076683096555520
+    m_Key: desc_passive_cutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076786658115584
+    m_Key: desc_passive_skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13076944665935872
+    m_Key: desc_passive_glitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077065373810688
+    m_Key: desc_passive_glue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077240817352704
+    m_Key: desc_passive_sponge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13077334115450880
+    m_Key: desc_passive_pen
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
