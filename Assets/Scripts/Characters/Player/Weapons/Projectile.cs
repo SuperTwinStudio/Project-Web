@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
@@ -14,6 +15,8 @@ public class Projectile : MonoBehaviour {
     [SerializeField] private bool isPlayer = true;
     [SerializeField] private float speed = 20;
     [SerializeField] private float damage = 25;
+
+    private event Action<IDamageable> OnHit;
 
 
     //State
@@ -42,10 +45,20 @@ public class Projectile : MonoBehaviour {
             //Deal damage
             if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
             damageable.Damage(damage, source, DamageType.Ranged);
+            OnHit?.Invoke(damageable);
         }
 
         //Destroy self
         if (destroyOnHit) Destroy(gameObject);
+    }
+
+    //Events
+    public void AddOnHit(Action<IDamageable> action) {
+        OnHit += action;
+    }
+
+    public void RemoveOnHit(Action<IDamageable> action) {
+        OnHit -= action;
     }
 
 }

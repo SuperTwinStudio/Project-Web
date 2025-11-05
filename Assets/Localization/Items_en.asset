@@ -58,6 +58,10 @@ MonoBehaviour:
     m_Localized: Gauntlet
     m_Metadata:
       m_Items: []
+  - m_Id: 12969046891921408
+    m_Localized: Fan
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

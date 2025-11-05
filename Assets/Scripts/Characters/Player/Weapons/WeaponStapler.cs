@@ -75,15 +75,14 @@ public class WeaponStapler : Weapon {
         //No ammo
         if (ammo <= 0) return;
 
-        //Animate
-        animator.SetTrigger("Shoot");
-
         //Shoot
-        Projectile projectile = SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>();
-        projectile.Init(Player, damage);
+        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage);
 
         //Update ammo
         SetAmmo(ammo - 1);
+
+        //Animate
+        animator.SetTrigger("Shoot");
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);
