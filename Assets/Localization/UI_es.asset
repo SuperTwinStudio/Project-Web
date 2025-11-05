@@ -59,7 +59,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2942271885283328
-    m_Localized: Puedes obtener nuevas clases derrotando jefes
+    m_Localized: Puedes obtener nuevas armas derrotando jefes
     m_Metadata:
       m_Items: []
   - m_Id: 3135052578914304
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3137753219956736
-    m_Localized: Clase Seleccionada
+    m_Localized: Arma Seleccionada
     m_Metadata:
       m_Items: []
   - m_Id: 3566097304260608
@@ -204,6 +204,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13015460753575936
     m_Localized: Recargando...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13035009775374336
+    m_Localized: Rugosidad description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13035064179691520
+    m_Localized: Gramaje description
     m_Metadata:
       m_Items: []
   references:

@@ -34,7 +34,7 @@ public class ShopMenu : Menu {
 
     //Weapon
     [Header("Weapon")]
-    [SerializeField] private List<WeaponTab> weaponTabs;
+    [SerializeField] private List<ShopWeaponTab> weaponTabs;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private WeaponUpgrade primaryAttack;
     [SerializeField] private WeaponUpgrade secondaryAttack;
@@ -107,16 +107,17 @@ public class ShopMenu : Menu {
     [Serializable]
     private class CharacterUpgrade {
 
-        public TMP_Text nameText;
-        public LocalizedString nameLocale;
-        public TMP_Text descriptionText;
-        public Button button;
-        public TMP_Text buttonText;
+        [SerializeField] private TMP_Text nameText;
+        [SerializeField] private LocalizedString nameLocale;
+        [SerializeField] private TMP_Text descriptionText;
+        [SerializeField] private LocalizedString descriptionLocale;
+        [SerializeField] private Button button;
+        [SerializeField] private TMP_Text buttonText;
 
         public void UpdateUI(Upgrade upgrade, int money) {
             //Name & description
             nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
-            //Update description text
+            descriptionText.SetText(descriptionLocale.GetLocalizedString());
 
             //Upgrade button
             button.interactable = upgrade.CanUpgrade && money >= upgrade.Cost;
@@ -158,41 +159,32 @@ public class ShopMenu : Menu {
     }
 
     [Serializable]
-    private class WeaponTab {
-
-        public Item item;
-        public Button button;
-
-        public void UpdateUI(Loadout loadout) {
-            button.interactable = loadout.Unlocked.Contains(item);
-        }
-
-    }
-
-    [Serializable]
     private class WeaponUpgrade {
 
-        public Image icon;
-        public TMP_Text nameText;
-        public LocalizedString nameLocale;
-        public TMP_Text descriptionText;
-        public Button button;
-        public TMP_Text buttonText;
+        [SerializeField] private Image icon;
+        [SerializeField] private TMP_Text nameText;
+        [SerializeField] private TMP_Text descriptionText;
+        [SerializeField] private Button button;
+        [SerializeField] private TMP_Text buttonText;
 
-        public void UpdateUI(Weapon weapon, WeaponAction attack, int money) {
+        public void UpdateUI(Weapon weapon, WeaponAction action, int money) {
             //Get upgrade
-            Upgrade upgrade = weapon.GetUpgrade(attack);
+            Upgrade upgrade = weapon.GetUpgrade(action);
         
             //Icon
-            icon.sprite = attack switch {
+            icon.sprite = action switch {
                 WeaponAction.Primary => weapon.PrimaryIcon,
                 WeaponAction.Secondary => weapon.SecondaryIcon,
                 _ => weapon.PassiveIcon
             };
 
             //Name & description
-            nameText.SetText($"{nameLocale.GetLocalizedString()} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
-            //Update description text
+            nameText.SetText($"{weapon.Item.Name} - LvL {(upgrade.CanUpgrade ? upgrade.Level : "MAX")}");
+            descriptionText.SetText(action switch { 
+                WeaponAction.Primary => weapon.PrimaryDescription, 
+                WeaponAction.Secondary => weapon.SecondaryDescription, 
+                _ => weapon.PassiveDescription, 
+            });
 
             //Upgrade button
             button.interactable = upgrade.CanUpgrade && money >= upgrade.Cost;

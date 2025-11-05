@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5625636327424
-    m_Localized: Papel
+    m_Localized: Espada
     m_Metadata:
       m_Items: []
   - m_Id: 5642983968768
@@ -124,6 +124,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13046186966482944
     m_Localized: Mojado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031383011037184
+    m_Localized: Pasiva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031348479332352
+    m_Localized: Primaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13031367097847808
+    m_Localized: Secundaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033482478292992
+    m_Localized: Primaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033561209573376
+    m_Localized: Primaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033653618479104
+    m_Localized: Primaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033719343222784
+    m_Localized: Primaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033501151334400
+    m_Localized: Secundaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033586727718912
+    m_Localized: Secundaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033666406912000
+    m_Localized: Secundaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033731905163264
+    m_Localized: Secundaria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033750657896448
+    m_Localized: Pasiva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033520835203072
+    m_Localized: Pasiva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033605694361600
+    m_Localized: Pasiva
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13033681376382976
+    m_Localized: Pasiva
     m_Metadata:
       m_Items: []
   references:

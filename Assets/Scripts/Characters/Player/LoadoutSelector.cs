@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class LoadoutSelector : MonoBehaviour {
 
+    //Components
+    [Header("Components")]
+    [SerializeField] private MeshRenderer meshRenderer;
+
     //Weapon
     [Header("Weapon")]
     [SerializeField] private Item weapon;
@@ -22,6 +26,9 @@ public class LoadoutSelector : MonoBehaviour {
         //Check if other is player
         if (!other.CompareTag("Player") || !other.TryGetComponent(out Player player)) return;
 
+        //Hide
+        meshRenderer.enabled = false;
+
         //Unlock weapon
         if (weapon) {
             //Has weapon -> Select it
@@ -31,6 +38,14 @@ public class LoadoutSelector : MonoBehaviour {
             player.Loadout.UnlockAllWeapons();
             foreach (var selector in FindObjectsByType<LoadoutSelector>(FindObjectsInactive.Include, FindObjectsSortMode.None)) selector.ToggleActive();
         }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        //Check if player
+        if (!other.CompareTag("Player")) return;
+
+        //Show
+        meshRenderer.enabled = true;
     }
 
 }
