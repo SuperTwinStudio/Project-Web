@@ -23,7 +23,7 @@ MonoBehaviour:
     m_LocalVariables: []
   Icon: {fileID: 0}
   Rarity: 2
-  Logic: {fileID: 0}
+  Logic: {fileID: 5922581861221923766, guid: f509d9116d7021547a1e8f2606fe30f8, type: 3}
   references:
     version: 2
     RefIds: []

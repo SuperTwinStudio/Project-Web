@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Boss
   - ItemShield
+  - ItemBuddy
   layers:
   - Default
   - TransparentFX
