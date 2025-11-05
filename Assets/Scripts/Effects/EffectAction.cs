@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum EffectType { None, Damage, Heal, Slow }
+public enum EffectType { None, Damage, Heal, SlowGeneral, SlowAttack, SlowSpeed, Weak }
 
 [Serializable]
 public class EffectAction {

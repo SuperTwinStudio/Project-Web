@@ -115,6 +115,14 @@ MonoBehaviour:
     m_Key: weapon_abanico
     m_Metadata:
       m_Items: []
+  - m_Id: 13044225118535680
+    m_Key: effect_glue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13046186966482944
+    m_Key: effect_water
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -32,6 +32,9 @@ public class Character : MonoBehaviour, IDamageable {
     //Effects
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
     protected float slowSpeedMultiplier = 1;
+    protected float moveSpeedMultiplier = 1;
+    protected float attackSpeedMultiplier = 1;
+    protected float damageTakenMultiplier = 1;
 
 
     //State
@@ -130,8 +133,10 @@ public class Character : MonoBehaviour, IDamageable {
         //Ignore negative damage
         if (amount <= 0) return false;
 
+        float damage = amount * damageTakenMultiplier;
+
         //Damage character
-        Health = Mathf.Max(Health - amount, 0);
+        Health = Mathf.Max(Health - damage, 0);
 
         //Check if character died
         if (Health <= 0) {
@@ -171,6 +176,9 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Reset slow multiplier
         slowSpeedMultiplier = 1;
+        moveSpeedMultiplier = 1;
+        attackSpeedMultiplier = 1;
+        damageTakenMultiplier = 1;
 
         //Apply effects
         foreach (var effect in effects.Keys.ToList()) {
@@ -187,9 +195,21 @@ public class Character : MonoBehaviour, IDamageable {
                 case EffectType.Heal:
                     Heal(Time.deltaTime * level * effect.Action.Value); //Take value as healing per second
                     break;
-                //Slow
-                case EffectType.Slow:
+                //Slow general
+                case EffectType.SlowGeneral:
                     slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
+                    break;
+                //Slow attack speed
+                case EffectType.SlowAttack:
+                    attackSpeedMultiplier = Mathf.Min(attackSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
+                    break;
+                //Slow movement
+                case EffectType.SlowSpeed:
+                    moveSpeedMultiplier = Mathf.Min(moveSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
+                    break;
+                //Weak
+                case EffectType.Weak:
+                    damageTakenMultiplier = Mathf.Max(damageTakenMultiplier, 1 + effect.Action.Value);
                     break;
             }
 

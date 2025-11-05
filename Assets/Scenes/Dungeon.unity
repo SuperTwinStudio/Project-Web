@@ -748,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fde8438619b634fb485231919ce329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: a5b8e8a0da3d8e246a8915f35ed61023, type: 2}
+  item: {fileID: 11400000, guid: f2d7f349d6611804e910c0e52df0e5b6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

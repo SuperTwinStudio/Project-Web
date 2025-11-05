@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23cc99f797bd0d84b980522cba2e1f9d, type: 3}
-  m_Name: Stun
+  m_Name: Glue
   m_EditorClassIdentifier: 
   _show: 1
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
@@ -18,7 +18,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
     m_TableEntryReference:
-      m_KeyId: 12388082734039040
+      m_KeyId: 13044225118535680
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   _hasLevels: 0
   _maxLevel: 5
   _action:
-    _type: 3
+    _type: 5
     _value: 1
   references:
     version: 2

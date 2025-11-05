@@ -118,6 +118,14 @@ MonoBehaviour:
     m_Localized: Abanico
     m_Metadata:
       m_Items: []
+  - m_Id: 13044225118535680
+    m_Localized: Pegado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13046186966482944
+    m_Localized: Mojado
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
