@@ -7,6 +7,6 @@ public class PIUnfoldedSheet : PassiveItem
         player.IsAlive = true;
         player.Heal(player.HealthMax / 2);
 
-        player.Loadout.RemovePassiveItem(this);
+        player.Loadout.QueuePassiveItemRemoval(this);
     }
 }

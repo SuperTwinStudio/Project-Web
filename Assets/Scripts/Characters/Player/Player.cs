@@ -264,22 +264,18 @@ public class Player : Character, ISavable {
         //Damage
         bool success = base.Damage(amount - resistance, source, type);
 
-        //Died -> Open death menu
-        if (success && !IsAlive) {
-            foreach (var item in Loadout.PassiveItems) {
-                item.Key.OnDeathHook(this, item.Value);
-            }
-
-            // Run the alive check again since items could have altered that outcome
-            if(!IsAlive) MenuManager.Open(MenusList.Death); 
-        }
-
         //Return success
         return success;
     }
 
     protected override void OnDeath(bool instant = false) {
-        MenuManager.Open(MenusList.Death);
+        foreach (var item in Loadout.PassiveItems)
+        {
+            item.Key.OnDeathHook(this, item.Value);
+        }
+
+        // Run the alive check again since items could have altered that outcome
+        if (!IsAlive) MenuManager.Open(MenusList.Death);
     }
 
     //Events (other)

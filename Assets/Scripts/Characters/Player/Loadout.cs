@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Botpa;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Loadout : MonoBehaviour, ISavable {
 
@@ -50,6 +51,7 @@ public class Loadout : MonoBehaviour, ISavable {
     public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
 
     private event ObtainedItem OnObtainItem;
+    private List<PassiveItem> passiveItemDeletionList;
 
     //State
     private void Awake() {
@@ -58,6 +60,21 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Select weapon if none selected
         if (!CurrentWeapon) SelectWeapon(Unlocked.First());
+
+        passiveItemDeletionList = new List<PassiveItem>();
+    }
+
+    private void Update()
+    {
+        if (passiveItemDeletionList.Count > 0)
+        {
+            foreach (var item in passiveItemDeletionList)
+            {
+                RemovePassiveItem(item);
+            }
+
+            passiveItemDeletionList.Clear();
+        }
     }
 
     //Weapons
@@ -246,7 +263,12 @@ public class Loadout : MonoBehaviour, ISavable {
         OnObtainItem -= action;
     }
 
-    public void RemovePassiveItem(PassiveItem item) {
+    public void QueuePassiveItemRemoval(PassiveItem item)
+    {
+        passiveItemDeletionList.Add(item);
+    }
+
+    private void RemovePassiveItem(PassiveItem item) {
         //Invalid item or we don't have it yet
         if (!item || !PassiveItems.ContainsKey(item)) return;
 
