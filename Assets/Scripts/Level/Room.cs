@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class Room : MonoBehaviour
     private bool m_Faded = true;
     private float m_Size = 1.0f;
 
+    private readonly List<EnemyBase> m_enemies = new();
     private bool m_BossPresent;
     private int m_EnemyCount;
 
@@ -64,6 +66,13 @@ public class Room : MonoBehaviour
         }
     }
 
+    private void InitializeEnemy(GameObject obj)
+    {
+        EnemyBase enemy = obj.GetComponent<EnemyBase>();
+        enemy.SetRoom(this);
+        m_enemies.Add(enemy);
+    }
+
     public void InitializeRoom(int flags, LevelDefinition def)
     {
         m_Flags = flags;
@@ -99,12 +108,12 @@ public class Room : MonoBehaviour
                 if (isRare)
                 {
                     int id = Random.Range(0, def.RareEnemies.Length);
-                    Instantiate(def.RareEnemies[id], spawnPoint).GetComponent<EnemyBase>().SetRoom(this);
+                    InitializeEnemy(Instantiate(def.RareEnemies[id], spawnPoint));
                 }
                 else
                 {
                     int id = Random.Range(0, def.FodderEnemies.Length);
-                    Instantiate(def.FodderEnemies[id], spawnPoint).GetComponent<EnemyBase>().SetRoom(this);
+                    InitializeEnemy(Instantiate(def.FodderEnemies[id], spawnPoint));
                 }
 
                 m_EnemyCount++;
@@ -112,7 +121,7 @@ public class Room : MonoBehaviour
         }
         else if (m_BossRoom)
         {
-            m_BossObject.GetComponent<EnemyBase>().SetRoom(this);
+            InitializeEnemy(m_BossObject);
         }
 
         // Shrink all rooms but the starting room
@@ -129,6 +138,9 @@ public class Room : MonoBehaviour
         m_GeometryTransform.gameObject.SetActive(true);
         m_Faded = false;
         m_FadeTrigger = false;
+
+        //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again)
+        foreach (var enemy in m_enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
     }
 
     public void FadeOut()
@@ -165,6 +177,9 @@ public class Room : MonoBehaviour
 
         //Update walkable surface
         Game.Current.Level.UpdateWalkableSurface();
+
+        //Enable enemies
+        foreach (var enemy in m_enemies) enemy.SetEnabled(true);
     }
 
     private void UnlockDoors()
@@ -172,9 +187,6 @@ public class Room : MonoBehaviour
         for (int i = 0; i < 4; i++) {
             m_Doors[i].SetActive(((m_Flags >> i) & 0b1) == m_ShowActiveDoors);
         }
-
-        //Update walkable surface
-        Game.Current.Level.UpdateWalkableSurface();
     }
 
     private void OnTriggerEnter(Collider other)

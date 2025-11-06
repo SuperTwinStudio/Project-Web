@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5988547702214694839}
   m_Layer: 7
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   _renderer: {fileID: 0}
   _agent: {fileID: 4960207987092544457}
   _rigidbody: {fileID: 5988547702214694839}
+  moveSpeed: 3
   viewDistance: 5
   damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
   _maxHealth: 100

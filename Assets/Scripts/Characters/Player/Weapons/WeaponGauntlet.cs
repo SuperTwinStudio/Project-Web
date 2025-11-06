@@ -38,7 +38,7 @@ public class WeaponGauntlet : Weapon {
     [Header("Passive")]
     [SerializeField, Min(0)] private float passiveDamage = 4f;
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 2f;
-    [SerializeField, Min(0)] private float passiveDuration = 3f;
+    [SerializeField, Min(0)] private float passiveDuration = 5f;
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 

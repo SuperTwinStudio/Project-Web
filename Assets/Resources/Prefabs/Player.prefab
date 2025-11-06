@@ -389,7 +389,7 @@ MonoBehaviour:
   secondaryAttackSphereCast: {x: 1, y: 0}
   passiveDamage: 4
   passiveDamagePerLevel: 2
-  passiveDuration: 3
+  passiveDuration: 5
   references:
     version: 2
     RefIds: []

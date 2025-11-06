@@ -15,6 +15,8 @@ public class EnemyBase : Character {
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Renderer _renderer;
 
+    public bool IsEnabled { get; private set; } = true;
+
     public EnemyBehaviour Behaviour => _behaviour;
     public Collider Collider => _collider;
     public Transform Model => _model;
@@ -59,6 +61,9 @@ public class EnemyBase : Character {
     }
 
     protected override void OnUpdate() {
+        //Not enabled
+        if (!IsEnabled) return;
+
         //Check if player is visible
         CheckPlayerVisible();
 
@@ -68,6 +73,12 @@ public class EnemyBase : Character {
         //Rotate model
         Vector3 lookDirection = Agent.desiredVelocity;
         if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.LookRotation(lookDirection.normalized, Vector3.up);
+    }
+
+    public void SetEnabled(bool enabled) {
+        IsEnabled = enabled;
+        Agent.enabled = enabled;
+        Collider.enabled = enabled && IsAlive;
     }
 
     //Player
@@ -153,6 +164,7 @@ public class EnemyBase : Character {
     //Room
     public void SetRoom(Room room) {
         Room = room;
+        SetEnabled(false); //Disable on creation
     }
 
 }

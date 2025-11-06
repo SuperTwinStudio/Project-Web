@@ -89,6 +89,11 @@ public class Character : MonoBehaviour, IDamageable {
         return false;
     }
 
+    //Movement
+    public virtual void TeleportTo(Vector3 position) {
+        transform.position = position;
+    }
+
     //Health
     private IEnumerator DamageFeedbackCoroutine() {
         OnDamageFeedbackStart();

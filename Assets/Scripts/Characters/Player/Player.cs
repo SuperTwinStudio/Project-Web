@@ -212,6 +212,12 @@ public class Player : Character, ISavable {
     }
 
     //Movement
+    public override void TeleportTo(Vector3 position) {
+        controller.enabled = false;
+        transform.position = position;
+        controller.enabled = true;
+    }
+
     private void StopMovement() {
         isMoving = false;
         Animator.SetBool("IsMoving", isMoving);
