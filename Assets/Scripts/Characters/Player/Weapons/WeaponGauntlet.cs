@@ -15,7 +15,8 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primaryDamage = 20f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
-    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private AudioClip primaryAttackSound;
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -28,7 +29,8 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
-    [SerializeField, Min(0)] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private AudioClip secondaryAttackSound;
 
     private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
@@ -59,6 +61,7 @@ public class WeaponGauntlet : Weapon {
         );
 
         //Animate
+        PlaySound(primaryAttackSound);
         animator.SetTrigger("Attack");
 
         //Slow player
@@ -84,6 +87,7 @@ public class WeaponGauntlet : Weapon {
         );
 
         //Animate
+        PlaySound(secondaryAttackSound);
         animator.SetTrigger("AttackDown");
 
         //Slow player

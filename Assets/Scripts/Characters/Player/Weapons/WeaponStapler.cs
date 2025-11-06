@@ -8,8 +8,8 @@ public class WeaponStapler : Weapon {
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
-    [SerializeField, Min(0)] private float primaryDamage = 10f;
-    [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
+    [SerializeField, Min(0)] private float primaryDamage = 25f;
+    [SerializeField, Min(0)] private float primaryDamagePerLevel = 8f;
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -19,8 +19,8 @@ public class WeaponStapler : Weapon {
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float secondaryDamage = 10f;
-    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 5f;
+    [SerializeField, Min(0)] private float secondaryDamage = 25f;
+    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 8f;
     [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
     [SerializeField, Min(0)] private float secondaryBurstDelay = 0.6f;
 
@@ -32,7 +32,8 @@ public class WeaponStapler : Weapon {
     [Header("Passive")]
     [SerializeField, Min(0)] private float passiveDamage = 30f;
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 10f;
-    [SerializeField, Min(0)] private Vector2 passiveAttackSphereCast = new(1f, 0f);
+    [SerializeField] private Vector2 passiveAttackSphereCast = new(1f, 0f);
+    [SerializeField] private AudioClip passiveAttackSound;
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
@@ -42,6 +43,7 @@ public class WeaponStapler : Weapon {
     [SerializeField] private Transform bulletOrigin;
     [SerializeField, Min(0)] private int maxAmmo = 12;
     [SerializeField, Min(0)] private float reloadDuration = 1f;
+    [SerializeField] private AudioClip shootAttackSound;
 
     private readonly Timer reloadTimer = new();
     private int ammo = 0;
@@ -82,6 +84,7 @@ public class WeaponStapler : Weapon {
         //Check if melee attack hit something
         if (hit) {
             //Hit something with passive -> Animate attack
+            PlaySound(passiveAttackSound);
             animator.SetTrigger("Attack");
         } else {
             //Didn't hit anything -> Use primary (shoot)
@@ -155,6 +158,7 @@ public class WeaponStapler : Weapon {
         SetAmmo(ammo - 1);
 
         //Animate
+        PlaySound(shootAttackSound);
         animator.SetTrigger("Shoot");
 
         //Apply camera knockback

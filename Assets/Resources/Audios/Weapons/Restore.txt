@@ -1,0 +1,10 @@
+Abanico:
+- Primary -> Shoot
+- Secondary -> HitBig
+- Passive -> HitBig
+
+Cerilla
+- Secondary -> HitBig
+
+Gauntlet
+- Secondary -> HitForward

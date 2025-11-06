@@ -15,7 +15,8 @@ public class WeaponMatch : Weapon {
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
-    [SerializeField, Min(0)] private Vector2 primaryAttackSphereCast = new(0.5f, 1.5f);
+    [SerializeField] private Vector2 primaryAttackSphereCast = new(0.5f, 1.5f);
+    [SerializeField] private AudioClip primaryAttackSound;
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -29,6 +30,7 @@ public class WeaponMatch : Weapon {
     [SerializeField, Min(0)] private float secondaryDuration = 3f;
     [SerializeField, Min(0)] private float secondaryDurationPerLevel = 1f;
     [SerializeField, Min(0)] private float secondaryRadius = 3f;
+    [SerializeField] private AudioClip secondaryAttackSound;
 
     private float SecondaryBurnDuration => secondaryDuration + (SecondaryUpgrade.Level - 1) * secondaryDurationPerLevel;
 
@@ -38,7 +40,8 @@ public class WeaponMatch : Weapon {
     [Header("Passive")]
     [SerializeField, Min(0)] private float passiveDuration = 1f;
     [SerializeField, Min(0)] private float passiveDurationPerLevel = 1f;
-    [SerializeField, Min(2)] private int passiveHit = 4;
+    [SerializeField, Min(1)] private int passiveHit = 4;
+    [SerializeField] private AudioClip passiveAttackSound;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
@@ -70,13 +73,14 @@ public class WeaponMatch : Weapon {
             isPassiveHit ? (damageable) => ApplyBurn(damageable, PassiveBurnDuration) : null
         );
 
+        //Animate
+        PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
+        animator.SetTrigger("Attack");
+
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
-
-        //Animate
-        animator.SetTrigger("Attack");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, primarySlowDuration);
@@ -100,7 +104,7 @@ public class WeaponMatch : Weapon {
         );
 
         //Animate
-        //animator.SetTrigger("AttackSpin");
+        PlaySound(secondaryAttackSound);
 
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);

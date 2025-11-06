@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour {
     //Components
     [Header("Components")]
     [SerializeField] protected Loadout _loadout;
+    [SerializeField] protected AudioSource audioSource;
 
     public Loadout Loadout => _loadout;
     public Player Player => Loadout.Player;
@@ -130,6 +131,14 @@ public class Weapon : MonoBehaviour {
     }
 
     protected virtual void OnShow() {}
+
+    //Audio
+    protected void PlaySound(AudioClip clip) {
+        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
+        audioSource.PlayOneShot(clip);
+        //audioSource.clip = clip;
+        //audioSource.Play();
+    }
 
     //Weapon
     protected void SetCooldown(WeaponAction attack, float cooldown) {

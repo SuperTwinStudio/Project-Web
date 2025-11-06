@@ -10,6 +10,7 @@ public class WeaponAbanico : Weapon {
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
     [SerializeField, Min(0)] private float primaryDamage = 10f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
+    [SerializeField] private AudioClip primaryAttackSound;
 
     private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
@@ -17,11 +18,12 @@ public class WeaponAbanico : Weapon {
 
     //Secondary
     [Header("Secondary")]
-    [SerializeField, Min(0)] private float _secondaryCooldown = 5f;
+    [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float secondaryPushForce = 10f;
     [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 3f;
-    [SerializeField, Min(0)] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
+    [SerializeField] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
+    [SerializeField] private AudioClip secondaryAttackSound;
 
     private float SecondaryPushForce => secondaryPushForce + (SecondaryUpgrade.Level - 1) * secondaryPushForcePerLevel;
 
@@ -31,7 +33,8 @@ public class WeaponAbanico : Weapon {
     [Header("Passive")]
     [SerializeField, Min(0)] private float passivePushForce = 6f;
     [SerializeField, Min(0)] private float passivePushForcePerLevel = 2f;
-    [SerializeField, Min(2)] private int passiveHit = 8;
+    [SerializeField, Min(1)] private int passiveHit = 8;
+    [SerializeField] private AudioClip passiveAttackSound;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
@@ -65,13 +68,14 @@ public class WeaponAbanico : Weapon {
         projectile.Init(Player, PrimaryDamage);
         if (isPassiveHit) projectile.AddOnHit((damageable) => Push(damageable, PassivePushForce));
 
+        //Animate
+        PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
+        animator.SetTrigger("Shoot");
+
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
-
-        //Animate
-        animator.SetTrigger("Shoot");
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);
@@ -91,6 +95,9 @@ public class WeaponAbanico : Weapon {
             0,
             (damageable) => Push(damageable, SecondaryPushForce)
         );
+
+        //Animate
+        PlaySound(secondaryAttackSound);
     }
 
     //Passive
@@ -110,7 +117,6 @@ public class WeaponAbanico : Weapon {
         //Push enemy
         if (direction.IsEmpty()) direction = enemy.transform.position - Player.transform.position;
         enemy.Push(force * direction);
-        //Debug.Log($"Push {enemy.name} with {force} force");
     }
 
 }
