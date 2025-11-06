@@ -492,7 +492,7 @@ MonoBehaviour:
   secondaryDamage: 50
   secondaryDamagePerLevel: 15
   secondaryAttackSphereCast: {x: 1, y: 0}
-  secondaryAttackSound: {fileID: 8300000, guid: a8fb16a661f212742ab80029b0c0b98b, type: 3}
+  secondaryAttackSound: {fileID: 8300000, guid: 54c1c1e17d12c324cbc80cd2b80dc771, type: 3}
   passiveDamage: 4
   passiveDamagePerLevel: 2
   passiveDuration: 5
@@ -806,7 +806,8 @@ MonoBehaviour:
   bulletOrigin: {fileID: 4886712245934270044}
   maxAmmo: 12
   reloadDuration: 1
-  shootAttackSound: {fileID: 8300000, guid: b93b00e0dbddc3e429ac5c71d0659bd3, type: 3}
+  reloadAttackSound: {fileID: 8300000, guid: b96cc2e3042e1e740a7942e4ef04a656, type: 3}
+  shootAttackSound: {fileID: 8300000, guid: a09669c445298a6479e6d12f959f0a85, type: 3}
   references:
     version: 2
     RefIds: []

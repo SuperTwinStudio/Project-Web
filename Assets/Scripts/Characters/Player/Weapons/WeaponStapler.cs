@@ -43,6 +43,7 @@ public class WeaponStapler : Weapon {
     [SerializeField] private Transform bulletOrigin;
     [SerializeField, Min(0)] private int maxAmmo = 12;
     [SerializeField, Min(0)] private float reloadDuration = 1f;
+    [SerializeField] private AudioClip reloadAttackSound;
     [SerializeField] private AudioClip shootAttackSound;
 
     private readonly Timer reloadTimer = new();
@@ -140,6 +141,9 @@ public class WeaponStapler : Weapon {
         //Add reload cooldown to primary and secondary
         SetCooldown(WeaponAction.Primary, reloadDuration);
         SetCooldown(WeaponAction.Secondary, reloadDuration);
+
+        //Play sound
+        PlaySound(reloadAttackSound);
 
         //Start reload coroutine
         StartCoroutine(ReloadCoroutine());

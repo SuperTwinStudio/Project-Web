@@ -5,6 +5,3 @@ Abanico:
 
 Cerilla
 - Secondary -> HitBig
-
-Gauntlet
-- Secondary -> HitForward
