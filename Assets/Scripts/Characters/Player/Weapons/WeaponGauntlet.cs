@@ -36,8 +36,8 @@ public class WeaponGauntlet : Weapon {
 
     //Passive
     [Header("Passive")]
-    [SerializeField, Min(0)] private float passiveDamage = 5f;
-    [SerializeField, Min(0)] private float passiveDamagePerLevel = 5f;
+    [SerializeField, Min(0)] private float passiveDamage = 4f;
+    [SerializeField, Min(0)] private float passiveDamagePerLevel = 2f;
     [SerializeField, Min(0)] private float passiveDuration = 3f;
 
     private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
@@ -55,7 +55,7 @@ public class WeaponGauntlet : Weapon {
             primaryAttackSphereCast.x,
             primaryAttackSphereCast.y,
             0,
-            ApplyChincheta
+            (damageable) => ApplyChincheta(damageable, PrimaryDamage)
         );
 
         //Animate
@@ -79,7 +79,8 @@ public class WeaponGauntlet : Weapon {
         MeleeForward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
-            SecondaryDamage
+            0,
+            (damageable) => ApplyChincheta(damageable, SecondaryDamage)
         );
 
         //Animate
@@ -93,11 +94,11 @@ public class WeaponGauntlet : Weapon {
     }
 
     //Passive
-    private void ApplyChincheta(IDamageable damageable) {
+    private void ApplyChincheta(IDamageable damageable, float damage) {
         //Check type
         if (damageable is not Character) {
             //Not a character -> Default damage
-            damageable.Damage(PrimaryDamage, this, DamageType.Melee);
+            damageable.Damage(damage, this, DamageType.Melee);
             return;
         }
 
@@ -107,8 +108,8 @@ public class WeaponGauntlet : Weapon {
         //Apply damage taking effect into account
         damageable.Damage(
             character.TryGetEffect(chinchetaEffect, out float endTimestamp, out int level) ?
-                PrimaryDamage + PassiveDamage * level :
-                PrimaryDamage,
+                damage + PassiveDamage * level :
+                damage,
             this,
             DamageType.Melee
         );

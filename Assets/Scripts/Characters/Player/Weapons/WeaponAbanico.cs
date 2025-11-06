@@ -19,8 +19,8 @@ public class WeaponAbanico : Weapon {
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 5f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float secondaryPushForce = 2f;
-    [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 1f;
+    [SerializeField, Min(0)] private float secondaryPushForce = 10f;
+    [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 3f;
     [SerializeField, Min(0)] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
 
     private float SecondaryPushForce => secondaryPushForce + (SecondaryUpgrade.Level - 1) * secondaryPushForcePerLevel;
@@ -29,14 +29,16 @@ public class WeaponAbanico : Weapon {
 
     //Passive
     [Header("Passive")]
-    [SerializeField, Min(0)] private float passivePushForce = 2f;
-    [SerializeField, Min(0)] private float passivePushForcePerLevel = 1f;
-    [SerializeField, Min(2)] private int passiveHit = 5;
+    [SerializeField, Min(0)] private float passivePushForce = 6f;
+    [SerializeField, Min(0)] private float passivePushForcePerLevel = 2f;
+    [SerializeField, Min(2)] private int passiveHit = 8;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
 
     private float PassivePushForce => passivePushForce + (PassiveUpgrade.Level - 1) * passivePushForcePerLevel;
+
+    public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
     //Ammo
     [Header("Ammo")]

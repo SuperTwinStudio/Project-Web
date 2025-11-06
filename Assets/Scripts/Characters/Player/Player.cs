@@ -130,7 +130,7 @@ public class Player : Character, ISavable {
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
 
             //Move in move direction
-            controller.SimpleMove(moveSpeed * moveDirection);
+            controller.SimpleMove(moveSpeed * slowMovementMultiplier * moveDirection);
         }
 
 

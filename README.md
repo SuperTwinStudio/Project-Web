@@ -155,7 +155,7 @@ Clase de combate cuerpo a cuerpo genérica con un estilo de juego balanceado.
 	- Mejora: Aumenta el daño.
 - **Ataque secundario:** Golpea girando sobre sí mismo, dañando a los enemigos que estén en el área de corte.
 	- Mejora: Aumenta el daño.
-- **Pasiva:** Tras dar tres golpes, el siguiente golpe realiza daño extra.
+- **Pasiva:** Tras dar 3 golpes, el siguiente golpe realiza daño extra.
 	- Mejora: Aumenta el daño.
 
 #### Clase Lanza
@@ -166,18 +166,18 @@ Clase de combate cuerpo a cuerpo que sacrifica velocidad por potencia y algo má
 	- Mejora: Aumenta el daño.
 - **Ataque secundario:** Crea una explosión que quema un área a su alrededor.
 	- Mejora: Aumenta la duración de la quemadura.
-- **Pasiva:** Tras dar tres golpes, el siguiente quema a los enemigos.
+- **Pasiva:** Tras dar 3 golpes, el siguiente quema a los enemigos.
 	- Mejora: Aumenta la duración de la quemadura.    
 
 #### Clase Garra
 Clase de combate cuerpo a cuerpo que sacrifica área de daño por velocidad de ataque.
 
 **Guantelete de chinchetas**
-- **Ataque primario:** Golpea hacia el frente, dañando a los enemigos que estén en su rango y clavando una chincheta hasta un máximo de 5.
+- **Ataque primario:** Golpea hacia el frente, dañando a los enemigos que estén en su rango.
 	- Mejora: Aumenta el daño del golpe.
 - **Ataque secundario:** Realiza un plunge attack con daño en área.
 	- Mejora: Aumenta el daño del golpe.
-- **Pasiva:** Cada chincheta clavada en un enemigo aumenta el daño del ataque primario.
+- **Pasiva:** Dañar a un enemigo le clava una chincheta, hasta un máximo de 5, aumentando el daño de los ataques por cada chincheta clavada.
 	- Mejora: Aumenta el daño extra.
 
 #### Clase Trabuco
@@ -199,7 +199,7 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
 	- Mejora: Aumenta el daño de la rafaga de aire.
 - **Ataque secundario:** Bate el abanico para empujar a los enemigos que tiene enfrente.
 	- Mejora: Aumenta la distancia de empuje.
-- **Pasiva:** Tras lanzar 4 ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
+- **Pasiva:** Tras lanzar 7 ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
 	- Mejora: Aumenta la distancia de empuje.
 
 #### Clase Mental

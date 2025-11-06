@@ -87,10 +87,6 @@ MonoBehaviour:
     m_Key: passive_pen
     m_Metadata:
       m_Items: []
-  - m_Id: 12943447938924544
-    m_Key: effect_chincheta
-    m_Metadata:
-      m_Items: []
   - m_Id: 1381918873358336
     m_Key: treasure_bag
     m_Metadata:

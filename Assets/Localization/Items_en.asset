@@ -107,7 +107,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12943447938924544
-    m_Localized: Pushpin
+    m_Localized: Thumbtack
     m_Metadata:
       m_Items: []
   - m_Id: 12946958567178240
@@ -127,8 +127,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13031383011037184
-    m_Localized: After three hits, the next hit deals bonus damage (upgrading this
-      skill increases its damage).
+    m_Localized: After 3 hits, the next hit deals bonus damage (upgrading this skill
+      increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13031348479332352
@@ -151,8 +151,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033653618479104
-    m_Localized: Strikes forward, damaging enemies within range and driving up to
-      5 pins into the enemies (upgrading this skill increases its damage).
+    m_Localized: Strikes forward, damaging enemies within range (upgrading this skill
+      increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13033719343222784
@@ -181,8 +181,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033750657896448
-    m_Localized: After four gusts of air, the next one pushes back the enemies it
-      collides with (upgrading this skill increases the force of the push).
+    m_Localized: After 7 gusts of air, the next one pushes back the enemies it collides
+      with (upgrading this skill increases the force of the push).
     m_Metadata:
       m_Items: []
   - m_Id: 13033520835203072
@@ -191,13 +191,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033605694361600
-    m_Localized: After three hits, the next hit burns enemies (upgrading this skill
-      increases the burn duration).
+    m_Localized: After 3 hits, the next hit burns enemies (upgrading this skill increases
+      the burn duration).
     m_Metadata:
       m_Items: []
   - m_Id: 13033681376382976
-    m_Localized: Each pushpin driven into an enemy increases the damage of the primary
-      attack (upgrading this skill increases its damage).
+    m_Localized: Damaging an enemy drives a thumbtack into them, up to a maximum
+      of 5, increasing attack damage for each thumbtack driven (upgrading this skill
+      increases its damage).
     m_Metadata:
       m_Items: []
   - m_Id: 13074380935364608

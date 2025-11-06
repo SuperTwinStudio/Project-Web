@@ -76,8 +76,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13033653618479104
     m_Localized: "Golpea hacia el frente, da\xF1ando a los enemigos que est\xE9n
-      en su rango y clavando una chincheta hasta un m\xE1ximo de 5 (mejorar esta
-      habilidad aumenta su da\xF1o)."
+      en su rango (mejorar esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033719343222784
@@ -96,8 +95,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033605694361600
-    m_Localized: "Tras dar tres golpes, el siguiente quema a los enemigos (mejorar
-      esta habilidad aumenta la duraci\xF3n de la quemadura)."
+    m_Localized: "Tras dar 3 golpes, el siguiente quema a los enemigos (mejorar esta
+      habilidad aumenta la duraci\xF3n de la quemadura)."
     m_Metadata:
       m_Items: []
   - m_Id: 13033520835203072
@@ -106,7 +105,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033750657896448
-    m_Localized: "Tras lanzar 4 r\xE1fagas de aire, la siguiente empuja a los enemigos
+    m_Localized: "Tras lanzar 7 r\xE1fagas de aire, la siguiente empuja a los enemigos
       con los que colisiona (mejorar esta habilidad aumenta la fuerza del empuje)."
     m_Metadata:
       m_Items: []
@@ -121,13 +120,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13033681376382976
-    m_Localized: "Cada chincheta clavada en un enemigo aumenta el da\xF1o del ataque
-      primario (mejorar esta habilidad aumenta su da\xF1o)."
+    m_Localized: "Da\xF1ar a un enemigo le clava una chincheta, hasta un m\xE1ximo
+      de 5, aumentando el da\xF1o de los ataques por cada chincheta clavada (mejorar
+      esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13031383011037184
-    m_Localized: "Tras dar tres golpes, el siguiente golpe realiza da\xF1o extra
-      (mejorar esta habilidad aumenta su da\xF1o)."
+    m_Localized: "Tras dar 3 golpes, el siguiente golpe realiza da\xF1o extra (mejorar
+      esta habilidad aumenta su da\xF1o)."
     m_Metadata:
       m_Items: []
   - m_Id: 13046186966482944

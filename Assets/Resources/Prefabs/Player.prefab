@@ -51,8 +51,6 @@ MonoBehaviour:
   _top: {fileID: 794176676061406782}
   _eyes: {fileID: 1142675718610680985}
   _bot: {fileID: 1936036416147092579}
-  IgnoreNextDamage: 0
-  IsInvulnerable: 0
   _level: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -83,9 +81,9 @@ MonoBehaviour:
   _player: {fileID: 468255279070448659}
   weapons:
   - {fileID: 6276396774210786200}
-  - {fileID: 846072094820107339}
   - {fileID: 3499355174417952672}
   - {fileID: 7252970620708159940}
+  - {fileID: 846072094820107339}
   - {fileID: 1122487539104593671}
 --- !u!143 &3851105479952359991
 CharacterController:
@@ -389,8 +387,8 @@ MonoBehaviour:
   secondaryDamage: 50
   secondaryDamagePerLevel: 15
   secondaryAttackSphereCast: {x: 1, y: 0}
-  passiveDamage: 5
-  passiveDamagePerLevel: 5
+  passiveDamage: 4
+  passiveDamagePerLevel: 2
   passiveDuration: 3
   references:
     version: 2
@@ -690,9 +688,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 403091629657982332}
-  - {fileID: 1522470169753867797}
   - {fileID: 866372256686769059}
   - {fileID: 5835956054949143995}
+  - {fileID: 1522470169753867797}
   - {fileID: 4829512223886480836}
   m_Father: {fileID: 7881899320982841798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -985,7 +983,12 @@ MonoBehaviour:
   primaryDamagePerLevel: 5
   _secondaryCooldown: 2
   secondaryPrimaryCooldown: 0.3
+  secondaryPushForce: 10
+  secondaryPushForcePerLevel: 3
   secondaryAttackSphereCast: {x: 1.5, y: 0}
+  passivePushForce: 6
+  passivePushForcePerLevel: 2
+  passiveHit: 5
   bulletPrefab: {fileID: 2421915764250194293, guid: 55cb7ae45634d52458836dbf1477e412, type: 3}
   bulletOrigin: {fileID: 1200029707466882067}
   references:

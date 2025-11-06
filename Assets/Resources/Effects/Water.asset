@@ -26,7 +26,7 @@ MonoBehaviour:
   _hasLevels: 0
   _maxLevel: 5
   _action:
-    _type: 6
+    _type: 4
     _value: 0.5
   references:
     version: 2

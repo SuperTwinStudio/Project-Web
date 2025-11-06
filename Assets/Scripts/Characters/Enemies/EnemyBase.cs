@@ -25,6 +25,7 @@ public class EnemyBase : Character {
     [Header("Movement")]
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected Rigidbody _rigidbody;
+    [SerializeField] protected float moveSpeed = 3;
     [SerializeField] protected float viewDistance = 5;
 
     public bool PlayerIsVisible { get; protected set; }
@@ -49,6 +50,9 @@ public class EnemyBase : Character {
     protected virtual void Start() {
         //Save player reference
         Player = Game.Current.Level.Player;
+
+        //Update effects
+        OnEffectsUpdated();
     
         //Call behaviour event
         Behaviour.OnStart();
@@ -116,13 +120,16 @@ public class EnemyBase : Character {
     }
 
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
+        //Update amount
+        amount *= damageTakenMultiplier;
+
         //Damage
         bool damaged = base.Damage(amount, source, type);
 
         //Check if damaged
         if (damaged) {
             //Show damage indicator
-            if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount * damageTakenMultiplier, type);
+            if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount, type);
 
             //Call behaviour event
             Behaviour.OnDamage();
@@ -135,6 +142,12 @@ public class EnemyBase : Character {
     protected override void OnDeath() {
         //Call behaviour event
         Behaviour.OnDeath();
+    }
+
+    //Effects
+    protected override void OnEffectsUpdated() {
+        //Update move speed
+        Agent.speed = moveSpeed * slowMovementMultiplier;
     }
 
     //Room

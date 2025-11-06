@@ -31,9 +31,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Effects
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
-    protected float slowSpeedMultiplier = 1;
-    protected float moveSpeedMultiplier = 1;
-    protected float attackSpeedMultiplier = 1;
+    protected float slowMovementMultiplier = 1;
     protected float damageTakenMultiplier = 1;
 
 
@@ -188,14 +186,14 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     //Effects
+    protected virtual void OnEffectsUpdated() {}
+
     protected void UpdateEffects() {
         //Get current time
         float nowTimestamp = Time.time;
 
         //Reset slow multiplier
-        slowSpeedMultiplier = 1;
-        moveSpeedMultiplier = 1;
-        attackSpeedMultiplier = 1;
+        slowMovementMultiplier = 1;
         damageTakenMultiplier = 1;
 
         //Apply effects
@@ -213,17 +211,9 @@ public class Character : MonoBehaviour, IDamageable {
                 case EffectType.Heal:
                     Heal(Time.deltaTime * level * effect.Action.Value); //Take value as healing per second
                     break;
-                //Slow general
-                case EffectType.SlowGeneral:
-                    slowSpeedMultiplier = Mathf.Min(slowSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
-                    break;
-                //Slow attack speed
-                case EffectType.SlowAttack:
-                    attackSpeedMultiplier = Mathf.Min(attackSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
-                    break;
                 //Slow movement
-                case EffectType.SlowSpeed:
-                    moveSpeedMultiplier = Mathf.Min(moveSpeedMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
+                case EffectType.SlowMovement:
+                    slowMovementMultiplier = Mathf.Min(slowMovementMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
                     break;
                 //Weak
                 case EffectType.Weak:
@@ -234,6 +224,9 @@ public class Character : MonoBehaviour, IDamageable {
             //Check if effect finished
             if (nowTimestamp > endTimestamp) effects.Remove(effect);
         }
+
+        //Call on effects updated
+        OnEffectsUpdated();
     }
 
     public void AddEffect(Effect effect, float duration) {
