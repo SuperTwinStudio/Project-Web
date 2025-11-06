@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5765300369353771717}
   - component: {fileID: 6306209005496088998}
   - component: {fileID: 37854629741742818}
-  - component: {fileID: 4076784449040027878}
   m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
@@ -87,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4076784449040027878
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2442523083390986777}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3293415959875675893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +94,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 37854629741742818}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: _behaviour
       value: 

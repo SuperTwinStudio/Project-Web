@@ -7,6 +7,15 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "b018788e-8dbf-4a1a-9fb8-b0f83a3c71e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "351f2ccd-1f9f-44bf-9bec-d62ac5c5f408",
@@ -52,6 +61,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "5a5534bb-3969-4643-8e1d-a39bf0ad274c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "c1452ca3-f4d0-4171-a4d4-6cf3b3140cb6",
@@ -73,15 +91,6 @@
                     "name": "Test",
                     "type": "Button",
                     "id": "07069b14-dfeb-4712-ba3c-628b5b809ca1",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "b018788e-8dbf-4a1a-9fb8-b0f83a3c71e0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -224,7 +233,7 @@
                 {
                     "name": "",
                     "id": "ef29bb9f-5ad1-4f58-aa90-3cbc2eee0dd3",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -257,7 +266,7 @@
                 {
                     "name": "",
                     "id": "072704ae-9f16-49d2-82cb-67b5b11be6ab",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -361,6 +370,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d7065de-18f0-4b93-b159-be30a75fb140",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d11e582-f4a0-4dd4-aef7-4018be7689a7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64be718b-c417-4ed0-9e54-66d43a29c074",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
