@@ -159,18 +159,22 @@ public class Room : MonoBehaviour
 
     private void LockDoors()
     {
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             m_Doors[i].SetActive(true);
         }
+
+        //Update walkable surface
+        Game.Current.Level.UpdateWalkableSurface();
     }
 
     private void UnlockDoors()
     {
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             m_Doors[i].SetActive(((m_Flags >> i) & 0b1) == m_ShowActiveDoors);
         }
+
+        //Update walkable surface
+        Game.Current.Level.UpdateWalkableSurface();
     }
 
     private void OnTriggerEnter(Collider other)

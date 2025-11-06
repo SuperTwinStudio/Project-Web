@@ -7,8 +7,8 @@ public class EnemyTest : EnemyBase {
         return base.Damage(amount, source, type);
     }
 
-    protected override void OnDeath(bool instant = false) {
-        base.OnDeath(instant);
+    protected override void OnDeath() {
+        base.OnDeath();
 
         //Destroy
         Destroy(gameObject);

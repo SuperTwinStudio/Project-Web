@@ -13,7 +13,7 @@ public enum PlayerUpgrade {
 public class Player : Character, ISavable {
 
     //Character
-    public override float HealthMax => HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
+    public override float HealthMax => DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
 
     //Level
     [Header("Level")]
@@ -257,9 +257,8 @@ public class Player : Character, ISavable {
         //Calculate resistance
         float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
 
-        foreach (var item in Loadout.PassiveItems) {
-            item.Key.OnHurtHook(this, item.Value, (source is Character character) ? character : null);
-        }
+        //Hurt item hooks
+        foreach (var pair in Loadout.PassiveItems) pair.Key.OnHurtHook(this, pair.Value, (source is Character character) ? character : null);
 
         //Damage
         bool success = base.Damage(amount - resistance, source, type);
@@ -268,13 +267,11 @@ public class Player : Character, ISavable {
         return success;
     }
 
-    protected override void OnDeath(bool instant = false) {
-        foreach (var item in Loadout.PassiveItems)
-        {
-            item.Key.OnDeathHook(this, item.Value);
-        }
+    protected override void OnDeath() {
+        //Death item hooks
+        foreach (var pair in Loadout.PassiveItems) pair.Key.OnDeathHook(this, pair.Value);
 
-        // Run the alive check again since items could have altered that outcome
+        //Run the alive check again since items could have altered that outcome
         if (!IsAlive) MenuManager.Open(MenusList.Death);
     }
 
@@ -346,7 +343,7 @@ public class Player : Character, ISavable {
     private class PlayerSave {
 
         //Health
-        public float health = HEALTH_MAX;
+        public float health = DEFAULT_HEALTH_MAX;
 
         //Upgrades
         public int levelGramaje = 1;

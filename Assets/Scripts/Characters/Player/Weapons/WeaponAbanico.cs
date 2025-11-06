@@ -1,4 +1,5 @@
 using System.Collections;
+using Botpa;
 using UnityEngine;
 
 public class WeaponAbanico : Weapon {
@@ -97,13 +98,17 @@ public class WeaponAbanico : Weapon {
     }
 
     //Helpers    
-    private void Push(IDamageable damageable, float force) {
-        //Check if a character
-        if (damageable is not Character) return;
+    private void Push(IDamageable damageable, float force, Vector3 direction = new Vector3()) {
+        //Check if an enemy
+        if (damageable is not EnemyBase) return;
 
-        //Push enemy back
-        Character character = damageable as Character;
-        Debug.Log($"Push {character.name} with {force} force");
+        //Get enemy
+        EnemyBase enemy = damageable as EnemyBase;
+
+        //Push enemy
+        if (direction.IsEmpty()) direction = enemy.transform.position - Player.transform.position;
+        enemy.Push(force * direction);
+        //Debug.Log($"Push {enemy.name} with {force} force");
     }
 
 }

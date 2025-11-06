@@ -19,10 +19,10 @@ PrefabInstance:
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: _behaviour
       value: 
-      objectReference: {fileID: -2907684016781353817}
+      objectReference: {fileID: -3320715591096525975}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Name
-      value: Frog
+      value: Frog (Boss)
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,7 +73,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       insertIndex: 2
-      addedObject: {fileID: -2907684016781353817}
+      addedObject: {fileID: -3320715591096525975}
   m_SourcePrefab: {fileID: 100100000, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
 --- !u!4 &842202375143149454 stripped
 Transform:
@@ -85,7 +85,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
   m_PrefabInstance: {fileID: 3293415959875675893}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-2907684016781353817
+--- !u!114 &-3320715591096525975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

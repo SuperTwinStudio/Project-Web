@@ -20,14 +20,14 @@ public class Character : MonoBehaviour, IDamageable {
     private event Action<float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
-    public bool IgnoreNextDamage = false;
-    public bool IsInvulnerable = false;
+    public bool IgnoreNextDamage { get; set; } = false;
+    public bool IsInvulnerable { get; set; } = false;
 
     public bool IsAlive { get; set; } = true;
-    public float Health { get; protected set; } = HEALTH_MAX;
-    public virtual float HealthMax => HEALTH_MAX;
+    public float Health { get; protected set; } = DEFAULT_HEALTH_MAX;
+    public virtual float HealthMax => DEFAULT_HEALTH_MAX;
 
-    public const float HEALTH_MAX = 100;
+    public const float DEFAULT_HEALTH_MAX = 100;
 
     //Effects
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
@@ -52,7 +52,7 @@ public class Character : MonoBehaviour, IDamageable {
         OnUpdate();
     }
 
-    protected virtual void OnUpdate() { }
+    protected virtual void OnUpdate() {}
 
     //Visibility
     public bool IsVisible(Vector3 origin, float viewDistance, LayerMask layers) {
@@ -106,7 +106,25 @@ public class Character : MonoBehaviour, IDamageable {
         Game.UnslowTime(this);
     }
 
+    public virtual bool Revive(float health) {
+        //Character is already alive
+        if (IsAlive) return false;
+
+        //Heal character
+        Health = Mathf.Min(health, HealthMax);
+        IsAlive = true;
+
+        //Call event
+        OnHealthChanged?.Invoke(Health);
+
+        //Revived
+        return true;
+    }
+
     public virtual bool Heal(float amount) {
+        //Character is dead -> Ignore healing
+        if (!IsAlive) return false;
+
         //Ignore negative healing
         if (amount <= 0) return false;
 
@@ -121,7 +139,7 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     public virtual bool Damage(float amount, object source, DamageType type = DamageType.None) {
-        //Character is already dead or invulnerable-> Ignore damage
+        //Character is already dead or invulnerable -> Ignore damage
         if (!IsAlive || IsInvulnerable) return false;
 
         //Ignore this tick of damage
@@ -159,7 +177,7 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    protected virtual void OnDeath(bool instant = false) { }
+    protected virtual void OnDeath() {}
 
     public void AddOnHealthChanged(Action<float> action) {
         OnHealthChanged += action;

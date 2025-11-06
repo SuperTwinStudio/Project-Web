@@ -1,6 +1,5 @@
-using Botpa;
+using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Level : MonoBehaviour {
 
@@ -30,24 +29,36 @@ public class Level : MonoBehaviour {
     [Header("Level")]
     [SerializeField] private bool _isLobby = false;
     [SerializeField] private bool _isHandmade = true;
+    [SerializeField] private NavMeshSurface _surface;
+
     public LevelDefinition Definition;
 
     public bool IsLobby => _isLobby;
     public bool IsHandmade => _isHandmade;
+    public NavMeshSurface Surface => _surface;
 
 
     //State
     private void Start() {
-        if (!_isLobby && !_isHandmade) InitializeLevel();
+        //Generate AI surface
+        Surface.BuildNavMesh();
+
+        //Init level
+        if (!IsLobby && !IsHandmade) InitializeLevel();
     }
 
     private void InitializeLevel() {
         LevelGenerator generator = new LevelGenerator();
         generator.GenerateLevel(Definition);
 
-        // Allow player interaction when level has generated
+        //Allow player interaction when level has generated
         Player.gameObject.SetActive(true);
         CameraController.gameObject.SetActive(true);
+    }
+
+    //World
+    public void UpdateWalkableSurface() {
+        Surface.UpdateNavMesh(Surface.navMeshData);
     }
 
     //Scene
