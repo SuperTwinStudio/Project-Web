@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Pool
   m_EditorClassIdentifier: 
   CommonItems:
-  - {fileID: 11400000, guid: 74fdc1bf08c6cd04d9d17d87e6c4aa90, type: 2}
+  - {fileID: 11400000, guid: d7b59f7b6414efa4c8cb48ed33ec767a, type: 2}
   CommonItemChance: 100
   UncommonItems: []
   UncommonItemChance: 0

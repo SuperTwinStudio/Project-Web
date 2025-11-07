@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -14,6 +15,15 @@ public class PassiveItemObject : ScriptableObject
     public ItemRarity Rarity;
     
     public PassiveItem Logic;
+
+    public static PassiveItemObject GetFromName(string name)
+    {
+        //Invalid name
+        if (string.IsNullOrEmpty(name)) return null;
+        //Load from resources
+        var item = Resources.Load<PassiveItemObject>($"Passive Items/Scriptable Objects/{name}");
+        return item;
+    }
 }
 
 public enum ItemRarity : int

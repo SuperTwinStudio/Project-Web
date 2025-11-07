@@ -51,7 +51,6 @@ public class OrbitalBuddy : MonoBehaviour
             {
                 if (collider.CompareTag("Enemy") || collider.CompareTag("Boss"))
                 {
-                    Debug.Log($"Added {collider.name}");
                     m_TargetEnemy = collider.GetComponent<Character>();
                 }
             }
