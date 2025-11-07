@@ -86,7 +86,7 @@ public class WeaponStapler : Weapon {
         if (hit) {
             //Hit something with passive -> Animate attack
             PlaySound(passiveAttackSound);
-            animator.SetTrigger("Attack");
+            Animator.SetTrigger("Attack");
         } else {
             //Didn't hit anything -> Use primary (shoot)
             Shoot(PrimaryDamage);
@@ -163,7 +163,7 @@ public class WeaponStapler : Weapon {
 
         //Animate
         PlaySound(shootAttackSound);
-        animator.SetTrigger("Attack");
+        Animator.SetTrigger("Attack");
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);

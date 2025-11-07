@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WeaponAbanico : Weapon {
 
+    //Temp
+    [Header("Temp")]
+    [SerializeField] private Animator _animator;
+
+    protected override Animator Animator => _animator;
+
     //Primary
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
@@ -70,7 +76,7 @@ public class WeaponAbanico : Weapon {
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        animator.SetTrigger("Shoot");
+        Animator.SetTrigger("Shoot");
 
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;

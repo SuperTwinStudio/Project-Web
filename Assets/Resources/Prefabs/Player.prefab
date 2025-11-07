@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 5487478310553497482}
-  animController: {fileID: 9100000, guid: ad6ddf1c6933d2c4a9fcc38180c023e9, type: 2}
+  animatorController: {fileID: 9100000, guid: ad6ddf1c6933d2c4a9fcc38180c023e9, type: 2}
   _item: {fileID: 11400000, guid: cd0ad7cf8152c0b4aaddbb4eb872adab, type: 2}
   _primaryIcon: {fileID: 21300000, guid: 9ac7201581f14044680a1f68a535e4c4, type: 3}
   _primaryDescription:
@@ -191,7 +191,6 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 3698209227500789784}
-  animator: {fileID: 2393395648455993377}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   _primaryCooldown: 0.4
   primarySlowDuration: 0.2
@@ -359,7 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 8843916554162638499}
-  animController: {fileID: 0}
+  animatorController: {fileID: 0}
   _item: {fileID: 11400000, guid: 2ffb216ac8f51a649ae1948e37a210c8, type: 2}
   _primaryIcon: {fileID: 21300000, guid: b7fa15463712f3144bdaa11d6e116b9e, type: 3}
   _primaryDescription:
@@ -392,7 +391,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 6701724206196661710}
-  animator: {fileID: 6921905436315680496}
+  _animator: {fileID: 6921905436315680496}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   chinchetaEffect: {fileID: 11400000, guid: dbb892d5018f90a4dbd3565a8a427139, type: 2}
   _primaryCooldown: 0.4
@@ -648,7 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 6325080915746571348}
-  animController: {fileID: 9100000, guid: 0309e374ad2880c479cabd2d7ee91b9d, type: 2}
+  animatorController: {fileID: 9100000, guid: 0309e374ad2880c479cabd2d7ee91b9d, type: 2}
   _item: {fileID: 11400000, guid: 16abb62fcefae104badd1e2b20c4d6db, type: 2}
   _primaryIcon: {fileID: 21300000, guid: 04c75452138e0064c84d2fcae9328ea9, type: 3}
   _primaryDescription:
@@ -681,7 +680,6 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 2856207341596626414}
-  animator: {fileID: 2393395648455993377}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
   primaryDamage: 25
@@ -1122,7 +1120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 7136729457388564981}
-  animController: {fileID: 0}
+  animatorController: {fileID: 0}
   _item: {fileID: 11400000, guid: ced40d40167627e40893da77d3ad12fb, type: 2}
   _primaryIcon: {fileID: 21300000, guid: 39239cb9f3693b74181517c2f8850082, type: 3}
   _primaryDescription:
@@ -1155,7 +1153,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 1801451465853676353}
-  animator: {fileID: 8456411707006948077}
+  _animator: {fileID: 8456411707006948077}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
   primaryDamage: 10
@@ -1524,7 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 4547025912353158846}
-  animController: {fileID: 0}
+  animatorController: {fileID: 0}
   _item: {fileID: 11400000, guid: 4f7b7f5aa3004544c9c505835c824805, type: 2}
   _primaryIcon: {fileID: 21300000, guid: ac89f13fa60be594694f40178d7926fd, type: 3}
   _primaryDescription:
@@ -1557,7 +1555,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 5403484492777555683}
-  animator: {fileID: 8204431917465148954}
+  _animator: {fileID: 8204431917465148954}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   burnEffect: {fileID: 11400000, guid: 994c091a1743dc643953eaa4fecff2d2, type: 2}
   _primaryCooldown: 0.4
@@ -2120,7 +2118,7 @@ Animator:
   m_GameObject: {fileID: 1911687950759496828}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ad6ddf1c6933d2c4a9fcc38180c023e9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0309e374ad2880c479cabd2d7ee91b9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

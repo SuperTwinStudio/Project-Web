@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class WeaponGauntlet : Weapon {
 
+    //Temp
+    [Header("Temp")]
+    [SerializeField] private Animator _animator;
+
+    protected override Animator Animator => _animator;
+
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
@@ -62,7 +68,7 @@ public class WeaponGauntlet : Weapon {
 
         //Animate
         PlaySound(primaryAttackSound);
-        animator.SetTrigger("Attack");
+        Animator.SetTrigger("Attack");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, primarySlowDuration);
@@ -88,7 +94,7 @@ public class WeaponGauntlet : Weapon {
 
         //Animate
         PlaySound(secondaryAttackSound);
-        animator.SetTrigger("AttackDown");
+        Animator.SetTrigger("AttackDown");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);

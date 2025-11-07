@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class WeaponMatch : Weapon {
 
+    //Temp
+    [Header("Temp")]
+    [SerializeField] private Animator _animator;
+
+    protected override Animator Animator => _animator;
+
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
@@ -75,7 +81,7 @@ public class WeaponMatch : Weapon {
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        animator.SetTrigger("Attack");
+        Animator.SetTrigger("Attack");
 
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;

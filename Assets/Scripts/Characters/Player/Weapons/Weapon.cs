@@ -13,11 +13,12 @@ public class Weapon : MonoBehaviour {
     [Header("Components")]
     [SerializeField] protected Loadout _loadout;
     [SerializeField] protected AudioSource audioSource;
-    [SerializeField] protected AnimatorController animController;
+    [SerializeField] protected AnimatorController animatorController;
 
-    public Loadout Loadout => _loadout;
-    public Player Player => Loadout.Player;
-    public CameraController CameraController => Player.CameraController;
+    protected Loadout Loadout => _loadout;
+    protected Player Player => Loadout.Player;
+    protected virtual Animator Animator => Player.Animator;
+    protected CameraController CameraController => Player.CameraController;
 
     //Weapon
     [Header("Weapon")]
@@ -29,7 +30,6 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private Sprite _passiveIcon;
     [SerializeField] private LocalizedString _passiveDescription;
     [SerializeField] private GameObject model;
-    [SerializeField] protected Animator animator;
 
     private event Action<WeaponAction, int> OnValueChanged;
 
@@ -128,8 +128,8 @@ public class Weapon : MonoBehaviour {
         //Toggle model
         model.SetActive(show);
 
-        //Change player animation contoller (remove the if when all controllers are done)
-        if (show) if(animController) Game.Current.Level.Player.SetAnimationController(animController);
+        //Change player animator controller (remove the if when all controllers are done)
+        if (show && animatorController) Animator.runtimeAnimatorController = animatorController;
 
         //Weapon custom on show
         OnShow();

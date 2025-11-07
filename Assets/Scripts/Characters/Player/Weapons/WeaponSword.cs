@@ -73,8 +73,8 @@ public class WeaponSword : Weapon {
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        animator.SetFloat("HitCounter", hitCount % 2);
-        animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
+        Animator.SetFloat("HitCounter", hitCount % 2);
+        Animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
@@ -103,7 +103,7 @@ public class WeaponSword : Weapon {
 
         //Animate
         PlaySound(secondaryAttackSound);
-        animator.SetTrigger("AttackSpin");
+        Animator.SetTrigger("AttackSpin");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
