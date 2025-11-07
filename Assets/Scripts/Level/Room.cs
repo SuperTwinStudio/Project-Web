@@ -29,6 +29,11 @@ public class Room : MonoBehaviour
     private bool m_BossPresent;
     private int m_EnemyCount;
 
+    private void Start()
+    {
+        m_BossPresent = m_BossRoom;
+    }
+
     private void Update()
     {
         if (m_Faded) return;
@@ -56,7 +61,7 @@ public class Room : MonoBehaviour
             }
             else
             {
-                if ((m_EnemyRoom && m_EnemyCount != 0) || m_BossRoom) 
+                if ((m_EnemyRoom && m_EnemyCount != 0) || (m_BossRoom && m_BossPresent)) 
                 {
                     LockDoors();
                 }
