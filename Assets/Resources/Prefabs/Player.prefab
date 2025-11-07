@@ -193,6 +193,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 3698209227500789784}
+  particleEmitter: {fileID: 0}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   _primaryCooldown: 0.4
   primarySlowDuration: 0.2
@@ -393,6 +394,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 6701724206196661710}
+  particleEmitter: {fileID: 0}
   _animator: {fileID: 6921905436315680496}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   chinchetaEffect: {fileID: 11400000, guid: dbb892d5018f90a4dbd3565a8a427139, type: 2}
@@ -682,6 +684,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 2856207341596626414}
+  particleEmitter: {fileID: 0}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
   primaryDamage: 25
@@ -1100,6 +1103,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 1801451465853676353}
+  particleEmitter: {fileID: 0}
   _animator: {fileID: 8456411707006948077}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
@@ -1233,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6713001859621090456
 Transform:
   m_ObjectHideFlags: 0
@@ -1481,6 +1485,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 5403484492777555683}
+  particleEmitter: {fileID: 7163236552808989687}
+  tip: {fileID: 6849242891339637249}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   burnEffect: {fileID: 11400000, guid: 994c091a1743dc643953eaa4fecff2d2, type: 2}
   _primaryCooldown: 0.4
@@ -1501,8 +1507,6 @@ MonoBehaviour:
   passiveDurationPerLevel: 1
   passiveHit: 4
   passiveAttackSound: {fileID: 8300000, guid: 0bdb6fdd6d0bcde4399cb525213aa26d, type: 3}
-  tip: {fileID: 6849242891339637249}
-  particleEmitter: {fileID: 7163236552808989687}
   references:
     version: 2
     RefIds: []
