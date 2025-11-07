@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Botpa;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -234,11 +235,19 @@ public class Player : Character, ISavable {
     }
 
     //Upgrades
-    public Upgrade GetUpgrade(PlayerUpgrade type) {
-        return type switch {
+    public Upgrade GetUpgrade(PlayerUpgrade type)
+    {
+        return type switch
+        {
             PlayerUpgrade.Gramaje => GramajeUpgrade,
             _ => RugosidadUpgrade
         };
+    }
+    
+    public void SetAnimationController(AnimatorController animController)
+    {
+        _animator.runtimeAnimatorController = animController;
+        Debug.Log("nigga");
     }
 
     public bool TryUpgrade(PlayerUpgrade type) {

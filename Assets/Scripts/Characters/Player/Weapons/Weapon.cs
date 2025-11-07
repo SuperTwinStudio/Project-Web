@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Botpa;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -12,6 +13,7 @@ public class Weapon : MonoBehaviour {
     [Header("Components")]
     [SerializeField] protected Loadout _loadout;
     [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AnimatorController animController;
 
     public Loadout Loadout => _loadout;
     public Player Player => Loadout.Player;
@@ -125,6 +127,9 @@ public class Weapon : MonoBehaviour {
 
         //Toggle model
         model.SetActive(show);
+
+        //Change player animation contoller (remove the if when all controllers are done)
+        if (show) if(animController) Game.Current.Level.Player.SetAnimationController(animController);
 
         //Weapon custom on show
         OnShow();

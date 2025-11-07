@@ -163,7 +163,7 @@ public class WeaponStapler : Weapon {
 
         //Animate
         PlaySound(shootAttackSound);
-        animator.SetTrigger("Shoot");
+        animator.SetTrigger("Attack");
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);
