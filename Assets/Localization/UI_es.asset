@@ -216,8 +216,13 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13722598425628672
     m_Localized: "Tu inventario tiene <gold> y tesoros valorados en <treasures>.\r\n\r\nPuedes
-      continuar a una mazmorra m\xE1s dif\xEDcil y arriesgarte a perder la mitad
-      de tu oro y todos tus tesoros, o salir para conservarlo todo."
+      continuar a una mazmorra m\xE1s dif\xEDcil y arriesgarte a perder todos tus
+      tesoros y la mitad de tu oro, o salir para conservarlo todo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13737919144398848
+    m_Localized: "No pudiste salvar a tu hermano...\r\n\r\nMientras hu\xEDas, la
+      todos tus tesoros y la mitad de tu oro cayeron al suelo."
     m_Metadata:
       m_Items: []
   references:

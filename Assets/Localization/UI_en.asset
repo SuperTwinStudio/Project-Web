@@ -220,8 +220,17 @@ MonoBehaviour:
       
 
       You
-      can continue to a more difficult dungeon and risk loosing half your gold and
-      all of your treasures, or exit to keep it all.'
+      can continue to a more difficult dungeon and risk loosing all of your treasures
+      and half your gold, or exit to keep it all.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13737919144398848
+    m_Localized: 'You couldn''t save your brother...
+
+      
+
+      While fleeing,
+      all of your treasures and half of your gold fell to the ground.'
     m_Metadata:
       m_Items: []
   references:
