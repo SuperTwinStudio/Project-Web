@@ -30,6 +30,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private LocalizedString _passiveDescription;
     [SerializeField] private GameObject model;
 
+    [Header("ParticleEffect")]
+    [SerializeField] protected ParticleEmitter particleEmitter;
+
+
     private event Action<WeaponAction, int> OnValueChanged;
 
     private bool isInit = false;
@@ -310,8 +314,14 @@ public class Weapon : MonoBehaviour {
         return DamageHits(MeleeAroundCheck(radius), damage, onHit);
     }
 
-    protected GameObject SpawnProjectile(GameObject prefab, Transform origin = null) {
+    protected GameObject SpawnProjectile(GameObject prefab, Transform origin = null)
+    {
         return Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation);
+    }
+    
+    public virtual void EmitParticle(String name)
+    {
+        particleEmitter.Play(name, Vector3.up);
     }
 
 }

@@ -1,14 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class WeaponMatch : Weapon {
 
-    //Temp
-    [Header("Temp")]
-    [SerializeField] private Animator _animator;
-
-    protected override Animator Animator => _animator;
-
+    [SerializeField] protected Transform tip;
+    
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
@@ -127,13 +124,19 @@ public class WeaponMatch : Weapon {
     }
 
     //Effects
-    private void ApplyBurn(IDamageable damageable, float duration) {
+    private void ApplyBurn(IDamageable damageable, float duration)
+    {
         //Not a character
         if (damageable is not Character) return;
 
         //Get character
         Character character = damageable as Character;
         character.AddEffect(burnEffect, duration);
+    }
+    
+    public override void EmitParticle(String name)
+    {
+        particleEmitter.PlayOnPosition(name, Vector3.up, tip.position);
     }
 
     public override float GetWeaponBaseDamage()
