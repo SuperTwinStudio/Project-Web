@@ -86,7 +86,7 @@ public class Player : Character, ISavable {
         RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
 
         HealthMax = DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
-        Health = HealthMax;
+        Heal(HealthMax);
 
         //Events
         Game.AddOnLoadingChanged(OnGameLoadingChanged);
@@ -254,6 +254,7 @@ public class Player : Character, ISavable {
         switch (type) {
             //Reset player health
             case PlayerUpgrade.Gramaje:
+                HealthMax = DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
                 Heal(HealthMax);
                 break;
         }
