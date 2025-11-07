@@ -263,6 +263,22 @@ public class Loadout : MonoBehaviour, ISavable {
         logic.OnPickup(Player, _passiveItems[logic]);
     }
 
+    public void SilentAddPassiveItem(PassiveItemObject item)
+    {
+        //Invalid item
+        if (!item) return;
+
+        PassiveItem logic = item.Logic;
+
+        //Add item
+        if (PassiveItems.ContainsKey(logic))
+            _passiveItems[logic]++;
+        else
+            _passiveItems[logic] = 1;
+
+        logic.OnPickup(Player, _passiveItems[logic]);
+    }
+
     public void AddOnObtainItem(ObtainedItem action) {
         OnObtainItem += action;
     }
@@ -292,6 +308,9 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Add inventory to save
         foreach (var pair in Inventory) save.inventory.Add(pair.Key.FileName, pair.Value);
+
+        //Add items to save
+        foreach (var pair in PassiveItems) save.passiveItems.Add(pair.Key.name, pair.Value);
 
         //Return save
         return JsonUtility.ToJson(save);
@@ -323,6 +342,19 @@ public class Loadout : MonoBehaviour, ISavable {
             if (Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowInventorySold(addedValue);
         }
 
+        //Load items if not in lobby
+        _passiveItems.Clear();
+        if (!Level.IsLobby)
+        {
+            foreach (var pair in save.passiveItems)
+            {
+                for (int i = 0; i < pair.Value; i++)
+                {
+                    SilentAddPassiveItem(PassiveItemObject.GetFromName(pair.Key));
+                }
+            }
+        }
+
         //Load weapon
         SelectWeapon(Item.GetFromName(save.currentWeapon));
     }
@@ -344,6 +376,9 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Inventory
         public SerializableDictionary<string, int> inventory = new();
+
+        //Items
+        public SerializableDictionary<string, int> passiveItems = new();
 
     }
 

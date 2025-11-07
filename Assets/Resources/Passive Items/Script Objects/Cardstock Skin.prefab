@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6833003159234357152}
   - component: {fileID: 670056290243478246}
   m_Layer: 0
-  m_Name: Card Skin
+  m_Name: Cardstock Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
