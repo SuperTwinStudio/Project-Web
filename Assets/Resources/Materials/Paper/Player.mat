@@ -40,6 +40,6 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _FrontFaceColor: {r: 0, g: 0.61172193, b: 0.7830189, a: 0}
+    - _FrontFaceColor: {r: 0.12205757, g: 0.8147262, b: 0.81886786, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

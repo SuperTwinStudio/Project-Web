@@ -81,7 +81,7 @@ public class WeaponMatch : Weapon {
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        Animator.SetTrigger("Attack");
+        Animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
@@ -111,6 +111,7 @@ public class WeaponMatch : Weapon {
 
         //Animate
         PlaySound(secondaryAttackSound);
+        Animator.SetTrigger("AttackSlam");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
