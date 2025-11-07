@@ -2,6 +2,7 @@ using Botpa;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class GameMenu : Menu {
@@ -13,11 +14,6 @@ public class GameMenu : Menu {
     [Header("Input")]
     [SerializeField] private InputActionReference pauseAction;
     [SerializeField] private InputActionReference inventoryAction;
-
-    //Money
-    [Header("Money")]
-    [SerializeField] private Animator moneyAnimator;
-    [SerializeField] private TMP_Text moneyText;
 
     //Health
     [Header("Health")]
@@ -52,9 +48,15 @@ public class GameMenu : Menu {
     [SerializeField] private GameObject reloadIndicator;
     [SerializeField] private Slider reloadSlider;
 
+    //Inventory Sold
+    [Header("Inventory Sold")]
+    [SerializeField] private Animator soldAnimator;
+    [SerializeField] private TMP_Text soldText;
+    [SerializeField] private LocalizedString soldLocale;
+
     //Item
     [Header("Passive Item")]
-    [SerializeField] private GameObject passiveItemPanel;
+    [SerializeField] private Animator itemAnimator;
     [SerializeField] private Image itemIcon;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDesc;
@@ -105,14 +107,14 @@ public class GameMenu : Menu {
         healthText.SetText($"{health}HP");
     }
 
-    //Money
-    public void ShowItemsSold(int value) {
+    //Gold
+    public void ShowInventorySold(int value) {
         //No value
         if (value <= 0) return;
 
         //Show animation
-        moneyText.SetText($"{Util.Localize("inventory_sold")} {value}G");
-        moneyAnimator.SetTrigger("Show");
+        soldText.SetText($"{soldLocale.GetLocalizedString()} {value}G");
+        soldAnimator.SetTrigger("Show");
     }
 
     //Weapon
@@ -178,13 +180,12 @@ public class GameMenu : Menu {
         }
     }
 
-    private void OnObtainItem(PassiveItemObject item)
-    {
+    private void OnObtainItem(PassiveItemObject item) {
         itemIcon.sprite = item.Icon;
         itemName.text = item.Name;
         itemDesc.text = item.Description;
 
-        passiveItemPanel.GetComponent<Animator>().SetTrigger("Show");
+        itemAnimator.SetTrigger("Show");
     }
 
 

@@ -3,6 +3,7 @@ using UnityEngine;
 using Botpa;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Localization;
 
 public class InventoryMenu : Menu {
 
@@ -22,20 +23,23 @@ public class InventoryMenu : Menu {
 
     //Inventory
     [Header("Inventory")]
-    [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private LocalizedString goldLocale;
     [SerializeField] private GameObject emptyMessage;
     [SerializeField] private RectTransform itemsGrid;
     [SerializeField] private TMP_Text valueText;
+    [SerializeField] private LocalizedString valueLocale;
     [SerializeField] private GameObject itemPrefab;
 
-    /*$$$$$   /$$                 /$$
-   /$$__  $$ | $$                | $$
-  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-   \______/   \___/   \_______/   \___/   \______*/
+
+      /*$$$$$   /$$                 /$$
+     /$$__  $$ | $$                | $$
+    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+    \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+     \______/   \___/   \_______/   \___/   \______*/
 
     public override void OnUpdate() {
         //Close menu
@@ -53,9 +57,9 @@ public class InventoryMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     private void UpdateUI() {
-        //Update money & inventory value
-        moneyText.SetText($"{Util.Localize("indicator_money")} {Loadout.Money}G");
-        valueText.SetText($"{Util.Localize("indicator_value")} {Loadout.InventoryValue}G");
+        //Update gold & inventory value
+        goldText.SetText($"{goldLocale.GetLocalizedString()} {Loadout.Gold}G");
+        valueText.SetText($"{valueLocale.GetLocalizedString()} {Loadout.InventoryValue}G");
 
         //Clear old items
         Util.DestroyChildren(itemsGrid);

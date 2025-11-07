@@ -84,7 +84,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2902327242395648
-    m_Key: indicator_money
+    m_Key: indicator_gold
     m_Metadata:
       m_Items: []
   - m_Id: 13015460753575936
@@ -209,6 +209,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2904128704352256
     m_Key: shop_weapon_upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13722598425628672
+    m_Key: end_info
     m_Metadata:
       m_Items: []
   m_Metadata:

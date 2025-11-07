@@ -36,8 +36,8 @@ public class Loadout : MonoBehaviour, ISavable {
 
     public IReadOnlyDictionary<string, int> Upgrades => _upgrades;
 
-    //Money
-    public int Money { get; private set; }
+    //Gold
+    public int Gold { get; private set; }
 
     //Inventory
     private readonly SerializableDictionary<Item, int> _inventory = new();
@@ -48,10 +48,11 @@ public class Loadout : MonoBehaviour, ISavable {
 
     //Passive items
     private readonly SerializableDictionary<PassiveItem, int> _passiveItems = new();
-    public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
-
     private event ObtainedItem OnObtainItem;
     private List<PassiveItem> passiveItemDeletionList;
+
+    public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
+
 
     //State
     private void Awake() {
@@ -190,13 +191,13 @@ public class Loadout : MonoBehaviour, ISavable {
         _upgrades[key] = Math.Max(tier, 1);
     }
 
-    //Money
-    public bool Expend(int amount) {
-        //No enough money
-        if (Money < amount) return false;
+    //Gold
+    public bool SpendGold(int amount) {
+        //No enough gold
+        if (Gold < amount) return false;
 
         //Pay
-        Money -= amount;
+        Gold -= amount;
         return true;
     }
 
@@ -224,9 +225,9 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public int SellInventory() {
-        //Add inventory value to money
+        //Add inventory value to gold
         int addedValue = InventoryValue;
-        Money += addedValue;
+        Gold += addedValue;
 
         //Clear inventory items & value
         ClearInventory();
@@ -236,7 +237,16 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Passive items
-    public void AddToPassiveItems(PassiveItemObject item) {
+    private void RemovePassiveItem(PassiveItem item) {
+        //Invalid item or we don't have it yet
+        if (!item || !PassiveItems.ContainsKey(item)) return;
+
+        _passiveItems[item] -= 1;
+
+        if (_passiveItems[item] == 0) _passiveItems.Remove(item);
+    }
+
+    public void AddPassiveItem(PassiveItemObject item) {
         //Invalid item
         if (!item) return;
 
@@ -253,28 +263,16 @@ public class Loadout : MonoBehaviour, ISavable {
         logic.OnPickup(Player, _passiveItems[logic]);
     }
 
-    public void AddOnObtainItem(ObtainedItem action)
-    {
+    public void AddOnObtainItem(ObtainedItem action) {
         OnObtainItem += action;
     }
 
-    public void RemoveOnObtainItem(ObtainedItem action)
-    {
+    public void RemoveOnObtainItem(ObtainedItem action) {
         OnObtainItem -= action;
     }
 
-    public void QueuePassiveItemRemoval(PassiveItem item)
-    {
+    public void QueuePassiveItemRemoval(PassiveItem item) {
         passiveItemDeletionList.Add(item);
-    }
-
-    private void RemovePassiveItem(PassiveItem item) {
-        //Invalid item or we don't have it yet
-        if (!item || !PassiveItems.ContainsKey(item)) return;
-
-        _passiveItems[item] -= 1;
-
-        if (_passiveItems[item] == 0) _passiveItems.Remove(item);
     }
 
     //Saving
@@ -285,8 +283,8 @@ public class Loadout : MonoBehaviour, ISavable {
             currentWeapon = CurrentWeapon ? CurrentWeapon.Item.FileName : "",
             //Upgrades
             upgrades = _upgrades,
-            //Money
-            money = Money,
+            //Gold
+            gold = Gold,
         };
 
         //Add unlocked weapons to save
@@ -311,8 +309,8 @@ public class Loadout : MonoBehaviour, ISavable {
         _upgrades.Clear();
         foreach (var pair in save.upgrades) _upgrades.Add(pair.Key, pair.Value);
 
-        //Load money
-        Money = save.money;
+        //Load gold
+        Gold = save.gold;
 
         //Load inventory
         ClearInventory();
@@ -322,7 +320,7 @@ public class Loadout : MonoBehaviour, ISavable {
             int addedValue = SellInventory();
 
             //Show items sold animation
-            if (Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowItemsSold(addedValue);
+            if (Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowInventorySold(addedValue);
         }
 
         //Load weapon
@@ -341,8 +339,8 @@ public class Loadout : MonoBehaviour, ISavable {
         //Weapon upgrades
         public SerializableDictionary<string, int> upgrades = new();
 
-        //Money
-        public int money = 0;
+        //Gold
+        public int gold = 0;
 
         //Inventory
         public SerializableDictionary<string, int> inventory = new();

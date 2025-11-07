@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class EndMenu : Menu {
@@ -8,6 +10,8 @@ public class EndMenu : Menu {
 
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
+    [SerializeField] private TMP_Text infoText;
+    [SerializeField] private LocalizedString infoLocale;
 
     /*$$$$$   /$$                 /$$
    /$$__  $$ | $$                | $$
@@ -61,6 +65,13 @@ public class EndMenu : Menu {
 
         //Select default button (for controller navigation)
         defaultSelectable.Select();
+
+        //Update text
+        infoText.SetText(
+            infoLocale.GetLocalizedString()
+                .Replace("<gold>", $"{Player.Loadout.Gold}G")
+                .Replace("<treasures>", $"{Player.Loadout.InventoryValue}G")
+        );
 
         //Pause game
         Game.Pause(this);

@@ -41,7 +41,7 @@ public class WorldPassiveItem : MonoBehaviour
         if (!other.CompareTag("Player") || !other.TryGetComponent(out Player player)) return;
 
         //Add item to player
-        player.Loadout.AddToPassiveItems(item);
+        player.Loadout.AddPassiveItem(item);
 
         //Destroy self
         Destroy(gameObject);

@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2902327242395648
-    m_Localized: 'Money:'
+    m_Localized: 'Gold:'
     m_Metadata:
       m_Items: []
   - m_Id: 2902393453678592
@@ -212,6 +212,16 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13035064179691520
     m_Localized: Grants additional maximum health.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13722598425628672
+    m_Localized: 'You inventory has <gold> and treasures valued in <treasures>.
+
+      
+
+      You
+      can continue to a more difficult dungeon and risk loosing half your gold and
+      all of your treasures, or exit to keep it all.'
     m_Metadata:
       m_Items: []
   references:

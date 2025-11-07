@@ -58,7 +58,7 @@ public class Upgrade {
         if (!CanUpgrade) return false;
 
         //Pay for upgrade
-        if (!loadout.Expend(Cost)) return false;
+        if (!loadout.SpendGold(Cost)) return false;
 
         //Upgrade
         SetLevel(Level + 1);
