@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Botpa;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -13,7 +12,7 @@ public class Weapon : MonoBehaviour {
     [Header("Components")]
     [SerializeField] protected Loadout _loadout;
     [SerializeField] protected AudioSource audioSource;
-    [SerializeField] protected AnimatorController animatorController;
+    [SerializeField] protected RuntimeAnimatorController animatorController;
 
     protected Loadout Loadout => _loadout;
     protected Player Player => Loadout.Player;
