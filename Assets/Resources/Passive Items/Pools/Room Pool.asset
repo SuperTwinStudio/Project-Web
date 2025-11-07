@@ -15,6 +15,9 @@ MonoBehaviour:
   CommonItems:
   - {fileID: 11400000, guid: 8f33cca9b5ac1a342825a2b8956b5df9, type: 2}
   - {fileID: 11400000, guid: f2d7f349d6611804e910c0e52df0e5b6, type: 2}
+  - {fileID: 11400000, guid: 95ca0455605ee8842ad2d96b4fea1e0a, type: 2}
+  - {fileID: 11400000, guid: d7b59f7b6414efa4c8cb48ed33ec767a, type: 2}
+  - {fileID: 11400000, guid: a7d2ec930ca5b614fb963ada03832728, type: 2}
   CommonItemChance: 60
   UncommonItems:
   - {fileID: 11400000, guid: 8643215186e8f3246928c0000c212727, type: 2}

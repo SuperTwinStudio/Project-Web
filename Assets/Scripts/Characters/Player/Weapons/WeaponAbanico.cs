@@ -125,4 +125,8 @@ public class WeaponAbanico : Weapon {
         enemy.Push(force * direction);
     }
 
+    public override float GetWeaponBaseDamage()
+    {
+        return PrimaryDamage;
+    }
 }

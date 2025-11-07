@@ -156,7 +156,7 @@ public class WeaponStapler : Weapon {
         if (ammo <= 0) return;
 
         //Shoot
-        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage);
+        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage * Player.DamageMultiplier);
 
         //Update ammo
         SetAmmo(ammo - 1);
@@ -169,4 +169,8 @@ public class WeaponStapler : Weapon {
         CameraController.AddKnockback(-transform.forward);
     }
 
+    public override float GetWeaponBaseDamage()
+    {
+        return PrimaryDamage;
+    }
 }

@@ -194,6 +194,8 @@ public class Weapon : MonoBehaviour {
         OnValueChanged -= action;
     }
 
+    public virtual float GetWeaponBaseDamage() { throw new NotImplementedException(); }
+
     //Upgrades
     private void RefreshUpgradeLevels() {
         PrimaryUpgrade.SetLevel(Loadout.GetUpgrade(PrimaryUpgrade.Key));
@@ -276,7 +278,7 @@ public class Weapon : MonoBehaviour {
             //Damage
             if (damage > 0) {
                 Loadout.OnDamageableHit(hit.collider.gameObject);
-                damageable.Damage(damage, Player, DamageType.Melee);
+                damageable.Damage(damage * Player.DamageMultiplier, Player, DamageType.Melee);
             }
 
             //Mark as hit

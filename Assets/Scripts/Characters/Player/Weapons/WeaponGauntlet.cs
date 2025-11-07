@@ -128,4 +128,8 @@ public class WeaponGauntlet : Weapon {
         character.AddEffect(chinchetaEffect, passiveDuration);
     }
 
+    public override float GetWeaponBaseDamage()
+    {
+        return PrimaryDamage;
+    }
 }

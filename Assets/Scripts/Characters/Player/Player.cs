@@ -14,7 +14,8 @@ public enum PlayerUpgrade {
 public class Player : Character, ISavable {
 
     //Character
-    public override float HealthMax => DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
+    public float DamageMultiplier = 1;
+    public float SpeedMultiplier = 1;
 
     //Level
     [Header("Level")]
@@ -85,6 +86,8 @@ public class Player : Character, ISavable {
         GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
         RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
 
+        HealthMax = DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
+
         //Events
         Game.AddOnLoadingChanged(OnGameLoadingChanged);
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
@@ -131,7 +134,7 @@ public class Player : Character, ISavable {
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
 
             //Move in move direction
-            controller.SimpleMove(moveSpeed * slowMovementMultiplier * moveDirection);
+            controller.SimpleMove(moveSpeed * SpeedMultiplier * slowMovementMultiplier * moveDirection);
         }
 
 
@@ -282,6 +285,16 @@ public class Player : Character, ISavable {
         if (!IsAlive) MenuManager.Open(MenusList.Death);
     }
 
+    public float GetBaseHealth()
+    {
+        return DEFAULT_HEALTH_MAX;
+    }
+
+    public void SetMaxHealth(float health)
+    {
+        HealthMax = health;
+    }
+
     //Events (other)
     private void OnGameLoadingChanged(bool IsLoading) {
         if (IsLoading)
@@ -360,5 +373,4 @@ public class Player : Character, ISavable {
         public string loadout = "{}";
 
     }
-
 }

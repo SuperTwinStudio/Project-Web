@@ -118,4 +118,8 @@ public class WeaponSword : Weapon {
         SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
     }
 
+    public override float GetWeaponBaseDamage()
+    {
+        return PrimaryDamage;
+    }
 }

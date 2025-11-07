@@ -135,4 +135,8 @@ public class WeaponMatch : Weapon {
         character.AddEffect(burnEffect, duration);
     }
 
+    public override float GetWeaponBaseDamage()
+    {
+        return PrimaryDamage;
+    }
 }

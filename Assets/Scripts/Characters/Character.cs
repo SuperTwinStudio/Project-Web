@@ -25,7 +25,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     public bool IsAlive { get; set; } = true;
     public float Health { get; protected set; } = DEFAULT_HEALTH_MAX;
-    public virtual float HealthMax => DEFAULT_HEALTH_MAX;
+    public virtual float HealthMax { get; protected set; } = DEFAULT_HEALTH_MAX;
 
     public const float DEFAULT_HEALTH_MAX = 100;
 
