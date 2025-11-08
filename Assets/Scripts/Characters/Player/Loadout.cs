@@ -293,7 +293,7 @@ public class Loadout : MonoBehaviour, ISavable {
         //Load gold
         Gold = save.gold;
 
-        //Load inventory
+        //Load inventory (and sell it if in lobby)
         ClearInventory();
         foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value);
         if (Level.IsLobby) {
@@ -312,11 +312,13 @@ public class Loadout : MonoBehaviour, ISavable {
         _upgrades.Clear();
         foreach (var pair in save.upgrades) _upgrades.Add(pair.Key, pair.Value);
 
-        //Load items if not in lobby
+        //Load items (if not in lobby)
         _passiveItems.Clear();
-        foreach (var pair in save.passiveItems) {
-            for (int i = 0; i < pair.Value; i++) {
-                AddPassiveItem(PassiveItemObject.GetFromName(pair.Key), true);
+        if (Level.IsLobby) {
+            foreach (var pair in save.passiveItems) {
+                for (int i = 0; i < pair.Value; i++) {
+                    AddPassiveItem(PassiveItemObject.GetFromName(pair.Key), true);
+                }
             }
         }
 

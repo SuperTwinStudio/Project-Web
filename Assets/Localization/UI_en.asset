@@ -63,7 +63,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3135052578914304
-    m_Localized: Weapon
+    m_Localized: Weapons
     m_Metadata:
       m_Items: []
   - m_Id: 3135097906757632
@@ -217,7 +217,7 @@ MonoBehaviour:
   - m_Id: 13722598425628672
     m_Localized: 'You inventory has <gold> and treasures valued in <treasures>.
 
-      
+
 
       You
       can continue to a more difficult dungeon and risk loosing all of your treasures
@@ -227,10 +227,10 @@ MonoBehaviour:
   - m_Id: 13737919144398848
     m_Localized: 'You couldn''t save your brother...
 
-      
 
-      While fleeing,
-      all of your treasures and half of your gold fell to the ground.'
+
+      While fleeing, all
+      of your treasures and half of your gold fell to the ground.'
     m_Metadata:
       m_Items: []
   references:

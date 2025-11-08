@@ -336,10 +336,7 @@ public class Player : Character, ISavable {
         var save = JsonUtility.FromJson<PlayerSave>(saveJson);
 
         //Load health
-        if (Level.IsLobby)
-            Health = HealthMax;
-        else
-            Health = save.health;
+        Health = Level.IsLobby ? HealthMax : save.health;
 
         //Load upgrades
         GramajeUpgrade.SetLevel(save.levelGramaje);
