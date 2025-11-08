@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4322be108328984297b6cf1e9e4b1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutterEffect: {fileID: 11400000, guid: d15520aecca297e4c8e2f422bbf1a077, type: 2}

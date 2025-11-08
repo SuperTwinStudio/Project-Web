@@ -239,6 +239,10 @@ MonoBehaviour:
     m_Key: desc_passive_pen
     m_Metadata:
       m_Items: []
+  - m_Id: 14074311770771456
+    m_Key: effect_default_item
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

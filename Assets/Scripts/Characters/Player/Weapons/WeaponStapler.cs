@@ -11,9 +11,9 @@ public class WeaponStapler : Weapon {
     [SerializeField, Min(0)] private float primaryDamage = 25f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 8f;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+    public override float PrimaryCooldownDuration => _primaryCooldown;
 
-    protected override float PrimaryCooldownDuration => _primaryCooldown;
+    public override float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     //Secondary
     [Header("Secondary")]
@@ -24,9 +24,9 @@ public class WeaponStapler : Weapon {
     [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
     [SerializeField, Min(0)] private float secondaryBurstDelay = 0.6f;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
+    public override float SecondaryCooldownDuration => _secondaryCooldown;
 
-    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+    public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
     //Passive
     [Header("Passive")]
@@ -35,7 +35,7 @@ public class WeaponStapler : Weapon {
     [SerializeField] private Vector2 passiveAttackSphereCast = new(1f, 0f);
     [SerializeField] private AudioClip passiveAttackSound;
 
-    private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
+    public override float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
     //Reload
     [Header("Reload")]
@@ -66,6 +66,30 @@ public class WeaponStapler : Weapon {
             SetValue(WeaponAction.Reload, -1);
             reloadTimer.Reset();
         }
+    }
+
+    //Weapon
+    private void Shoot(float damage) {
+        //No ammo
+        if (ammo <= 0) return;
+
+        //Shoot
+        SpawnProjectile(bulletPrefab, damage, bulletOrigin);
+
+        //Update ammo
+        SetAmmo(ammo - 1);
+
+        //Animate
+        PlaySound(shootAttackSound);
+        Animator.SetTrigger("Attack");
+
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
+    }
+
+    private void SetAmmo(int newAmmo) {
+        ammo = newAmmo;
+        SetValue(WeaponAction.Passive, ammo);
     }
 
     //Primary
@@ -117,11 +141,6 @@ public class WeaponStapler : Weapon {
     }
 
     //Reloading
-    private void SetAmmo(int newAmmo) {
-        ammo = newAmmo;
-        SetValue(WeaponAction.Passive, ammo);
-    }
-
     private IEnumerator ReloadCoroutine() {
         //Wait
         yield return new WaitForSeconds(reloadDuration);
@@ -150,27 +169,4 @@ public class WeaponStapler : Weapon {
         return true;
     }
 
-    //Helpers
-    private void Shoot(float damage) {
-        //No ammo
-        if (ammo <= 0) return;
-
-        //Shoot
-        SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>().Init(Player, damage * Player.DamageMultiplier);
-
-        //Update ammo
-        SetAmmo(ammo - 1);
-
-        //Animate
-        PlaySound(shootAttackSound);
-        Animator.SetTrigger("Attack");
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
-    }
-
-    public override float GetWeaponBaseDamage()
-    {
-        return PrimaryDamage;
-    }
 }

@@ -24,9 +24,9 @@ public class WeaponGauntlet : Weapon {
     [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0f);
     [SerializeField] private AudioClip primaryAttackSound;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+    public override float PrimaryCooldownDuration => _primaryCooldown;
 
-    protected override float PrimaryCooldownDuration => _primaryCooldown;
+    public override float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     //Secondary
     [Header("Secondary")]
@@ -38,9 +38,9 @@ public class WeaponGauntlet : Weapon {
     [SerializeField] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
     [SerializeField] private AudioClip secondaryAttackSound;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
+    public override float SecondaryCooldownDuration => _secondaryCooldown;
 
-    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+    public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
     //Passive
     [Header("Passive")]
@@ -48,7 +48,7 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 2f;
     [SerializeField, Min(0)] private float passiveDuration = 5f;
 
-    private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
+    public override float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
 
     //Primary
@@ -108,7 +108,7 @@ public class WeaponGauntlet : Weapon {
         //Check type
         if (damageable is not Character) {
             //Not a character -> Default damage
-            damageable.Damage(damage, this, DamageType.Melee);
+            damageable.Damage(CalculateDamage(damage), this, DamageType.Melee);
             return;
         }
 
@@ -118,8 +118,8 @@ public class WeaponGauntlet : Weapon {
         //Apply damage taking effect into account
         damageable.Damage(
             character.TryGetEffect(chinchetaEffect, out float endTimestamp, out int level) ?
-                damage + PassiveDamage * level :
-                damage,
+                CalculateDamage(damage + PassiveDamage * level) :
+                CalculateDamage(damage),
             this,
             DamageType.Melee
         );
@@ -128,8 +128,4 @@ public class WeaponGauntlet : Weapon {
         character.AddEffect(chinchetaEffect, passiveDuration);
     }
 
-    public override float GetWeaponBaseDamage()
-    {
-        return PrimaryDamage;
-    }
 }

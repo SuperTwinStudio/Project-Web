@@ -21,9 +21,9 @@ public class WeaponMatch : Weapon {
     [SerializeField] private Vector2 primaryAttackSphereCast = new(0.5f, 1.5f);
     [SerializeField] private AudioClip primaryAttackSound;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+    public override float PrimaryCooldownDuration => _primaryCooldown;
 
-    protected override float PrimaryCooldownDuration => _primaryCooldown;
+    public override float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     //Secondary
     [Header("Secondary")]
@@ -37,7 +37,7 @@ public class WeaponMatch : Weapon {
 
     private float SecondaryBurnDuration => secondaryDuration + (SecondaryUpgrade.Level - 1) * secondaryDurationPerLevel;
 
-    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+    public override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
@@ -124,8 +124,7 @@ public class WeaponMatch : Weapon {
     }
 
     //Effects
-    private void ApplyBurn(IDamageable damageable, float duration)
-    {
+    private void ApplyBurn(IDamageable damageable, float duration) {
         //Not a character
         if (damageable is not Character) return;
 
@@ -133,14 +132,9 @@ public class WeaponMatch : Weapon {
         Character character = damageable as Character;
         character.AddEffect(burnEffect, duration);
     }
-    
-    public override void EmitParticle(String name)
-    {
+
+    public override void EmitParticle(string name) {
         particleEmitter.PlayOnPosition(name, Vector3.up, tip.position);
     }
 
-    public override float GetWeaponBaseDamage()
-    {
-        return PrimaryDamage;
-    }
 }

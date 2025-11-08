@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Botpa;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,10 +10,6 @@ public enum PlayerUpgrade {
 }
 
 public class Player : Character, ISavable {
-
-    //Character
-    public float DamageMultiplier = 1;
-    public float SpeedMultiplier = 1;
 
     //Level
     [Header("Level")]
@@ -74,6 +69,9 @@ public class Player : Character, ISavable {
     public Upgrade GramajeUpgrade { get; private set; } = new("GRAMAJE");
     public Upgrade RugosidadUpgrade { get; private set; } = new("RUGOSIDAD");
 
+    //Health
+    public override float HealthMax => base.HealthMax + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
+
 
     //State
     private void Start() {
@@ -84,9 +82,6 @@ public class Player : Character, ISavable {
         //Refresh upgrade levels
         GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
         RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
-
-        HealthMax = DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
-        Heal(HealthMax);
 
         //Events
         Game.AddOnLoadingChanged(OnGameLoadingChanged);
@@ -134,7 +129,7 @@ public class Player : Character, ISavable {
             Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
 
             //Move in move direction
-            controller.SimpleMove(moveSpeed * SpeedMultiplier * slowMovementMultiplier * moveDirection);
+            controller.SimpleMove(moveSpeed * SpeedMultiplier * moveDirection);
         }
 
 
@@ -254,7 +249,6 @@ public class Player : Character, ISavable {
         switch (type) {
             //Reset player health
             case PlayerUpgrade.Gramaje:
-                HealthMax = DEFAULT_HEALTH_MAX + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
                 Heal(HealthMax);
                 break;
         }
@@ -289,11 +283,6 @@ public class Player : Character, ISavable {
     public float GetBaseHealth()
     {
         return DEFAULT_HEALTH_MAX;
-    }
-
-    public void SetMaxHealth(float health)
-    {
-        HealthMax = health;
     }
 
     //Events (other)

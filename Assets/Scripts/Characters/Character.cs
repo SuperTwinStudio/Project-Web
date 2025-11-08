@@ -17,6 +17,8 @@ public class Character : MonoBehaviour, IDamageable {
     public Transform Bot => _bot;
 
     //Health
+    [SerializeField] protected float _maxHealth = DEFAULT_HEALTH_MAX;
+
     private event Action<float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
@@ -25,14 +27,20 @@ public class Character : MonoBehaviour, IDamageable {
 
     public bool IsAlive { get; set; } = true;
     public float Health { get; protected set; } = DEFAULT_HEALTH_MAX;
-    public virtual float HealthMax { get; protected set; } = DEFAULT_HEALTH_MAX;
+    public virtual float HealthMax => _maxHealth + EffectExtraHealth;
 
     public const float DEFAULT_HEALTH_MAX = 100;
 
     //Effects
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
-    protected float slowMovementMultiplier = 1;
-    protected float damageTakenMultiplier = 1;
+
+    public float EffectSlowSpeedMultiplier { get; private set; } = 1;
+    public float EffectFastSpeedMultiplier { get; private set; } = 1;
+    public float EffectDamageTakenMultiplier { get; private set; } = 1;
+    public float EffectDamageDealtMultiplier { get; private set; } = 1;
+    public float EffectExtraHealth { get; private set; } = 0;
+
+    public float SpeedMultiplier => EffectSlowSpeedMultiplier * EffectFastSpeedMultiplier;
 
 
     //State
@@ -154,7 +162,7 @@ public class Character : MonoBehaviour, IDamageable {
         //Ignore negative damage
         if (amount <= 0) return false;
 
-        float damage = amount * damageTakenMultiplier;
+        float damage = amount * EffectDamageTakenMultiplier;
 
         //Damage character
         Health = Mathf.Max(Health - damage, 0);
@@ -197,44 +205,79 @@ public class Character : MonoBehaviour, IDamageable {
         //Get current time
         float nowTimestamp = Time.time;
 
-        //Reset slow multiplier
-        slowMovementMultiplier = 1;
-        damageTakenMultiplier = 1;
+        //Reset effects
+        EffectSlowSpeedMultiplier = 1;
+        EffectFastSpeedMultiplier = 1;
+        EffectDamageTakenMultiplier = 1;
+        EffectDamageDealtMultiplier = 1;
+        EffectExtraHealth = 0;
 
         //Apply effects
         foreach (var effect in effects.Keys.ToList()) {
             //Get end timestamp
             (float endTimestamp, int level) = effects[effect];
+            float value = effect.Action.Value * level;
 
             //Apply effect
             switch (effect.Action.Type) {
                 //Damage
                 case EffectType.Damage:
-                    Damage(Time.deltaTime * level * effect.Action.Value, this, DamageType.Burn); //Take value as damage per second
+                    Damage(Time.deltaTime * value, this, DamageType.Burn); //Take value as damage per second
                     break;
                 //Heal
                 case EffectType.Heal:
-                    Heal(Time.deltaTime * level * effect.Action.Value); //Take value as healing per second
+                    Heal(Time.deltaTime * value); //Take value as healing per second
                     break;
-                //Slow movement
-                case EffectType.SlowMovement:
-                    slowMovementMultiplier = Mathf.Min(slowMovementMultiplier, Mathf.Clamp01(1 - effect.Action.Value)); //Take value as slow percentaje
+                //Slowness (slow movement)
+                case EffectType.Slowness:
+                    EffectSlowSpeedMultiplier = Mathf.Min(EffectSlowSpeedMultiplier, Mathf.Clamp01(1 - value)); //Take value as slow percentaje
                     break;
-                //Weak
-                case EffectType.Weak:
-                    damageTakenMultiplier = Mathf.Max(damageTakenMultiplier, 1 + effect.Action.Value);
+                //Fastness (fast movement)
+                case EffectType.Fastness:
+                    EffectFastSpeedMultiplier = Mathf.Max(EffectFastSpeedMultiplier, 1 + value); //Take value as speed percentaje
+                    break;
+                //Weakness (take more damage)
+                case EffectType.Weakness:
+                    EffectDamageTakenMultiplier = Mathf.Max(EffectDamageTakenMultiplier, 1 + value); //Take value as damage taken percentaje
+                    break;
+                //Strength (deal more damage)
+                case EffectType.Strength:
+                    EffectDamageDealtMultiplier = Mathf.Max(EffectDamageDealtMultiplier, 1 + value); //Take value as damage dealt percentaje
                     break;
             }
 
-            //Check if effect finished
-            if (nowTimestamp > endTimestamp) effects.Remove(effect);
+            //Check if effect hasn't finished
+            if (nowTimestamp < endTimestamp) continue;
+
+            //Remove effect
+            effects.Remove(effect);
+
+            //Unapply instant application effects
+            switch (effect.Action.Type) {
+                //Max health
+                case EffectType.MaxHealth:
+                    EffectExtraHealth -= effect.Action.Value;
+                    break;
+            }
         }
 
         //Call on effects updated
         OnEffectsUpdated();
     }
 
-    public void AddEffect(Effect effect, float duration) {
+    public bool TryGetEffect(Effect effect, out float endTimestamp, out int level) {
+        if (effects.ContainsKey(effect)) {
+            //Has effect
+            (endTimestamp, level) = effects[effect];
+            return true;
+        } else {
+            //Does not have effect
+            (endTimestamp, level) = (0, 0);
+            return true;
+        }
+    }
+
+    public void AddEffect(Effect effect, float duration = float.PositiveInfinity) {
         //Calculate effect end timestamp
         float effectEndTimestamp = Time.time + duration;
 
@@ -253,17 +296,13 @@ public class Character : MonoBehaviour, IDamageable {
                 1                   //Level
             );
         }
-    }
 
-    public bool TryGetEffect(Effect effect, out float endTimestamp, out int level) {
-        if (effects.ContainsKey(effect)) {
-            //Has effect
-            (endTimestamp, level) = effects[effect];
-            return true;
-        } else {
-            //Does not have effect
-            (endTimestamp, level) = (0, 0);
-            return true;
+        //Apply instant application effects
+        switch (effect.Action.Type) {
+            //Max health
+            case EffectType.MaxHealth:
+                EffectExtraHealth += effect.Action.Value;
+                break;
         }
     }
 

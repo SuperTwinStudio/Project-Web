@@ -17,9 +17,9 @@ public class WeaponSword : Weapon {
     [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0.5f);
     [SerializeField] private AudioClip primaryAttackSound;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+    public override float PrimaryCooldownDuration => _primaryCooldown;
 
-    protected override float PrimaryCooldownDuration => _primaryCooldown;
+    public override float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     //Secondary
     [Header("Secondary")]
@@ -31,9 +31,9 @@ public class WeaponSword : Weapon {
     [SerializeField, Min(0)] private float secondarySpinRadius = 3f;
     [SerializeField] private AudioClip secondaryAttackSound;
 
-    private float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
+    public override float SecondaryCooldownDuration => _secondaryCooldown;
 
-    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+    public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
     //Passive
     [Header("Passive")]
@@ -45,9 +45,9 @@ public class WeaponSword : Weapon {
     private bool isPassiveHit = false;
     private int hitCount = 0;
 
-    private float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
-
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
+
+    public override float PassiveDamage => passiveDamage + (PassiveUpgrade.Level - 1) * passiveDamagePerLevel;
 
 
     //State
@@ -118,8 +118,4 @@ public class WeaponSword : Weapon {
         SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
     }
 
-    public override float GetWeaponBaseDamage()
-    {
-        return PrimaryDamage;
-    }
 }

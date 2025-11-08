@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23cc99f797bd0d84b980522cba2e1f9d, type: 3}
-  m_Name: Water
+  m_Name: ItemAerodynamic2
   m_EditorClassIdentifier: 
-  _show: 1
+  _show: 0
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
     m_TableEntryReference:
-      m_KeyId: 13046186966482944
+      m_KeyId: 14074311770771456
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _hasLevels: 0
-  _maxLevel: 5
+  _hasLevels: 1
+  _maxLevel: 999
   _action:
-    _type: 5
-    _value: 0.5
+    _type: 4
+    _value: 0.05
   references:
     version: 2
     RefIds: []

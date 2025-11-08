@@ -18,9 +18,9 @@ public class WeaponAbanico : Weapon {
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
     [SerializeField] private AudioClip primaryAttackSound;
 
-    private float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
+    public override float PrimaryCooldownDuration => _primaryCooldown;
 
-    protected override float PrimaryCooldownDuration => _primaryCooldown;
+    public override float PrimaryDamage => primaryDamage + (PrimaryUpgrade.Level - 1) * primaryDamagePerLevel;
 
     //Secondary
     [Header("Secondary")]
@@ -33,7 +33,7 @@ public class WeaponAbanico : Weapon {
 
     private float SecondaryPushForce => secondaryPushForce + (SecondaryUpgrade.Level - 1) * secondaryPushForcePerLevel;
 
-    protected override float SecondaryCooldownDuration => _secondaryCooldown;
+    public override float SecondaryCooldownDuration => _secondaryCooldown;
 
     //Passive
     [Header("Passive")]
@@ -62,6 +62,19 @@ public class WeaponAbanico : Weapon {
         UpdatePassiveValue();
     }
 
+    //Weapon 
+    private void Push(IDamageable damageable, float force, Vector3 direction = new Vector3()) {
+        //Check if an enemy
+        if (damageable is not EnemyBase) return;
+
+        //Get enemy
+        EnemyBase enemy = damageable as EnemyBase;
+
+        //Push enemy
+        if (direction.IsEmpty()) direction = enemy.transform.position - Player.transform.position;
+        enemy.Push(force * direction);
+    }
+
     //Primary
     protected override IEnumerator OnUsePrimaryCoroutine() {
         yield return null;
@@ -70,8 +83,7 @@ public class WeaponAbanico : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Shoot
-        Projectile projectile = SpawnProjectile(bulletPrefab, bulletOrigin).GetComponent<Projectile>();
-        projectile.Init(Player, PrimaryDamage);
+        Projectile projectile = SpawnProjectile(bulletPrefab, PrimaryDamage, bulletOrigin);
         if (isPassiveHit) projectile.AddOnHit((damageable) => Push(damageable, PassivePushForce));
 
         //Animate
@@ -112,21 +124,4 @@ public class WeaponAbanico : Weapon {
         SetValue(WeaponAction.Passive, passiveHit - hitCount - 1);
     }
 
-    //Helpers    
-    private void Push(IDamageable damageable, float force, Vector3 direction = new Vector3()) {
-        //Check if an enemy
-        if (damageable is not EnemyBase) return;
-
-        //Get enemy
-        EnemyBase enemy = damageable as EnemyBase;
-
-        //Push enemy
-        if (direction.IsEmpty()) direction = enemy.transform.position - Player.transform.position;
-        enemy.Push(force * direction);
-    }
-
-    public override float GetWeaponBaseDamage()
-    {
-        return PrimaryDamage;
-    }
 }

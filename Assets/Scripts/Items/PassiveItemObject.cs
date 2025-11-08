@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -20,9 +19,9 @@ public class PassiveItemObject : ScriptableObject
     {
         //Invalid name
         if (string.IsNullOrEmpty(name)) return null;
+
         //Load from resources
-        var item = Resources.Load<PassiveItemObject>($"Passive Items/Scriptable Objects/{name}");
-        return item;
+        return Resources.Load<PassiveItemObject>($"Passive Items/Scriptable Objects/{name}");
     }
 }
 

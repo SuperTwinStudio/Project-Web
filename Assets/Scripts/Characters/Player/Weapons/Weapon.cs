@@ -51,10 +51,12 @@ public class Weapon : MonoBehaviour {
     //Primary
     private readonly Timer primaryTimer = new();
 
-    protected virtual float PrimaryCooldownDuration => 1;
+    public virtual float PrimaryCooldownDuration => 1;
 
     public virtual bool PrimaryAvailable => !primaryTimer.counting;
     public virtual float PrimaryCooldown => 1 - primaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+
+    public virtual float PrimaryDamage => 0;
 
     public Upgrade PrimaryUpgrade { get; protected set; }
 
@@ -63,10 +65,12 @@ public class Weapon : MonoBehaviour {
     //Secondary
     private readonly Timer secondaryTimer = new();
 
-    protected virtual float SecondaryCooldownDuration => 1;
+    public virtual float SecondaryCooldownDuration => 1;
 
     public virtual bool SecondaryAvailable => !secondaryTimer.counting;
-    public float SecondaryCooldown => 1 - secondaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+
+    public virtual float SecondaryDamage => 0;
 
     public Upgrade SecondaryUpgrade { get; protected set; }
 
@@ -75,10 +79,12 @@ public class Weapon : MonoBehaviour {
     //Passive
     private readonly Timer passiveTimer = new();
 
-    protected virtual float PassiveCooldownDuration => 1;
+    public virtual float PassiveCooldownDuration => 1;
 
     public virtual bool PassiveAvailable => !passiveTimer.counting;
     public virtual float PassiveCooldown => 1 - passiveTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+
+    public virtual float PassiveDamage => 0;
 
     public Upgrade PassiveUpgrade { get; protected set; }
 
@@ -149,6 +155,10 @@ public class Weapon : MonoBehaviour {
     }
 
     //Weapon
+    protected float CalculateDamage(float damage) {
+        return damage * Player.EffectDamageDealtMultiplier;
+    }
+
     protected void SetCooldown(WeaponAction attack, float cooldown) {
         //Get timer
         Timer timer = attack switch {
@@ -196,8 +206,6 @@ public class Weapon : MonoBehaviour {
     public void RemoveOnValueChanged(Action<WeaponAction, int> action) {
         OnValueChanged -= action;
     }
-
-    public virtual float GetWeaponBaseDamage() { throw new NotImplementedException(); }
 
     //Upgrades
     private void RefreshUpgradeLevels() {
@@ -281,7 +289,7 @@ public class Weapon : MonoBehaviour {
             //Damage
             if (damage > 0) {
                 Loadout.OnDamageableHit(hit.collider.gameObject);
-                damageable.Damage(damage * Player.DamageMultiplier, Player, DamageType.Melee);
+                damageable.Damage(damage, Player, DamageType.Melee);
             }
 
             //Mark as hit
@@ -307,18 +315,19 @@ public class Weapon : MonoBehaviour {
     }
 
     protected bool MeleeForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(MeleeForwardCheck(radius, forward), damage, onHit);
+        return DamageHits(MeleeForwardCheck(radius, forward), CalculateDamage(damage), onHit);
     }
 
     protected bool MeleeAround(float radius, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(MeleeAroundCheck(radius), damage, onHit);
+        return DamageHits(MeleeAroundCheck(radius), CalculateDamage(damage), onHit);
     }
 
-    protected GameObject SpawnProjectile(GameObject prefab, Transform origin = null)
-    {
-        return Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation);
+    protected Projectile SpawnProjectile(GameObject prefab, float damage, Transform origin = null) {
+        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation).GetComponent<Projectile>();
+        projectile.Init(this, CalculateDamage(damage));
+        return projectile;
     }
-    
+
     public virtual void EmitParticle(String name)
     {
         particleEmitter.Play(name, Vector3.up);

@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03511cd499d338c4e9d561e966d598c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aerodynamic1Effect: {fileID: 11400000, guid: 9cc15cd00d501834c998364d523b9cde, type: 2}
+  aerodynamic2Effect: {fileID: 11400000, guid: 5236b4a1cc8d78542892a63b0373b66d, type: 2}

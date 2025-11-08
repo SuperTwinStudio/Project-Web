@@ -37,12 +37,9 @@ public class EnemyBase : Character {
     public NavMeshAgent Agent => _agent;
     public Rigidbody Rigidbody => _rigidbody;
 
-    //Health
-    [Header("Health")]
+    //Feedback
+    [Header("Feedback")]
     [SerializeField] protected GameObject damageIndicatorPrefab;
-    [SerializeField] protected float _maxHealth = DEFAULT_HEALTH_MAX;
-
-    public override float HealthMax => _maxHealth;
 
     //Room
     public Room Room { get; protected set; } = null;
@@ -131,16 +128,13 @@ public class EnemyBase : Character {
     }
 
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
-        //Update amount
-        amount *= damageTakenMultiplier;
-
         //Damage
         bool damaged = base.Damage(amount, source, type);
 
         //Check if damaged
         if (damaged) {
             //Show damage indicator
-            if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount, type);
+            if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount *= EffectDamageTakenMultiplier, type);
 
             //Call behaviour event
             Behaviour.OnDamage();
@@ -158,7 +152,7 @@ public class EnemyBase : Character {
     //Effects
     protected override void OnEffectsUpdated() {
         //Update move speed
-        Agent.speed = moveSpeed * slowMovementMultiplier;
+        Agent.speed = moveSpeed * SpeedMultiplier;
     }
 
     //Room

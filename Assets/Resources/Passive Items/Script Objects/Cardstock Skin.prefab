@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8670790ef5aed8b42a1b8ab410e7eef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardSkinEffect: {fileID: 11400000, guid: f449d974cc43e41488b4857549a50099, type: 2}
