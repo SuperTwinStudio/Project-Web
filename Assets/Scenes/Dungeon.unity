@@ -288,10 +288,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
-      propertyPath: _isLobby
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
       propertyPath: Definition
       value: 
       objectReference: {fileID: 11400000, guid: d1b3decb0f9fc6c4993fba677df134d1, type: 2}
