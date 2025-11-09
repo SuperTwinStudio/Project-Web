@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public class DuendeEvadeState : EnemyState
+public class DuendeEvadeState : DuendeState
 {
-
-    //Attack
-    private const float EVADE_RANGE = 1.5f;
-
     public DuendeEvadeState(EnemyBehaviour behaviour) : base(behaviour) {}
     
     //Actions
@@ -20,17 +16,15 @@ public class DuendeEvadeState : EnemyState
     }
 
     public override void Execute() {
-        //Check player visibility
-        if (!Enemy.PlayerIsVisible) {
-            //Player not visible -> Go to idle
-            Behaviour.SetState(new SimpleIdleState(Behaviour));
-        } else if (Enemy.PlayerDistance <= EVADE_RANGE) {
-            //Player in attack range -> Attack it
-            Behaviour.SetState(new SimpleAttackState(Behaviour), true);
-        } else {
-            //Move towards player
-            Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
-            Enemy.Animator.SetBool("IsMoving", true);
+        if(Enemy.PlayerDistance > Duende.evadeRange)
+        {
+            //Player lejos -> mira a ver que haces
+            Duende.SetState(new DuendeIdleState(Duende));
+        }
+        else
+        {
+            //Player cerca -> huye!
+            Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.PlayerLastKnownPosition).normalized);
         }
     }
 }

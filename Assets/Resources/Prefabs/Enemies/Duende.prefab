@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112247229224764258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4958273343536241438}
+  m_Layer: 7
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4958273343536241438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112247229224764258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.465, y: 0.628, z: 0.088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 842202375143149454}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3293415959875675893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,15 +69,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.5006557
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04989028
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -24.990038
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -82,6 +113,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2739467051366623611, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7223640214850411857}
+    - targetCorrespondingSourceObject: {fileID: 2739467051366623611, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4958273343536241438}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       insertIndex: -1
@@ -109,6 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bcb2eb7c0d1e94bbf1d42d1ba130e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 2421915764250194293, guid: 3a6d72f7ea62941458b6c4f01968d473, type: 3}
+  hand: {fileID: 4958273343536241438}
+  minAttackRange: 3.62
+  maxAttackRange: 5.89
+  evadeRange: 2
+  spearDamage: 10
 --- !u!1001 &7184719139651451578
 PrefabInstance:
   m_ObjectHideFlags: 0

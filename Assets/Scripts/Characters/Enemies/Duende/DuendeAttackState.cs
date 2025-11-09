@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class DuendeAttackState : EnemyState {
+public class DuendeAttackState : DuendeState {
 
     //Attack
-    private const float ATTACK_DAMAGE = 20;
-    private const float ATTACK_COOLDOWN = 0.5f;
     private Coroutine attackCoroutine = null;
 
 
@@ -15,6 +13,9 @@ public class DuendeAttackState : EnemyState {
     //Actions
     public override void OnEnter()
     {
+        //Stop moving
+        Enemy.StopMovement();
+
         //Start coroutine
         attackCoroutine = Enemy.StartCoroutine(AttackCoroutine());
     }
@@ -29,14 +30,26 @@ public class DuendeAttackState : EnemyState {
     private IEnumerator AttackCoroutine() {
         //Animate
         Enemy.Animator.SetTrigger("Attack");
-
-        //TODO: Throw the spear
+        Duende.ThrowSpear();
         
         //Wait
-        yield return new WaitForSeconds(ATTACK_COOLDOWN);
+        yield return new WaitForSeconds(Duende.spearCoolDown);
 
-        //Return to idle state & execute it
-        Behaviour.SetState(new DuendeIdleState(Behaviour), true);
+        if (Enemy.PlayerDistance < Duende.evadeRange)
+        {
+            //Player too close - > evade
+            Duende.SetState(new DuendeEvadeState(Duende));
+        }else if(Enemy.PlayerDistance < Duende.maxAttackRange)
+        {
+            //Aun en rango -> Sigue atacando
+            attackCoroutine = Enemy.StartCoroutine(AttackCoroutine());
+        }
+        else
+        {
+            //Player fuera de rango -> siguele
+            Duende.SetState(new DuendeFollowState(Duende));
+        }
+        
     }
 
 }

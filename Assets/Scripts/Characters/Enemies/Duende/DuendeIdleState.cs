@@ -1,15 +1,14 @@
-public class DuendeIdleState : EnemyState {
+using UnityEngine;
 
-    private const float MIN_ATTACK_RANGE = 2.5f;
-    private const float MAX_ATTACK_RANGE = 5f;
-
+public class DuendeIdleState : DuendeState {
 
     //Constructor
-    public DuendeIdleState(EnemyBehaviour behaviour) : base(behaviour) { }
+    public DuendeIdleState(EnemyBehaviour Duende) : base(Duende) { }
 
     //Actions
     public override void OnEnter() {
         //Called when the state enters
+        Debug.Log("hola");
     }
 
     public override void OnExit() {
@@ -20,20 +19,20 @@ public class DuendeIdleState : EnemyState {
         //Check if player is visible
         if (!Enemy.PlayerIsVisible) return;
 
-        if (Enemy.PlayerDistance > MAX_ATTACK_RANGE)
+        if (Enemy.PlayerDistance > Duende.minAttackRange)
         {
             //Player too far -> follow him
-            Behaviour.SetState(new DuendeFollowState(Behaviour));
+            Duende.SetState(new DuendeFollowState(Duende));
         }
-        else if (Enemy.PlayerDistance > MIN_ATTACK_RANGE)
+        else if (Enemy.PlayerDistance > Duende.evadeRange)
         {
             //Player within attack range -> Attack him
-            Behaviour.SetState(new DuendeAttackState(Behaviour));
+            Duende.SetState(new DuendeAttackState(Duende));
         }
         else
         {
             //Player too close -> Evade
-            Behaviour.SetState(new DuendeEvadeState(Behaviour));
+            // Duende.SetState(new DuendeEvadeState(Duende));
         }
         
     }

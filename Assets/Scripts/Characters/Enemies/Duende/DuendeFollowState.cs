@@ -1,11 +1,8 @@
 using System;
 using UnityEngine;
 
-public class DuendeFollowState : EnemyState
+public class DuendeFollowState : DuendeState
 {
-
-    //Attack
-    private const float ATTACK_RANGE = 5f;
 
     public DuendeFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
     
@@ -26,13 +23,13 @@ public class DuendeFollowState : EnemyState
         if (!Enemy.PlayerIsVisible)
         {
             //Player not visible -> Go to idle
-            Behaviour.SetState(new DuendeIdleState(Behaviour));
+            Duende.SetState(new DuendeIdleState(Duende));
         }
-        else if (Enemy.PlayerDistance <= ATTACK_RANGE)
+        else if (Enemy.PlayerDistance > Duende.evadeRange && Enemy.PlayerDistance < Duende.minAttackRange)
         {
             //Player in attack range -> Attack it
             Enemy.StopMovement();
-            
+            Duende.SetState(new DuendeAttackState(Duende));
         }
         else
         {
