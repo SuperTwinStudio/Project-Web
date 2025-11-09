@@ -90,6 +90,9 @@ public class GameMenu : Menu {
         //Open inventory
         else if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
 
+        //Disable minimap if in lobby
+        minimap.SetActive(!Level.IsLobby);
+
         //Move minimap camera
         Vector3 playerPos = Player.transform.position;
         playerPos.y = 100;
@@ -225,9 +228,6 @@ public class GameMenu : Menu {
 
         //Add item obtain event
         Player.Loadout.AddOnObtainItem(OnObtainItem);
-
-        //Disable minimap when in lobby
-        if (Level.IsLobby) minimap.SetActive(false);
     }
 
     protected override void OnClose() {
