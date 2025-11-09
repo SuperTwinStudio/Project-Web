@@ -314,7 +314,7 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Load items (if not in lobby)
         _passiveItems.Clear();
-        if (Level.IsLobby) {
+        if (!Level.IsLobby) {
             foreach (var pair in save.passiveItems) {
                 for (int i = 0; i < pair.Value; i++) {
                     AddPassiveItem(PassiveItemObject.GetFromName(pair.Key), true);
