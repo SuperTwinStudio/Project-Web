@@ -40,11 +40,11 @@ public class PassiveItem : MonoBehaviour
     public virtual void OnHurtHook(Player player, int itemCount, Character enemy) { }
 
     /// <summary>
-    /// [UNHOOKED] Called when the player uses their dash
+    /// Called when the player uses their dash
     /// </summary>
     /// <param name="player"></param>
     /// <param name="itemCount"></param>
-    public virtual void OnDashHook(Player player, int itemCount) { }
+    public virtual void OnDashHook(Player player, int itemCount, Vector3 direction) { }
 
     /// <summary>
     /// Called when the player dies

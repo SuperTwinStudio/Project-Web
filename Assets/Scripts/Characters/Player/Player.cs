@@ -174,11 +174,16 @@ public class Player : Character, ISavable {
 
         //Check for dash
         if (dashAction.Triggered() && !dashTimer.counting) {
+
             //Start dash timer
             dashTimer.Count(dashCooldown);
 
             //Push player (dash)
-            Push(dashForce * (isMoving ? moveDirection : playerTransform.forward));
+            Vector3 direction = isMoving ? moveDirection : playerTransform.forward;
+            Push(dashForce * direction);
+
+            //Dash item hooks
+            foreach (var pair in Loadout.PassiveItems) pair.Key.OnDashHook(this, pair.Value, direction);
         }
     
         //Move in move direction
