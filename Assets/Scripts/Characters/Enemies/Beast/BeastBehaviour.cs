@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Botpa;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ public class BeastBehaviour : EnemyBehaviour {
     public float AuraDamage => _auraDamage;
     public float AuraPushForce => _auraPushForce;
     public float AuraCooldown => _auraPushCooldown;
+
+    //Pillars
+    [Header("Pillars")]
+    [SerializeField] private List<BeastPillar> pillars = new();
 
     //States
     [Header("States")]
@@ -36,8 +41,11 @@ public class BeastBehaviour : EnemyBehaviour {
         //Make enemy invulnerable
         Enemy.IsInvulnerable = true;
 
+        //Init pillars
+        foreach (var pillar in pillars) pillar.Init(this);
+
         //Start in idle state
-        SetState(new BeastRageState(this));
+        SetState(new BeastPillarsState(this));
     }
 
     //Health
@@ -46,6 +54,26 @@ public class BeastBehaviour : EnemyBehaviour {
 
         //Set state to death
         SetState(new BeastDeathState(this));
+    }
+
+    //Pillars
+    public void OnPillarDestroyed(BeastPillar pillar) {
+        //Remove from list
+        pillars.Remove(pillar);
+
+        //Check remaining pillars
+        if (pillars.Count >= 2) {
+            //Still 2+ columns -> Spawn enemies on the broken pillar
+            Debug.Log("Spawn enemies");
+        } else if (pillars.Count == 1) {
+            //Only 1 column remaining -> Destroy it
+            BeastPillar remainingPillar = pillars[0];
+            remainingPillar.Damage(remainingPillar.Health, Enemy, DamageType.None);
+            pillars.Clear();
+
+            //Start rage phase
+            SetState(new BeastRageState(this));
+        }
     }
 
 }
