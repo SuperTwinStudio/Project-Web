@@ -62,7 +62,6 @@ public class Level : MonoBehaviour {
     //World
     public void UpdateWalkableSurface() {
         Surface.UpdateNavMesh(Surface.navMeshData);
-        Debug.Log("Updated surface");
     }
 
     //Scene
