@@ -210,7 +210,6 @@ public class Character : MonoBehaviour, IDamageable {
         EffectFastSpeedMultiplier = 1;
         EffectDamageTakenMultiplier = 1;
         EffectDamageDealtMultiplier = 1;
-        EffectExtraHealth = 0;
 
         //Apply effects
         foreach (var effect in effects.Keys.ToList()) {
@@ -234,7 +233,7 @@ public class Character : MonoBehaviour, IDamageable {
                     break;
                 //Fastness (fast movement)
                 case EffectType.Fastness:
-                    EffectFastSpeedMultiplier = Mathf.Max(EffectFastSpeedMultiplier, 1 + value); //Take value as speed percentaje
+                    EffectFastSpeedMultiplier += value; //Take value as speed percentaje
                     break;
                 //Weakness (take more damage)
                 case EffectType.Weakness:
