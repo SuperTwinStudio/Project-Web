@@ -1869,6 +1869,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8576734611b5ef342ac4a266db642fd5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 17a9fca29ecabc649924881d3e5e7e3d, type: 2}
     - target: {fileID: 919132149155446097, guid: 8576734611b5ef342ac4a266db642fd5, type: 3}
       propertyPath: m_Name
       value: Sword
@@ -2291,6 +2295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stapler
       objectReference: {fileID: 0}
+    - target: {fileID: 8282909117703725295, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c35c471f54bd9d4f802c53de9cd270c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2349,6 +2357,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ca9ea489b0467d24abb51329ec60a91c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ba3b2f5892af54148a839ca91576f7d4, type: 2}
     - target: {fileID: 919132149155446097, guid: ca9ea489b0467d24abb51329ec60a91c, type: 3}
       propertyPath: m_Name
       value: Match

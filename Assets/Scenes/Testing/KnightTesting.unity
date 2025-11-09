@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3362959691692423892, guid: ed5d1283271d6b94c86fc4290daf6c28, type: 3}
       propertyPath: viewDistance
-      value: 5.5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7711825781590031116, guid: ed5d1283271d6b94c86fc4290daf6c28, type: 3}
       propertyPath: m_LocalPosition.x
