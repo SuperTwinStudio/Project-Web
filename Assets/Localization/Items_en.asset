@@ -230,7 +230,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13076458839703552
-    m_Localized: Receive less knockback.
+    m_Localized: Bonk enemies with your dashes.
     m_Metadata:
       m_Items: []
   - m_Id: 13076683096555520

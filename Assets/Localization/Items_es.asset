@@ -175,11 +175,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13076458839703552
-    m_Localized: Los ataques te empujan menos.
+    m_Localized: Ataca a enemigos al esquivar.
     m_Metadata:
       m_Items: []
   - m_Id: 13076328237465600
-    m_Localized: Empuja enemigos al esquivar
+    m_Localized: Empuja enemigos al esquivar.
     m_Metadata:
       m_Items: []
   - m_Id: 13076043255480320

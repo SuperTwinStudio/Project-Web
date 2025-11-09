@@ -25,6 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a5b8e8a0da3d8e246a8915f35ed61023, type: 2}
   - {fileID: 11400000, guid: e42a8cc7d24cccc4aa54aa3468028854, type: 2}
   - {fileID: 11400000, guid: 20049f34f1b042545babefc8b5c40fbf, type: 2}
+  - {fileID: 11400000, guid: f579afc21f431e049826fac0d3f87f0d, type: 2}
   UncommonItemChance: 25
   RareItems:
   - {fileID: 11400000, guid: 88465e390d6f75a459420d10183d5962, type: 2}
