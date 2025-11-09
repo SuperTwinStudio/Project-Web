@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 7048343673859228868}
   _player: {fileID: 3014555502683683044}
-  _isLobby: 1
+  _isLobby: 0
   _isHandmade: 1
   _surface: {fileID: 3368089088693657629}
   Definition: {fileID: 0}

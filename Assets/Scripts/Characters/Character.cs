@@ -75,7 +75,7 @@ public class Character : MonoBehaviour, IDamageable {
             Vector3 direction = top + topToBot * percent - origin;
 
             //Raycast
-            if (Physics.Raycast(origin, direction.normalized, out RaycastHit hit, viewDistance, layers)) {
+            if (Physics.Raycast(origin, direction.normalized, out RaycastHit hit, viewDistance, layers, QueryTriggerInteraction.Ignore)) {
                 if (hit.collider.CompareTag("Player")) {
                     //Debug hit
                     Debug.DrawRay(origin, direction.normalized * hit.distance, Color.green);

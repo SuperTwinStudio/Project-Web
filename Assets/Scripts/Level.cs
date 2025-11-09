@@ -40,15 +40,18 @@ public class Level : MonoBehaviour {
 
     //State
     private void Start() {
+        //Ignore lobby
+        if (IsLobby) return;
+
         //Generate AI surface
         Surface.BuildNavMesh();
 
-        //Init level
-        if (!IsLobby && !IsHandmade) InitializeLevel();
+        //Init dungeon
+        if (!IsHandmade) InitializeLevel();
     }
 
     private void InitializeLevel() {
-        LevelGenerator generator = new LevelGenerator();
+        LevelGenerator generator = new();
         generator.GenerateLevel(Definition);
 
         //Allow player interaction when level has generated
@@ -59,6 +62,7 @@ public class Level : MonoBehaviour {
     //World
     public void UpdateWalkableSurface() {
         Surface.UpdateNavMesh(Surface.navMeshData);
+        Debug.Log("Updated surface");
     }
 
     //Scene

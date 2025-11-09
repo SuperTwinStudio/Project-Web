@@ -8019,6 +8019,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
+      propertyPath: _isLobby
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5901354825017178245, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
       propertyPath: m_Name
       value: Level

@@ -17,6 +17,9 @@ public class BeastRageState : BeastState {
     }
 
     public override void OnExit() {
+        //Update walkable surface
+        Game.Current.Level.UpdateWalkableSurface();
+
         //Stop coroutine
         if (coroutine != null) Enemy.StopCoroutine(coroutine);
     }

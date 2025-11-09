@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 1742561134597324348}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: _behaviour
@@ -107,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: viewDistance
       value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354158519484372618, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      propertyPath: m_Height
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2354158519484372618, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Radius
@@ -211,9 +215,10 @@ MonoBehaviour:
   _auraDamage: 20
   _auraPushForce: 25
   _auraPushCooldown: 0.5
+  pillars: []
   _rageDuration: 2
   _prechargeDuration: 2
-  _maxChargeDistance: 10
+  _maxChargeDistance: 20
   _stunDuration: 5
 --- !u!4 &1363099885631336440 stripped
 Transform:

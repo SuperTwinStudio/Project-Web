@@ -24,7 +24,7 @@ public class BeastBehaviour : EnemyBehaviour {
     [Header("States")]
     [SerializeField, Min(0)] private float _rageDuration = 2.0f;
     [SerializeField, Min(0)] private float _prechargeDuration = 2.0f;
-    [SerializeField, Min(0)] private float _maxChargeDistance = 10.0f;
+    [SerializeField, Min(0)] private float _maxChargeDistance = 20.0f;
     [SerializeField, Min(0)] private float _stunDuration = 5.0f;
 
     public float RageDuration => _rageDuration;
