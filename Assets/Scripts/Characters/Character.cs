@@ -100,6 +100,10 @@ public class Character : MonoBehaviour, IDamageable {
         transform.position = position;
     }
 
+    public virtual void Push(Vector3 direction) {
+        Debug.Log("Push not implemented");
+    }
+
     //Health
     private IEnumerator DamageFeedbackCoroutine() {
         OnDamageFeedbackStart();

@@ -98,6 +98,10 @@ public class EnemyBase : Character {
     }
 
     //Movement
+    public override void Push(Vector3 direction) {
+        Rigidbody.AddForce(direction, ForceMode.Impulse);
+    }
+
     public void StopMovement() {
         //Not on a navmesh
         if (!Agent.isOnNavMesh) return;
@@ -113,10 +117,6 @@ public class EnemyBase : Character {
         //Move towards position
         Agent.SetDestination(position);
         Agent.isStopped = false;
-    }
-
-    public void Push(Vector3 direction) {
-        Rigidbody.AddForce(direction, ForceMode.Impulse);
     }
 
     //Attack

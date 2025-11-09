@@ -51,8 +51,6 @@ MonoBehaviour:
   _top: {fileID: 794176676061406782}
   _eyes: {fileID: 1142675718610680985}
   _bot: {fileID: 1936036416147092579}
-  DamageMultiplier: 1
-  SpeedMultiplier: 1
   _level: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -60,12 +58,15 @@ MonoBehaviour:
   primaryAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   secondaryAction: {fileID: -1424028098101527299, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   reloadAction: {fileID: 8363650257003998890, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  testAction: {fileID: -4352797778555733023, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  dashAction: {fileID: 3545898801410580973, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   controller: {fileID: 3851105479952359991}
   _loadout: {fileID: 8538115829238214355}
   model: {fileID: 6960520357802286510}
   _animator: {fileID: 2393395648455993377}
   moveSpeed: 6.5
+  dashCooldown: 2.5
+  dashForce: 15
+  pushDeceleration: 50
   gramajeHealthPerLevel: 10
   rugosidadResistancePerLevel: 0.1
 --- !u!114 &8538115829238214355

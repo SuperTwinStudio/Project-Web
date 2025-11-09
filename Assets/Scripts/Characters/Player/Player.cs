@@ -27,7 +27,7 @@ public class Player : Character, ISavable {
     [SerializeField] private InputActionReference primaryAction;
     [SerializeField] private InputActionReference secondaryAction;
     [SerializeField] private InputActionReference reloadAction;
-    [SerializeField] private InputActionReference testAction;
+    [SerializeField] private InputActionReference dashAction;
 
     private Vector2 moveInput, lookInput;
     private readonly Timer primaryCoyote = new();
@@ -51,10 +51,15 @@ public class Player : Character, ISavable {
 
     //Movement
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 6.5f;
+    [SerializeField] private float dashCooldown = 2.5f;
+    [SerializeField] private float dashForce = 15f;
+    [SerializeField] private float pushDeceleration = 50f;
 
-    private bool isMoving;
+    private readonly Timer dashTimer = new();
     private Transform playerTransform;
+    private Vector3 pushVelocity;
+    private bool isMoving;
 
     //Controls
     private readonly HashSet<object> controlBlockers = new();
@@ -101,35 +106,9 @@ public class Player : Character, ISavable {
         //Player not controlled
         if (!IsControlled) return;
 
-        //Test (damage player)
-        if (testAction.Triggered()) Damage(10, this);
-
         //Check if switched to gamepad
         if (moveAction.action.activeControl != null) {
             isLastInputGamepad = moveAction.action.activeControl?.device is Gamepad;
-        }
-
-
-         /*$      /$$                              
-        | $$$    /$$$                              
-        | $$$$  /$$$$  /$$$$$$  /$$    /$$ /$$$$$$ 
-        | $$ $$/$$ $$ /$$__  $$|  $$  /$$//$$__  $$
-        | $$  $$$| $$| $$  \ $$ \  $$/$$/| $$$$$$$$
-        | $$\  $ | $$| $$  | $$  \  $$$/ | $$_____/
-        | $$ \/  | $$|  $$$$$$/   \  $/  |  $$$$$$$
-        |__/     |__/ \______/     \_/    \______*/
-
-        //Get move input
-        moveInput = moveAction.ReadValue<Vector2>();
-        isMoving = moveInput.sqrMagnitude > 0;
-
-        //Moving
-        if (isMoving) {
-            //Calculate move direction
-            Vector3 moveDirection = Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized;
-
-            //Move in move direction
-            controller.SimpleMove(moveSpeed * SpeedMultiplier * moveDirection);
         }
 
 
@@ -177,6 +156,38 @@ public class Player : Character, ISavable {
         }
 
 
+         /*$      /$$                              
+        | $$$    /$$$                              
+        | $$$$  /$$$$  /$$$$$$  /$$    /$$ /$$$$$$ 
+        | $$ $$/$$ $$ /$$__  $$|  $$  /$$//$$__  $$
+        | $$  $$$| $$| $$  \ $$ \  $$/$$/| $$$$$$$$
+        | $$\  $ | $$| $$  | $$  \  $$$/ | $$_____/
+        | $$ \/  | $$|  $$$$$$/   \  $/  |  $$$$$$$
+        |__/     |__/ \______/     \_/    \______*/
+
+        //Get move input
+        moveInput = moveAction.ReadValue<Vector2>();
+        isMoving = moveInput.sqrMagnitude > 0;
+
+        //Calculate move direction
+        Vector3 moveDirection = isMoving ? Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized : Vector3.zero;
+
+        //Check for dash
+        if (dashAction.Triggered() && !dashTimer.counting) {
+            //Start dash timer
+            dashTimer.Count(dashCooldown);
+
+            //Push player (dash)
+            Push(dashForce * (isMoving ? moveDirection : playerTransform.forward));
+        }
+    
+        //Move in move direction
+        controller.SimpleMove(moveSpeed * SpeedMultiplier * moveDirection + pushVelocity);
+
+        //Decrease push velocity
+        pushVelocity = Vector3.MoveTowards(pushVelocity, Vector3.zero, Time.deltaTime * pushDeceleration);
+
+
           /*$$$$$              /$$     /$$
          /$$__  $$            | $$    |__/
         | $$  \ $$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$   /$$$$$$$
@@ -215,6 +226,10 @@ public class Player : Character, ISavable {
         controller.enabled = false;
         transform.position = position;
         controller.enabled = true;
+    }
+
+    public override void Push(Vector3 direction) {
+        pushVelocity += direction;
     }
 
     private void StopMovement() {
