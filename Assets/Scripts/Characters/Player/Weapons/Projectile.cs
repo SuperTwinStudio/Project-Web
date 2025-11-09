@@ -38,8 +38,8 @@ public class Projectile : MonoBehaviour {
         if (other.isTrigger) return;
 
         //Ignore player/other
-        if (other.CompareTag("Player") == isPlayer) return;
-
+        if (other.CompareTag("Player") == isPlayer || other.CompareTag("Enemy") == !isPlayer) return;
+        
         //Check if damageable
         if (other.TryGetComponent(out IDamageable damageable)) {
             //Deal damage
