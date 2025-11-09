@@ -18,7 +18,7 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Instantiate(m_ItemPrefab, transform.position, Quaternion.identity).GetComponent<WorldItem>().SetItem(m_Item);
+            Instantiate(m_ItemPrefab, transform.position + (Vector3.up * 0.5f), m_ItemPrefab.transform.rotation).GetComponent<WorldItem>().SetItem(m_Item);
             Destroy(gameObject);
         }
     }

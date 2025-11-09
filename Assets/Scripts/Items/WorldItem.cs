@@ -10,6 +10,7 @@ public class WorldItem : MonoBehaviour {
     public void SetItem(Item item)
     {
         this.item = item;
+        GetComponent<MeshRenderer>().material.SetTexture("_MainTex", item.Icon.texture);
     }
 
     //State

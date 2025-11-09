@@ -34,7 +34,7 @@ MonoBehaviour:
   SecretRooms: []
   RareEnemyChance: 25
   FodderEnemies:
-  - {fileID: 2171775490227705875, guid: 4c62103ec50de544683ed6f39308c90c, type: 3}
+  - {fileID: 2171775490227705875, guid: a9379672591ffc34f917fae4f826a649, type: 3}
   RareEnemies:
   - {fileID: 2171775490227705875, guid: a9379672591ffc34f917fae4f826a649, type: 3}
   RareTreasureChance: 25
