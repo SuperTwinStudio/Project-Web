@@ -4,8 +4,8 @@ using UnityEngine;
 public class BeastRageState : EnemyState {
 
     //Rage
-    private const float DURATION = 2.0f;
     private Coroutine coroutine = null;
+    private const float DURATION = 2.0f;
 
 
     //Constructor

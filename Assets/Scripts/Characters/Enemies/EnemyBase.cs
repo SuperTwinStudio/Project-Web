@@ -41,7 +41,7 @@ public class EnemyBase : Character {
     public bool PlayerIsVisible { get; private set; }
     public float PlayerDistance { get; private set; }
     public Vector3 PlayerLastKnownPosition { get; private set; }
-    public bool UseAutomaticRotation { get; private set; }
+    public bool UseAutomaticRotation { get; private set; } = true;
 
     public NavMeshAgent Agent => _agent;
     public Rigidbody Rigidbody => _rigidbody;

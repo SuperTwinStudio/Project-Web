@@ -4,8 +4,8 @@ using UnityEngine;
 public class BeastPrechargeState : EnemyState {
 
     //Rage
-    private const float DURATION = 2.0f;
     private Coroutine coroutine = null;
+    private const float DURATION = 2.0f;
 
 
     //Constructor
@@ -28,7 +28,7 @@ public class BeastPrechargeState : EnemyState {
         if (coroutine != null) Enemy.StopCoroutine(coroutine);
     }
 
-    //Rage
+    //Charge
     private IEnumerator PrechargeCoroutine() {
         //Animate
         Debug.Log("LISTOS O NO, AYA VOY");
