@@ -71,6 +71,11 @@ public class Loadout : MonoBehaviour, ISavable {
         return true;
     }
 
+    public void AddGold(int amount) {
+        //Add gold
+        Gold += amount;
+    }
+
     //Inventory
     public void ClearInventory() {
         //Empty dictionary

@@ -1,14 +1,6 @@
 using UnityEngine;
 
-public class BeastChargeState : EnemyState {
-
-    //Components
-    private Transform transform;
-
-    //Charge
-    private Vector3 movePosition;
-    private const float SPEED = 5.0f;
-
+public class BeastChargeState : BeastState {
 
     //Constructor
     public BeastChargeState(EnemyBehaviour behaviour) : base(behaviour) {}
@@ -16,29 +8,39 @@ public class BeastChargeState : EnemyState {
     //Actions
     public override void OnEnter() {
         //Gather info
-        transform = Enemy.transform;
         CapsuleCollider capsule = Enemy.Collider as CapsuleCollider;
-        Vector3 capsuleStart = transform.position;
-        Vector3 capsuleEnd = transform.position + capsule.height * Vector3.up;
-        Vector3 forward = transform.forward;
-        float maxMoveDistance = 10f;
+        Vector3 capsuleStart = Enemy.Model.position;
+        Vector3 capsuleEnd = Enemy.Model.position + capsule.height * Vector3.up;
+        Vector3 forward = Enemy.Model.forward;
 
         //Check for max forward distance
-        bool hit = Physics.CapsuleCast(capsuleStart, capsuleEnd, capsule.radius, forward, out RaycastHit hitInfo, maxMoveDistance + capsule.radius, LayerMask.GetMask("Default"));
+        bool hit = Physics.CapsuleCast(capsuleStart, capsuleEnd, capsule.radius, forward, out RaycastHit hitInfo, Beast.MaxChargeDistance + capsule.radius, LayerMask.GetMask("Default"));
 
-        //Calculate move point
-        movePosition = hit ? 
-            capsuleStart + (hitInfo.distance - capsule.radius) * forward : //Hit something -> Move right before the hit
-            capsuleStart + maxMoveDistance * forward; //Didn't hit nothing -> Max distance possible
+        //Move to position
+        Enemy.MoveTowards(hit ? 
+            //Hit something -> Move right before the hit
+            capsuleStart + (hitInfo.distance - capsule.radius) * forward : 
+            //Didn't hit nothing -> Max distance possible
+            capsuleStart + Beast.MaxChargeDistance * forward
+        );
     }
 
     public override void Execute() {
-        //Move towards point
-        Vector3 newPosition = Vector3.MoveTowards(transform.position, movePosition, Time.deltaTime * SPEED);
-        Enemy.TeleportTo(newPosition);
+        //Aura check
+        base.Execute();
 
-        //Check if reached end
-        if (newPosition == movePosition) Behaviour.SetState(new BeastStunState(Behaviour), true);
+        //Does not have a path yet
+        if (Enemy.Agent.pathPending) return;
+
+        //Check distance
+        if (Enemy.Agent.remainingDistance <= 0.1f) {
+            //Reached destination -> Go to stunned state
+            Enemy.StopMovement();
+            Behaviour.SetState(new BeastStunState(Behaviour), true);
+        } else {
+            //Moving -> Update trigger
+            
+        }
     }
 
 }

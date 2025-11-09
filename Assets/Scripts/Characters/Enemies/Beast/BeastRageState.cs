@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class BeastRageState : EnemyState {
+public class BeastRageState : BeastState {
 
     //Rage
     private Coroutine coroutine = null;
-    private const float DURATION = 2.0f;
 
 
     //Constructor
@@ -25,13 +24,13 @@ public class BeastRageState : EnemyState {
     //Rage
     private IEnumerator RageCoroutine() {
         //Shake screen
-        Enemy.Player.CameraController.AddShake(DURATION);
+        Enemy.Player.CameraController.AddShake(Beast.RageDuration);
 
         //Animate
         Debug.Log("ESTOY TO ENFADAOO");
 
         //Wait
-        yield return new WaitForSeconds(DURATION);
+        yield return new WaitForSeconds(Beast.RageDuration);
 
         //Go start charging
         Behaviour.SetState(new BeastPrechargeState(Behaviour), true);

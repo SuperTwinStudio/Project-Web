@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class BeastPrechargeState : EnemyState {
+public class BeastPrechargeState : BeastState {
 
     //Rage
     private Coroutine coroutine = null;
-    private const float DURATION = 2.0f;
 
 
     //Constructor
@@ -34,7 +33,7 @@ public class BeastPrechargeState : EnemyState {
         Debug.Log("LISTOS O NO, AYA VOY");
 
         //Wait
-        yield return new WaitForSeconds(DURATION);
+        yield return new WaitForSeconds(Beast.PrechargeDuration);
 
         //Go start charging
         Behaviour.SetState(new BeastChargeState(Behaviour), true);

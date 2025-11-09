@@ -58,6 +58,9 @@ public class EnemyBase : Character {
         //Save player reference
         Player = Game.Current.Level.Player;
 
+        //Heal to max health
+        Heal(HealthMax);
+
         //Update effects
         OnEffectsUpdated();
     
