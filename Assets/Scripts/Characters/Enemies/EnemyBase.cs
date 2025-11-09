@@ -41,6 +41,7 @@ public class EnemyBase : Character {
     public bool PlayerIsVisible { get; private set; }
     public float PlayerDistance { get; private set; }
     public Vector3 PlayerLastKnownPosition { get; private set; }
+    public bool UseAutomaticRotation { get; private set; }
 
     public NavMeshAgent Agent => _agent;
     public Rigidbody Rigidbody => _rigidbody;
@@ -75,8 +76,10 @@ public class EnemyBase : Character {
         Behaviour.OnUpdate();
 
         //Rotate model
-        Vector3 lookDirection = PlayerIsVisible ? (PlayerLastKnownPosition - transform.position) : Agent.desiredVelocity;
-        if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * 1000);
+        if (UseAutomaticRotation) {
+            Vector3 lookDirection = PlayerIsVisible ? (PlayerLastKnownPosition - transform.position) : Agent.desiredVelocity;
+            if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * 500);
+        }
     }
 
     public void SetEnabled(bool enabled) {
@@ -117,6 +120,10 @@ public class EnemyBase : Character {
         //Move towards position
         Agent.SetDestination(position);
         Agent.isStopped = false;
+    }
+
+    public void SetAutomaticRotation(bool automaticRotation) {
+        UseAutomaticRotation = automaticRotation;
     }
 
     //Attack
@@ -188,6 +195,9 @@ public class EnemyBase : Character {
     }
 
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
+        //Check if damage is allowed
+        amount = Behaviour.OnBeforeDamage(amount, source, type);
+
         //Damage
         bool damaged = base.Damage(amount, source, type);
 

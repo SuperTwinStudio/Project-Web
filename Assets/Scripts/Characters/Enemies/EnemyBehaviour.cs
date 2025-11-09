@@ -47,6 +47,11 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     //Health
+    public virtual float OnBeforeDamage(float amount, object source, DamageType type = DamageType.None) {
+        //Before the enemy was damaged
+        return amount;
+    }
+
     public virtual void OnDamage() {
         //Enemy was damaged
     }

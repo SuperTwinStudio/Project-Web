@@ -252,6 +252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 2171775490227705875, guid: a9379672591ffc34f917fae4f826a649, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7711825781590031116, guid: a9379672591ffc34f917fae4f826a649, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -361,7 +365,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 215aa42d6ef69cf488b710eebd0453a1, type: 2}
+  - {fileID: 2100000, guid: 00b0a0107647b5e4b9a7d1454c7fadec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
