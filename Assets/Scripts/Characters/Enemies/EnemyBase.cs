@@ -178,8 +178,15 @@ public class EnemyBase : Character {
         return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
     }
 
-    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
+    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null)
+    {
         return DamageHits(AttackAroundCheck(radius), damage, onHit);
+    }
+    
+    protected Projectile SpawnProjectile(GameObject prefab, float damage, Transform origin = null) {
+        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation).GetComponent<Projectile>();
+        projectile.Init(this, CalculateDamage(damage));
+        return projectile;
     }
 
     //Health
