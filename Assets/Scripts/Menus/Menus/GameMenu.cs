@@ -61,6 +61,10 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDesc;
 
+    //Minimap
+    [Header("Minimap")]
+    [SerializeField] private GameObject minimapCamera;
+    [SerializeField] private GameObject minimap;
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -85,6 +89,11 @@ public class GameMenu : Menu {
         if (pauseAction.Triggered()) MenuManager.Open(MenusList.Settings);
         //Open inventory
         else if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
+
+        //Move minimap camera
+        Vector3 playerPos = Player.transform.position;
+        playerPos.y = 100;
+        minimapCamera.transform.position = playerPos;
     }
 
     public override bool OnBack() {
@@ -216,6 +225,9 @@ public class GameMenu : Menu {
 
         //Add item obtain event
         Player.Loadout.AddOnObtainItem(OnObtainItem);
+
+        //Disable minimap when in lobby
+        if (Level.IsLobby) minimap.SetActive(false);
     }
 
     protected override void OnClose() {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    [Header("Attributes")]
     [SerializeField] private GameObject[] m_Doors;
     [SerializeField, Range(0, 1)] private int m_ShowActiveDoors;
     [Space]
@@ -17,6 +18,12 @@ public class Room : MonoBehaviour
     [SerializeField] private bool m_BossRoom;
     [SerializeField] private GameObject m_BossObject;
     [SerializeField] private GameObject m_Elevator;
+
+    [Header("Minimap")]
+    [SerializeField] private GameObject m_MinimapUnvisited;
+    [SerializeField] private GameObject m_MinimapVisited;
+    [Space]
+    [SerializeField] private GameObject[] m_MinimapDoors;
 
     private int m_Flags;
     private Transform m_GeometryTransform = null;
@@ -86,6 +93,7 @@ public class Room : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             m_Doors[i].SetActive(((flags >> i) & 0b1) == m_ShowActiveDoors);
+            m_MinimapDoors[i].SetActive(((flags >> i) & 0b1) == 0);
 
             if (m_ShowDoorSigns)
             {
@@ -134,6 +142,14 @@ public class Room : MonoBehaviour
         {
             m_Size = 0;
             m_GeometryTransform.localScale = Vector3.one * m_Size;
+
+            m_MinimapUnvisited.SetActive(true);
+            m_MinimapVisited.SetActive(false);
+        }
+        else
+        {
+            m_MinimapUnvisited.SetActive(false);
+            m_MinimapVisited.SetActive(true);
         }
 
     }
@@ -143,6 +159,9 @@ public class Room : MonoBehaviour
         m_GeometryTransform.gameObject.SetActive(true);
         m_Faded = false;
         m_FadeTrigger = false;
+
+        m_MinimapUnvisited.SetActive(false);
+        m_MinimapVisited.SetActive(true);
 
         //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again)
         foreach (var enemy in m_enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
