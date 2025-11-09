@@ -107,7 +107,7 @@ public class WeaponAbanico : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Push enemies back
-        MeleeForward(
+        AttackForward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,

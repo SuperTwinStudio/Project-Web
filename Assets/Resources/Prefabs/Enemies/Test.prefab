@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5765300369353771717}
   - component: {fileID: 6306209005496088998}
   - component: {fileID: 37854629741742818}
+  - component: {fileID: 5821451503687727204}
   m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
@@ -86,6 +87,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &5821451503687727204
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2442523083390986777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f453548cca4b9c4b9e6da66bf242b34, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3293415959875675893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,7 +124,7 @@ PrefabInstance:
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: _behaviour
       value: 
-      objectReference: {fileID: 3527744844647968253}
+      objectReference: {fileID: 8301651731475935439}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Name
       value: Test
@@ -154,8 +177,8 @@ PrefabInstance:
       addedObject: {fileID: 5765300369353771717}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 3527744844647968253}
+      insertIndex: -1
+      addedObject: {fileID: 8301651731475935439}
   m_SourcePrefab: {fileID: 100100000, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
 --- !u!4 &842202375143149454 stripped
 Transform:
@@ -167,7 +190,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
   m_PrefabInstance: {fileID: 3293415959875675893}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3527744844647968253
+--- !u!114 &8301651731475935439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,18 +199,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2171775490227705875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751462345d7e301408c4ee74037780ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 3362959691692423892}
---- !u!114 &3362959691692423892 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
-  m_PrefabInstance: {fileID: 3293415959875675893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2171775490227705875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8800df346420314bbf53bc1e973bcff, type: 3}
+  m_Script: {fileID: 11500000, guid: 101ab599fd71326419fa3b3f4cd56ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

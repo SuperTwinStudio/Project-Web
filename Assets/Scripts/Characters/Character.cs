@@ -17,8 +17,6 @@ public class Character : MonoBehaviour, IDamageable {
     public Transform Bot => _bot;
 
     //Health
-    [SerializeField] protected float _maxHealth = DEFAULT_HEALTH_MAX;
-
     private event Action<float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
@@ -27,7 +25,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     public bool IsAlive { get; set; } = true;
     public float Health { get; protected set; } = DEFAULT_HEALTH_MAX;
-    public virtual float HealthMax => _maxHealth + EffectExtraHealth;
+    public virtual float HealthMax => DEFAULT_HEALTH_MAX + EffectExtraHealth;
 
     public const float DEFAULT_HEALTH_MAX = 100;
 
@@ -233,7 +231,7 @@ public class Character : MonoBehaviour, IDamageable {
                     break;
                 //Fastness (fast movement)
                 case EffectType.Fastness:
-                    EffectFastSpeedMultiplier += value; //Take value as speed percentaje
+                    EffectFastSpeedMultiplier += Mathf.Max(0, value); //Take value as speed percentaje
                     break;
                 //Weakness (take more damage)
                 case EffectType.Weakness:

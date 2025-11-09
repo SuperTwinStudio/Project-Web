@@ -65,7 +65,7 @@ public class WeaponSword : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack
-        MeleeForward(
+        AttackForward(
             primaryAttackSphereCast.x,
             primaryAttackSphereCast.y,
             PrimaryDamage + (isPassiveHit ? PassiveDamage : 0)
@@ -96,7 +96,7 @@ public class WeaponSword : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Attack
-        MeleeAround(
+        AttackAround(
             secondarySpinRadius,
             SecondaryDamage
         );

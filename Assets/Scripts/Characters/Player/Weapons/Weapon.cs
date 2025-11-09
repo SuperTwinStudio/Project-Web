@@ -275,6 +275,9 @@ public class Weapon : MonoBehaviour {
 
     //Actions
     private bool DamageHits(RaycastHit[] hits, float damage, Action<IDamageable> onHit = null) {
+        //Calculate damage
+        damage = CalculateDamage(damage);
+
         //Bool to check if anything was hit
         bool somethingHit = false;
 
@@ -301,7 +304,7 @@ public class Weapon : MonoBehaviour {
         return somethingHit;
     }
 
-    protected RaycastHit[] MeleeForwardCheck(float radius, float forward) {
+    protected RaycastHit[] AttackForwardCheck(float radius, float forward) {
         //Get forward direction
         Vector3 forwardDirection = transform.forward;
 
@@ -309,17 +312,17 @@ public class Weapon : MonoBehaviour {
         return Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
     }
 
-    protected RaycastHit[] MeleeAroundCheck(float radius) {
+    protected RaycastHit[] AttackAroundCheck(float radius) {
         //Casts a sphere of <radius> radius around the player
         return Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
     }
 
-    protected bool MeleeForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(MeleeForwardCheck(radius, forward), CalculateDamage(damage), onHit);
+    protected bool AttackForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
     }
 
-    protected bool MeleeAround(float radius, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(MeleeAroundCheck(radius), CalculateDamage(damage), onHit);
+    protected bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackAroundCheck(radius), damage, onHit);
     }
 
     protected Projectile SpawnProjectile(GameObject prefab, float damage, Transform origin = null) {

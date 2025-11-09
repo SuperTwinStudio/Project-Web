@@ -1,3 +1,4 @@
+using System;
 using Botpa;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,15 +6,15 @@ using UnityEngine.AI;
 public class EnemyBase : Character {
 
     //Player
-    public Player Player { get; protected set; }
+    public Player Player { get; private set; }
 
     //Components
     [Header("Components")]
-    [SerializeField] protected EnemyBehaviour _behaviour;
-    [SerializeField] protected Collider _collider;
-    [SerializeField] protected Transform _model;
-    [SerializeField] protected Animator _animator;
-    [SerializeField] protected Renderer _renderer;
+    [SerializeField] private EnemyBehaviour _behaviour;
+    [SerializeField] private Collider _collider;
+    [SerializeField] private Transform _model;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Renderer _renderer;
 
     public bool IsEnabled { get; private set; } = true;
 
@@ -23,38 +24,44 @@ public class EnemyBase : Character {
     public Animator Animator => _animator;
     public Renderer Renderer => _renderer;
 
+    //Health
+    [Header("Health")]
+    [SerializeField] private float _maxhealth = DEFAULT_HEALTH_MAX;
+    [SerializeField] private GameObject damageIndicatorPrefab;
+
+    public override float HealthMax => _maxhealth + EffectExtraHealth;
+
     //Movement
     [Header("Movement")]
-    [SerializeField] protected NavMeshAgent _agent;
-    [SerializeField] protected Rigidbody _rigidbody;
-    [SerializeField] protected float moveSpeed = 3;
-    [SerializeField] protected float viewDistance = 5;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private float moveSpeed = 3;
+    [SerializeField] private float viewDistance = 5;
 
-    public bool PlayerIsVisible { get; protected set; }
-    public float PlayerDistance { get; protected set; }
-    public Vector3 PlayerLastKnownPosition { get; protected set; }
+    public bool PlayerIsVisible { get; private set; }
+    public float PlayerDistance { get; private set; }
+    public Vector3 PlayerLastKnownPosition { get; private set; }
 
     public NavMeshAgent Agent => _agent;
     public Rigidbody Rigidbody => _rigidbody;
 
-    //Feedback
-    [Header("Feedback")]
-    [SerializeField] protected GameObject damageIndicatorPrefab;
-
     //Room
-    public Room Room { get; protected set; } = null;
+    public Room Room { get; private set; } = null;
 
 
     //State
-    protected virtual void Start() {
+    private void Start() {
+        //Check for missing behaviour
+        if (!Behaviour) _behaviour = GetComponent<EnemyBehaviour>();
+
         //Save player reference
         Player = Game.Current.Level.Player;
 
         //Update effects
         OnEffectsUpdated();
     
-        //Call behaviour event
-        Behaviour.OnStart();
+        //Init behaviour
+        Behaviour.Init(this);
     }
 
     protected override void OnUpdate() {
@@ -68,8 +75,8 @@ public class EnemyBase : Character {
         Behaviour.OnUpdate();
 
         //Rotate model
-        Vector3 lookDirection = Agent.desiredVelocity;
-        if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.LookRotation(lookDirection.normalized, Vector3.up);
+        Vector3 lookDirection = PlayerIsVisible ? (PlayerLastKnownPosition - transform.position) : Agent.desiredVelocity;
+        if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * 1000);
     }
 
     public void SetEnabled(bool enabled) {
@@ -110,6 +117,59 @@ public class EnemyBase : Character {
 
     public void Push(Vector3 direction) {
         Rigidbody.AddForce(direction, ForceMode.Impulse);
+    }
+
+    //Attack
+    private bool DamageHits(RaycastHit[] hits, float damage, Action<IDamageable> onHit = null) {
+        //Calculate damage
+        damage = CalculateDamage(damage);
+
+        //Bool to check if anything was hit
+        bool somethingHit = false;
+
+        //Check hits
+        foreach (var hit in hits) {
+            //Check if collision is a damageable
+            if (!hit.collider.TryGetComponent(out IDamageable damageable)) continue;
+
+            //Ignore enemies
+            if (damageable is EnemyBase) continue;
+
+            //Damage
+            if (damage > 0) damageable.Damage(damage, this, DamageType.Melee);
+
+            //Mark as hit
+            onHit?.Invoke(damageable);
+            somethingHit = true;
+        }
+
+        //Return if anything was hit
+        return somethingHit;
+    }
+
+    private float CalculateDamage(float damage) {
+        return damage * Player.EffectDamageDealtMultiplier;
+    }
+
+    private RaycastHit[] AttackForwardCheck(float radius, float forward) {
+        //Get forward direction
+        Vector3 forwardDirection = Model.forward;
+
+        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
+        return Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
+    }
+
+    private RaycastHit[] AttackAroundCheck(float radius) {
+        //Casts a sphere of <radius> radius around the player
+        return Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
+    }
+
+    public bool AttackForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
+    }
+
+    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackAroundCheck(radius), damage, onHit);
     }
 
     //Health

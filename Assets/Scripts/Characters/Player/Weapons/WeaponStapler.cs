@@ -100,7 +100,7 @@ public class WeaponStapler : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack melee (passive)
-        bool hit = MeleeForward(
+        bool hit = AttackForward(
             passiveAttackSphereCast.x, 
             passiveAttackSphereCast.y,
             PassiveDamage

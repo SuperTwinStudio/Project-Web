@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5495191504116420431}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 477687261881235934}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5219902595676972824}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,10 +105,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5093985615932988921}
-  - component: {fileID: 224953861418605601}
   - component: {fileID: 2354158519484372618}
   - component: {fileID: 4960207987092544457}
   - component: {fileID: 5988547702214694839}
+  - component: {fileID: 224953861418605601}
   m_Layer: 7
   m_Name: Base
   m_TagString: Enemy
@@ -133,32 +133,6 @@ Transform:
   - {fileID: 2739467051366623611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &224953861418605601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3717477471731449574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8800df346420314bbf53bc1e973bcff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _top: {fileID: 5219902595676972824}
-  _eyes: {fileID: 1764233524365519611}
-  _bot: {fileID: 5495191504116420431}
-  _behaviour: {fileID: 0}
-  _collider: {fileID: 2354158519484372618}
-  _model: {fileID: 2739467051366623611}
-  _animator: {fileID: 0}
-  _renderer: {fileID: 0}
-  _agent: {fileID: 4960207987092544457}
-  _rigidbody: {fileID: 5988547702214694839}
-  moveSpeed: 3
-  viewDistance: 10
-  damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
-  _maxHealth: 100
 --- !u!136 &2354158519484372618
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -231,6 +205,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &224953861418605601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717477471731449574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8800df346420314bbf53bc1e973bcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _top: {fileID: 5219902595676972824}
+  _eyes: {fileID: 1764233524365519611}
+  _bot: {fileID: 5495191504116420431}
+  _maxHealth: 100
+  _behaviour: {fileID: 0}
+  _collider: {fileID: 2354158519484372618}
+  _model: {fileID: 2739467051366623611}
+  _animator: {fileID: 0}
+  _renderer: {fileID: 0}
+  _agent: {fileID: 4960207987092544457}
+  _rigidbody: {fileID: 5988547702214694839}
+  moveSpeed: 3
+  viewDistance: 10
+  damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
 --- !u!1 &7812867994057174218
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1764233524365519611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

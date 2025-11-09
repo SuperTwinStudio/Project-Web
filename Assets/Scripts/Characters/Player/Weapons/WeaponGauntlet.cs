@@ -59,7 +59,7 @@ public class WeaponGauntlet : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack
-        MeleeForward(
+        AttackForward(
             primaryAttackSphereCast.x,
             primaryAttackSphereCast.y,
             0,
@@ -85,7 +85,7 @@ public class WeaponGauntlet : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Attack
-        MeleeForward(
+        AttackForward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,

@@ -69,7 +69,7 @@ public class WeaponMatch : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack
-        MeleeForward(
+        AttackForward(
             primaryAttackSphereCast.x, 
             primaryAttackSphereCast.y,
             PrimaryDamage,
@@ -100,7 +100,7 @@ public class WeaponMatch : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Attack
-        MeleeAround(
+        AttackAround(
             secondaryRadius,
             0, 
             (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
