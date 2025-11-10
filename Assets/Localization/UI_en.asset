@@ -233,12 +233,10 @@ MonoBehaviour:
   - m_Id: 14865746547838976
     m_Localized: 'You unlocked a new weapon: <weapon>.
 
-      
 
-      You have
-      <gold> and treasures valued in <treasures>. You can exit and keep your inventory
-      or continue to a more difficult dungeon and risk loosing your treasures and
-      half your gold.'
+      You have <gold> and
+      treasures valued in <treasures>. You can exit and keep your inventory or continue
+      to a more difficult dungeon and risk loosing your treasures and half your gold.'
     m_Metadata:
       m_Items: []
   references:
