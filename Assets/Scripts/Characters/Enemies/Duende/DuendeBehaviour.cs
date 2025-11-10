@@ -13,6 +13,8 @@ public class DuendeBehaviour : EnemyBehaviour
     [SerializeField] public float spearDamage = 10;
     [SerializeField] public float spearCoolDown = 2f;
 
+    public bool onAttackCooldown = false;
+
     //Init
     protected override void OnInit() {
         //Start in idle state
@@ -28,15 +30,25 @@ public class DuendeBehaviour : EnemyBehaviour
         SetState(new SimpleDeathState(this));
     }
 
+    public void Attack()
+    {
+        onAttackCooldown = true;
+        Enemy.Animator.SetTrigger("Attack");    //The actual attack is triggered within the animation
+    }
+
     public void ThrowSpear()
     {
         Enemy.SpawnProjectile(projectile, spearDamage, hand);
     }
 
+    public void ResetAttackCooldown()
+    {
+        onAttackCooldown = false;
+    }
 
     private void OnDrawGizmosSelected()
     {
-       
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, minAttackRange);
         Gizmos.color = Color.yellow;

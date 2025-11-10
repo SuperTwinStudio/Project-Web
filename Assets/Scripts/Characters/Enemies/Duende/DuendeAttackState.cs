@@ -16,8 +16,8 @@ public class DuendeAttackState : DuendeState {
         //Stop moving
         Enemy.StopMovement();
 
-        //Start coroutine
-        attackCoroutine = Enemy.StartCoroutine(AttackCoroutine());
+        //Attack
+        Duende.Attack();
     }
 
     public override void OnExit()
@@ -27,13 +27,9 @@ public class DuendeAttackState : DuendeState {
     }
 
     //Attack
-    private IEnumerator AttackCoroutine() {
-        //Animate
-        Enemy.Animator.SetTrigger("Attack");
-        Duende.ThrowSpear();
-        
-        //Wait
-        yield return new WaitForSeconds(Duende.spearCoolDown);
+    public override void Execute()
+    {
+        if (Duende.onAttackCooldown) return;
 
         if (Enemy.PlayerDistance < Duende.evadeRange)
         {
@@ -41,15 +37,14 @@ public class DuendeAttackState : DuendeState {
             Duende.SetState(new DuendeEvadeState(Duende));
         }else if(Enemy.PlayerDistance < Duende.maxAttackRange)
         {
-            //Aun en rango -> Sigue atacando
-            attackCoroutine = Enemy.StartCoroutine(AttackCoroutine());
+            //Attack
+            Duende.Attack();
         }
         else
         {
             //Player fuera de rango -> siguele
             Duende.SetState(new DuendeFollowState(Duende));
         }
-        
     }
 
 }
