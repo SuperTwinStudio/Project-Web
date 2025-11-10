@@ -192,6 +192,10 @@ public class Character : MonoBehaviour, IDamageable {
 
     protected virtual void OnDeath() {}
 
+    protected void CallOnHealthChanged() {
+        OnHealthChanged?.Invoke(Health);
+    }
+
     public void AddOnHealthChanged(Action<float> action) {
         OnHealthChanged += action;
     }

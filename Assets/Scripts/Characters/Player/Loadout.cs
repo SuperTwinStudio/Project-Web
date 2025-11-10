@@ -29,9 +29,11 @@ public class Loadout : MonoBehaviour, ISavable {
 
     //Weapons
     [Header("Weapon")]
-    [SerializeField] private List<Weapon> weapons = new();
+    [SerializeField] private List<Weapon> _weapons = new();
 
     private event ClassChanged OnWeaponChanged;
+
+    public IReadOnlyList<Weapon> Weapons => _weapons;
 
     public Weapon CurrentWeapon { get; private set; }
 
@@ -55,7 +57,7 @@ public class Loadout : MonoBehaviour, ISavable {
     //State
     private void Awake() {
         //Unlock first weapon
-        if (Unlocked.IsEmpty()) UnlockWeapon(weapons[0].Item);
+        if (Unlocked.IsEmpty()) UnlockWeapon(Weapons[0].Item);
 
         //Select weapon if none selected
         if (!CurrentWeapon) SelectWeapon(Unlocked.First());
@@ -113,7 +115,7 @@ public class Loadout : MonoBehaviour, ISavable {
 
     //Weapons
     public Weapon GetWeapon(Item item) {
-        foreach (var weapon in weapons) {
+        foreach (var weapon in Weapons) {
             //Check weapon item
             if (weapon.Item != item) continue;
 
@@ -208,7 +210,7 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     public void UnlockAllWeapons() {
-        foreach (var weapon in weapons) UnlockWeapon(weapon.Item);
+        foreach (var weapon in Weapons) UnlockWeapon(weapon.Item);
     }
 
     //Weapon upgrades

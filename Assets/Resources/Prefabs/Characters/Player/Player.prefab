@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 468255279070448659}
-  weapons:
+  _weapons:
   - {fileID: 6276396774210786200}
   - {fileID: 3499355174417952672}
   - {fileID: 7252970620708159940}

@@ -1034,11 +1034,20 @@ MonoBehaviour:
   _state: 0
   defaultSelectable: {fileID: 5170607534995641289}
   infoText: {fileID: 5172877314712880318}
-  infoLocale:
+  infoDefaultLocale:
     m_TableReference:
       m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
     m_TableEntryReference:
       m_KeyId: 13722598425628672
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  infoWeaponLocale:
+    m_TableReference:
+      m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+    m_TableEntryReference:
+      m_KeyId: 14865746547838976
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

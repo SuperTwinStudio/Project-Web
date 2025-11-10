@@ -215,22 +215,30 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13722598425628672
+    m_Localized: You have <gold> and treasures valued in <treasures>. You can exit
+      and keep your inventory or continue to a more difficult dungeon and risk loosing
+      your treasures and half your gold.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13737919144398848
     m_Localized: 'You inventory has <gold> and treasures valued in <treasures>.
 
 
 
       You
-      can continue to a more difficult dungeon and risk loosing all of your treasures
-      and half your gold, or exit to keep it all.'
+      can exit and keep your inventory or continue to a more difficult dungeon and
+      risk loosing all.'
     m_Metadata:
       m_Items: []
-  - m_Id: 13737919144398848
-    m_Localized: 'You couldn''t save your brother...
+  - m_Id: 14865746547838976
+    m_Localized: 'You unlocked a new weapon: <weapon>.
 
+      
 
-
-      While fleeing, all
-      of your treasures and half of your gold fell to the ground.'
+      You have
+      <gold> and treasures valued in <treasures>. You can exit and keep your inventory
+      or continue to a more difficult dungeon and risk loosing your treasures and
+      half your gold.'
     m_Metadata:
       m_Items: []
   references:

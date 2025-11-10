@@ -212,11 +212,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13722598425628672
-    m_Key: end_info
+    m_Key: end_info_default
     m_Metadata:
       m_Items: []
   - m_Id: 13737919144398848
     m_Key: death_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14865746547838976
+    m_Key: end_info_weapon
     m_Metadata:
       m_Items: []
   m_Metadata:

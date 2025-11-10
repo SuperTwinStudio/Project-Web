@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -8,10 +10,14 @@ public class EndMenu : Menu {
     //Prefab
     public override string Name => MenusList.End;
 
+    //Components
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
     [SerializeField] private TMP_Text infoText;
-    [SerializeField] private LocalizedString infoLocale;
+    [SerializeField] private LocalizedString infoDefaultLocale;
+    [SerializeField] private LocalizedString infoWeaponLocale;
+
+    private Loadout Loadout => Player.Loadout;
 
 
       /*$$$$$   /$$                 /$$
@@ -67,12 +73,40 @@ public class EndMenu : Menu {
         //Select default button (for controller navigation)
         defaultSelectable.Select();
 
-        //Update text
-        infoText.SetText(
-            infoLocale.GetLocalizedString()
-                .Replace("<gold>", $"{Player.Loadout.Gold}G")
-                .Replace("<treasures>", $"{Player.Loadout.InventoryValue}G")
-        );
+        //Get non unlocked weapon items
+        List<Item> items = new();
+        foreach (var weapon in Loadout.Weapons) {
+            //Get item
+            Item item = weapon.Item;
+
+            //Check if is already unlocked
+            if (Loadout.Unlocked.Contains(item)) continue;
+
+            //Not unlocked -> Add to list
+            items.Add(weapon.Item);
+        }
+
+        //Check if a weapon can be unlocked
+        if (items.Count == 0) {
+            //Update text
+            infoText.SetText(
+                infoDefaultLocale.GetLocalizedString()
+                    .Replace("<gold>", $"{Loadout.Gold}G")
+                    .Replace("<treasures>", $"{Loadout.InventoryValue}G")
+            );
+        } else {
+            //Unlock weapon
+            Item item = items[Random.Range(0, items.Count)];
+            Loadout.UnlockWeapon(item);
+
+            //Update text
+            infoText.SetText(
+                infoWeaponLocale.GetLocalizedString()
+                    .Replace("<weapon>", item.Name)
+                    .Replace("<gold>", $"{Loadout.Gold}G")
+                    .Replace("<treasures>", $"{Loadout.InventoryValue}G")
+            );
+        }
 
         //Pause game
         Game.Pause(this);

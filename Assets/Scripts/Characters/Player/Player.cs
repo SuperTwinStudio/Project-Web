@@ -85,10 +85,6 @@ public class Player : Character, ISavable {
         cameraTransform = CameraController.Camera.transform;
         playerTransform = transform;
 
-        //Refresh upgrade levels
-        GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
-        RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
-
         //Events
         Game.AddOnLoadingChanged(OnGameLoadingChanged);
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
@@ -347,13 +343,10 @@ public class Player : Character, ISavable {
     //Saving
     public string OnSave() {
         return JsonUtility.ToJson(new PlayerSave() {
-            //Health
-            health = Health,
-            //Upgrades
-            levelGramaje = GramajeUpgrade.Level,
-            levelRugosidad = RugosidadUpgrade.Level,
             //Loadout
-            loadout = Loadout.OnSave()
+            loadout = Loadout.OnSave(),
+            //Health
+            health = Health
         });
     }
 
@@ -361,29 +354,26 @@ public class Player : Character, ISavable {
         //Parse save
         var save = JsonUtility.FromJson<PlayerSave>(saveJson);
 
-        //Load health
-        Health = Level.IsLobby ? HealthMax : save.health;
-
-        //Load upgrades
-        GramajeUpgrade.SetLevel(save.levelGramaje);
-        RugosidadUpgrade.SetLevel(save.levelRugosidad);
-
         //Load loadout
         Loadout.OnLoad(save.loadout);
+
+        //Load upgrades
+        GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
+        RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
+
+        //Load health
+        Health = Level.IsLobby ? HealthMax : save.health;
+        CallOnHealthChanged();
     }
 
     [Serializable]
     private class PlayerSave {
 
-        //Health
-        public float health = DEFAULT_HEALTH_MAX;
-
-        //Upgrades
-        public int levelGramaje = 1;
-        public int levelRugosidad = 1;
-
         //Loadout
         public string loadout = "{}";
+
+        //Health
+        public float health = DEFAULT_HEALTH_MAX;
 
     }
 }
