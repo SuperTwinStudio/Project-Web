@@ -11,8 +11,9 @@ public class Projectile : MonoBehaviour {
 
     //Projectile
     [Header("Projectile")]
-    [SerializeField] private bool destroyOnHit = true;
     [SerializeField] private bool isPlayer = true;
+    [SerializeField] private bool destroyOnDamage = true;
+    [SerializeField] private bool destroyOnWallHit = true;
     [SerializeField] private float speed = 20;
     [SerializeField] private float damage = 25;
 
@@ -29,7 +30,7 @@ public class Projectile : MonoBehaviour {
         //Save origin
         this.source = source;
 
-        //Update damage
+        //Update damage (optional value)
         if (damage > 0) this.damage = damage;
     }
 
@@ -37,19 +38,24 @@ public class Projectile : MonoBehaviour {
         //Collided with trigger
         if (other.isTrigger) return;
 
-        //Ignore player/other
-        if (other.CompareTag("Player") == isPlayer || other.CompareTag("Enemy") == !isPlayer) return;
-        
+        //Ignore certain targets (player hits everything except player, enemies only hit player)
+        if (isPlayer == other.CompareTag("Player")) return;
+
         //Check if damageable
         if (other.TryGetComponent(out IDamageable damageable)) {
             //Deal damage
-            if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
             damageable.Damage(damage, source, DamageType.Ranged);
-            OnHit?.Invoke(damageable);
-        }
+            if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
 
-        //Destroy self
-        if (destroyOnHit) Destroy(gameObject);
+            //Call on hit event
+            OnHit?.Invoke(damageable);
+
+            //Check if should destroy self
+            if (destroyOnDamage) Destroy(gameObject);
+        } else {
+            //Check if should destroy self
+            if (destroyOnWallHit) Destroy(gameObject);
+        }
     }
 
     //Events

@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033048085151353711}
+  - component: {fileID: 837048495078134411}
   - component: {fileID: 921343144809111436}
   - component: {fileID: 3986777226150757125}
   - component: {fileID: 7926148660051566330}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet (Aire)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,6 +36,29 @@ Transform:
   - {fileID: 2248582425191457792}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &837048495078134411
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421915764250194293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &921343144809111436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,8 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 921343144809111436}
-  destroyOnHit: 0
   isPlayer: 1
+  destroyOnDamage: 0
+  destroyOnWallHit: 0
   speed: 20
   damage: 15
 --- !u!114 &7926148660051566330
@@ -106,8 +131,7 @@ GameObject:
   - component: {fileID: 2248582425191457792}
   - component: {fileID: 2717090434560098964}
   - component: {fileID: 364886617730448372}
-  - component: {fileID: 1523418499964944044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,26 +206,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1523418499964944044
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8480762698771587786}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

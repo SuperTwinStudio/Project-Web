@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033048085151353711}
+  - component: {fileID: 2256003350544138301}
   - component: {fileID: 921343144809111436}
   - component: {fileID: 3986777226150757125}
   - component: {fileID: 7926148660051566330}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet (Grapa)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,6 +36,27 @@ Transform:
   - {fileID: 8393260576258640394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2256003350544138301
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421915764250194293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &921343144809111436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 921343144809111436}
-  destroyOnHit: 1
   isPlayer: 1
+  destroyOnDamage: 1
+  destroyOnWallHit: 1
   speed: 20
   damage: 25
 --- !u!114 &7926148660051566330
@@ -117,11 +140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.007
+      value: -0.0118
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.003
+      value: -0.2913
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
       propertyPath: m_LocalPosition.z
@@ -167,42 +190,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7323966404150228286}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
 --- !u!4 &8393260576258640394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
   m_PrefabInstance: {fileID: 8354286689468984801}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9165118445319065776 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a9e101570aeea074a9cf02a50c799b92, type: 3}
-  m_PrefabInstance: {fileID: 8354286689468984801}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &7323966404150228286
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165118445319065776}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.065733
-  m_Center: {x: 0.5343763, y: 0.8315051, z: 0}

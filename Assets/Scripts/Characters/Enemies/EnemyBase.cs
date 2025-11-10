@@ -142,8 +142,8 @@ public class EnemyBase : Character {
             //Check if collision is a damageable
             if (!hit.collider.TryGetComponent(out IDamageable damageable)) continue;
 
-            //Ignore enemies
-            if (damageable is EnemyBase) continue;
+            //Ignore all except player
+            if (damageable is not global::Player) continue;
 
             //Damage
             if (damage > 0) damageable.Damage(damage, this, DamageType.Melee);
@@ -178,13 +178,12 @@ public class EnemyBase : Character {
         return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
     }
 
-    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null)
-    {
+    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
         return DamageHits(AttackAroundCheck(radius), damage, onHit);
     }
     
     public Projectile SpawnProjectile(GameObject prefab, float damage, Vector3 direction, Transform origin = null) {
-        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
+        Projectile projectile = Instantiate(prefab, (origin ? origin : Eyes).position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
         projectile.Init(this, CalculateDamage(damage));
         return projectile;
     }

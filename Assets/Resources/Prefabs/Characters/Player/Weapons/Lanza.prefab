@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033048085151353711}
+  - component: {fileID: 5194975842076760300}
   - component: {fileID: 921343144809111436}
   - component: {fileID: 3986777226150757125}
   - component: {fileID: 7926148660051566330}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lanza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,6 +36,29 @@ Transform:
   - {fileID: 2314898242789623972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5194975842076760300
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421915764250194293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.48
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.36}
 --- !u!54 &921343144809111436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,8 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 921343144809111436}
-  destroyOnHit: 1
   isPlayer: 0
+  destroyOnDamage: 1
+  destroyOnWallHit: 1
   speed: 20
   damage: 10
 --- !u!114 &7926148660051566330
@@ -147,44 +172,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lanza
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 42abe4ac8fd0f8643b15158e7f81f2ad, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42abe4ac8fd0f8643b15158e7f81f2ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5886085553318395302}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42abe4ac8fd0f8643b15158e7f81f2ad, type: 3}
 --- !u!4 &2314898242789623972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42abe4ac8fd0f8643b15158e7f81f2ad, type: 3}
   m_PrefabInstance: {fileID: 2858258346880511823}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3128870357618299422 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 42abe4ac8fd0f8643b15158e7f81f2ad, type: 3}
-  m_PrefabInstance: {fileID: 2858258346880511823}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &5886085553318395302
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3128870357618299422}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Height: 0.48
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.36}
