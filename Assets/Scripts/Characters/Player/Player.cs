@@ -60,6 +60,7 @@ public class Player : Character, ISavable {
     private Transform playerTransform;
     private Vector3 pushVelocity;
     private bool isMoving;
+    private Vector3 moveDirection;
 
     //Controls
     private readonly HashSet<object> controlBlockers = new();
@@ -170,7 +171,7 @@ public class Player : Character, ISavable {
         isMoving = moveInput.sqrMagnitude > 0;
 
         //Calculate move direction
-        Vector3 moveDirection = isMoving ? Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized : Vector3.zero;
+        moveDirection = isMoving ? Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized : Vector3.zero;
 
         //Check for dash
         if (dashAction.Triggered() && !dashTimer.counting) {
@@ -303,6 +304,11 @@ public class Player : Character, ISavable {
     public float GetBaseHealth()
     {
         return DEFAULT_HEALTH_MAX;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return moveSpeed * SpeedMultiplier * moveDirection;
     }
 
     //Events (other)

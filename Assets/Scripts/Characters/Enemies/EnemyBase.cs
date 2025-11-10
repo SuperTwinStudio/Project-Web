@@ -183,8 +183,8 @@ public class EnemyBase : Character {
         return DamageHits(AttackAroundCheck(radius), damage, onHit);
     }
     
-    public Projectile SpawnProjectile(GameObject prefab, float damage, Transform origin = null) {
-        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, origin.rotation).GetComponent<Projectile>();
+    public Projectile SpawnProjectile(GameObject prefab, float damage, Vector3 direction, Transform origin = null) {
+        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
         projectile.Init(this, CalculateDamage(damage));
         return projectile;
     }

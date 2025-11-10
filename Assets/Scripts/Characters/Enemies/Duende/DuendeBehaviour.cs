@@ -1,4 +1,5 @@
 using UnityEngine;
+using Botpa;
 public class DuendeBehaviour : EnemyBehaviour
 {
 
@@ -38,7 +39,9 @@ public class DuendeBehaviour : EnemyBehaviour
 
     public void ThrowSpear()
     {
-        Enemy.SpawnProjectile(projectile, spearDamage, hand);
+        Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.PlayerLastKnownPosition, Enemy.Player.GetVelocity(), 20);
+        Vector3 direction = Util.RemoveY((target - hand.position).normalized);
+        Enemy.SpawnProjectile(projectile, spearDamage, direction, hand);
     }
 
     public void ResetAttackCooldown()
