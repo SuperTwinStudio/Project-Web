@@ -88,7 +88,8 @@ public class WeaponAbanico : Weapon {
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        Animator.SetTrigger("Shoot");
+        Animator.SetFloat("HitCounter", hitCount % 2);
+        Animator.SetTrigger(isPassiveHit ? "ShootStrong" : "Shoot");
 
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
@@ -116,6 +117,7 @@ public class WeaponAbanico : Weapon {
 
         //Animate
         PlaySound(secondaryAttackSound);
+        Animator.SetTrigger("Push");
     }
 
     //Passive

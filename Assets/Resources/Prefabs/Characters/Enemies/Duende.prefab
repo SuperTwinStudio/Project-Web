@@ -69,19 +69,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5006557
+      value: -1.8103756
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04989028
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.990038
+      value: -1.1633899
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.14817765
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -89,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.9889608
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -162.957
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -145,11 +145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 2421915764250194293, guid: 3a6d72f7ea62941458b6c4f01968d473, type: 3}
   hand: {fileID: 4958273343536241438}
-  minAttackRange: 3.62
-  maxAttackRange: 5.89
-  evadeRange: 2
+  minAttackRange: 5.28
+  maxAttackRange: 7.33
+  evadeRange: 3.65
   spearDamage: 10
-  spearCoolDown: 1
+  spearCoolDown: 4
+  onAttackCooldown: 0
 --- !u!1001 &7184719139651451578
 PrefabInstance:
   m_ObjectHideFlags: 0
