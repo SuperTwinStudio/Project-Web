@@ -8,7 +8,6 @@ public class DuendeIdleState : DuendeState {
     //Actions
     public override void OnEnter() {
         //Called when the state enters
-        Debug.Log("hola");
     }
 
     public override void OnExit() {
@@ -32,7 +31,7 @@ public class DuendeIdleState : DuendeState {
         else
         {
             //Player too close -> Evade
-            // Duende.SetState(new DuendeEvadeState(Duende));
+            Duende.SetState(new DuendeEvadeState(Duende));
         }
         
     }

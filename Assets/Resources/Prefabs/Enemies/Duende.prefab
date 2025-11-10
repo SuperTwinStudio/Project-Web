@@ -149,6 +149,7 @@ MonoBehaviour:
   maxAttackRange: 5.89
   evadeRange: 2
   spearDamage: 10
+  spearCoolDown: 1
 --- !u!1001 &7184719139651451578
 PrefabInstance:
   m_ObjectHideFlags: 0

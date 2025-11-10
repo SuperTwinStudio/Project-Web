@@ -25,6 +25,7 @@ public class DuendeEvadeState : DuendeState
         {
             //Player cerca -> huye!
             Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.PlayerLastKnownPosition).normalized);
+            Enemy.Animator.SetBool("IsMoving", false);
         }
     }
 }
