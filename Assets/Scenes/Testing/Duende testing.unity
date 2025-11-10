@@ -406,8 +406,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8147076522692389515, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
+      propertyPath: evadeRange
+      value: 3.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147076522692389515, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
       propertyPath: spearCoolDown
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147076522692389515, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
+      propertyPath: maxAttackRange
+      value: 7.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147076522692389515, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
+      propertyPath: minAttackRange
+      value: 5.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

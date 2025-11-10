@@ -110,7 +110,7 @@ public class WeaponStapler : Weapon {
         if (hit) {
             //Hit something with passive -> Animate attack
             PlaySound(passiveAttackSound);
-            Animator.SetTrigger("Attack");
+            Animator.SetTrigger("AttackMelee");
         } else {
             //Didn't hit anything -> Use primary (shoot)
             Shoot(PrimaryDamage);
