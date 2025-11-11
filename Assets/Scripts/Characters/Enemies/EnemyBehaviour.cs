@@ -57,9 +57,6 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     public virtual void OnDeath() {
-        //Notify room that enemy was killed
-        if (Enemy.Room) Enemy.Room.EnemyKilled();
-
         //Stop moving
         Enemy.StopMovement();
 

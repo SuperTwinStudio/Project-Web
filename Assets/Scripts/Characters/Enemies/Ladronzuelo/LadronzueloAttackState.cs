@@ -1,16 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : EnemyState {
+public class LadronzueloAttackState : LadronzueloState {
 
     //Attack
-    private const float ATTACK_DAMAGE = 20;
-    private const float ATTACK_RANGE = 1.5f;
     private Coroutine attackCoroutine = null;
 
 
     //Constructor
-    public AttackState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public LadronzueloAttackState(EnemyBehaviour behaviour) : base(behaviour) { }
 
     //Actions
     public override void OnEnter() {
@@ -27,20 +25,17 @@ public class AttackState : EnemyState {
     private IEnumerator AttackCoroutine() {
         //Animate
         Enemy.Animator.SetTrigger("Attack");
-    
+
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.AttackForward(0.5f, 0, ATTACK_DAMAGE);
-    
+        Enemy.AttackForward(0.5f, 0, Ladronzuelo.AttackDamage);
+
         //Wait
         yield return new WaitForSeconds(0.5f);
 
-        if(Enemy.PlayerDistance > ATTACK_RANGE)
-        {
-            Behaviour.SetState(new ApproachState(Behaviour), true);
-        }
+        if (Enemy.PlayerDistance > Ladronzuelo.AttackRange) Behaviour.SetState(new LadronzueloApproachState(Behaviour), true);
     }
 
 }

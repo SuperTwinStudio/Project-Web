@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -34,7 +33,10 @@ public class Room : MonoBehaviour
 
     private readonly List<EnemyBase> m_enemies = new();
     private bool m_BossPresent;
-    private int m_EnemyCount;
+
+    public int EnemyCount => m_enemies.Count;
+    public IReadOnlyList<EnemyBase> Enemies => m_enemies;
+
 
     private void Start()
     {
@@ -68,7 +70,7 @@ public class Room : MonoBehaviour
             }
             else
             {
-                if ((m_EnemyRoom && m_EnemyCount != 0) || (m_BossRoom && m_BossPresent)) 
+                if ((m_EnemyRoom && EnemyCount != 0) || (m_BossRoom && m_BossPresent)) 
                 {
                     LockDoors();
                 }
@@ -128,8 +130,6 @@ public class Room : MonoBehaviour
                     int id = Random.Range(0, def.FodderEnemies.Length);
                     InitializeEnemy(Instantiate(def.FodderEnemies[id], spawnPoint));
                 }
-
-                m_EnemyCount++;
             }
         }
         else if (m_BossRoom)
@@ -173,23 +173,22 @@ public class Room : MonoBehaviour
         m_FadeTrigger = true;
     }
 
-    public void EnemyKilled()
+    public void EnemyKilled(EnemyBase enemy)
     {
-        if (m_BossRoom)
-        {
-            // ALLOW ACCESS TO NEXT FLOOR
-            m_Elevator.SetActive(true);
-            UnlockDoors();
-            m_BossPresent = false;
+        m_enemies.Remove(enemy);
 
-            return;
-        }
-
-        m_EnemyCount--;
-
-        if (m_EnemyCount == 0)
+        if (EnemyCount == 0)
         {
             UnlockDoors();
+            
+            if (m_BossRoom)
+            {
+                // ALLOW ACCESS TO NEXT FLOOR
+                m_Elevator.SetActive(true);
+                m_BossPresent = false;
+
+                return;
+            }
         }
     }
 

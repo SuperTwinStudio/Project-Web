@@ -53,7 +53,7 @@ public class BeastBehaviour : EnemyBehaviour {
         base.OnDeath();
 
         //Set state to death
-        SetState(new BeastDeathState(this));
+        SetState(new SimpleDeathState(this));
     }
 
     //Pillars

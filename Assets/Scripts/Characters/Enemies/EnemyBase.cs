@@ -203,6 +203,23 @@ public class EnemyBase : Character {
         if (Renderer) Renderer.material.SetColor("_Color", Color.white);
     }
 
+    protected override void OnDeath() {
+        //Notify room that enemy was killed
+        if (Room) Room.EnemyKilled(this);
+
+        //Stop moving
+        StopMovement();
+
+        //Disable collisions
+        Collider.enabled = false;
+
+        //Disable script
+        enabled = false;
+
+        //Call behaviour event
+        Behaviour.OnDeath();
+    }
+
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
         //Check if damage is allowed
         amount = Behaviour.OnBeforeDamage(amount, source, type);
@@ -221,11 +238,6 @@ public class EnemyBase : Character {
 
         //Return if damaged
         return damaged;
-    }
-
-    protected override void OnDeath() {
-        //Call behaviour event
-        Behaviour.OnDeath();
     }
 
     //Effects

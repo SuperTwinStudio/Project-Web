@@ -36,7 +36,7 @@ public class DuendeBehaviour : EnemyBehaviour {
         base.OnDeath();
 
         //Set state to death
-        SetState(new DuendeDeathState(this));
+        SetState(new SimpleDeathState(this));
     }
 
     //Attack
