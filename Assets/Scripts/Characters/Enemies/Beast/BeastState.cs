@@ -6,11 +6,13 @@ public class BeastState : EnemyState {
     //Beast
     private readonly Timer damageTimer = new();
 
-    protected BeastBehaviour Beast => Behaviour as BeastBehaviour;
+    protected BeastBehaviour Beast;
 
 
     //Constructor
-    public BeastState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public BeastState(EnemyBehaviour behaviour) : base(behaviour) {
+        Beast = behaviour as BeastBehaviour;
+    }
 
     //Actions
     public override void Execute() {

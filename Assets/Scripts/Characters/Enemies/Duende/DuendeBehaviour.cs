@@ -1,20 +1,29 @@
 using UnityEngine;
 using Botpa;
-public class DuendeBehaviour : EnemyBehaviour
-{
 
+public class DuendeBehaviour : EnemyBehaviour {
+
+    //Components
     [Header("Components")]
-    [SerializeField] private GameObject projectile;
     [SerializeField] private Transform hand;
+    [SerializeField] private GameObject projectile;
 
+    //Variables
     [Header("Variables")]
-    [SerializeField] public float minAttackRange = 2.5f;
-    [SerializeField] public float maxAttackRange = 5f;
-    [SerializeField] public float evadeRange = 2f;
-    [SerializeField] public float spearDamage = 10;
-    [SerializeField] public float spearCoolDown = 2f;
+    [SerializeField] private float _minAttackRange = 5.28f;
+    [SerializeField] private float _maxAttackRange = 7.33f;
+    [SerializeField] private float _evadeRange = 3.65f;
+    [SerializeField] private float _spearDamage = 10f;
+    [SerializeField] private float _spearCoolDown = 4f;
 
-    public bool onAttackCooldown = false;
+    public bool OnAttackCooldown { get; private set; } = false;
+    
+    public float MinAttackRange => _minAttackRange;
+    public float MaxAttackRange => _maxAttackRange;
+    public float EvadeRange => _evadeRange;
+    public float SpearDamage => _spearDamage;
+    public float SpearCoolDown => _spearCoolDown;
+
 
     //Init
     protected override void OnInit() {
@@ -23,42 +32,39 @@ public class DuendeBehaviour : EnemyBehaviour
     }
 
     //Health
-    public override void OnDeath()
-    {
+    public override void OnDeath() {
         base.OnDeath();
 
         //Set state to death
-        SetState(new SimpleDeathState(this));
+        SetState(new DuendeDeathState(this));
     }
 
-    public void Attack()
-    {
-        onAttackCooldown = true;
+    //Attack
+    public void Attack() {
+        OnAttackCooldown = true;
         Enemy.Animator.SetTrigger("Attack");    //The actual attack is triggered within the animation
     }
 
-    public void ThrowSpear()
-    {
+    public void ThrowSpear() {
         Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.PlayerLastKnownPosition, Enemy.Player.GetVelocity(), 20);
         Vector3 direction = Util.RemoveY((target - hand.position).normalized);
-        Enemy.SpawnProjectile(projectile, spearDamage, direction, hand);
+        Enemy.SpawnProjectile(projectile, SpearDamage, direction, hand);
     }
 
-    public void ResetAttackCooldown()
-    {
-        onAttackCooldown = false;
+    public void ResetAttackCooldown() {
+        OnAttackCooldown = false;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-
+    //Gizmos
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, minAttackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxAttackRange);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, evadeRange);
+        Gizmos.DrawWireSphere(transform.position, MinAttackRange);
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, MaxAttackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, EvadeRange);
     }
 
 }

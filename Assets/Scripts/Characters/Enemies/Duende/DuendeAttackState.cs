@@ -3,16 +3,11 @@ using UnityEngine;
 
 public class DuendeAttackState : DuendeState {
 
-    //Attack
-    private Coroutine attackCoroutine = null;
-
-
     //Constructor
     public DuendeAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
-    public override void OnEnter()
-    {
+    public override void OnEnter() {
         //Stop moving
         Enemy.StopMovement();
 
@@ -20,28 +15,19 @@ public class DuendeAttackState : DuendeState {
         Duende.Attack();
     }
 
-    public override void OnExit()
-    {
-        //Stop coroutine
-        if (attackCoroutine != null) Enemy.StopCoroutine(attackCoroutine);
-    }
-
     //Attack
-    public override void Execute()
-    {
-        if (Duende.onAttackCooldown) return;
+    public override void Execute() {
+        //Cannot attack
+        if (Duende.OnAttackCooldown) return;
 
-        if (Enemy.PlayerDistance < Duende.evadeRange)
-        {
+        //Check distance
+        if (Enemy.PlayerDistance < Duende.EvadeRange) {
             //Player too close - > evade
             Duende.SetState(new DuendeEvadeState(Duende));
-        }else if(Enemy.PlayerDistance < Duende.maxAttackRange)
-        {
+        } else if (Enemy.PlayerDistance < Duende.MaxAttackRange) {
             //Attack
             Duende.Attack();
-        }
-        else
-        {
+        } else {
             //Player fuera de rango -> siguele
             Duende.SetState(new DuendeFollowState(Duende));
         }
