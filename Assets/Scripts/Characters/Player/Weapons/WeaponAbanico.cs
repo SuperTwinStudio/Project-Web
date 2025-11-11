@@ -83,7 +83,7 @@ public class WeaponAbanico : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Shoot
-        Projectile projectile = SpawnProjectile(bulletPrefab, PrimaryDamage, bulletOrigin);
+        Projectile projectile = Attack.Throw(bulletPrefab, PrimaryDamage, bulletOrigin);
         if (isPassiveHit) projectile.AddOnHit((damageable) => Push(damageable, PassivePushForce));
 
         //Animate
@@ -108,7 +108,7 @@ public class WeaponAbanico : Weapon {
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
         //Push enemies back
-        AttackForward(
+        Attack.Forward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,

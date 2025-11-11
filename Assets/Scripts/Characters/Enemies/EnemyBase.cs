@@ -11,6 +11,7 @@ public class EnemyBase : Character {
     //Components
     [Header("Components")]
     [SerializeField] private EnemyBehaviour _behaviour;
+    [SerializeField] private AttackHelper _attack;
     [SerializeField] private Collider _collider;
     [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
@@ -19,6 +20,7 @@ public class EnemyBase : Character {
     public bool IsEnabled { get; private set; } = true;
 
     public EnemyBehaviour Behaviour => _behaviour;
+    public AttackHelper Attack => _attack;
     public Collider Collider => _collider;
     public Transform Model => _model;
     public Animator Animator => _animator;
@@ -129,65 +131,6 @@ public class EnemyBase : Character {
         UseAutomaticRotation = automaticRotation;
     }
 
-    //Attack
-    private bool DamageHits(RaycastHit[] hits, float damage, Action<IDamageable> onHit = null) {
-        //Calculate damage
-        damage = CalculateDamage(damage);
-
-        //Bool to check if anything was hit
-        bool somethingHit = false;
-
-        //Check hits
-        foreach (var hit in hits) {
-            //Check if collision is a damageable
-            if (!hit.collider.TryGetComponent(out IDamageable damageable)) continue;
-
-            //Ignore all except player
-            if (damageable is not global::Player) continue;
-
-            //Damage
-            if (damage > 0) damageable.Damage(damage, this, DamageType.Melee);
-
-            //Mark as hit
-            onHit?.Invoke(damageable);
-            somethingHit = true;
-        }
-
-        //Return if anything was hit
-        return somethingHit;
-    }
-
-    private float CalculateDamage(float damage) {
-        return damage * Player.EffectDamageDealtMultiplier;
-    }
-
-    private RaycastHit[] AttackForwardCheck(float radius, float forward) {
-        //Get forward direction
-        Vector3 forwardDirection = Model.forward;
-
-        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        return Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
-    }
-
-    private RaycastHit[] AttackAroundCheck(float radius) {
-        //Casts a sphere of <radius> radius around the player
-        return Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
-    }
-
-    public bool AttackForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
-    }
-
-    public bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackAroundCheck(radius), damage, onHit);
-    }
-    
-    public Projectile SpawnProjectile(GameObject prefab, float damage, Vector3 direction, Transform origin = null) {
-        Projectile projectile = Instantiate(prefab, (origin ? origin : Eyes).position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
-        projectile.Init(this, CalculateDamage(damage));
-        return projectile;
-    }
-
     //Health
     protected override void OnDamageFeedbackStart() {
         base.OnDamageFeedbackStart();
@@ -244,6 +187,11 @@ public class EnemyBase : Character {
     protected override void OnEffectsUpdated() {
         //Update move speed
         Agent.speed = moveSpeed * SpeedMultiplier;
+    }
+
+    //Attack
+    public override float CalculateDamage(float damage) {
+        return damage * Player.EffectDamageDealtMultiplier;
     }
 
     //Room

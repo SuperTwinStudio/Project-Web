@@ -74,7 +74,7 @@ public class WeaponStapler : Weapon {
         if (ammo <= 0) return;
 
         //Shoot
-        SpawnProjectile(bulletPrefab, damage, bulletOrigin);
+        Attack.Throw(bulletPrefab, damage, bulletOrigin);
 
         //Update ammo
         SetAmmo(ammo - 1);
@@ -100,7 +100,7 @@ public class WeaponStapler : Weapon {
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
         //Attack melee (passive)
-        bool hit = AttackForward(
+        bool hit = Attack.Forward(
             passiveAttackSphereCast.x, 
             passiveAttackSphereCast.y,
             PassiveDamage

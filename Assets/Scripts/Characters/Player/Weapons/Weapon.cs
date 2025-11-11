@@ -10,10 +10,12 @@ public class Weapon : MonoBehaviour {
 
     //Components
     [Header("Components")]
+    [SerializeField] protected AttackHelper _attack;
     [SerializeField] protected Loadout _loadout;
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected RuntimeAnimatorController animatorController;
 
+    protected AttackHelper Attack => _attack;
     protected Loadout Loadout => _loadout;
     protected Player Player => Loadout.Player;
     protected virtual Animator Animator => Player.Animator;
@@ -274,63 +276,6 @@ public class Weapon : MonoBehaviour {
     }
 
     //Actions
-    private bool DamageHits(RaycastHit[] hits, float damage, Action<IDamageable> onHit = null) {
-        //Calculate damage
-        damage = CalculateDamage(damage);
-
-        //Bool to check if anything was hit
-        bool somethingHit = false;
-
-        //Check hits
-        foreach (var hit in hits) {
-            //Check if collision is a damageable
-            if (!hit.collider.TryGetComponent(out IDamageable damageable)) continue;
-
-            //Ignore player
-            if (damageable is Player) continue;
-
-            //Damage
-            if (damage > 0) {
-                Loadout.OnDamageableHit(hit.collider.gameObject);
-                damageable.Damage(damage, Player, DamageType.Melee);
-            }
-
-            //Mark as hit
-            onHit?.Invoke(damageable);
-            somethingHit = true;
-        }
-
-        //Return if anything was hit
-        return somethingHit;
-    }
-
-    protected RaycastHit[] AttackForwardCheck(float radius, float forward) {
-        //Get forward direction
-        Vector3 forwardDirection = transform.forward;
-
-        //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
-        return Physics.SphereCastAll(transform.position + radius * forwardDirection, radius, forwardDirection, forward);
-    }
-
-    protected RaycastHit[] AttackAroundCheck(float radius) {
-        //Casts a sphere of <radius> radius around the player
-        return Physics.SphereCastAll(transform.position, radius, Vector3.up, 0);
-    }
-
-    protected bool AttackForward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
-    }
-
-    protected bool AttackAround(float radius, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackAroundCheck(radius), damage, onHit);
-    }
-
-    protected Projectile SpawnProjectile(GameObject prefab, float damage, Transform origin = null) {
-        Projectile projectile = Instantiate(prefab, (origin ? origin : transform).position, Player.transform.rotation).GetComponent<Projectile>();
-        projectile.Init(this, CalculateDamage(damage));
-        return projectile;
-    }
-
     public virtual void EmitParticle(String name)
     {
         particleEmitter.Play(name, Vector3.up);

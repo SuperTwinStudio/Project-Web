@@ -34,7 +34,7 @@ public class KnightAttackState : EnemyState
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.AttackForward(2f, 0, ATTACK_DAMAGE);
+        Enemy.Attack.Forward(2f, 0, ATTACK_DAMAGE);
     
         //Wait
         yield return new WaitForSeconds(2f);

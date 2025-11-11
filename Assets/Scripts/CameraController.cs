@@ -31,7 +31,6 @@ public class CameraController : MonoBehaviour {
     //Travel
     [Header("Travel")]
     [SerializeField] private float cameraSpeed = 100;
-    [SerializeField] private float cameraRotationSpeed = 1000;
 
     private Transform moveTo, lookAt;
     private Coroutine travelCoroutine = null;

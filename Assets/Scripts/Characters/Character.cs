@@ -311,4 +311,9 @@ public class Character : MonoBehaviour, IDamageable {
         }
     }
 
+    //Attack
+    public virtual float CalculateDamage(float damage) {
+        return damage * EffectDamageDealtMultiplier;
+    }
+
 }

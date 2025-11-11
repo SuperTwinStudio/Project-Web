@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 275417671378692547}
   - component: {fileID: 468255279070448659}
+  - component: {fileID: 5015934107059590354}
   - component: {fileID: 8538115829238214355}
   - component: {fileID: 3851105479952359991}
   m_Layer: 6
@@ -69,6 +70,21 @@ MonoBehaviour:
   pushDeceleration: 50
   gramajeHealthPerLevel: 10
   rugosidadResistancePerLevel: 0.1
+--- !u!114 &5015934107059590354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314232767875138061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666641ca2fbeef047bd3fa3b0abf4c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPlayer: 1
+  _source: {fileID: 468255279070448659}
+  _model: {fileID: 3154183115244130666}
 --- !u!114 &8538115829238214355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccc4fe4875f5ab449fe6d5b8c17306d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 5487478310553497482}
   animatorController: {fileID: 9100000, guid: ad6ddf1c6933d2c4a9fcc38180c023e9, type: 2}
@@ -360,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f75db291b0dc6346a683e0148e32c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 8843916554162638499}
   animatorController: {fileID: 0}
@@ -627,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da264a5b8c496f44bc83d11ae76bfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 6325080915746571348}
   animatorController: {fileID: 9100000, guid: 0309e374ad2880c479cabd2d7ee91b9d, type: 2}
@@ -960,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39364be532b0ab047833c8178b9f08cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 7136729457388564981}
   animatorController: {fileID: 9100000, guid: 4806ae76ce08c744aa209df6a9ce954e, type: 2}
@@ -1342,6 +1362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479c261ad69c3604592b87cb1bfbd6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 4547025912353158846}
   animatorController: {fileID: 9100000, guid: 84c80267d71bb6647b2fbaa691dd7a48, type: 2}

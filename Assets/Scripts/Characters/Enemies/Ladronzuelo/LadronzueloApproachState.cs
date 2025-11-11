@@ -1,9 +1,7 @@
-using UnityEngine;
-
 public class LadronzueloApproachState : LadronzueloState {
 
     //Constructor
-    public LadronzueloApproachState(EnemyBehaviour behaviour) : base(behaviour) { }
+    public LadronzueloApproachState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -17,32 +15,20 @@ public class LadronzueloApproachState : LadronzueloState {
         if (!Enemy.PlayerIsVisible) {
             //Player not visible -> Go to idle
             Behaviour.SetState(new LadronzueloIdleState(Behaviour));
-        } else if (Enemy.PlayerDistance <= Ladronzuelo.AttackRange) {
-            if (OtherTypes()) {
-                //Player in attack range -> Steal from it
-                Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
-            } else {
-                //Player in attack range -> Attack it
-                Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
-            }
-        } else {
-            //Move towards player
+        } else if (Enemy.PlayerDistance > Ladronzuelo.InteractRange) {
+            //Player too far -> Move towards player
             Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
             Enemy.Animator.SetBool("IsMoving", true);
+        } else {
+            //Player in interact range -> Check if allowed to steal
+            if (Ladronzuelo.CheckIfAllowedToSteal()) {
+                //Steal from player
+                Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
+            } else {
+                //Attack player
+                Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
+            }
         }
-    }
-
-    private bool OtherTypes() {
-        foreach (EnemyBase enemy in Enemy.Room.Enemies) {
-            //Ignore ladronzuelos
-            if (enemy.Behaviour is LadronzueloBehaviour) continue;
-
-            //Found a different type
-            return true;
-        }
-
-        //No other types
-        return false;
     }
 
 }

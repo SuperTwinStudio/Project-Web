@@ -30,12 +30,13 @@ public class LadronzueloAttackState : LadronzueloState {
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.AttackForward(0.5f, 0, Ladronzuelo.AttackDamage);
+        Enemy.Attack.Forward(0.5f, 0, Ladronzuelo.AttackDamage);
 
         //Wait
         yield return new WaitForSeconds(0.5f);
 
-        if (Enemy.PlayerDistance > Ladronzuelo.AttackRange) Behaviour.SetState(new LadronzueloApproachState(Behaviour), true);
+        //Return to aproach state
+        Behaviour.SetState(new LadronzueloApproachState(Behaviour));
     }
 
 }
