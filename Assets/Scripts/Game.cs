@@ -69,8 +69,10 @@ public class Game : MonoBehaviour, ISavable {
         OnNewGame(this);
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
+    }
 
-        //Init audio preferences
+    private void Start() {
+        //Init audio preferences (AudioMixer can't be init in Awake)
         Preferences.InitAudio();
     }
 

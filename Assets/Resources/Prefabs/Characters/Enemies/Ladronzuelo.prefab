@@ -279,7 +279,7 @@ MonoBehaviour:
   _interactRange: 1.5
   _attackDamage: 10
   stolenAmountText: {fileID: 8425290379161956104}
-  _stealAmount: 10
+  _stealAmount: 25
 --- !u!4 &5693178922483284373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}

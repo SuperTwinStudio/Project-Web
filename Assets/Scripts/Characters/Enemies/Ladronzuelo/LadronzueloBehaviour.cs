@@ -22,7 +22,7 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     //Stealing
     [Header("Stealing")]
     [SerializeField] private TMP_Text stolenAmountText;
-    [SerializeField] private int _stealAmount = 10;
+    [SerializeField] private int _stealAmount = 25;
 
     private int stolenAmount = 0;
 

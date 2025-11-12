@@ -23,12 +23,12 @@ public class InventoryMenu : Menu {
 
     //Inventory
     [Header("Inventory")]
+    [SerializeField] private TMP_Text valueText;
+    [SerializeField] private LocalizedString valueLocale;
     [SerializeField] private TMP_Text goldText;
     [SerializeField] private LocalizedString goldLocale;
     [SerializeField] private GameObject emptyMessage;
     [SerializeField] private RectTransform itemsGrid;
-    [SerializeField] private TMP_Text valueText;
-    [SerializeField] private LocalizedString valueLocale;
     [SerializeField] private GameObject itemPrefab;
 
 
