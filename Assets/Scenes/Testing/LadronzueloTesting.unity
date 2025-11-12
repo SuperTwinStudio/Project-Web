@@ -1073,10 +1073,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8859455159003852098, guid: 16578441a536ec64d80a967e61534ac9, type: 3}
-      propertyPath: _fleeEffect
-      value: 
-      objectReference: {fileID: 11400000, guid: 02cbc4760edca054aa93eb9e9551e6b8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -18,6 +18,7 @@ public class BeastBehaviour : EnemyBehaviour {
 
     //Pillars
     [Header("Pillars")]
+    [SerializeField] private GameObject minionPrefab;
     [SerializeField] private List<BeastPillar> pillars = new();
 
     //States
@@ -64,7 +65,8 @@ public class BeastBehaviour : EnemyBehaviour {
         //Check remaining pillars
         if (pillars.Count >= 2) {
             //Still 2+ columns -> Spawn enemies on the broken pillar
-            Debug.Log("Spawn enemies");
+            SpawnEnemy(minionPrefab, pillar.Spawn1);
+            SpawnEnemy(minionPrefab, pillar.Spawn2);
         } else if (pillars.Count == 1) {
             //Only 1 column remaining -> Destroy it
             BeastPillar remainingPillar = pillars[0];

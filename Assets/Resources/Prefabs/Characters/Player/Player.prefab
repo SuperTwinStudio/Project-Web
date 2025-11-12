@@ -1022,8 +1022,9 @@ MonoBehaviour:
   primaryDamage: 10
   primaryDamagePerLevel: 5
   primaryAttackSound: {fileID: 8300000, guid: fe9171e54a0aaf04f8cb2a4de67fee2a, type: 3}
-  _secondaryCooldown: 2
-  secondaryPrimaryCooldown: 0.3
+  _secondaryCooldown: 5
+  secondaryPrimaryCooldown: 0.8
+  secondaryPushDelay: 0.6
   secondaryPushForce: 10
   secondaryPushForcePerLevel: 3
   secondaryAttackSphereCast: {x: 1.5, y: 0}

@@ -73,20 +73,14 @@ public class AttackHelper : MonoBehaviour {
     }
 
     //Ranged
-    public Projectile Throw(GameObject prefab, float damage, Transform customOrigin = null) {
-        Transform origin = customOrigin ? customOrigin : Model;
-
-        Projectile projectile = Instantiate(prefab, origin.position, origin.rotation).GetComponent<Projectile>();
+    public Projectile Throw(GameObject prefab, float damage, Vector3 direction, Transform origin) {
+        Projectile projectile = Instantiate(prefab, origin.position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
         projectile.Init(Source, Source.CalculateDamage(damage));
         return projectile;
     }
 
-    public Projectile Throw(GameObject prefab, float damage, Vector3 direction, Transform customOrigin = null) {
-        Transform origin = customOrigin ? customOrigin : Model;
-
-        Projectile projectile = Instantiate(prefab, origin.position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
-        projectile.Init(Source, Source.CalculateDamage(damage));
-        return projectile;
+    public Projectile Throw(GameObject prefab, float damage, Transform origin) {
+        return Throw(prefab, damage, origin.forward, origin);
     }
 
 }

@@ -26,6 +26,7 @@ public class WeaponAbanico : Weapon {
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
+    [SerializeField, Min(0)] private float secondaryPushDelay = 1f;
     [SerializeField, Min(0)] private float secondaryPushForce = 10f;
     [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 3f;
     [SerializeField] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
@@ -102,10 +103,14 @@ public class WeaponAbanico : Weapon {
 
     //Secondary
     protected override IEnumerator OnUseSecondaryCoroutine() {
-        yield return null;
-
         //Set cooldown on primary so it can't be used while using secondary
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
+
+        //Animate
+        Animator.SetTrigger("Push");
+
+        //Wait
+        yield return new WaitForSeconds(secondaryPushDelay);
 
         //Push enemies back
         Attack.Forward(
@@ -115,9 +120,8 @@ public class WeaponAbanico : Weapon {
             (damageable) => Push(damageable, SecondaryPushForce)
         );
 
-        //Animate
+        //Play sound
         PlaySound(secondaryAttackSound);
-        Animator.SetTrigger("Push");
     }
 
     //Passive

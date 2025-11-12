@@ -217,6 +217,7 @@ MonoBehaviour:
   _auraDamage: 20
   _auraPushForce: 25
   _auraPushCooldown: 0.5
+  minionPrefab: {fileID: 2171775490227705875, guid: a9379672591ffc34f917fae4f826a649, type: 3}
   pillars: []
   _rageDuration: 2
   _prechargeDuration: 2

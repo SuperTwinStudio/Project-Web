@@ -31,16 +31,18 @@ public class Room : MonoBehaviour
     private bool m_Faded = true;
     private float m_Size = 1.0f;
 
-    private readonly List<EnemyBase> m_enemies = new();
-    private bool m_BossPresent;
+    //Enemies
+    private readonly List<EnemyBase> _enemies = new();
+    private bool _isBossPresent = false;
 
-    public int EnemyCount => m_enemies.Count;
-    public IReadOnlyList<EnemyBase> Enemies => m_enemies;
+    public IReadOnlyList<EnemyBase> Enemies => _enemies;
+    public bool IsBossPresent => _isBossPresent;
+    public int EnemyCount => _enemies.Count;
 
 
     private void Start()
     {
-        m_BossPresent = m_BossRoom;
+        _isBossPresent = m_BossRoom;
     }
 
     private void Update()
@@ -70,7 +72,7 @@ public class Room : MonoBehaviour
             }
             else
             {
-                if ((m_EnemyRoom && EnemyCount != 0) || (m_BossRoom && m_BossPresent)) 
+                if ((m_EnemyRoom && EnemyCount != 0) || (m_BossRoom && IsBossPresent)) 
                 {
                     LockDoors();
                 }
@@ -80,13 +82,35 @@ public class Room : MonoBehaviour
         }
     }
 
-    private void InitializeEnemy(GameObject obj)
+    //Enemies
+    public EnemyBase InitializeEnemy(GameObject obj)
     {
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         enemy.SetRoom(this);
-        m_enemies.Add(enemy);
+        _enemies.Add(enemy);
+        return enemy;
     }
 
+    public void EnemyKilled(EnemyBase enemy)
+    {
+        _enemies.Remove(enemy);
+
+        if (EnemyCount == 0)
+        {
+            UnlockDoors();
+            
+            if (m_BossRoom)
+            {
+                // ALLOW ACCESS TO NEXT FLOOR
+                m_Elevator.SetActive(true);
+                _isBossPresent = false;
+
+                return;
+            }
+        }
+    }
+
+    //Room
     public void InitializeRoom(int flags, LevelDefinition def)
     {
         m_Flags = flags;
@@ -164,7 +188,7 @@ public class Room : MonoBehaviour
         m_MinimapVisited.SetActive(true);
 
         //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again)
-        foreach (var enemy in m_enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
+        foreach (var enemy in _enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
     }
 
     public void FadeOut()
@@ -173,25 +197,7 @@ public class Room : MonoBehaviour
         m_FadeTrigger = true;
     }
 
-    public void EnemyKilled(EnemyBase enemy)
-    {
-        m_enemies.Remove(enemy);
-
-        if (EnemyCount == 0)
-        {
-            UnlockDoors();
-            
-            if (m_BossRoom)
-            {
-                // ALLOW ACCESS TO NEXT FLOOR
-                m_Elevator.SetActive(true);
-                m_BossPresent = false;
-
-                return;
-            }
-        }
-    }
-
+    //Doors
     private void LockDoors()
     {
         for (int i = 0; i < 4; i++) {
@@ -202,7 +208,7 @@ public class Room : MonoBehaviour
         Game.Current.Level.UpdateWalkableSurface();
 
         //Enable enemies
-        foreach (var enemy in m_enemies) enemy.SetEnabled(true);
+        foreach (var enemy in _enemies) enemy.SetEnabled(true);
     }
 
     private void UnlockDoors()
@@ -212,6 +218,7 @@ public class Room : MonoBehaviour
         }
     }
 
+    //Triggers
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

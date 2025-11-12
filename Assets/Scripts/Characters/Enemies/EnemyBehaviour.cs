@@ -96,4 +96,16 @@ public class EnemyBehaviour : MonoBehaviour {
         return (point, distance);
     }
 
+    public EnemyBase SpawnEnemy(GameObject prefab, Transform spawn) {
+        if (Enemy.Room) {
+            //Spawn with room
+            EnemyBase enemy = Enemy.Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
+            enemy.SetEnabled(true);
+            return enemy;
+        } else {
+            //Spawn without room
+            return Instantiate(prefab, spawn.position, Quaternion.identity).GetComponent<EnemyBase>();
+        }
+    }
+
 }
