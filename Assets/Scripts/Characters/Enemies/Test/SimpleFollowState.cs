@@ -15,7 +15,6 @@ public class SimpleFollowState : EnemyState {
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
-        Enemy.Animator.SetBool("IsMoving", false);
     }
 
     public override void Execute() {
@@ -29,7 +28,6 @@ public class SimpleFollowState : EnemyState {
         } else {
             //Move towards player
             Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
-            Enemy.Animator.SetBool("IsMoving", true);
         }
     }
 

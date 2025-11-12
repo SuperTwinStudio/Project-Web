@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38692aa9f04acc41aa83332b589f8b3, type: 3}
-  m_Name: treasure_bag
+  m_Name: treasure_pile
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29
     m_TableEntryReference:
-      m_KeyId: 1381933679251456
+      m_KeyId: 15485432226742272
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _value: 60
+  _value: 40
   references:
     version: 2
     RefIds: []

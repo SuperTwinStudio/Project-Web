@@ -11,30 +11,18 @@ public class BeastChargeState : BeastState {
 
     //Actions
     public override void OnEnter() {
-        //Gather info
-        CapsuleCollider capsule = Enemy.Collider as CapsuleCollider;
-        Vector3 capsuleStart = Enemy.Model.position + ERROR_DELTA * Vector3.up;
-        Vector3 capsuleEnd = Enemy.Model.position + (capsule.height - 2 * ERROR_DELTA) * Vector3.up;
-        float radius = capsule.radius - ERROR_DELTA;
-        Vector3 forward = Enemy.Model.forward;
+        //Get furthest point forward
+        Vector3 point = Beast.GetFurthestPoint(Enemy.Model.forward, Beast.MaxChargeDistance);
 
-        //Check for max forward distance
-        bool hit = Physics.CapsuleCast(capsuleStart, capsuleEnd, radius, forward, out RaycastHit hitInfo, Beast.MaxChargeDistance + radius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
-
-        //Move to position
-        Enemy.MoveTowards(hit ? 
-            //Hit something -> Move right before the hit
-            capsuleStart + (hitInfo.distance - radius) * forward : 
-            //Didn't hit nothing -> Max distance possible
-            capsuleStart + Beast.MaxChargeDistance * forward
-        );
+        //Move to point
+        Enemy.MoveTowards(point);
     }
 
     public override void Execute() {
         //Aura check
         base.Execute();
 
-        //Does not have a path yet
+        //No path yet
         if (Enemy.Agent.pathPending) return;
 
         //Check distance

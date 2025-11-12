@@ -88,11 +88,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1381918873358336
-    m_Key: treasure_bag
+    m_Key: treasure_star
     m_Metadata:
       m_Items: []
   - m_Id: 1381933679251456
-    m_Key: treasure_cup
+    m_Key: treasure_bag
     m_Metadata:
       m_Items: []
   - m_Id: 12969046891921408
@@ -241,6 +241,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14074311770771456
     m_Key: effect_default_item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15485432226742272
+    m_Key: treasure_pile
     m_Metadata:
       m_Items: []
   m_Metadata:

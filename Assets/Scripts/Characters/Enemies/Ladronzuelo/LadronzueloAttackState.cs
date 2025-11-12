@@ -8,7 +8,7 @@ public class LadronzueloAttackState : LadronzueloState {
 
 
     //Constructor
-    public LadronzueloAttackState(EnemyBehaviour behaviour) : base(behaviour) { }
+    public LadronzueloAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {
@@ -30,7 +30,11 @@ public class LadronzueloAttackState : LadronzueloState {
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(0.5f, 0, Ladronzuelo.AttackDamage);
+        Enemy.Attack.Forward(
+            Ladronzuelo.InteractRange / 2,
+            0,
+            Ladronzuelo.AttackDamage
+        );
 
         //Wait
         yield return new WaitForSeconds(0.5f);

@@ -1,4 +1,3 @@
-using System;
 using Botpa;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +9,6 @@ public class EnemyBase : Character {
 
     //Components
     [Header("Components")]
-    [SerializeField] private EnemyBehaviour _behaviour;
     [SerializeField] private AttackHelper _attack;
     [SerializeField] private Collider _collider;
     [SerializeField] private Transform _model;
@@ -18,8 +16,8 @@ public class EnemyBase : Character {
     [SerializeField] private Renderer _renderer;
 
     public bool IsEnabled { get; private set; } = true;
+    public EnemyBehaviour Behaviour { get; private set; }
 
-    public EnemyBehaviour Behaviour => _behaviour;
     public AttackHelper Attack => _attack;
     public Collider Collider => _collider;
     public Transform Model => _model;
@@ -55,7 +53,7 @@ public class EnemyBase : Character {
     //State
     private void Start() {
         //Check for missing behaviour
-        if (!Behaviour) _behaviour = GetComponent<EnemyBehaviour>();
+        Behaviour = GetComponent<EnemyBehaviour>();
 
         //Save player reference
         Player = Game.Current.Level.Player;
@@ -116,6 +114,7 @@ public class EnemyBase : Character {
 
         //Stop movement
         Agent.isStopped = true;
+        Animator.SetBool("IsMoving", false);
     }
 
     public void MoveTowards(Vector3 position) {
@@ -123,12 +122,21 @@ public class EnemyBase : Character {
         if (!Agent.isOnNavMesh) return;
 
         //Move towards position
-        Agent.SetDestination(position);
         Agent.isStopped = false;
+        Agent.SetDestination(position);
+        Animator.SetBool("IsMoving", true);
     }
 
     public void SetAutomaticRotation(bool automaticRotation) {
         UseAutomaticRotation = automaticRotation;
+    }
+
+    public void LookTowards(Vector3 position) {
+        //Using automatic rotation -> Ignore
+        if (UseAutomaticRotation) return;
+        
+        //Update rotation
+        Model.rotation = Quaternion.LookRotation((position - Model.position).normalized);
     }
 
     //Health

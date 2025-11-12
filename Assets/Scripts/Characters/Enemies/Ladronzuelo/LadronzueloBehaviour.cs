@@ -7,34 +7,31 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     //Components
     private Loadout Loadout => Enemy.Player.Loadout;
 
-    //Interact
-    [Header("Interact")]
-    [SerializeField] private float _interactRange = 1.5f;
+    //Movement
+    [Header("Movement")]
+    [SerializeField] private float _moveSpeed = 2f;
 
-    public float InteractRange => _interactRange;
-
-    //Attack
-    [Header("Attack")]
-    [SerializeField] private float _attackDamage = 10f;
-
-    public float AttackDamage => _attackDamage;
-
-    //Stealing
-    [Header("Stealing")]
+    //States
+    [Header("States")]
     [SerializeField] private TMP_Text stolenAmountText;
+    [SerializeField] private Effect _fleeEffect;
+    [SerializeField] private float _interactRange = 1.5f;
+    [SerializeField] private float _attackDamage = 10f;
     [SerializeField] private int _stealAmount = 25;
+    [SerializeField] private float _maxFleeDistance = 25;
 
-    private int stolenAmount = 0;
+    public int StolenAmount { get; private set; }
 
+    public Effect FleeEffect => _fleeEffect;
+    public float InteractRange => _interactRange;
+    public float AttackDamage => _attackDamage;
     public bool PlayerHasGold => Loadout.Gold > 0;
     public int StealAmount => _stealAmount;
+    public float MaxFleeDistance => _maxFleeDistance;
 
 
     //Init
     protected override void OnInit() {
-        //Reset stolen amount text
-        stolenAmountText.SetText("");
-
         //Start in idle state
         SetState(new LadronzueloIdleState(this));
     }
@@ -48,6 +45,15 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     }
 
     //Helpers
+    public void UpdateGoldText() {
+        if (StolenAmount <= 0)
+            //Hide stolen amount
+            stolenAmountText.SetText("");
+        else
+            //Show stolen amount
+            stolenAmountText.SetText($"{StolenAmount}G");
+    }
+
     public bool CheckIfAllowedToSteal() {
         //Player has no gold
         if (!PlayerHasGold) return false;
@@ -87,18 +93,19 @@ public class LadronzueloBehaviour : EnemyBehaviour {
         if (!Loadout.SpendGold(gold)) return false;
 
         //Add gold to stolen amount
-        stolenAmount += gold;
-        stolenAmountText.SetText($"{stolenAmount}G");
+        StolenAmount += gold;
+        UpdateGoldText();
         return true;
     }
 
     public void ReturnGoldToPlayer() {
         //Nothing to return
-        if (stolenAmount <= 0) return;
+        if (StolenAmount <= 0) return;
 
         //Return gold to player
-        Loadout.AddGold(stolenAmount);
-        stolenAmountText.SetText("");
+        Loadout.AddGold(StolenAmount);
+        StolenAmount = 0;
+        UpdateGoldText();
     }
 
 }

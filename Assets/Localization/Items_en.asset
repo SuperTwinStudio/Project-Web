@@ -31,11 +31,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1381918873358336
-    m_Localized: Money Bag
+    m_Localized: Star
     m_Metadata:
       m_Items: []
   - m_Id: 1381933679251456
-    m_Localized: Golden Cup
+    m_Localized: Stars bag
     m_Metadata:
       m_Items: []
   - m_Id: 2119845693755392
@@ -259,6 +259,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14074311770771456
     m_Localized: Passive Item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15485432226742272
+    m_Localized: Stars pile
     m_Metadata:
       m_Items: []
   references:

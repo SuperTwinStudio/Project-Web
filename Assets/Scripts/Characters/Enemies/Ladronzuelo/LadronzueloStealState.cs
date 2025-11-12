@@ -30,13 +30,24 @@ public class LadronzueloStealState : LadronzueloState {
         yield return new WaitForSeconds(0.5f);
 
         //Steal
-        Enemy.Attack.Forward(0.5f, 0, 0, (damageable) => { Ladronzuelo.StealGoldFromPlayer(); });
+        Enemy.Attack.Forward(
+            Ladronzuelo.InteractRange / 2,
+            0,
+            0,
+            (damageable) => Ladronzuelo.StealGoldFromPlayer()
+        );
 
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Return to aproach state
-        Behaviour.SetState(new LadronzueloApproachState(Behaviour));
+        if (!Ladronzuelo.CheckIfAllowedToSteal() && Ladronzuelo.StolenAmount > 0) {
+            //Stole gold -> Flee from player
+            Behaviour.SetState(new LadronzueloFleeState(Behaviour));
+        } else {
+            //keep following player
+            Behaviour.SetState(new LadronzueloApproachState(Behaviour));   
+        }
     }
 
 }

@@ -7,7 +7,6 @@ public class LadronzueloApproachState : LadronzueloState {
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
-        Enemy.Animator.SetBool("IsMoving", false);
     }
 
     public override void Execute() {
@@ -18,14 +17,16 @@ public class LadronzueloApproachState : LadronzueloState {
         } else if (Enemy.PlayerDistance > Ladronzuelo.InteractRange) {
             //Player too far -> Move towards player
             Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
-            Enemy.Animator.SetBool("IsMoving", true);
         } else {
             //Player in interact range -> Check if allowed to steal
             if (Ladronzuelo.CheckIfAllowedToSteal()) {
                 //Steal from player
                 Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
+            } else if (Ladronzuelo.StolenAmount > 0) {
+                //Stole gold -> Flee from player
+                Behaviour.SetState(new LadronzueloFleeState(Behaviour));
             } else {
-                //Attack player
+                //Stole nothin -> Attack player
                 Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
             }
         }

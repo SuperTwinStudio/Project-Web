@@ -17,7 +17,6 @@ public class KnightFollowState : EnemyState
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
-        Enemy.Animator.SetBool("IsMoving", false);
     }
 
     public override void Execute() {
@@ -31,7 +30,6 @@ public class KnightFollowState : EnemyState
         } else {
             //Move towards player
             Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
-            Enemy.Animator.SetBool("IsMoving", true);
         }
     }
 

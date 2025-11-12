@@ -7,7 +7,6 @@ public class DuendeEvadeState : DuendeState {
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
-        Enemy.Animator.SetBool("IsMoving", false);
     }
 
     public override void Execute() {
@@ -17,7 +16,6 @@ public class DuendeEvadeState : DuendeState {
         } else {
             //Player cerca -> huye!
             Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.PlayerLastKnownPosition).normalized);
-            Enemy.Animator.SetBool("IsMoving", false);
         }
     }
 

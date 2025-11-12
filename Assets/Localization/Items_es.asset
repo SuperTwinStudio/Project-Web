@@ -139,11 +139,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1381918873358336
-    m_Localized: Bolsa de Dinero
+    m_Localized: Estrella
     m_Metadata:
       m_Items: []
   - m_Id: 1381933679251456
-    m_Localized: Copa Dorada
+    m_Localized: Bolsa de estrellas
     m_Metadata:
       m_Items: []
   - m_Id: 12372701139140608
@@ -260,6 +260,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14074311770771456
     m_Localized: Item Pasivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15485432226742272
+    m_Localized: Pila de estrellas
     m_Metadata:
       m_Items: []
   references:

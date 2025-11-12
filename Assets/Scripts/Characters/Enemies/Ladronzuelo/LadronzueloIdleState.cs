@@ -4,6 +4,11 @@ public class LadronzueloIdleState : LadronzueloState {
     public LadronzueloIdleState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
+    public override void OnEnter() {
+        //Update gold text
+        Ladronzuelo.UpdateGoldText();
+    }
+
     public override void Execute() {
         //Check if player is visible
         if (!Enemy.PlayerIsVisible) return;

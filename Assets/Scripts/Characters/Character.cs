@@ -311,6 +311,40 @@ public class Character : MonoBehaviour, IDamageable {
         }
     }
 
+    public void RemoveEffect(Effect effect) {
+        //Check if player has effect
+        if (!effects.ContainsKey(effect)) return;
+
+        //Get effect
+        (float currentEndTimestamp, int currentLevel) = effects[effect];
+
+        //Check if effect has levels
+        if (effect.HasLevels) {
+            //Has levels -> Remove a level
+            int newLevel = currentLevel - 1;
+
+            //Check new level
+            if (newLevel >= 1) {
+                //Still has levels -> Update it
+                effects[effect] = (currentEndTimestamp, newLevel);
+            } else {
+                //No levels -> Remove it
+                effects.Remove(effect);
+            }
+        } else {
+            //No levels -> Remove it
+            effects.Remove(effect);
+        }
+
+        //Unapply instant application effects
+        switch (effect.Action.Type) {
+            //Max health
+            case EffectType.MaxHealth:
+                EffectExtraHealth -= effect.Action.Value;
+                break;
+        }
+    }
+
     //Attack
     public virtual float CalculateDamage(float damage) {
         return damage * EffectDamageDealtMultiplier;
