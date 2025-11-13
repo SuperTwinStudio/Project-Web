@@ -117,6 +117,10 @@ PrefabInstance:
       propertyPath: _renderer
       value: 
       objectReference: {fileID: 2720303786589334219}
+    - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      propertyPath: _baseHealth
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Name
       value: Knight
@@ -194,3 +198,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c70789a67cde464f8e45b424c6ed1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 1.5
+  _attackDamage: 20

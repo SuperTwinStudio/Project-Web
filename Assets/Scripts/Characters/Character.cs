@@ -17,17 +17,23 @@ public class Character : MonoBehaviour, IDamageable {
     public Transform Bot => _bot;
 
     //Health
+    [Header("Health")]
+    [SerializeField] private float _baseHealth = DEFAULT_HEALTH_MAX;
+
     private event Action<float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
     public bool IgnoreNextDamage { get; set; } = false;
     public bool IsInvulnerable { get; set; } = false;
 
-    public bool IsAlive { get; set; } = true;
+    public bool IsAlive { get; protected set; } = true;
     public float Health { get; protected set; } = DEFAULT_HEALTH_MAX;
-    public virtual float HealthMax => DEFAULT_HEALTH_MAX + EffectExtraHealth;
+    public virtual float HealthMax => _baseHealth + EffectExtraHealth;
 
     public const float DEFAULT_HEALTH_MAX = 100;
+
+    //Movement & Rotation
+    public virtual Vector3 MoveVelocity => Vector3.zero;
 
     //Effects
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level

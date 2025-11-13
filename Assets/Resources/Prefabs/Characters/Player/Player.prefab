@@ -62,7 +62,7 @@ MonoBehaviour:
   dashAction: {fileID: 3545898801410580973, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   controller: {fileID: 3851105479952359991}
   _loadout: {fileID: 8538115829238214355}
-  model: {fileID: 6960520357802286510}
+  _model: {fileID: 3154183115244130666}
   _animator: {fileID: 2393395648455993377}
   moveSpeed: 6.5
   dashCooldown: 2.5

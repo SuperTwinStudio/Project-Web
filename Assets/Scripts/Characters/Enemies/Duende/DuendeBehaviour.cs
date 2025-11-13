@@ -46,7 +46,7 @@ public class DuendeBehaviour : EnemyBehaviour {
     }
 
     public void ThrowSpear() {
-        Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.TargetLastKnownPosition, Enemy.Player.GetVelocity(), 20);
+        Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.TargetLastKnownPosition, Enemy.Target.MoveVelocity, 20);
         Vector3 direction = Util.RemoveY((target - hand.position).normalized);
         Enemy.Attack.Throw(projectile, SpearDamage, direction, hand);
     }

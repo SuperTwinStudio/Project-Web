@@ -7,10 +7,6 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     //Components
     private Loadout Loadout => Enemy.Player.Loadout;
 
-    //Movement
-    [Header("Movement")]
-    [SerializeField] private float _moveSpeed = 2f;
-
     //States
     [Header("States")]
     [SerializeField] private TMP_Text stolenAmountText;

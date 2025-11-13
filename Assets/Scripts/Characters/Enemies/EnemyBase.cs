@@ -5,54 +5,58 @@ using UnityEngine.AI;
 
 public class EnemyBase : Character {
 
-    //Player
+    //Level & Player
+    public Level Level { get; private set; }
     public Player Player { get; private set; }
 
-    //Components
-    [Header("Components")]
-    [SerializeField] private AttackHelper _attack;
+    //Enemy
+    [Header("Enemy")]
+    [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Collider _collider;
+    [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private AudioSource _audio;
+    [SerializeField] private AttackHelper _attack;
     [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
     [SerializeField] private Renderer _renderer;
 
     public bool IsEnabled { get; private set; } = true;
+
     public EnemyBehaviour Behaviour { get; private set; }
 
-    public AttackHelper Attack => _attack;
+    public NavMeshAgent Agent => _agent;
     public Collider Collider => _collider;
+    public Rigidbody Rigidbody => _rigidbody;
     public AudioSource Audio => _audio;
+    public AttackHelper Attack => _attack;
     public Transform Model => _model;
     public Animator Animator => _animator;
     public Renderer Renderer => _renderer;
 
-    //Health
-    [Header("Health")]
-    [SerializeField] private float _maxhealth = DEFAULT_HEALTH_MAX;
-    [SerializeField] private GameObject damageIndicatorPrefab;
-
-    public override float HealthMax => _maxhealth + EffectExtraHealth;
-
-    //Movement
-    [Header("Movement")]
-    [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private Rigidbody _rigidbody;
+    //Movement & Rotation
+    [Header("Movement & Rotation")]
     [SerializeField] private float moveSpeed = 3;
+    [SerializeField] private float rotateSpeed = 500;
+
+    public bool UseAutomaticRotation { get; private set; } = true;
+
+    public bool AgentReachedDestination => Agent.hasPath && !Agent.pathPending && Agent.remainingDistance <= 0.1f;
+
+    public override Vector3 MoveVelocity => Agent.desiredVelocity;
+
+    //Targets
+    [Header("Targets")]
     [SerializeField] private float viewDistance = 5;
 
+    public Character Target { get; private set; }
     public bool TargetIsVisible { get; private set; }
     public bool TargetPositionIsKnown { get; private set; }
     public float TargetLastKnownDistance { get; private set; }
     public Vector3 TargetLastKnownPosition { get; private set; }
 
-    public NavMeshAgent Agent => _agent;
-    public Rigidbody Rigidbody => _rigidbody;
-
-    public bool AgentReachedDestination => Agent.hasPath && !Agent.pathPending && Agent.remainingDistance <= 0.1f;
-
-    //Rotation
-    public bool UseAutomaticRotation { get; private set; } = true;
+    //Feedback
+    [Header("Feedback")]
+    [SerializeField] private GameObject damageIndicatorPrefab;
 
     //Room
     public Room Room { get; private set; } = null;
@@ -65,9 +69,13 @@ public class EnemyBase : Character {
     private void Start() {
         //Get behaviour
         Behaviour = GetComponent<EnemyBehaviour>();
+    
+        //Get level & player references
+        Level = Game.Current.Level;
+        Player = Level.Player;
 
-        //Save player reference
-        Player = Game.Current.Level.Player;
+        //Take player as target
+        Target = Player;
 
         //Heal to max health
         Heal(HealthMax);
@@ -92,7 +100,7 @@ public class EnemyBase : Character {
         //Rotate model
         if (UseAutomaticRotation) {
             Vector3 lookDirection = TargetIsVisible ? (TargetLastKnownPosition - transform.position) : Agent.desiredVelocity;
-            if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * 500);
+            if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * rotateSpeed);
         }
     }
 
@@ -100,63 +108,6 @@ public class EnemyBase : Character {
         IsEnabled = enabled;
         Agent.enabled = enabled;
         Collider.enabled = enabled && IsAlive;
-    }
-
-    //Player
-    private void CheckTargetVisible() {
-        //Check if target is visible
-        TargetIsVisible = Player.IsVisible(Eyes.position, viewDistance, LayerMask.GetMask("Default", "Player"));
-
-        //Save distance
-        TargetLastKnownDistance = Vector3.Distance(Player.transform.position, transform.position);
-
-        //Save position if visible
-        if (TargetIsVisible) {
-            TargetPositionIsKnown = true;
-            TargetLastKnownPosition = Player.transform.position;
-        }
-    }
-
-    public void NotifyTargetPositionReached() {
-        //Used for when the enemy reaches the last known position of the player
-        TargetPositionIsKnown = TargetIsVisible;
-    }
-
-    //Movement
-    public override void Push(Vector3 direction) {
-        Rigidbody.AddForce(direction, ForceMode.Impulse);
-    }
-
-    public void StopMovement() {
-        //Not on a navmesh
-        if (!Agent.isOnNavMesh) return;
-
-        //Stop movement
-        Agent.isStopped = true;
-        Animator.SetBool("IsMoving", false);
-    }
-
-    public void MoveTowards(Vector3 position) {
-        //Not on a navmesh
-        if (!Agent.isOnNavMesh) return;
-
-        //Move towards position
-        Agent.isStopped = false;
-        Agent.SetDestination(position);
-        Animator.SetBool("IsMoving", true);
-    }
-
-    //Rotation
-    public void SetAutomaticRotation(bool automaticRotation) {
-        UseAutomaticRotation = automaticRotation;
-    }
-
-    public void LookTowards(Vector3 position) {
-        //Using automatic rotation -> Ignore
-        if (UseAutomaticRotation) return;
-        
-        //Update rotation
-        Model.rotation = Quaternion.LookRotation((position - Model.position).normalized);
     }
 
     //Health
@@ -221,15 +172,66 @@ public class EnemyBase : Character {
         return damaged;
     }
 
+    //Movement & Rotation
+    public override void Push(Vector3 direction) {
+        Rigidbody.AddForce(direction, ForceMode.Impulse);
+    }
+
+    public void StopMovement() {
+        //Not on a navmesh
+        if (!Agent.isOnNavMesh) return;
+
+        //Stop movement
+        Agent.isStopped = true;
+        Animator.SetBool("IsMoving", false);
+    }
+
+    public void MoveTowards(Vector3 position) {
+        //Not on a navmesh
+        if (!Agent.isOnNavMesh) return;
+
+        //Move towards position
+        Agent.isStopped = false;
+        Agent.SetDestination(position);
+        Animator.SetBool("IsMoving", true);
+    }
+
+    public void SetAutomaticRotation(bool automaticRotation) {
+        UseAutomaticRotation = automaticRotation;
+    }
+
+    public void LookTowards(Vector3 position) {
+        //Using automatic rotation -> Ignore
+        if (UseAutomaticRotation) return;
+        
+        //Update rotation
+        Model.rotation = Quaternion.LookRotation((position - Model.position).normalized);
+    }
+
+    //Targets
+    private void CheckTargetVisible() {
+        //Check if target is visible
+        TargetIsVisible = Target.IsVisible(Eyes.position, viewDistance, LayerMask.GetMask("Default", "Player"));
+
+        //Save distance
+        TargetLastKnownDistance = Vector3.Distance(Target.transform.position, transform.position);
+
+        //Save position if visible
+        if (TargetIsVisible) {
+            TargetPositionIsKnown = true;
+            TargetLastKnownPosition = Target.transform.position;
+        }
+    }
+
+    public void NotifyTargetPositionReached() {
+        //Used for when the enemy reaches the last known position of the player
+        TargetPositionIsKnown = TargetIsVisible;
+    }
+
     //Effects
     protected override void OnEffectsUpdated() {
         //Update move speed
         Agent.speed = moveSpeed * SpeedMultiplier;
-    }
-
-    //Attack
-    public override float CalculateDamage(float damage) {
-        return damage * Player.EffectDamageDealtMultiplier;
     }
 
     //Room

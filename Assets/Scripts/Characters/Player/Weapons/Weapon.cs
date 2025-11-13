@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] protected AttackHelper _attack;
     [SerializeField] protected Loadout _loadout;
     [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected ParticleEmitter particleEmitter;
     [SerializeField] protected RuntimeAnimatorController animatorController;
 
     protected AttackHelper Attack => _attack;
@@ -32,12 +33,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private LocalizedString _passiveDescription;
     [SerializeField] private GameObject model;
 
-    [Header("ParticleEffect")]
-    [SerializeField] protected ParticleEmitter particleEmitter;
-
-
     private event Action<WeaponAction, int> OnValueChanged;
-
     private bool isInit = false;
 
     public Item Item => _item;
@@ -47,8 +43,6 @@ public class Weapon : MonoBehaviour {
     public string SecondaryDescription => _secondaryDescription.GetLocalizedString();
     public Sprite PassiveIcon => _passiveIcon;
     public string PassiveDescription => _passiveDescription.GetLocalizedString();
-
-    [HideInInspector] public GameObject LastHit { get; protected set; }
 
     //Primary
     private readonly Timer primaryTimer = new();
@@ -147,14 +141,6 @@ public class Weapon : MonoBehaviour {
     }
 
     protected virtual void OnShow() {}
-
-    //Audio
-    protected void PlaySound(AudioClip clip) {
-        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
-        audioSource.PlayOneShot(clip);
-        //audioSource.clip = clip;
-        //audioSource.Play();
-    }
 
     //Weapon
     protected float CalculateDamage(float damage) {
@@ -275,9 +261,13 @@ public class Weapon : MonoBehaviour {
         return OnReload();
     }
 
-    //Actions
-    public virtual void EmitParticle(String name)
-    {
+    //Helpers
+    protected void PlaySound(AudioClip clip) {
+        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
+        audioSource.PlayOneShot(clip);
+    }
+
+    public virtual void EmitParticle(string name) {
         particleEmitter.Play(name, Vector3.up);
     }
 

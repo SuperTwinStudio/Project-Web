@@ -24,7 +24,7 @@ public class BeastRageState : BeastState {
     //Rage
     private IEnumerator RageCoroutine() {
         //Shake screen
-        Enemy.Player.CameraController.AddShake(Beast.RageDuration);
+        Enemy.Level.CameraController.AddShake(Beast.RageDuration);
     
         //Animate
         Debug.Log("ESTOY TO ENFADAOO");
