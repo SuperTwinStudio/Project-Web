@@ -17,7 +17,7 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     [SerializeField] private Effect _fleeEffect;
     [SerializeField] private float _interactRange = 1.5f;
     [SerializeField] private float _attackDamage = 10f;
-    [SerializeField] private int _stealAmount = 25;
+    [SerializeField] private int _stealAmount = 50;
     [SerializeField] private float _maxFleeDistance = 25;
 
     public int StolenAmount { get; private set; }
@@ -27,20 +27,19 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     public float AttackDamage => _attackDamage;
     public bool PlayerHasGold => Loadout.Gold > 0;
     public int StealAmount => _stealAmount;
+    public bool HasStolen => StolenAmount > 0;
     public float MaxFleeDistance => _maxFleeDistance;
 
 
     //Init
     protected override void OnInit() {
-        //Start in idle state
+        //Go to idle
         SetState(new LadronzueloIdleState(this));
     }
 
     //Health
     public override void OnDeath() {
-        base.OnDeath();
-
-        //Set state to death
+        //Go to death
         SetState(new LadronzueloDeathState(this));
     }
 
@@ -57,6 +56,9 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     public bool CheckIfAllowedToSteal() {
         //Player has no gold
         if (!PlayerHasGold) return false;
+
+        //Already stole gold
+        if (HasStolen) return false;
 
         //Result variables
         bool otherTypes = false;

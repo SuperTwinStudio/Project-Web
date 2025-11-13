@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class KnightBehaviour : EnemyBehaviour {
+public class MinionBehaviour : EnemyBehaviour {
 
     //States
     [Header("States")]
     [SerializeField] private float _attackRange = 1.5f;
-    [SerializeField] private float _attackDamage = 20f;
+    [SerializeField] private float _attackDamage = 10f;
 
     public float AttackRange => _attackRange;
     public float AttackDamage => _attackDamage;
@@ -14,7 +14,7 @@ public class KnightBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new KnightIdleState(this));
+        SetState(new MinionIdleState(this));
     }
 
     //Health

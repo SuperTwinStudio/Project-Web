@@ -1,3 +1,4 @@
+using System.Collections;
 using Botpa;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,6 +12,7 @@ public class EnemyBase : Character {
     [Header("Components")]
     [SerializeField] private AttackHelper _attack;
     [SerializeField] private Collider _collider;
+    [SerializeField] private AudioSource _audio;
     [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
     [SerializeField] private Renderer _renderer;
@@ -20,6 +22,7 @@ public class EnemyBase : Character {
 
     public AttackHelper Attack => _attack;
     public Collider Collider => _collider;
+    public AudioSource Audio => _audio;
     public Transform Model => _model;
     public Animator Animator => _animator;
     public Renderer Renderer => _renderer;
@@ -38,21 +41,29 @@ public class EnemyBase : Character {
     [SerializeField] private float moveSpeed = 3;
     [SerializeField] private float viewDistance = 5;
 
-    public bool PlayerIsVisible { get; private set; }
-    public float PlayerDistance { get; private set; }
-    public Vector3 PlayerLastKnownPosition { get; private set; }
-    public bool UseAutomaticRotation { get; private set; } = true;
+    public bool TargetIsVisible { get; private set; }
+    public bool TargetPositionIsKnown { get; private set; }
+    public float TargetLastKnownDistance { get; private set; }
+    public Vector3 TargetLastKnownPosition { get; private set; }
 
     public NavMeshAgent Agent => _agent;
     public Rigidbody Rigidbody => _rigidbody;
 
+    public bool AgentReachedDestination => Agent.hasPath && !Agent.pathPending && Agent.remainingDistance <= 0.1f;
+
+    //Rotation
+    public bool UseAutomaticRotation { get; private set; } = true;
+
     //Room
     public Room Room { get; private set; } = null;
+
+    //Helpers
+    private const float ERROR_DELTA = 0.1f;
 
 
     //State
     private void Start() {
-        //Check for missing behaviour
+        //Get behaviour
         Behaviour = GetComponent<EnemyBehaviour>();
 
         //Save player reference
@@ -72,15 +83,15 @@ public class EnemyBase : Character {
         //Not enabled
         if (!IsEnabled) return;
 
-        //Check if player is visible
-        CheckPlayerVisible();
+        //Check if target is visible
+        CheckTargetVisible();
 
         //Call behaviour event
         Behaviour.OnUpdate();
 
         //Rotate model
         if (UseAutomaticRotation) {
-            Vector3 lookDirection = PlayerIsVisible ? (PlayerLastKnownPosition - transform.position) : Agent.desiredVelocity;
+            Vector3 lookDirection = TargetIsVisible ? (TargetLastKnownPosition - transform.position) : Agent.desiredVelocity;
             if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * 500);
         }
     }
@@ -92,15 +103,23 @@ public class EnemyBase : Character {
     }
 
     //Player
-    private void CheckPlayerVisible() {
-        //Check if player is visible
-        PlayerIsVisible = Player.IsVisible(Eyes.position, viewDistance, LayerMask.GetMask("Default", "Player"));
+    private void CheckTargetVisible() {
+        //Check if target is visible
+        TargetIsVisible = Player.IsVisible(Eyes.position, viewDistance, LayerMask.GetMask("Default", "Player"));
 
         //Save distance
-        PlayerDistance = Vector3.Distance(Player.transform.position, transform.position);
+        TargetLastKnownDistance = Vector3.Distance(Player.transform.position, transform.position);
 
         //Save position if visible
-        if (PlayerIsVisible) PlayerLastKnownPosition = Player.transform.position;
+        if (TargetIsVisible) {
+            TargetPositionIsKnown = true;
+            TargetLastKnownPosition = Player.transform.position;
+        }
+    }
+
+    public void NotifyTargetPositionReached() {
+        //Used for when the enemy reaches the last known position of the player
+        TargetPositionIsKnown = TargetIsVisible;
     }
 
     //Movement
@@ -127,6 +146,7 @@ public class EnemyBase : Character {
         Animator.SetBool("IsMoving", true);
     }
 
+    //Rotation
     public void SetAutomaticRotation(bool automaticRotation) {
         UseAutomaticRotation = automaticRotation;
     }
@@ -140,6 +160,14 @@ public class EnemyBase : Character {
     }
 
     //Health
+    private IEnumerator DeathCoroutine() {
+        //Wait
+        yield return new WaitForSeconds(5.0f);
+
+        //Destroy enemy object
+        Destroy(gameObject);
+    }
+
     protected override void OnDamageFeedbackStart() {
         base.OnDamageFeedbackStart();
 
@@ -161,14 +189,16 @@ public class EnemyBase : Character {
         //Stop moving
         StopMovement();
 
-        //Disable collisions
+        //Disable
         Collider.enabled = false;
-
-        //Disable script
+        Agent.enabled = false;
         enabled = false;
 
         //Call behaviour event
         Behaviour.OnDeath();
+
+        //Start destroy countdown
+        StartCoroutine(DeathCoroutine());
     }
 
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
@@ -206,6 +236,48 @@ public class EnemyBase : Character {
     public void SetRoom(Room room) {
         Room = room;
         SetEnabled(false); //Disable on creation
+    }
+
+    //Helpers
+    public void PlaySound(AudioClip clip) {
+        Audio.pitch = Random.Range(0.92f, 1.08f);
+        Audio.PlayOneShot(clip);
+    }
+
+    public EnemyBase SpawnEnemy(GameObject prefab, Transform spawn) {
+        if (Room) {
+            //Spawn with room
+            EnemyBase enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
+            enemy.SetEnabled(true);
+            return enemy;
+        } else {
+            //Spawn without room
+            return Instantiate(prefab, spawn.position, Quaternion.identity).GetComponent<EnemyBase>();
+        }
+    }
+
+    public Vector3 GetFurthestPoint(Vector3 moveDirection, float maxDistance) {
+        //Gather info
+        CapsuleCollider capsule = Collider as CapsuleCollider;
+        Vector3 capsuleStart = Model.position + ERROR_DELTA * Vector3.up;
+        Vector3 capsuleEnd = Model.position + (capsule.height - 2 * ERROR_DELTA) * Vector3.up;
+        float radius = capsule.radius - ERROR_DELTA;
+
+        //Check for max forward distance
+        bool hit = Physics.CapsuleCast(capsuleStart, capsuleEnd, radius, moveDirection, out RaycastHit hitInfo, maxDistance + radius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+
+        //Return furthest point
+        return hit ?
+            //Hit something -> Move right before the hit
+            capsuleStart + (hitInfo.distance - radius) * moveDirection :
+            //Didn't hit nothing -> Max distance possible
+            capsuleStart + maxDistance * moveDirection;
+    }
+
+    public (Vector3 point, float distance) GetFurthestPointAndDistance(Vector3 moveDirection, float maxDistance) {
+        Vector3 point = GetFurthestPoint(moveDirection, maxDistance);
+        float distance = Vector3.Distance(point, Model.position);
+        return (point, distance);
     }
 
 }

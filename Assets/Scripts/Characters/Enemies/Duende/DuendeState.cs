@@ -1,7 +1,7 @@
 public class DuendeState : EnemyState {
 
     //Duende
-    protected DuendeBehaviour Duende;
+    protected DuendeBehaviour Duende { get; private set; }
 
 
     //Constructor

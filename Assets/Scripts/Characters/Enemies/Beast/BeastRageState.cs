@@ -17,9 +17,6 @@ public class BeastRageState : BeastState {
     }
 
     public override void OnExit() {
-        //Update walkable surface
-        Game.Current.Level.UpdateWalkableSurface();
-
         //Stop coroutine
         if (coroutine != null) Enemy.StopCoroutine(coroutine);
     }
@@ -28,9 +25,10 @@ public class BeastRageState : BeastState {
     private IEnumerator RageCoroutine() {
         //Shake screen
         Enemy.Player.CameraController.AddShake(Beast.RageDuration);
-
+    
         //Animate
         Debug.Log("ESTOY TO ENFADAOO");
+        Enemy.PlaySound(Beast.RageSound);
 
         //Wait
         yield return new WaitForSeconds(Beast.RageDuration);

@@ -14,14 +14,18 @@ public class BeastStunState : BeastState {
     public override void OnEnter() {
         //Make enemy vulnerable
         Enemy.IsInvulnerable = false;
+        Beast.AuraModel.SetActive(false);
 
         //Start coroutine
         coroutine = Enemy.StartCoroutine(StunCoroutine());
     }
 
     public override void OnExit() {
-        //Make enemy invulnerable
-        Enemy.IsInvulnerable = true;
+        //Make enemy invulnerable (if still alive)
+        if (Enemy.IsAlive) {
+            Enemy.IsInvulnerable = true;
+            Beast.AuraModel.SetActive(true);
+        }
 
         //Stop coroutine
         if (coroutine != null) Enemy.StopCoroutine(coroutine);
@@ -31,11 +35,12 @@ public class BeastStunState : BeastState {
     private IEnumerator StunCoroutine() {
         //Animate
         Debug.Log("AMAI NO ME PEGUES QUE INDEFENSO ESTOY");
+        Enemy.PlaySound(Beast.StunSound);
 
         //Wait
         yield return new WaitForSeconds(Beast.StunDuration);
 
-        //Go start charging
+        //Start charging
         Behaviour.SetState(new BeastPrechargeState(Behaviour), true);
     }
 

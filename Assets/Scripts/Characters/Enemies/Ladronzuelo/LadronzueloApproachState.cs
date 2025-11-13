@@ -10,24 +10,33 @@ public class LadronzueloApproachState : LadronzueloState {
     }
 
     public override void Execute() {
-        //Check player visibility
-        if (!Enemy.PlayerIsVisible) {
-            //Player not visible -> Go to idle
+        //Check target visibility
+        if (!Enemy.TargetPositionIsKnown) {
+            //Target position is unknown -> Go to idle
             Behaviour.SetState(new LadronzueloIdleState(Behaviour));
-        } else if (Enemy.PlayerDistance > Ladronzuelo.InteractRange) {
-            //Player too far -> Move towards player
-            Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
-        } else {
-            //Player in interact range -> Check if allowed to steal
+        } else if (Enemy.TargetLastKnownDistance <= Ladronzuelo.InteractRange) {
+            //Target in interact range -> Check if allowed to steal
             if (Ladronzuelo.CheckIfAllowedToSteal()) {
-                //Steal from player
+                //Allowed to steal -> Steal
                 Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
-            } else if (Ladronzuelo.StolenAmount > 0) {
-                //Stole gold -> Flee from player
+            } else if (Ladronzuelo.HasStolen) {
+                //Has stolen already -> Flee
                 Behaviour.SetState(new LadronzueloFleeState(Behaviour));
             } else {
-                //Stole nothin -> Attack player
+                //Stole nothin -> Attack
                 Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
+            }
+        } else {
+            //Target too far -> Move towards it
+            Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
+
+            //Check if reached destination
+            if (Enemy.AgentReachedDestination) {
+                //Notify target position was reached
+                Enemy.NotifyTargetPositionReached();
+
+                //Check if should stop following
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new LadronzueloIdleState(Behaviour));
             }
         }
     }

@@ -1,26 +1,15 @@
-using UnityEngine;
-
-public class KnightIdleState : EnemyState
-{
+public class KnightIdleState : KnightState {
 
     //Constructor
     public KnightIdleState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
-    public override void OnEnter() {
-        //Called when the state enters
-    }
-
-    public override void OnExit() {
-        //Called when the state exits
-    }
-
     public override void Execute() {
-        //Check if player is visible
+        //Check if target is visible
+        if (!Enemy.TargetIsVisible) return;
 
-        if(Enemy.PlayerDistance > 5) return;
-
-        //Go to follow state & execute it
+        //Follow target
         Behaviour.SetState(new KnightUnsheatheShield(Behaviour), true);
     }
+
 }

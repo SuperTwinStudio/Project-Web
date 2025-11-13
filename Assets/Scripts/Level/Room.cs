@@ -15,7 +15,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Transform[] m_EnemySpawnPoints;
     [Space]
     [SerializeField] private bool m_BossRoom;
-    [SerializeField] private GameObject m_BossObject;
+    [SerializeField] private EnemyBase m_Boss;
     [SerializeField] private GameObject m_Elevator;
 
     [Header("Minimap")]
@@ -83,12 +83,16 @@ public class Room : MonoBehaviour
     }
 
     //Enemies
-    public EnemyBase InitializeEnemy(GameObject obj)
+    public EnemyBase InitializeEnemy(EnemyBase enemy)
     {
-        EnemyBase enemy = obj.GetComponent<EnemyBase>();
         enemy.SetRoom(this);
         _enemies.Add(enemy);
         return enemy;
+    }
+
+    public EnemyBase InitializeEnemy(GameObject obj)
+    {
+        return InitializeEnemy(obj.GetComponent<EnemyBase>());;
     }
 
     public void EnemyKilled(EnemyBase enemy)
@@ -158,7 +162,7 @@ public class Room : MonoBehaviour
         }
         else if (m_BossRoom)
         {
-            InitializeEnemy(m_BossObject);
+            InitializeEnemy(m_Boss);
         }
 
         // Shrink all rooms but the starting room
@@ -188,7 +192,7 @@ public class Room : MonoBehaviour
         m_MinimapVisited.SetActive(true);
 
         //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again)
-        foreach (var enemy in _enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
+        foreach (var enemy in Enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
     }
 
     public void FadeOut()
@@ -197,7 +201,6 @@ public class Room : MonoBehaviour
         m_FadeTrigger = true;
     }
 
-    //Doors
     private void LockDoors()
     {
         for (int i = 0; i < 4; i++) {

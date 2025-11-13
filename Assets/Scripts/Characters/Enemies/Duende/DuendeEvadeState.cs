@@ -10,12 +10,12 @@ public class DuendeEvadeState : DuendeState {
     }
 
     public override void Execute() {
-        if (Enemy.PlayerDistance > Duende.EvadeRange) {
-            //Player lejos -> mira a ver que haces
+        if (Enemy.TargetLastKnownDistance > Duende.EvadeRange) {
+            //Target lejos -> Mira a ver que haces
             Duende.SetState(new DuendeIdleState(Duende));
         } else {
-            //Player cerca -> huye!
-            Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.PlayerLastKnownPosition).normalized);
+            //Target cerca -> Huye!
+            Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.TargetLastKnownPosition).normalized);
         }
     }
 

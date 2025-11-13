@@ -7,11 +7,13 @@ public class BeastBehaviour : EnemyBehaviour {
 
     //Invulnerability Aura
     [Header("Invulnerability Aura")]
+    [SerializeField] private GameObject _auraModel;
     [SerializeField] private TriggerDetector _auraDetector;
     [SerializeField, Min(0)] private float _auraDamage = 20.0f;
     [SerializeField, Min(0)] private float _auraPushForce = 25.0f;
     [SerializeField, Min(0)] private float _auraPushCooldown = 0.5f;
 
+    public GameObject AuraModel => _auraModel;
     public TriggerDetector AuraDetector => _auraDetector;
     public float AuraDamage => _auraDamage;
     public float AuraPushForce => _auraPushForce;
@@ -19,17 +21,15 @@ public class BeastBehaviour : EnemyBehaviour {
 
     //Pillars
     [Header("Pillars")]
-    [SerializeField] private GameObject _minionPrefab;
-    [SerializeField] private Transform _minionSpawn1;
-    [SerializeField] private Transform _minionSpawn2;
     [SerializeField] private List<BeastPillar> _pillars = new();
+    [SerializeField] private GameObject _minionPrefab;
+    [SerializeField] private List<Transform> _minionSpawns = new();
 
     private event Action<BeastPillar> OnPillarDestroyed;
 
-    public GameObject MinionPrefab => _minionPrefab;
-    public Transform MinionSpawn1 => _minionSpawn1;
-    public Transform MinionSpawn2 => _minionSpawn2;
     public IReadOnlyList<BeastPillar> Pillars => _pillars;
+    public GameObject MinionPrefab => _minionPrefab;
+    public IReadOnlyList<Transform> MinionSpawns => _minionSpawns;
 
     //States
     [Header("States")]
@@ -37,11 +37,23 @@ public class BeastBehaviour : EnemyBehaviour {
     [SerializeField, Min(0)] private float _prechargeDuration = 2.0f;
     [SerializeField, Min(0)] private float _maxChargeDistance = 20.0f;
     [SerializeField, Min(0)] private float _stunDuration = 5.0f;
+    [SerializeField] private AudioClip _rageSound;
+    [SerializeField] private AudioClip _prechargeSound;
+    [SerializeField] private AudioClip _chargeSound;
+    [SerializeField] private AudioClip _stunSound;
+    [SerializeField] private AudioClip _damageSound;
+    [SerializeField] private AudioClip _deathSound;
 
     public float RageDuration => _rageDuration;
     public float PrechargeDuration => _prechargeDuration;
     public float MaxChargeDistance => _maxChargeDistance;
     public float StunDuration => _stunDuration;
+    public AudioClip RageSound => _rageSound;
+    public AudioClip PrechargeSound => _prechargeSound;
+    public AudioClip ChargeSound => _chargeSound;
+    public AudioClip StunSound => _stunSound;
+    public AudioClip DamageSound => _damageSound;
+    public AudioClip DeathSound => _deathSound;
 
 
     //Init
@@ -55,7 +67,7 @@ public class BeastBehaviour : EnemyBehaviour {
         //Init pillars
         foreach (var pillar in _pillars) pillar.Init(this);
 
-        //Start in idle state
+        //Go to idle
         SetState(new BeastPillarsState(this));
     }
 
@@ -63,8 +75,8 @@ public class BeastBehaviour : EnemyBehaviour {
     public override void OnDeath() {
         base.OnDeath();
 
-        //Set state to death
-        SetState(new SimpleDeathState(this));
+        //Go to death
+        SetState(new BeastDeathState(this));
     }
 
     //Pillars

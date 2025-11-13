@@ -39,7 +39,7 @@ public class LadronzueloAttackState : LadronzueloState {
         //Wait
         yield return new WaitForSeconds(0.5f);
 
-        //Return to aproach state
+        //Go to aproach
         Behaviour.SetState(new LadronzueloApproachState(Behaviour));
     }
 

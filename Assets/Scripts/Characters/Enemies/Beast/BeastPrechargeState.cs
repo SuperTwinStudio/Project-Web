@@ -31,11 +31,12 @@ public class BeastPrechargeState : BeastState {
     private IEnumerator PrechargeCoroutine() {
         //Animate
         Debug.Log("LISTOS O NO, AYA VOY");
+        Enemy.PlaySound(Beast.PrechargeSound);
 
         //Wait
         yield return new WaitForSeconds(Beast.PrechargeDuration);
 
-        //Go start charging
+        //Charge
         Behaviour.SetState(new BeastChargeState(Behaviour), true);
     }
 

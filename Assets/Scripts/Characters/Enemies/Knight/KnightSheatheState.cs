@@ -1,17 +1,11 @@
 using UnityEngine;
 
-public class KnightSheatheState : EnemyState
-{
+public class KnightSheatheState : KnightState {
 
     //Constructor
     public KnightSheatheState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
-    public override void OnEnter() {
-        //Called when the state enters
-        
-    }
-
     public override void OnExit() {
         //Called when the state exits
         Enemy.IsInvulnerable = false;
@@ -19,9 +13,7 @@ public class KnightSheatheState : EnemyState
 
     public override void Execute() {
         Debug.Log("Knight Sheathing Shield");
-
         Behaviour.SetState(new KnightAttackState(Behaviour), true);
-
     }
 
 }

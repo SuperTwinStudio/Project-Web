@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class DuendeAttackState : DuendeState {
 
     //Constructor
@@ -21,14 +18,14 @@ public class DuendeAttackState : DuendeState {
         if (Duende.OnAttackCooldown) return;
 
         //Check distance
-        if (Enemy.PlayerDistance < Duende.EvadeRange) {
-            //Player too close - > evade
+        if (Enemy.TargetLastKnownDistance < Duende.EvadeRange) {
+            //Target too close -> Evade
             Duende.SetState(new DuendeEvadeState(Duende));
-        } else if (Enemy.PlayerDistance < Duende.MaxAttackRange) {
-            //Attack
+        } else if (Enemy.TargetLastKnownDistance < Duende.MaxAttackRange) {
+            //Target in range -> Attack
             Duende.Attack();
         } else {
-            //Player fuera de rango -> siguele
+            //Target fuera de rango -> Siguele
             Duende.SetState(new DuendeFollowState(Duende));
         }
     }

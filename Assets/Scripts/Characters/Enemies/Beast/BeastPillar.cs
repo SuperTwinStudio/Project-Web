@@ -6,10 +6,8 @@ public class BeastPillar : MonoBehaviour, IDamageable {
 
     //Pillar
     [Header("Pillar")]
-    [SerializeField] private GameObject _model;
     [SerializeField] private Transform _top;
 
-    public GameObject Model => _model;
     public Transform Top => _top;
 
     //Health
@@ -51,7 +49,7 @@ public class BeastPillar : MonoBehaviour, IDamageable {
             Beast.NotifyPillarDestroyed(this);
 
             //Disable & destroy
-            Destroy(Model);
+            Destroy(gameObject);
         }
 
         //Success

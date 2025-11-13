@@ -5,18 +5,18 @@ public class DuendeIdleState : DuendeState {
 
     //Actions
     public override void Execute() {
-        //Check if player is visible
-        if (!Enemy.PlayerIsVisible) return;
+        //Check if target is visible
+        if (!Enemy.TargetIsVisible) return;
 
         //Check distance
-        if (Enemy.PlayerDistance > Duende.MinAttackRange) {
-            //Player too far -> follow him
+        if (Enemy.TargetLastKnownDistance > Duende.MinAttackRange) {
+            //Target too far -> Follow it
             Duende.SetState(new DuendeFollowState(Duende));
-        } else if (Enemy.PlayerDistance > Duende.EvadeRange) {
-            //Player within attack range -> Attack him
+        } else if (Enemy.TargetLastKnownDistance > Duende.EvadeRange) {
+            //Target within attack range -> Attack it
             Duende.SetState(new DuendeAttackState(Duende));
         } else {
-            //Player too close -> Evade
+            //Target too close -> Evade it
             Duende.SetState(new DuendeEvadeState(Duende));
         }
     }

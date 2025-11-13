@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class KnightAttackState : EnemyState
-{
+public class KnightAttackState : KnightState {
 
     //Attack
-    private const float ATTACK_DAMAGE = 20;
     private Coroutine attackCoroutine = null;
 
 
@@ -25,16 +23,15 @@ public class KnightAttackState : EnemyState
 
     //Attack
     private IEnumerator AttackCoroutine() {
-        Debug.Log("Knight Attacking");
-
         //Animate
+        Debug.Log("Knight Attacking");
         Enemy.Animator.SetTrigger("Attack");
     
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(2f, 0, ATTACK_DAMAGE);
+        Enemy.Attack.Forward(2f, 0, Knight.AttackDamage);
     
         //Wait
         yield return new WaitForSeconds(2f);

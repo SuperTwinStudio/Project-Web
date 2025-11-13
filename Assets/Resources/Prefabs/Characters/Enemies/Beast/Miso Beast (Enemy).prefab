@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1610134326598065793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7815488437459065982}
+  - component: {fileID: 622141064457712579}
+  - component: {fileID: 2742174701014374799}
+  m_Layer: 7
+  m_Name: Aura Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7815488437459065982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610134326598065793}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1363099885631336440}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &622141064457712579
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610134326598065793}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2742174701014374799
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610134326598065793}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 093b53dae28ec5742b9fcabb5015d892, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2075971432248723481
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +193,7 @@ GameObject:
   - component: {fileID: 618800547146424102}
   - component: {fileID: 782432667677587967}
   m_Layer: 3
-  m_Name: Aura
+  m_Name: Aura Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: _maxhealth
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: viewDistance
@@ -231,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Name
-      value: Sir Beast
+      value: Miso Beast (Enemy)
       objectReference: {fileID: 0}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_TagString
@@ -239,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -247,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -289,6 +375,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2739467051366623611, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 805068122690356888}
+    - targetCorrespondingSourceObject: {fileID: 2739467051366623611, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7815488437459065982}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       insertIndex: -1
@@ -311,18 +400,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ac575103990614f94d7f432e57512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _auraModel: {fileID: 1610134326598065793}
   _auraDetector: {fileID: 782432667677587967}
   _auraDamage: 20
   _auraPushForce: 25
   _auraPushCooldown: 0.5
-  _minionPrefab: {fileID: 4189586724926003850, guid: 16578441a536ec64d80a967e61534ac9, type: 3}
-  _minionSpawn1: {fileID: 7255958846259814492}
-  _minionSpawn2: {fileID: 297957182502553987}
   _pillars: []
+  _minionPrefab: {fileID: 2171775490227705875, guid: a9379672591ffc34f917fae4f826a649, type: 3}
+  _minionSpawns:
+  - {fileID: 7255958846259814492}
+  - {fileID: 297957182502553987}
   _rageDuration: 2
   _prechargeDuration: 2
   _maxChargeDistance: 20
   _stunDuration: 5
+  _rageSound: {fileID: 8300000, guid: d977a3d25552f12499d1cf0bf6635260, type: 3}
+  _prechargeSound: {fileID: 8300000, guid: 056c901ac64760742a7f47da980e644a, type: 3}
+  _chargeSound: {fileID: 8300000, guid: 056c901ac64760742a7f47da980e644a, type: 3}
+  _stunSound: {fileID: 8300000, guid: 07df315611985144aa925a0610a289bf, type: 3}
+  _damageSound: {fileID: 8300000, guid: 204b27e0c30f61841874f65fef2cb7f2, type: 3}
+  _deathSound: {fileID: 8300000, guid: 4a9c3488719b6a64bbf20eea0a1bdb3c, type: 3}
 --- !u!4 &1363099885631336440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2739467051366623611, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}

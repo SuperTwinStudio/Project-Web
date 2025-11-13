@@ -6,7 +6,7 @@ public class BeastState : EnemyState {
     //Beast
     private readonly Timer damageTimer = new();
 
-    protected BeastBehaviour Beast;
+    protected BeastBehaviour Beast { get; private set; }
 
 
     //Constructor
@@ -15,6 +15,11 @@ public class BeastState : EnemyState {
     }
 
     //Actions
+    public override void OnDamage() {
+        //Play sound
+        Enemy.PlaySound(Beast.DamageSound);
+    }
+
     public override void Execute() {
         //Enemy is vulnerable, aura is in cooldown or not triggering
         if (!Enemy.IsInvulnerable || damageTimer.counting || !Beast.AuraDetector.isTriggered) return;

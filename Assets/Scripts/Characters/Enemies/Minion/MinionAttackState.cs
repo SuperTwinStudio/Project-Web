@@ -1,15 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class SimpleAttackState : EnemyState {
+public class MinionAttackState : MinionState {
 
     //Attack
-    private const float ATTACK_DAMAGE = 20;
     private Coroutine attackCoroutine = null;
 
 
     //Constructor
-    public SimpleAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public MinionAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {
@@ -26,18 +25,18 @@ public class SimpleAttackState : EnemyState {
     private IEnumerator AttackCoroutine() {
         //Animate
         Enemy.Animator.SetTrigger("Attack");
-    
+
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(0.75f, 0, ATTACK_DAMAGE);
-    
+        Enemy.Attack.Forward(0.75f, 0, Minion.AttackDamage);
+
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Return to idle state & execute it
-        Behaviour.SetState(new SimpleIdleState(Behaviour), true);
+        Behaviour.SetState(new MinionIdleState(Behaviour), true);
     }
 
 }

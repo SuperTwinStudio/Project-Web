@@ -42,10 +42,10 @@ public class LadronzueloStealState : LadronzueloState {
 
         //Check next state
         if (Ladronzuelo.StolenAmount > 0) {
-            //Stole gold -> Flee from player
+            //Stole gold -> Go to flee
             Behaviour.SetState(new LadronzueloFleeState(Behaviour));
         } else {
-            //keep following player
+            //Missed steal attack -> Go to aproach
             Behaviour.SetState(new LadronzueloApproachState(Behaviour));   
         }
     }

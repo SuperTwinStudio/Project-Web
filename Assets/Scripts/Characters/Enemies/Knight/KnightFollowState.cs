@@ -1,19 +1,9 @@
-using UnityEngine;
-
-public class KnightFollowState : EnemyState
-{
-    //Attack
-    private const float ATTACK_RANGE = 1.5f;
-
+public class KnightFollowState : KnightState {
 
     //Constructor
     public KnightFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
-    public override void OnEnter() {
-        //Called when the state enters
-    }
-
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
@@ -21,15 +11,15 @@ public class KnightFollowState : EnemyState
 
     public override void Execute() {
         //Check player visibility
-        if (!Enemy.PlayerIsVisible) {
+        if (!Enemy.TargetIsVisible) {
             //Player not visible -> Go to idle
             Behaviour.SetState(new KnightIdleState(Behaviour));
-        } else if (Enemy.PlayerDistance <= ATTACK_RANGE) {
+        } else if (Enemy.TargetLastKnownDistance <= Knight.AttackRange) {
             //Player in attack range -> Attack it
             Behaviour.SetState(new KnightSheatheState(Behaviour), true);
         } else {
             //Move towards player
-            Enemy.MoveTowards(Enemy.PlayerLastKnownPosition);
+            Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
         }
     }
 

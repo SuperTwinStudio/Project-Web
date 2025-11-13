@@ -10,10 +10,10 @@ public class LadronzueloIdleState : LadronzueloState {
     }
 
     public override void Execute() {
-        //Check if player is visible
-        if (!Enemy.PlayerIsVisible) return;
+        //Check if target is visible
+        if (!Enemy.TargetIsVisible) return;
 
-        //Go to aproach player state & execute it
+        //Aproach target
         Behaviour.SetState(new LadronzueloApproachState(Behaviour), true);
     }
 

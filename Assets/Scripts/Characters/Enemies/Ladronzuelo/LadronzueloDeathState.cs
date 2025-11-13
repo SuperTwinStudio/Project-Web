@@ -1,15 +1,15 @@
-public class LadronzueloDeathState : SimpleDeathState {
+public class LadronzueloDeathState : LadronzueloState {
 
     //Constructor
     public LadronzueloDeathState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {
-        //Return money
-        (Behaviour as LadronzueloBehaviour).ReturnGoldToPlayer();
+        //Return gold
+        Ladronzuelo.ReturnGoldToPlayer();
 
-        //Die
-        base.OnEnter();
+        //Animate
+        Enemy.Animator.SetTrigger("Die");
     }
 
 }

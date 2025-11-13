@@ -1,7 +1,7 @@
-public class DuendeFollowState : DuendeState {
+public class MinionFollowState : MinionState {
 
     //Constructor
-    public DuendeFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public MinionFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -13,21 +13,21 @@ public class DuendeFollowState : DuendeState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Duende.SetState(new DuendeIdleState(Duende));
-        } else if (Enemy.TargetLastKnownDistance > Duende.EvadeRange && Enemy.TargetLastKnownDistance < Duende.MinAttackRange) {
+            Behaviour.SetState(new MinionIdleState(Behaviour));
+        } else if (Enemy.TargetLastKnownDistance <= Minion.AttackRange) {
             //Target in attack range -> Attack it
-            Duende.SetState(new DuendeAttackState(Duende));
+            Behaviour.SetState(new MinionAttackState(Behaviour), true);
         } else {
-            //Move towards target
+            //Target too far -> Move towards it
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
-    
+
             //Check if reached destination
             if (Enemy.AgentReachedDestination) {
                 //Notify target position was reached
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new DuendeIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new MinionIdleState(Behaviour));
             }
         }
     }
