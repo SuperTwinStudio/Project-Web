@@ -111,7 +111,7 @@ public class EnemyBase : Character {
     }
 
     //Health
-    private IEnumerator DeathCoroutine() {
+    private IEnumerator DestroyCoroutine() {
         //Wait
         yield return new WaitForSeconds(5.0f);
 
@@ -149,7 +149,7 @@ public class EnemyBase : Character {
         Behaviour.OnDeath();
 
         //Start destroy countdown
-        StartCoroutine(DeathCoroutine());
+        Level.StartCoroutine(DestroyCoroutine()); //Start coroutine in level cause its always active (when a gameobject, in this case the room, gets disabled, it stops all child coroutines)
     }
 
     public override bool Damage(float amount, object source, DamageType type = DamageType.None) {

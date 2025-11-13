@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BeastPillar : MonoBehaviour, IDamageable {
 
+    //Beast
     public BeastBehaviour Beast { get; private set; }
 
     //Pillar
@@ -12,12 +13,15 @@ public class BeastPillar : MonoBehaviour, IDamageable {
 
     //Health
     [Header("Health")]
-    [SerializeField] private float _maxHealth = 300;
-    [SerializeField] private GameObject damageIndicatorPrefab;
+    [SerializeField] private float _baseHealth = 300;
 
     public bool IsAlive { get; private set; } = true;
     public float Health { get; private set; } = 0;
-    public float HealthMax => _maxHealth;
+    public float HealthMax => _baseHealth;
+
+    //Feedback
+    [Header("Feedback")]
+    [SerializeField] private GameObject damageIndicatorPrefab;
 
 
     //State
