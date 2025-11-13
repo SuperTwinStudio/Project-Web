@@ -288,6 +288,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      propertyPath: _baseHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: viewDistance
       value: 69
       objectReference: {fileID: 0}
