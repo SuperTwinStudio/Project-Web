@@ -202,7 +202,7 @@ public class Weapon : MonoBehaviour {
         PassiveUpgrade.SetLevel(Loadout.GetUpgrade(PassiveUpgrade.Key));
     }
 
-    protected string GetUpgradeName(WeaponAction attack) {
+    public string GetUpgradeName(WeaponAction attack) {
         return $"{Item.FileName}_{attack}";
     }
 

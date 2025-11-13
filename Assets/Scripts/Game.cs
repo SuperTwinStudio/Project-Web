@@ -13,6 +13,7 @@ public class Game : MonoBehaviour, ISavable {
     //Components
     [Header("Components")]
     [SerializeField] private MenuManager _menuManager;
+    [SerializeField] private SaveManager _saveManager;
 
     private Level _level;
 
@@ -28,6 +29,7 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     public MenuManager MenuManager => _menuManager;
+    public SaveManager SaveManager => _saveManager;
 
     //Cursor
     private static readonly List<object> cursorLock = new();
@@ -58,7 +60,8 @@ public class Game : MonoBehaviour, ISavable {
         //Singleton 🤓
         if (Current) {
             //Another game exists -> Destroy this one
-            Current.OnNewGame(this);
+            if(SaveManager.SaveExists()) Current.OnLoadGame(this);
+            else Current.OnNewGame(this);
             gameObject.SetActive(false);
             DestroyImmediate(gameObject);
             return;
@@ -66,7 +69,8 @@ public class Game : MonoBehaviour, ISavable {
 
         //None exists -> Keep this one as singleton
         Current = this;
-        OnNewGame(this);
+        if(SaveManager.SaveExists()) OnLoadGame(this);
+        else OnNewGame(this);
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }
@@ -89,6 +93,25 @@ public class Game : MonoBehaviour, ISavable {
 
         //Load game state
         if (InGame) OnLoad(save);
+    }
+
+    private void OnLoadGame(Game newGame) {
+        //Reset cursor & time
+        ResetHasCursor();
+        ResetTime();
+
+        //Check for a level
+        InGame = Level;
+
+        //Init menus with new game menus
+        MenuManager.Init(newGame.MenuManager);
+
+        //Load game state
+        if (InGame) 
+        {
+            OnLoad(save);
+            SaveManager.Load();
+        }
     }
 
     //Cursor

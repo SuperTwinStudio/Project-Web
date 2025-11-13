@@ -292,6 +292,21 @@ public class Player : Character, ISavable {
         return true;
     }
 
+    public void LoadUpgradeSaveData(PlayerUpgrade type, int level)
+    {
+        switch (type)
+        {
+            case PlayerUpgrade.Gramaje:
+                GramajeUpgrade.SetLevel(level);
+                Heal(HealthMax);
+                break;
+
+            case PlayerUpgrade.Rugosidad:
+                RugosidadUpgrade.SetLevel(level);
+                break;
+        }
+    }
+
     //Events (other)
     private void OnGameLoadingChanged(bool IsLoading) {
         if (IsLoading)
