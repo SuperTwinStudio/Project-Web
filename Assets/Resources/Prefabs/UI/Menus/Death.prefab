@@ -68,10 +68,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'You couldn''t save your brother...
 
-    
 
-    While fleeing, all of
-    your treasures and half of your gold fell to the ground.'
+
+    While fleeing, all of your treasures
+    and half of your gold fell to the ground.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
@@ -1071,6 +1071,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6297959223258691023, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8494784243064451444}
+    - targetCorrespondingSourceObject: {fileID: 6297959223258691023, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7289312220941382900}
+    - targetCorrespondingSourceObject: {fileID: 6297959223258691023, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 524922311073364078}
   m_SourcePrefab: {fileID: 100100000, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}
 --- !u!1 &944703539788321147 stripped
 GameObject:
@@ -1093,6 +1099,40 @@ MonoBehaviour:
   _canvas: {fileID: 0}
   _state: 0
   defaultSelectable: {fileID: 1683460081971877955}
+--- !u!225 &7289312220941382900
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944703539788321147}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &524922311073364078
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944703539788321147}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d9c4afabccdb5f4b89e7397092f0c88, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &7480469518259031152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}

@@ -4,12 +4,12 @@ Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño
 Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y desarrollo de videojuegos* de la URJC.
 
 ## Twin Studio  
-- **Itch.io:** https://supertwinstudio.itch.io/
 - **Portfolio:** http://supertwinstudio.github.io/Portfolio/
-- **Linktree:** https://linktr.ee/supertwinstudio
+- **Itch.io:** https://supertwinstudio.itch.io/
 - **Instagram:** https://www.instagram.com/supertwinstudio/
-- **Youtube:** https://www.youtube.com/@superTwinStudio
 - **X (Twitter):** https://x.com/superTwinStudio
+- **Youtube:** https://www.youtube.com/@superTwinStudio
+- **Linktree:** https://linktr.ee/supertwinstudio
 
 ## Equipo de desarrollo
 - Alejandro Paniagua Moreno (@BOTPanzer) -> a.paniagua.2022@alumnos.urjc.es
@@ -295,7 +295,7 @@ Unidades inteligentes que se encontrarán repartidas por las mazmorras. Cada cla
 
 ### Bosses
 
-#### **Mr. Beast**
+#### **Miso Beast**
 Un animal de origami con un tamaño mayor a lo normal con diferentes fases.
 
 **Fase 1**

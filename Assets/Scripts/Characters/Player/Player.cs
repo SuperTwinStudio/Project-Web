@@ -258,7 +258,6 @@ public class Player : Character, ISavable {
         Animator.SetBool("IsMoving", isMoving);
     }
 
-    //Controls
     public void BlockControls(object obj) {
         controlBlockers.Add(obj);
         StopMovement();
