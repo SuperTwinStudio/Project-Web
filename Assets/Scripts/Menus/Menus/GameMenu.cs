@@ -17,7 +17,10 @@ public class GameMenu : Menu {
 
     //Health
     [Header("Health")]
+    [SerializeField] private Animator damageIndicator;
     [SerializeField] private TMP_Text healthText;
+
+    private float lastKnownHealth = -1;
 
     //Weapon
     private Weapon currentWeapon;
@@ -65,6 +68,7 @@ public class GameMenu : Menu {
     [Header("Minimap")]
     [SerializeField] private GameObject minimapCamera;
     [SerializeField] private GameObject minimap;
+
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -114,6 +118,17 @@ public class GameMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     //Health
+    private void OnHealthChanged(float health) {
+        //Check if health is init
+        if (lastKnownHealth >= 0) damageIndicator.SetTrigger("Damage");
+
+        //Update health UI
+        UpdateHealthIndicator(health);
+
+        //Update health
+        lastKnownHealth = health;
+    }
+
     private void UpdateHealthIndicator(float health) {
         //Update health UI
         healthText.SetText($"{health}HP");
@@ -219,9 +234,10 @@ public class GameMenu : Menu {
         //Not playing
         if (!Application.isPlaying) return;
 
-        //Add player health change event & update
-        Player.AddOnHealthChanged(UpdateHealthIndicator);
+        //Add player health change event & update it
+        Player.AddOnHealthChanged(OnHealthChanged);
         UpdateHealthIndicator(Player.Health);
+        lastKnownHealth = -1;
 
         //Add weapon change event
         Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);

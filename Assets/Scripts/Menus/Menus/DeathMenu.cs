@@ -6,6 +6,7 @@ public class DeathMenu : Menu {
     //Prefab
     public override string Name => MenusList.Death;
 
+    //Components
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
 
