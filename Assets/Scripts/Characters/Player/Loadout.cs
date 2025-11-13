@@ -50,6 +50,7 @@ public class Loadout : MonoBehaviour, ISavable {
     //Passive items
     private readonly SerializableDictionary<PassiveItem, int> _passiveItems = new();
     private event ItemObtained OnObtainItem;
+    private List<PassiveItem> _passiveItemDeletionQueue = new List<PassiveItem>();
 
     public IReadOnlyDictionary<PassiveItem, int> PassiveItems => _passiveItems;
 
@@ -227,6 +228,23 @@ public class Loadout : MonoBehaviour, ISavable {
     }
 
     //Passive items
+    public void QueuePassiveItemRemoval(PassiveItem item)
+    {
+        _passiveItemDeletionQueue.Add(item);
+    }
+
+    public void RemoveQueuedPassiveItems()
+    {
+        if(_passiveItemDeletionQueue.Count == 0) return;
+
+        for (int i = 0; i < _passiveItemDeletionQueue.Count; i++)
+        {
+            RemovePassiveItem(_passiveItemDeletionQueue[i]);
+        }
+
+        _passiveItemDeletionQueue.Clear();
+    }
+
     public void RemovePassiveItem(PassiveItem item) {
         //Invalid item or we don't have it yet
         if (!item || !PassiveItems.ContainsKey(item)) return;
@@ -355,5 +373,4 @@ public class Loadout : MonoBehaviour, ISavable {
         public SerializableDictionary<string, int> passiveItems = new();
 
     }
-
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38692aa9f04acc41aa83332b589f8b3, type: 3}
   m_Name: treasure_star
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
+  _icon: {fileID: 21300000, guid: 75640f9a91560a34fbc273a7bd722b36, type: 3}
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29

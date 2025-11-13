@@ -292,6 +292,7 @@ public class Player : Character, ISavable {
     protected override void OnDeath() {
         //Death item hooks
         foreach (var pair in Loadout.PassiveItems) pair.Key.OnDeathHook(this, pair.Value);
+        Loadout.RemoveQueuedPassiveItems();
 
         //Run the alive check again since items could have altered that outcome
         if (!IsAlive) MenuManager.Open(MenusList.Death);
