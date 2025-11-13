@@ -12,14 +12,6 @@ public class BeastPillar : MonoBehaviour, IDamageable {
     public GameObject Model => _model;
     public Transform Top => _top;
 
-    //Enemies
-    [Header("Enemies")]
-    [SerializeField] private Transform _spawn1;
-    [SerializeField] private Transform _spawn2;
-
-    public Transform Spawn1 => _spawn1;
-    public Transform Spawn2 => _spawn2;
-
     //Health
     [Header("Health")]
     [SerializeField] private float _maxHealth = 300;
@@ -56,7 +48,7 @@ public class BeastPillar : MonoBehaviour, IDamageable {
             IsAlive = false;
 
             //Notify pillar was destroyed
-            Beast.OnPillarDestroyed(this);
+            Beast.NotifyPillarDestroyed(this);
 
             //Disable & destroy
             Destroy(Model);

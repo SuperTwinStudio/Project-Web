@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Botpa;
 using UnityEngine;
@@ -18,8 +19,17 @@ public class BeastBehaviour : EnemyBehaviour {
 
     //Pillars
     [Header("Pillars")]
-    [SerializeField] private GameObject minionPrefab;
-    [SerializeField] private List<BeastPillar> pillars = new();
+    [SerializeField] private GameObject _minionPrefab;
+    [SerializeField] private Transform _minionSpawn1;
+    [SerializeField] private Transform _minionSpawn2;
+    [SerializeField] private List<BeastPillar> _pillars = new();
+
+    private event Action<BeastPillar> OnPillarDestroyed;
+
+    public GameObject MinionPrefab => _minionPrefab;
+    public Transform MinionSpawn1 => _minionSpawn1;
+    public Transform MinionSpawn2 => _minionSpawn2;
+    public IReadOnlyList<BeastPillar> Pillars => _pillars;
 
     //States
     [Header("States")]
@@ -43,7 +53,7 @@ public class BeastBehaviour : EnemyBehaviour {
         Enemy.IsInvulnerable = true;
 
         //Init pillars
-        foreach (var pillar in pillars) pillar.Init(this);
+        foreach (var pillar in _pillars) pillar.Init(this);
 
         //Start in idle state
         SetState(new BeastPillarsState(this));
@@ -58,24 +68,20 @@ public class BeastBehaviour : EnemyBehaviour {
     }
 
     //Pillars
-    public void OnPillarDestroyed(BeastPillar pillar) {
+    public void AddOnPillarDestroyed(Action<BeastPillar> action) {
+        OnPillarDestroyed += action;
+    }
+
+    public void RemoveOnPillarDestroyed(Action<BeastPillar> action) {
+        OnPillarDestroyed -= action;
+    }
+
+    public void NotifyPillarDestroyed(BeastPillar pillar) {
         //Remove from list
-        pillars.Remove(pillar);
+        _pillars.Remove(pillar);
 
-        //Check remaining pillars
-        if (pillars.Count >= 2) {
-            //Still 2+ columns -> Spawn enemies on the broken pillar
-            SpawnEnemy(minionPrefab, pillar.Spawn1);
-            SpawnEnemy(minionPrefab, pillar.Spawn2);
-        } else if (pillars.Count == 1) {
-            //Only 1 column remaining -> Destroy it
-            BeastPillar remainingPillar = pillars[0];
-            remainingPillar.Damage(remainingPillar.Health, Enemy, DamageType.None);
-            pillars.Clear();
-
-            //Start rage phase
-            SetState(new BeastRageState(this));
-        }
+        //Call event
+        OnPillarDestroyed?.Invoke(pillar);
     }
 
 }
