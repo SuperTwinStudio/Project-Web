@@ -1,55 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4010932218808847509
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6795849269857321798}
-  - component: {fileID: 144261189510047676}
-  m_Layer: 0
-  m_Name: Save Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6795849269857321798
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4010932218808847509}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6487303602168023219}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &144261189510047676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4010932218808847509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45157db03020d3b46809dbc88eab0140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WeaponItems:
-  - {fileID: 11400000, guid: cd0ad7cf8152c0b4aaddbb4eb872adab, type: 2}
-  - {fileID: 11400000, guid: 4f7b7f5aa3004544c9c505835c824805, type: 2}
-  - {fileID: 11400000, guid: 2ffb216ac8f51a649ae1948e37a210c8, type: 2}
-  - {fileID: 11400000, guid: 16abb62fcefae104badd1e2b20c4d6db, type: 2}
-  - {fileID: 11400000, guid: ced40d40167627e40893da77d3ad12fb, type: 2}
 --- !u!1 &5876889629632380585
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +111,6 @@ Transform:
   m_Children:
   - {fileID: 7852482871258039693}
   - {fileID: 5375438705075962623}
-  - {fileID: 6795849269857321798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &574688381295736015
@@ -177,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuManager: {fileID: 169917115230699701}
-  _saveManager: {fileID: 144261189510047676}
 --- !u!1001 &847836744261904261
 PrefabInstance:
   m_ObjectHideFlags: 0

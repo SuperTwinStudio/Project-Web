@@ -79,11 +79,6 @@ public class Loadout : MonoBehaviour, ISavable {
         Gold += amount;
     }
 
-    public void SetGold(int amount)
-    {
-        Gold = amount;
-    }
-
     //Inventory
     public void ClearInventory() {
         //Empty dictionary
@@ -115,8 +110,8 @@ public class Loadout : MonoBehaviour, ISavable {
         //Clear inventory items & value
         ClearInventory();
 
-        //Save progress
-        if(addedValue > 0) Game.Current.SaveManager.Save();
+        //Save game
+        if (addedValue > 0) Game.Current.SaveGame();
 
         //Return added value
         return addedValue;

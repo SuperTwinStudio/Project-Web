@@ -236,8 +236,8 @@ public class ShopMenu : Menu {
         //Not playing
         if (!Application.isPlaying) return;
 
-        //Save progress
-        Game.Current.SaveManager.Save();
+        //Save game
+        Game.Current.SaveGame();
 
         //Stop camera cinematic
         Level.CameraController.ExitCutscene();

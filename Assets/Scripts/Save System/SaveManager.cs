@@ -5,18 +5,28 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    private string m_Path => Application.persistentDataPath + "/save.paper";
-    private const int SAVE_VERSION = 1;
+    //Components
+    [Header("Components")]
+    [SerializeField] private Game _game;
+
+    public Game Game => _game;
+
+    //Saving
+    private const int SAVE_VERSION = 2;
+    private string SavePath => $"{Application.persistentDataPath}/save.paper";
+    private string Save = "{}";
+
+    public bool SaveLoaded { get; private set; }
+
+    public bool SaveExists => File.Exists(SavePath);
+
+
 
     [Header("Weapon References")]
     [SerializeField] private Item[] m_WeaponItems;
 
-    public bool SaveExists()
-    {
-        return File.Exists(m_Path);
-    }
 
-    public void Save()
+    /*public void Save()
     {
         Player player = Game.Current.Level.Player;
         Loadout loadout = player.Loadout;
@@ -51,9 +61,9 @@ public class SaveManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(m_Path, json);
-    }
+    }*/
 
-    public void Load()
+    /*public void Load()
     {
         if(!SaveExists())
         {
@@ -85,7 +95,7 @@ public class SaveManager : MonoBehaviour
             loadout.SetUpgrade(loadout.GetWeapon(weapon).GetUpgradeName(WeaponAction.Secondary), weaponData.UpgradeSecondaryLevel);
             loadout.SetUpgrade(loadout.GetWeapon(weapon).GetUpgradeName(WeaponAction.Passive), weaponData.UpgradePassiveLevel);
         }
-    }
+    }*/
 }
 
 [Serializable]

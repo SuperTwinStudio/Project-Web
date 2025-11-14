@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,6 @@ public class Game : MonoBehaviour, ISavable {
     //Components
     [Header("Components")]
     [SerializeField] private MenuManager _menuManager;
-    [SerializeField] private SaveManager _saveManager;
 
     private Level _level;
 
@@ -29,7 +29,6 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     public MenuManager MenuManager => _menuManager;
-    public SaveManager SaveManager => _saveManager;
 
     //Cursor
     private static readonly List<object> cursorLock = new();
@@ -52,7 +51,16 @@ public class Game : MonoBehaviour, ISavable {
     public static bool IsPlaying => !IsPaused && !IsLoading;
 
     //Saving
+    private const int SAVE_VERSION = 2;
+
+    private bool saveFileLoaded = false;
+    private bool saveIsLoading = false;
+    private bool saveAfterLoad = false;
     private string save = "{}";
+
+    private string SavePath => $"{Application.persistentDataPath}/save.paper";
+
+    public bool SaveExists => File.Exists(SavePath);
 
 
     //State
@@ -60,8 +68,7 @@ public class Game : MonoBehaviour, ISavable {
         //Singleton 🤓
         if (Current) {
             //Another game exists -> Destroy this one
-            if(SaveManager.SaveExists()) Current.OnLoadGame(this);
-            else Current.OnNewGame(this);
+            Current.OnNewGame(this);
             gameObject.SetActive(false);
             DestroyImmediate(gameObject);
             return;
@@ -69,8 +76,7 @@ public class Game : MonoBehaviour, ISavable {
 
         //None exists -> Keep this one as singleton
         Current = this;
-        if(SaveManager.SaveExists()) OnLoadGame(this);
-        else OnNewGame(this);
+        OnNewGame(this);
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }
@@ -92,26 +98,7 @@ public class Game : MonoBehaviour, ISavable {
         MenuManager.Init(newGame.MenuManager);
 
         //Load game state
-        if (InGame) OnLoad(save);
-    }
-
-    private void OnLoadGame(Game newGame) {
-        //Reset cursor & time
-        ResetHasCursor();
-        ResetTime();
-
-        //Check for a level
-        InGame = Level;
-
-        //Init menus with new game menus
-        MenuManager.Init(newGame.MenuManager);
-
-        //Load game state
-        if (InGame) 
-        {
-            OnLoad(save);
-            SaveManager.Load();
-        }
+        if (InGame) LoadGame();
     }
 
     //Cursor
@@ -195,8 +182,8 @@ public class Game : MonoBehaviour, ISavable {
         //Already loading
         if (IsLoading) return;
 
-        //Save game so new scene keeps info
-        if (InGame) save = OnSave();
+        //Soft save game (without writing to disk) so new scene keeps info
+        if (InGame) SaveGame(false);
 
         //Load scene
         IsLoading = true;
@@ -213,8 +200,41 @@ public class Game : MonoBehaviour, ISavable {
     }
 
     //Saving
+    public void LoadGame() {
+        //Check if file needs to be loaded
+        if (!saveFileLoaded && SaveExists) {
+            //Load file
+            save = File.ReadAllText(SavePath);
+            saveFileLoaded = true;
+        }
+
+        //Load game
+        saveIsLoading = true;
+        OnLoad(save);
+        saveIsLoading = false;
+
+        //Check if we need to save
+        if (saveAfterLoad) SaveGame();
+    }
+
+    public void SaveGame(bool writeToDisk = true) {
+        //Currently loading
+        if (saveIsLoading) {
+            saveAfterLoad = true;
+            return;
+        }
+
+        //Update save
+        save = OnSave();
+
+        //Write save to file
+        if (writeToDisk) File.WriteAllText(SavePath, save);
+    }
+
     public string OnSave() {
         return JsonUtility.ToJson(new GameSave() {
+            //Version
+            version = SAVE_VERSION,
             //Player
             player = Level.Player.OnSave()
         });
@@ -230,6 +250,9 @@ public class Game : MonoBehaviour, ISavable {
 
     [Serializable]
     private class GameSave {
+
+        //Save version
+        public int version = SAVE_VERSION;
 
         //Player
         public string player = "{}";
