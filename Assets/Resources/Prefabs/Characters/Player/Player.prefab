@@ -421,7 +421,7 @@ MonoBehaviour:
   _primaryCooldown: 0.4
   primarySlowDuration: 0.2
   primarySecondaryCooldown: 0.3
-  primaryDamage: 20
+  primaryDamage: 25
   primaryDamagePerLevel: 5
   primaryAttackSphereCast: {x: 1, y: 0}
   primaryAttackSound: {fileID: 8300000, guid: 5889ba25c176f254eac5598ce85ae60e, type: 3}

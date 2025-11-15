@@ -30,7 +30,6 @@ public class BeastPrechargeState : BeastState {
     //Charge
     private IEnumerator PrechargeCoroutine() {
         //Animate
-        Debug.Log("LISTOS O NO, AYA VOY");
         Enemy.PlaySound(Beast.PrechargeSound);
 
         //Wait

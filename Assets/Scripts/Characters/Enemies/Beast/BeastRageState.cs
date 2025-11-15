@@ -27,7 +27,6 @@ public class BeastRageState : BeastState {
         Enemy.Level.CameraController.AddShake(Beast.RageDuration);
     
         //Animate
-        Debug.Log("ESTOY TO ENFADAOO");
         Enemy.PlaySound(Beast.RageSound);
 
         //Wait

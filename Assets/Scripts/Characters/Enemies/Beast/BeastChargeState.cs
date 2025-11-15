@@ -1,6 +1,13 @@
+using Botpa;
 using UnityEngine;
 
 public class BeastChargeState : BeastState {
+
+    //Charge
+    private readonly Timer timeoutTimer = new(); //To prevent the enemy from staying permanently in charge mode (happened once in testing)
+
+    private const float TIMEOUT_DURATION = 3.0f;
+
 
     //Constructor
     public BeastChargeState(EnemyBehaviour behaviour) : base(behaviour) {}
@@ -15,6 +22,7 @@ public class BeastChargeState : BeastState {
 
         //Move to point
         Enemy.MoveTowards(point);
+        timeoutTimer.Count(TIMEOUT_DURATION);
     }
 
     public override void OnExit() {
@@ -27,7 +35,7 @@ public class BeastChargeState : BeastState {
         base.Execute();
 
         //Check if reached destination
-        if (Enemy.AgentReachedDestination) {
+        if (Enemy.AgentReachedDestination || timeoutTimer.IsFinished) {
             //Reached destination -> Go to stunned state
             Behaviour.SetState(new BeastStunState(Behaviour), true);
         }

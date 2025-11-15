@@ -34,7 +34,6 @@ public class BeastStunState : BeastState {
     //Stun
     private IEnumerator StunCoroutine() {
         //Animate
-        Debug.Log("AMAI NO ME PEGUES QUE INDEFENSO ESTOY");
         Enemy.PlaySound(Beast.StunSound);
 
         //Wait

@@ -221,9 +221,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13737919144398848
-    m_Localized: "Tu inventario tiene <gold> y tesoros valorados en <treasures>.\r\n\r\nPuedes
-      salir y conservar tu inventario o continuar a una mazmorra m\xE1s dificil y
-      arriesgarte a perderlo todo."
+    m_Localized: Mientras huias, todos tus tesoros y la mitad de tu oro cayeron al
+      suelo.
     m_Metadata:
       m_Items: []
   - m_Id: 14865746547838976

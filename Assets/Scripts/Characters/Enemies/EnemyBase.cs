@@ -62,7 +62,7 @@ public class EnemyBase : Character {
     public Room Room { get; private set; } = null;
 
     //Helpers
-    private const float ERROR_DELTA = 0.1f;
+    private const float GET_POINT_ERROR = 0.1f;
 
 
     //State
@@ -182,6 +182,7 @@ public class EnemyBase : Character {
         if (!Agent.isOnNavMesh) return;
 
         //Stop movement
+        Agent.ResetPath();
         Agent.isStopped = true;
         Animator.SetBool("IsMoving", false);
     }
@@ -261,9 +262,9 @@ public class EnemyBase : Character {
     public Vector3 GetFurthestPoint(Vector3 moveDirection, float maxDistance) {
         //Gather info
         CapsuleCollider capsule = Collider as CapsuleCollider;
-        Vector3 capsuleStart = Model.position + ERROR_DELTA * Vector3.up;
-        Vector3 capsuleEnd = Model.position + (capsule.height - 2 * ERROR_DELTA) * Vector3.up;
-        float radius = capsule.radius - ERROR_DELTA;
+        Vector3 capsuleStart = Model.position + GET_POINT_ERROR * Vector3.up;
+        Vector3 capsuleEnd = Model.position + (capsule.height - 2 * GET_POINT_ERROR) * Vector3.up;
+        float radius = capsule.radius - GET_POINT_ERROR;
 
         //Check for max forward distance
         bool hit = Physics.CapsuleCast(capsuleStart, capsuleEnd, radius, moveDirection, out RaycastHit hitInfo, maxDistance + radius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
