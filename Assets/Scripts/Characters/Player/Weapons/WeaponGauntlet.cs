@@ -42,6 +42,8 @@ public class WeaponGauntlet : Weapon {
 
     public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
 
+    private int hitCount;
+
     //Passive
     [Header("Passive")]
     [SerializeField, Min(0)] private float passiveDamage = 4f;
@@ -68,10 +70,14 @@ public class WeaponGauntlet : Weapon {
 
         //Animate
         PlaySound(primaryAttackSound);
+
+        Animator.SetFloat("HitCounter", hitCount % 2);
         Animator.SetTrigger("Attack");
 
         //Slow player
         Player.AddEffect(attackSlowEffect, primarySlowDuration);
+
+        hitCount = (hitCount + 1) % 2;
 
         //Apply camera knockback
         CameraController.AddKnockback(-transform.forward);
