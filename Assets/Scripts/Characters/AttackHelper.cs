@@ -1,4 +1,5 @@
 using System;
+using Botpa;
 using UnityEngine;
 
 public class AttackHelper : MonoBehaviour {
@@ -73,14 +74,10 @@ public class AttackHelper : MonoBehaviour {
     }
 
     //Ranged
-    public Projectile Throw(GameObject prefab, float damage, Vector3 direction, Transform origin) {
-        Projectile projectile = Instantiate(prefab, origin.position, Quaternion.LookRotation(direction)).GetComponent<Projectile>();
+    public Projectile Throw(GameObject prefab, float damage, Transform origin, Vector3 direction = new()) {
+        Projectile projectile = Instantiate(prefab, origin.position, Quaternion.LookRotation(direction.IsEmpty() ? origin.forward : direction)).GetComponent<Projectile>();
         projectile.Init(Source, Source.CalculateDamage(damage));
         return projectile;
-    }
-
-    public Projectile Throw(GameObject prefab, float damage, Transform origin) {
-        return Throw(prefab, damage, origin.forward, origin);
     }
 
 }

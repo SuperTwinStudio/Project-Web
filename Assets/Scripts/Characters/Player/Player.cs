@@ -69,7 +69,8 @@ public class Player : Character, ISavable {
     public bool IsControlled => controlBlockers.Count == 0;
     public float DashCooldown => 1 - dashTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
 
-    public override Vector3 MoveVelocity => moveSpeed * SpeedMultiplier * moveDirection + pushVelocity;
+    public override Vector3 MoveVelocity => moveSpeed * SpeedMultiplier * moveDirection;
+    public Vector3 FullMoveVelocity => MoveVelocity + pushVelocity;
 
     //Upgrades
     [Header("Upgrades")]
@@ -180,7 +181,7 @@ public class Player : Character, ISavable {
         }
     
         //Move in move direction
-        controller.SimpleMove(MoveVelocity);
+        controller.SimpleMove(FullMoveVelocity);
 
         //Decrease push velocity
         pushVelocity = Vector3.MoveTowards(pushVelocity, Vector3.zero, Time.deltaTime * pushDeceleration);
