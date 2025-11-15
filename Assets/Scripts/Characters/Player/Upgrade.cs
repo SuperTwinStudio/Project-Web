@@ -9,24 +9,22 @@ public class Upgrade {
     public string Key => key;
 
     //Level
-    private int level;
-    private int levelMax;
+    public int Level { get; private set; }
+    public int LevelMax { get; private set; }
 
-    public int Level => level;
-    public int LevelMax => levelMax;
     public bool CanUpgrade => Level < LevelMax;
 
     public const int DEFAULT_LEVEL_MIN = 1;
     public const int DEFAULT_LEVEL_MAX = 5;
 
     //Cost
-    private int costBase;
-    private int costPerLevel;
+    public int CostBase { get; private set; }
+    public int CostPerLevel { get; private set; }
 
-    public int Cost => costBase + (level - 1) * costPerLevel;
+    public int Cost => CostBase + (Level - 1) * CostPerLevel;
 
-    public const int DEFAULT_COST_BASE = 10;
-    public const int DEFAULT_COST_PER_LEVEL = 10;
+    public const int DEFAULT_COST_BASE = 30;
+    public const int DEFAULT_COST_PER_LEVEL = 15;
 
 
     //Constructor
@@ -44,12 +42,12 @@ public class Upgrade {
         this.key = key;
 
         //Level
-        this.level = level;
-        this.levelMax = levelMax;
+        Level = level;
+        LevelMax = levelMax;
 
         //Cost
-        this.costBase = costBase;
-        this.costPerLevel = costPerLevel;
+        CostBase = costBase;
+        CostPerLevel = costPerLevel;
     }
 
     //Upgrade
@@ -70,17 +68,17 @@ public class Upgrade {
 
     //Level
     public void SetLevel(int level) {
-        this.level = level;
+        Level = level;
     }
 
     public void SetLevelMax(int levelMax) {
-        this.levelMax = levelMax;
+        LevelMax = levelMax;
     }
 
     //Cost
     public void SetCost(int costBase, int costPerLevel) {
-        this.costBase = costBase;
-        this.costPerLevel = costPerLevel;
+        CostBase = costBase;
+        CostPerLevel = costPerLevel;
     }
 
 }

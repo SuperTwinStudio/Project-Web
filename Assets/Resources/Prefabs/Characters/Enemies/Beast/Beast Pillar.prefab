@@ -111,9 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759652879bd3c674981c226abbf95346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 1290429649717502856}
   _top: {fileID: 8734043386422200738}
-  _maxHealth: 300
+  _baseHealth: 220
   damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
 --- !u!4 &1919472705338046770 stripped
 Transform:

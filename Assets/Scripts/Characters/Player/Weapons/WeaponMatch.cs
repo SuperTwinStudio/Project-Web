@@ -27,29 +27,33 @@ public class WeaponMatch : Weapon {
 
     //Secondary
     [Header("Secondary")]
-    [SerializeField, Min(0)] private float _secondaryCooldown = 4f;
+    [SerializeField, Min(0)] private float _secondaryCooldown = 4.5f;
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
-    [SerializeField, Min(0)] private float secondaryDuration = 3f;
-    [SerializeField, Min(0)] private float secondaryDurationPerLevel = 1f;
+    [SerializeField, Min(0)] private float secondaryDamage = 40f;
+    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 10f;
+    [SerializeField, Min(0)] private float secondaryDuration = 2.5f;
+    [SerializeField, Min(0)] private float secondaryDurationPerLevel = 0.5f;
     [SerializeField, Min(0)] private float secondaryRadius = 3f;
     [SerializeField] private AudioClip secondaryAttackSound;
 
-    private float SecondaryBurnDuration => secondaryDuration + (SecondaryUpgrade.Level - 1) * secondaryDurationPerLevel;
-
     public override float SecondaryCooldownDuration => _secondaryCooldown;
+
+    public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
+
+    public float SecondaryBurnDuration => secondaryDuration + (SecondaryUpgrade.Level - 1) * secondaryDurationPerLevel;
 
     //Passive
     [Header("Passive")]
     [SerializeField, Min(0)] private float passiveDuration = 1f;
-    [SerializeField, Min(0)] private float passiveDurationPerLevel = 1f;
+    [SerializeField, Min(0)] private float passiveDurationPerLevel = 0.5f;
     [SerializeField, Min(1)] private int passiveHit = 4;
     [SerializeField] private AudioClip passiveAttackSound;
 
     private bool isPassiveHit = false;
     private int hitCount = 0;
 
-    private float PassiveBurnDuration => passiveDuration + (PassiveUpgrade.Level - 1) * passiveDurationPerLevel;
+    public float PassiveBurnDuration => passiveDuration + (PassiveUpgrade.Level - 1) * passiveDurationPerLevel;
 
     public override float PassiveCooldown => isPassiveHit ? 0 : 1;
 
@@ -102,7 +106,7 @@ public class WeaponMatch : Weapon {
         //Attack
         Attack.Around(
             secondaryRadius,
-            0, 
+            SecondaryDamage, 
             (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
         );
 

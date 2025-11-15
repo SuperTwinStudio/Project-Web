@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: viewDistance
       value: 69
       objectReference: {fileID: 0}
+    - target: {fileID: 224953861418605601, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
+      propertyPath: pushForceResistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2354158519484372618, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Height
       value: 3.5

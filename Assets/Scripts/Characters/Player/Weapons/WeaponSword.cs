@@ -23,7 +23,7 @@ public class WeaponSword : Weapon {
 
     //Secondary
     [Header("Secondary")]
-    [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
+    [SerializeField, Min(0)] private float _secondaryCooldown = 3f;
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 50f;
