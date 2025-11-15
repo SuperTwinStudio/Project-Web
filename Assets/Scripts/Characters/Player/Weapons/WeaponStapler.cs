@@ -58,13 +58,15 @@ public class WeaponStapler : Weapon {
 
     private void Update() {
         //Update reload
-        if (reloadTimer.counting) {
-            //Update value
-            SetValue(WeaponAction.Reload, (int) (reloadTimer.percent * 100));
-        } else if (reloadTimer.finished) {
-            //Reset value
-            SetValue(WeaponAction.Reload, -1);
-            reloadTimer.Reset();
+        if (reloadTimer.IsActive) {
+            if (reloadTimer.IsFinished) {
+                //Reset value
+                SetValue(WeaponAction.Reload, -1);
+                reloadTimer.Reset();
+            } else {
+                //Update value
+                SetValue(WeaponAction.Reload, (int) (reloadTimer.Percent * 100));
+            }
         }
     }
 

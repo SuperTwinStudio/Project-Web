@@ -65,9 +65,11 @@ public class CameraController : MonoBehaviour {
 
     private void LateUpdate() {
         //Update shake
-        for (int i = shakes.Count - 1; i >= 0; i--)
-            if (shakes[i].finished)
+        for (int i = shakes.Count - 1; i >= 0; i--) {
+            if (shakes[i].IsFinished) {
                 shakes.RemoveAt(i);
+            }
+        }
         cameraAnimator.SetBool("IsShaking", !shakes.IsEmpty());
 
         //Apply knockback acceleration to direction
@@ -156,8 +158,8 @@ public class CameraController : MonoBehaviour {
         public Vector3 Direction { get; private set; }
         public float Strength { get; private set; }
 
-        public float Duration => timer.duration;
-        public bool Finished => timer.finished;
+        public float Duration => timer.Duration;
+        public bool Finished => timer.IsFinished;
 
         public KnockbackController(Vector3 direction, float strength, float duration) {
             //Save values

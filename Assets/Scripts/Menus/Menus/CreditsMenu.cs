@@ -39,7 +39,7 @@ public class CreditsMenu : Menu {
 
     public override void OnUpdate() {
         //Scrolling is paused | Credits are too small to move | Waiting to move
-        if (!isScrolling || translationMax < 0 || delayTimer.counting) return;
+        if (!isScrolling || translationMax < 0 || delayTimer.IsCounting) return;
 
         //Move credits
         translation = Mathf.Clamp(translation + Time.unscaledDeltaTime * (movingUp ? -1 : 1) * translationMax / moveDuration, translationMin, translationMax);

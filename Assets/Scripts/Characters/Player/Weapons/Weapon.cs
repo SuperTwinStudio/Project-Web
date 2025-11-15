@@ -49,8 +49,8 @@ public class Weapon : MonoBehaviour {
 
     public virtual float PrimaryCooldownDuration => 1;
 
-    public virtual bool PrimaryAvailable => !primaryTimer.counting;
-    public virtual float PrimaryCooldown => 1 - primaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual bool PrimaryAvailable => !primaryTimer.IsCounting;
+    public virtual float PrimaryCooldown => 1 - primaryTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public virtual float PrimaryDamage => 0;
 
@@ -63,8 +63,8 @@ public class Weapon : MonoBehaviour {
 
     public virtual float SecondaryCooldownDuration => 1;
 
-    public virtual bool SecondaryAvailable => !secondaryTimer.counting;
-    public virtual float SecondaryCooldown => 1 - secondaryTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual bool SecondaryAvailable => !secondaryTimer.IsCounting;
+    public virtual float SecondaryCooldown => 1 - secondaryTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public virtual float SecondaryDamage => 0;
 
@@ -77,8 +77,8 @@ public class Weapon : MonoBehaviour {
 
     public virtual float PassiveCooldownDuration => 1;
 
-    public virtual bool PassiveAvailable => !passiveTimer.counting;
-    public virtual float PassiveCooldown => 1 - passiveTimer.percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual bool PassiveAvailable => !passiveTimer.IsCounting;
+    public virtual float PassiveCooldown => 1 - passiveTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
 
     public virtual float PassiveDamage => 0;
 
@@ -155,11 +155,11 @@ public class Weapon : MonoBehaviour {
             _ => passiveTimer,
         };
 
-        //Check if timer needs to count or extend
-        if (timer.counting) {
+        //Check the amount of time the timer needs to count
+        if (timer.IsCounting) {
             //Already counting -> Check if count is needed
-            float remaining = timer.duration - timer.counted;
-            if (remaining < cooldown) timer.Count(cooldown);//timer.Extend(cooldown - remaining);
+            float remaining = timer.Duration - timer.Counted;
+            if (remaining < cooldown) timer.Count(cooldown);
         } else {
             //Not counting -> Count
             timer.Count(cooldown);
