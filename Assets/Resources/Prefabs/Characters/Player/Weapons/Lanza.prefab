@@ -102,8 +102,8 @@ MonoBehaviour:
   isPlayer: 0
   destroyOnDamage: 1
   destroyOnWallHit: 1
-  speed: 20
-  damage: 10
+  _speed: 15
+  _damage: 25
 --- !u!114 &7926148660051566330
 MonoBehaviour:
   m_ObjectHideFlags: 0

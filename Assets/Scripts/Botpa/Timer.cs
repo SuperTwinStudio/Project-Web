@@ -8,80 +8,76 @@ namespace Botpa {
 
         //Time management
         private readonly TimerScale scale = TimerScale.Scaled;
-        private float curentTime => CurrentTime(scale);
-        private float deltaTime => DeltaTime(scale);
+        private float CurentTime => GetCurrentTime(scale);
+        private float DeltaTime => GetDeltaTime(scale);
 
-        private float startTime = -1;
-        private float elapsed => curentTime - startTime;
+        private float startTime = 0;
+        private float ElapsedTime => CurentTime - startTime;
 
-        private float _duration = -1;
+        private float _duration = 0;
 
         ///<summary>
         ///The duration of the count
         ///</summary>
-        public float duration { get => _duration; private set => _duration = value; }
+        public float Duration { get => _duration; private set => _duration = value; }
 
         ///<summary>
-        ///If the timer is active (counting or finished).
+        ///If the timer is active.
         ///</summary>
-        public bool isActive => duration != -1;
+        public bool IsActive => Duration > 0;
 
         ///<summary>
         ///The amout of time counted in this instant.
         ///</summary>
-        public float counted => isActive ? Mathf.Clamp(elapsed, 0, duration) : 0;
+        public float Counted => IsActive ? Mathf.Clamp(ElapsedTime, 0, Duration) : 0;
 
         ///<summary>
-        ///The percentage of progress of the timer count in the <b>[0, 1]</b> range.
+        ///The percentage of progress of the timer count in <b>[0, 1]</b> range.
         ///</summary>
-        public float percent => isActive ? counted / duration : 0;
+        public float Percent => IsActive ? Counted / Duration : 1;
 
         ///<summary>
         ///If the timer is counting.
         ///</summary>
-        public bool counting => isActive && elapsed < duration;
+        public bool IsCounting => IsActive && ElapsedTime < Duration;
 
         ///<summary>
         ///If the timer started counting this frame.
         ///</summary>
-        public bool startedThisFrame => isActive && startTime == curentTime;
+        public bool StartedThisFrame => IsActive && startTime == CurentTime;
 
         ///<summary>
         ///If the timer finished counting.
         ///</summary>
-        public bool finished => isActive && elapsed >= duration;
-        
+        public bool IsFinished => ElapsedTime >= Duration;
+
         ///<summary>
         ///If the timer finished counting this frame.
         ///</summary>
-        public bool finishedThisFrame => finished && duration > elapsed - deltaTime;
+        public bool FinishedThisFrame => IsFinished && Duration > ElapsedTime - DeltaTime;
 
 
         //Constructors
-        public Timer() : this(false, TimerScale.Scaled, -1) {}
-
-        public Timer(bool startActive)      : this(startActive, TimerScale.Scaled, -1) {}
-        public Timer(TimerScale timerScale) : this(false, timerScale, -1) {}
-        public Timer(float duration)        : this(false, TimerScale.Scaled, duration) {}
-
-        public Timer(bool startActive, TimerScale timerScale) : this(startActive, timerScale, -1) {}
-        public Timer(bool startActive, float duration)        : this(startActive, TimerScale.Scaled, duration) {}
-        public Timer(TimerScale timerScale, float duration)   : this(false, timerScale, duration) {}
-
-        public Timer(bool startActive, TimerScale timerScale, float duration) {
-            this.duration = startActive ? 0 : -1;
+        public Timer(float duration) : this(TimerScale.Scaled, duration) {}
+        public Timer(TimerScale timerScale = TimerScale.Scaled, float duration = 0) {
+            //Save scale
             scale = timerScale;
-            if (duration != -1) Count(duration);
-        }
 
+            //Start counting
+            Count(duration);
+        }
 
         ///<summary>
         ///Starts counting the specified duration.
         ///</summary>
-        public void Count(float duration) {
+        public bool Count(float duration) {
+            //Invalid duration
+            if (duration <= 0) return false;
+
             //Start timer
-            this.duration = duration;
-            startTime = curentTime;
+            startTime = CurentTime;
+            Duration = duration;
+            return true;
         }
 
         ///<summary>
@@ -89,14 +85,15 @@ namespace Botpa {
         ///<br/><br/>
         ///<b>NOTE:</b> If not counting, a new count will start.
         ///</summary>
-        public void Extend(float duration) {
+        public bool Extend(float duration) {
             //Add time to timer
-            if (counting) {
+            if (IsCounting) {
                 //Counting -> Extend duration
-                this.duration += duration;
+                Duration += duration;
+                return true;
             } else {
                 //Not counting -> Start count
-                Count(duration);
+                return Count(duration);
             }
         }
 
@@ -105,14 +102,13 @@ namespace Botpa {
         ///</summary>
         public void Reset() {
             //Reset timer
-            duration = -1;
+            Duration = 0;
         }
 
-        
         ///<summary>
         ///Returns the value of current time based on TimerScale.
         ///</summary>
-        public static float CurrentTime(TimerScale scale) {
+        public static float GetCurrentTime(TimerScale scale) {
             return scale switch { 
                 TimerScale.Scaled => Time.time, 
                 TimerScale.Unscaled => Time.unscaledTime, 
@@ -124,7 +120,7 @@ namespace Botpa {
         ///<summary>
         ///Returns the value of delta time based on TimerScale.
         ///</summary>
-        public static float DeltaTime(TimerScale scale) {
+        public static float GetDeltaTime(TimerScale scale) {
             return scale switch {
                 TimerScale.Scaled => Time.deltaTime,
                 TimerScale.Unscaled => Time.unscaledDeltaTime,
@@ -132,6 +128,7 @@ namespace Botpa {
                 _ => Time.deltaTime,
             };
         }
+
     }
 
 }

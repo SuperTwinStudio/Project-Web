@@ -14,7 +14,7 @@ namespace Botpa {
         [Header("Config")]
         [SerializeField] private TimerScale _timeScale;
 
-        public TimerScale timeScale  => _timeScale;
+        public TimerScale TimeScale  => _timeScale;
 
         //Autoplay
         [Header("Autoplay")]
@@ -23,52 +23,53 @@ namespace Botpa {
 
         private Timer playOnStartTimer;
 
-        public bool playOnStart  => _playOnStart;
-        public float playOnStartDelay  => _playOnStartDelay;
+        public bool PlayOnStart  => _playOnStart;
+        public float PlayOnStartDelay  => _playOnStartDelay;
 
         //Events
         [Space(10)]
         [SerializeField] private List<TurboEvent> events;
 
         private Coroutine playCoroutine = null;
-
-        public bool isPlaying => playCoroutine != null;
-        public bool isPaused { get; private set; } = false;
         private float lastEventTimestamp = 0;
         private float nextEventWait = 0;
 
+        public bool IsPlaying => playCoroutine != null;
+        public bool IsPaused { get; private set; } = false;
 
+
+        //State
         private void Start() {
             //Autoplay
-            if (playOnStart) {
+            if (PlayOnStart) {
                 //No delay -> Play
-                if (playOnStartDelay <= 0) Play();
+                if (PlayOnStartDelay <= 0) Play();
                 //Has delay -> Wait
-                else playOnStartTimer = new(timeScale, playOnStartDelay);
+                else playOnStartTimer = new(TimeScale, PlayOnStartDelay);
             }
         }
 
         private void Update() {
             //Not waiting for autoplay
-            if (playOnStartTimer == null || !playOnStartTimer.isActive) return;
+            if (playOnStartTimer == null || !playOnStartTimer.IsActive) return;
 
             //Autoplay wait finished
-            if (playOnStartTimer.finished) {
+            if (playOnStartTimer.IsFinished) {
                 playOnStartTimer.Reset();
                 Play();
             }
         }
-        
+
         //General
         public void End() {
             //Reset coroutine & resume
             playCoroutine = null;
-            isPaused = false;
+            IsPaused = false;
         }
 
         public void Stop() {
             //Not playing
-            if (!isPlaying) return;
+            if (!IsPlaying) return;
 
             //Stop coroutine & end cinematic
             StopCoroutine(playCoroutine);
@@ -87,7 +88,7 @@ namespace Botpa {
             //Start events loop
             foreach (var e in events) {
                 //Reset waits
-                lastEventTimestamp = Timer.CurrentTime(timeScale);
+                lastEventTimestamp = Timer.GetCurrentTime(TimeScale);
                 nextEventWait = 0;
 
                 //Run events
@@ -95,7 +96,7 @@ namespace Botpa {
 
                 //Wait
                 yield return new WaitUntil(() => { 
-                    return (!isPaused) && (Timer.CurrentTime(timeScale) - lastEventTimestamp > nextEventWait); 
+                    return (!IsPaused) && (Timer.GetCurrentTime(TimeScale) - lastEventTimestamp > nextEventWait); 
                 });
             }
 
@@ -106,7 +107,7 @@ namespace Botpa {
         //Waiting
         public void Wait(float seconds) {
             //Not playing
-            if (!isPlaying) return;
+            if (!IsPlaying) return;
 
             //Add seconds to wait
             nextEventWait += seconds;
@@ -114,15 +115,15 @@ namespace Botpa {
 
         public void Pause() {
             //Not playing
-            if (!isPlaying) return;
+            if (!IsPlaying) return;
 
             //Pause
-            isPaused = true;
+            IsPaused = true;
         }
 
         public void Resume() {
             //Resume
-            isPaused = false;
+            IsPaused = false;
         }
 
 
@@ -182,6 +183,6 @@ namespace Botpa {
         }
         #endif
     }
-  
+
 }
 

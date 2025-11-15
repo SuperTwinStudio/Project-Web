@@ -67,8 +67,10 @@ public class Player : Character, ISavable {
     private Vector3 moveDirection;
 
     public bool IsControlled => controlBlockers.Count == 0;
+    public float DashCooldown => 1 - dashTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
 
-    public override Vector3 MoveVelocity => moveSpeed * SpeedMultiplier * moveDirection + pushVelocity;
+    public override Vector3 MoveVelocity => moveSpeed * SpeedMultiplier * moveDirection;
+    public Vector3 FullMoveVelocity => MoveVelocity + pushVelocity;
 
     //Upgrades
     [Header("Upgrades")]
@@ -166,7 +168,7 @@ public class Player : Character, ISavable {
         moveDirection = isMoving ? Vector3.ProjectOnPlane(moveInput.x * cameraTransform.right + moveInput.y * cameraTransform.forward, Vector3.up).normalized : Vector3.zero;
 
         //Check for dash
-        if (dashAction.Triggered() && !dashTimer.counting) {
+        if (dashAction.Triggered() && !dashTimer.IsCounting) {
             //Start dash timer
             dashTimer.Count(dashCooldown);
 
@@ -179,7 +181,7 @@ public class Player : Character, ISavable {
         }
     
         //Move in move direction
-        controller.SimpleMove(MoveVelocity);
+        controller.SimpleMove(FullMoveVelocity);
 
         //Decrease push velocity
         pushVelocity = Vector3.MoveTowards(pushVelocity, Vector3.zero, Time.deltaTime * pushDeceleration);
@@ -200,9 +202,9 @@ public class Player : Character, ISavable {
         if (reloadAction.Triggered()) reloadCoyote.Count(INPUT_COYOTE_DURATION);
 
         //Check if an action should be performed
-        if (primaryCoyote.counting && Loadout.UsePrimary()) primaryCoyote.Reset();
-        if (secondaryCoyote.counting && Loadout.UseSecondary()) secondaryCoyote.Reset();
-        if (reloadCoyote.counting && Loadout.Reload()) reloadCoyote.Reset();
+        if (primaryCoyote.IsCounting && Loadout.UsePrimary()) primaryCoyote.Reset();
+        if (secondaryCoyote.IsCounting && Loadout.UseSecondary()) secondaryCoyote.Reset();
+        if (reloadCoyote.IsCounting && Loadout.Reload()) reloadCoyote.Reset();
 
 
           /*$$$$$            /$$                           /$$              

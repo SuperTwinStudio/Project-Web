@@ -14,16 +14,19 @@ public class Projectile : MonoBehaviour {
     [SerializeField] private bool isPlayer = true;
     [SerializeField] private bool destroyOnDamage = true;
     [SerializeField] private bool destroyOnWallHit = true;
-    [SerializeField] private float speed = 20;
-    [SerializeField] private float damage = 25;
+    [SerializeField] private float _speed = 20;
+    [SerializeField] private float _damage = 25;
 
     private event Action<IDamageable> OnHit;
+
+    public float Speed => _speed;
+    public float Damage => _damage;
 
 
     //State
     private void Start() {
         //Apply velocity
-        rigidbody.linearVelocity = speed * transform.forward;
+        ApplyVelocity();
     }
 
     public void Init(object source, float damage = -1) {
@@ -31,7 +34,7 @@ public class Projectile : MonoBehaviour {
         this.source = source;
 
         //Update damage (optional value)
-        if (damage > 0) this.damage = damage;
+        if (damage > 0) _damage = damage;
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -44,7 +47,7 @@ public class Projectile : MonoBehaviour {
         //Check if damageable
         if (other.TryGetComponent(out IDamageable damageable)) {
             //Deal damage
-            damageable.Damage(damage, source, DamageType.Ranged);
+            damageable.Damage(Damage, source, DamageType.Ranged);
             if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
 
             //Call on hit event
@@ -56,6 +59,25 @@ public class Projectile : MonoBehaviour {
             //Check if should destroy self
             if (destroyOnWallHit) Destroy(gameObject);
         }
+    }
+
+    //Speed & damage
+    private void ApplyVelocity() {
+        //Apply velocity
+        rigidbody.linearVelocity = Speed * transform.forward;
+    }
+
+    public void SetSpeed(float newSpeed) {
+        //Update speed
+        _speed = newSpeed;
+
+        //Apply velocity
+        ApplyVelocity();
+    }
+
+    public void SetDamage(float newDamage) {
+        //Update damage
+        _damage = newDamage;
     }
 
     //Events

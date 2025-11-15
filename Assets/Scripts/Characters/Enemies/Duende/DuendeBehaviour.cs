@@ -13,6 +13,7 @@ public class DuendeBehaviour : EnemyBehaviour {
     [SerializeField] private float _minAttackRange = 5.28f;
     [SerializeField] private float _maxAttackRange = 7.33f;
     [SerializeField] private float _evadeRange = 3.65f;
+    [SerializeField] private float _spearSpeed = 15f;
     [SerializeField] private float _spearDamage = 10f;
     [SerializeField] private float _spearCoolDown = 4f;
 
@@ -21,6 +22,7 @@ public class DuendeBehaviour : EnemyBehaviour {
     public float MinAttackRange => _minAttackRange;
     public float MaxAttackRange => _maxAttackRange;
     public float EvadeRange => _evadeRange;
+    public float SpearSpeed => _spearSpeed;
     public float SpearDamage => _spearDamage;
     public float SpearCoolDown => _spearCoolDown;
 
@@ -46,9 +48,15 @@ public class DuendeBehaviour : EnemyBehaviour {
     }
 
     public void ThrowSpear() {
-        Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.TargetLastKnownPosition, Enemy.Target.MoveVelocity, 20);
+        Vector3 target = ProyectileIntercept.InterceptPos(hand.position, Enemy.TargetLastKnownPosition, Enemy.Target.MoveVelocity, SpearSpeed);
         Vector3 direction = Util.RemoveY((target - hand.position).normalized);
-        Enemy.Attack.Throw(projectile, SpearDamage, direction, hand);
+        Projectile spear = null;
+        if (direction.IsEmpty()) {
+            spear = Enemy.Attack.Throw(projectile, SpearDamage, hand);
+        } else {
+            spear = Enemy.Attack.Throw(projectile, SpearDamage, hand, direction);
+        }
+        spear.SetSpeed(SpearSpeed);
     }
 
     public void ResetAttackCooldown() {

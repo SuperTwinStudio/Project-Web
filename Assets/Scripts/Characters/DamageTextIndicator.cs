@@ -39,13 +39,13 @@ public class DamageTextIndicator : MonoBehaviour {
 
     private void Update() {
         //Finish
-        if (animationTimer.finished) {
+        if (animationTimer.IsFinished) {
             Destroy(gameObject);
             return;
         }
 
         //Animate
-        float percent = Ease.OutCubic(animationTimer.percent);
+        float percent = Ease.OutCubic(animationTimer.Percent);
 
         transform.localScale = Util.Vec3(Mathf.Lerp(1, endScale, percent));
 

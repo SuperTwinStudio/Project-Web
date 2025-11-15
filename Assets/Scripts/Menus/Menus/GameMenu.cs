@@ -46,6 +46,10 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text passiveValueText;
     [SerializeField] private Image passiveCooldown;
 
+    //Dash
+    [Header("Dash")]
+    [SerializeField] private Image dashCooldown;
+
     //Reload
     [Header("Reload")]
     [SerializeField] private GameObject reloadIndicator;
@@ -86,6 +90,9 @@ public class GameMenu : Menu {
             secondaryCooldown.fillAmount = currentWeapon.SecondaryCooldown;
             passiveCooldown.fillAmount = currentWeapon.PassiveCooldown;
         }
+
+        //Update dash cooldown
+        dashCooldown.fillAmount = Player.DashCooldown;
     }
 
     public override void OnUpdate() {

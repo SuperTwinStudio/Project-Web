@@ -22,7 +22,7 @@ public class BeastState : EnemyState {
 
     public override void Execute() {
         //Enemy is vulnerable, aura is in cooldown or not triggering
-        if (!Enemy.IsInvulnerable || damageTimer.counting || !Beast.AuraDetector.isTriggered) return;
+        if (!Enemy.IsInvulnerable || damageTimer.IsCounting || !Beast.AuraDetector.isTriggered) return;
 
         //Calculate direction towards player
         Vector3 direction = (Enemy.Player.transform.position - Enemy.Model.position).normalized;
