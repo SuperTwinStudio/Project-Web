@@ -41,11 +41,11 @@ public class Projectile : MonoBehaviour {
         //Collided with trigger
         if (other.isTrigger) return;
 
-        //Ignore certain targets (player hits everything except player, enemies only hit player)
-        if (isPlayer == other.CompareTag("Player")) return;
-
         //Check if damageable
         if (other.TryGetComponent(out IDamageable damageable)) {
+            //Ignore certain targets (player hits everything except player, enemies only hit player)
+            if (isPlayer == other.CompareTag("Player")) return;
+
             //Deal damage
             damageable.Damage(Damage, source, DamageType.Ranged);
             if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);

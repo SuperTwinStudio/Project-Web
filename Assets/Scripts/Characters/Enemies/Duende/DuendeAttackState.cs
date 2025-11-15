@@ -18,7 +18,10 @@ public class DuendeAttackState : DuendeState {
         if (Duende.OnAttackCooldown) return;
 
         //Check distance
-        if (Enemy.TargetLastKnownDistance < Duende.EvadeRange) {
+        if (!Enemy.TargetIsVisible) {
+            //Lost target -> Go to last known position
+            Duende.SetState(new DuendeFollowState(Duende));
+        } else if (Enemy.TargetLastKnownDistance < Duende.EvadeRange) {
             //Target too close -> Evade
             Duende.SetState(new DuendeEvadeState(Duende));
         } else if (Enemy.TargetLastKnownDistance < Duende.MaxAttackRange) {

@@ -14,7 +14,7 @@ public class DuendeFollowState : DuendeState {
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
             Duende.SetState(new DuendeIdleState(Duende));
-        } else if (Enemy.TargetLastKnownDistance > Duende.EvadeRange && Enemy.TargetLastKnownDistance < Duende.MinAttackRange) {
+        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance > Duende.EvadeRange && Enemy.TargetLastKnownDistance < Duende.MinAttackRange) {
             //Target in attack range -> Attack it
             Duende.SetState(new DuendeAttackState(Duende));
         } else {
