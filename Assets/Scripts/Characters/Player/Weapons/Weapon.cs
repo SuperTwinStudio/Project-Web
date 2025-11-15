@@ -45,46 +45,52 @@ public class Weapon : MonoBehaviour {
     public string PassiveDescription => _passiveDescription.GetLocalizedString();
 
     //Primary
-    private readonly Timer primaryTimer = new();
+    public int PrimaryValue { get; private set; } = 0;
 
-    public virtual float PrimaryCooldownDuration => 1;
+    private readonly Timer primaryTimer = new();
 
     public virtual bool PrimaryAvailable => !primaryTimer.IsCounting;
     public virtual float PrimaryCooldown => 1 - primaryTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float PrimaryCooldownDuration => 1;
 
     public virtual float PrimaryDamage => 0;
 
     public Upgrade PrimaryUpgrade { get; protected set; }
 
-    public int PrimaryValue { get; private set; } = 0;
+    public virtual int PrimaryUpgradeCostBase => Upgrade.DEFAULT_COST_BASE;
+    public virtual int PrimaryUpgradeCostPerLevel => Upgrade.DEFAULT_COST_PER_LEVEL;
 
     //Secondary
-    private readonly Timer secondaryTimer = new();
+    public int SecondaryValue { get; private set; } = 0;
 
-    public virtual float SecondaryCooldownDuration => 1;
+    private readonly Timer secondaryTimer = new();
 
     public virtual bool SecondaryAvailable => !secondaryTimer.IsCounting;
     public virtual float SecondaryCooldown => 1 - secondaryTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float SecondaryCooldownDuration => 1;
 
     public virtual float SecondaryDamage => 0;
 
     public Upgrade SecondaryUpgrade { get; protected set; }
 
-    public int SecondaryValue { get; private set; } = 0;
+    public virtual int SecondaryUpgradeCostBase => Upgrade.DEFAULT_COST_BASE;
+    public virtual int SecondaryUpgradeCostPerLevel => Upgrade.DEFAULT_COST_PER_LEVEL;
 
     //Passive
-    private readonly Timer passiveTimer = new();
+    public int PassiveValue { get; private set; } = 0;
 
-    public virtual float PassiveCooldownDuration => 1;
+    private readonly Timer passiveTimer = new();
 
     public virtual bool PassiveAvailable => !passiveTimer.IsCounting;
     public virtual float PassiveCooldown => 1 - passiveTimer.Percent; //0 -> No cooldown, 1 -> Full cooldown
+    public virtual float PassiveCooldownDuration => 1;
 
     public virtual float PassiveDamage => 0;
 
     public Upgrade PassiveUpgrade { get; protected set; }
 
-    public int PassiveValue { get; private set; } = 0;
+    public virtual int PassiveUpgradeCostBase => Upgrade.DEFAULT_COST_BASE;
+    public virtual int PassiveUpgradeCostPerLevel => Upgrade.DEFAULT_COST_PER_LEVEL;
 
     //Reload
     public int ReloadValue { get; private set; } = -1;
@@ -106,11 +112,11 @@ public class Weapon : MonoBehaviour {
         //Init upgrades
         string name;
         name = GetUpgradeName(WeaponAction.Primary);
-        PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
+        PrimaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX, PrimaryUpgradeCostBase, PrimaryUpgradeCostPerLevel);
         name = GetUpgradeName(WeaponAction.Secondary);
-        SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
+        SecondaryUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX, SecondaryUpgradeCostBase, SecondaryUpgradeCostPerLevel);
         name = GetUpgradeName(WeaponAction.Passive);
-        PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX);
+        PassiveUpgrade = new(name, Loadout.GetUpgrade(name), Upgrade.DEFAULT_LEVEL_MAX, PassiveUpgradeCostBase, PassiveUpgradeCostPerLevel);
 
         //Weapon custom on init
         OnInit();

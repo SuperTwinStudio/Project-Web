@@ -19,7 +19,7 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float _primaryCooldown = 0.4f;
     [SerializeField, Min(0)] private float primarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float primaryDamage = 20f;
+    [SerializeField, Min(0)] private float primaryDamage = 25f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
     [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0f);
     [SerializeField] private AudioClip primaryAttackSound;
@@ -33,7 +33,7 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondarySlowDuration = 0.2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
-    [SerializeField, Min(0)] private float secondaryDamage = 50f;
+    [SerializeField, Min(0)] private float secondaryDamage = 40f;
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
     [SerializeField] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
     [SerializeField] private AudioClip secondaryAttackSound;

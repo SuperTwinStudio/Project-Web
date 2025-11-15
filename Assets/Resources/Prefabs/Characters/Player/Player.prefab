@@ -221,7 +221,7 @@ MonoBehaviour:
   primaryDamagePerLevel: 10
   primaryAttackSphereCast: {x: 1, y: 0.5}
   primaryAttackSound: {fileID: 8300000, guid: e65157d75eb67b1428cc54fefd8226f1, type: 3}
-  _secondaryCooldown: 2.5
+  _secondaryCooldown: 3
   secondarySlowDuration: 0.2
   secondaryPrimaryCooldown: 0.5
   secondaryDamage: 50
@@ -425,10 +425,10 @@ MonoBehaviour:
   primaryDamagePerLevel: 5
   primaryAttackSphereCast: {x: 1, y: 0}
   primaryAttackSound: {fileID: 8300000, guid: 5889ba25c176f254eac5598ce85ae60e, type: 3}
-  _secondaryCooldown: 2
+  _secondaryCooldown: 3
   secondarySlowDuration: 0.2
   secondaryPrimaryCooldown: 0.5
-  secondaryDamage: 50
+  secondaryDamage: 40
   secondaryDamagePerLevel: 15
   secondaryAttackSphereCast: {x: 1, y: 0}
   secondaryAttackSound: {fileID: 8300000, guid: 54c1c1e17d12c324cbc80cd2b80dc771, type: 3}
@@ -631,7 +631,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5860380924851828079}
-  - {fileID: 4886712245934270044}
   m_Father: {fileID: 7162894825253278290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &846072094820107339
@@ -685,20 +684,21 @@ MonoBehaviour:
   model: {fileID: 2856207341596626414}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
-  primaryDamage: 25
+  primaryDamage: 20
   primaryDamagePerLevel: 8
-  _secondaryCooldown: 2
+  _secondaryCooldown: 3
   secondaryPrimaryCooldown: 0.3
-  secondaryDamage: 25
+  secondaryDamage: 20
   secondaryDamagePerLevel: 8
   secondaryBurstAmount: 3
   secondaryBurstDelay: 0.06
+  passivePrimaryCooldown: 0.5
   passiveDamage: 30
   passiveDamagePerLevel: 10
   passiveAttackSphereCast: {x: 1, y: 0}
   passiveAttackSound: {fileID: 8300000, guid: e65157d75eb67b1428cc54fefd8226f1, type: 3}
   bulletPrefab: {fileID: 2421915764250194293, guid: 2d69aa295ec53c94c8fa2221af2cc07b, type: 3}
-  bulletOrigin: {fileID: 4886712245934270044}
+  bulletOrigin: {fileID: 3151680765440771274}
   maxAmmo: 12
   reloadDuration: 1
   reloadAttackSound: {fileID: 8300000, guid: b96cc2e3042e1e740a7942e4ef04a656, type: 3}
@@ -902,37 +902,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6713001859621090456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5056900687765579236
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1200029707466882067}
-  m_Layer: 0
-  m_Name: Origin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1200029707466882067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5056900687765579236}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.2, z: 0.098}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4829512223886480836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5123386452864677109
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +934,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2919929628914546220}
-  - {fileID: 1200029707466882067}
   m_Father: {fileID: 7162894825253278290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1122487539104593671
@@ -1019,22 +987,24 @@ MonoBehaviour:
   model: {fileID: 1801451465853676353}
   _primaryCooldown: 0.3
   primarySecondaryCooldown: 0.2
-  primaryDamage: 10
+  primaryDamage: 12
   primaryDamagePerLevel: 5
   primaryAttackSound: {fileID: 8300000, guid: fe9171e54a0aaf04f8cb2a4de67fee2a, type: 3}
   _secondaryCooldown: 5
   secondaryPrimaryCooldown: 0.8
+  secondaryDamage: 25
+  secondaryDamagePerLevel: 5
   secondaryPushDelay: 0.6
   secondaryPushForce: 10
   secondaryPushForcePerLevel: 3
-  secondaryAttackSphereCast: {x: 1.5, y: 0}
+  secondaryAttackSphereCast: {x: 2, y: 0}
   secondaryAttackSound: {fileID: 8300000, guid: 368628df9baa6f94b9b4e5a9e9ccf6da, type: 3}
   passivePushForce: 6
   passivePushForcePerLevel: 2
   passiveHit: 8
   passiveAttackSound: {fileID: 8300000, guid: 368628df9baa6f94b9b4e5a9e9ccf6da, type: 3}
   bulletPrefab: {fileID: 2421915764250194293, guid: 55cb7ae45634d52458836dbf1477e412, type: 3}
-  bulletOrigin: {fileID: 1200029707466882067}
+  bulletOrigin: {fileID: 3151680765440771274}
   references:
     version: 2
     RefIds: []
@@ -1168,37 +1138,6 @@ Transform:
   - {fileID: 6849242891339637249}
   m_Father: {fileID: 866372256686769059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5640377512378529060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4886712245934270044}
-  m_Layer: 0
-  m_Name: Origin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4886712245934270044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5640377512378529060}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.2, z: 0.098}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1522470169753867797}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6097828882005455566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,15 +1263,17 @@ MonoBehaviour:
   primaryDamagePerLevel: 10
   primaryAttackSphereCast: {x: 0.5, y: 1.5}
   primaryAttackSound: {fileID: 8300000, guid: 5889ba25c176f254eac5598ce85ae60e, type: 3}
-  _secondaryCooldown: 4
+  _secondaryCooldown: 4.5
   secondarySlowDuration: 0.2
   secondaryPrimaryCooldown: 0.5
-  secondaryDuration: 3
-  secondaryDurationPerLevel: 1
+  secondaryDamage: 40
+  secondaryDamagePerLevel: 10
+  secondaryDuration: 2.5
+  secondaryDurationPerLevel: 0.5
   secondaryRadius: 3
   secondaryAttackSound: {fileID: 8300000, guid: 28c3005c7a090884f8646af62a4d43f9, type: 3}
   passiveDuration: 1
-  passiveDurationPerLevel: 1
+  passiveDurationPerLevel: 0.5
   passiveHit: 4
   passiveAttackSound: {fileID: 8300000, guid: 0bdb6fdd6d0bcde4399cb525213aa26d, type: 3}
   references:
@@ -1453,6 +1394,37 @@ MonoBehaviour:
   - firetornado
   volumes:
   - 1
+--- !u!1 &6434661576311647238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3151680765440771274}
+  m_Layer: 0
+  m_Name: Bullet Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3151680765440771274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434661576311647238}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 2.220446e-15, z: -0.0000000120926416, w: 1}
+  m_LocalPosition: {x: 0, y: 0.699592, z: 0.19725245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3154183115244130666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6701724206196661710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1510,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1282539342242928326}
+  - {fileID: 3151680765440771274}
   m_Father: {fileID: 275417671378692547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7282643888172660204

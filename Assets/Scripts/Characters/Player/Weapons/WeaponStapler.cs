@@ -8,7 +8,7 @@ public class WeaponStapler : Weapon {
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
-    [SerializeField, Min(0)] private float primaryDamage = 25f;
+    [SerializeField, Min(0)] private float primaryDamage = 20f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 8f;
 
     public override float PrimaryCooldownDuration => _primaryCooldown;
@@ -19,10 +19,10 @@ public class WeaponStapler : Weapon {
     [Header("Secondary")]
     [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float secondaryDamage = 25f;
+    [SerializeField, Min(0)] private float secondaryDamage = 20f;
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 8f;
     [SerializeField, Min(1)] private int secondaryBurstAmount = 3;
-    [SerializeField, Min(0)] private float secondaryBurstDelay = 0.6f;
+    [SerializeField, Min(0)] private float secondaryBurstDelay = 0.06f;
 
     public override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -30,6 +30,7 @@ public class WeaponStapler : Weapon {
 
     //Passive
     [Header("Passive")]
+    [SerializeField, Min(0)] private float passivePrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float passiveDamage = 30f;
     [SerializeField, Min(0)] private float passiveDamagePerLevel = 10f;
     [SerializeField] private Vector2 passiveAttackSphereCast = new(1f, 0f);
@@ -110,7 +111,10 @@ public class WeaponStapler : Weapon {
 
         //Check if melee attack hit something
         if (hit) {
-            //Hit something with passive -> Animate attack
+            //Hit something with passive -> Update primary cooldown to use passive cooldown
+            SetCooldown(WeaponAction.Primary, passivePrimaryCooldown);
+
+            //Animate attack
             PlaySound(passiveAttackSound);
             Animator.SetTrigger("AttackMelee");
         } else {

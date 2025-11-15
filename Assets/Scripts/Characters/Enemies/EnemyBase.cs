@@ -37,6 +37,7 @@ public class EnemyBase : Character {
     [Header("Movement & Rotation")]
     [SerializeField] private float moveSpeed = 3;
     [SerializeField] private float rotateSpeed = 500;
+    [SerializeField, Range(0, 1)] private float pushForceResistance = 0;
 
     public bool UseAutomaticRotation { get; private set; } = true;
 
@@ -141,6 +142,7 @@ public class EnemyBase : Character {
         StopMovement();
 
         //Disable
+        Rigidbody.linearVelocity = Vector3.zero; //Stop push forces
         Collider.enabled = false;
         Agent.enabled = false;
         enabled = false;
@@ -174,7 +176,11 @@ public class EnemyBase : Character {
 
     //Movement & Rotation
     public override void Push(Vector3 direction) {
-        Rigidbody.AddForce(direction, ForceMode.Impulse);
+        //Only allow pushing if alive
+        if (!IsAlive) return;
+
+        //Push
+        Rigidbody.AddForce(Mathf.Clamp01(1 - pushForceResistance) * direction, ForceMode.Impulse);
     }
 
     public void StopMovement() {

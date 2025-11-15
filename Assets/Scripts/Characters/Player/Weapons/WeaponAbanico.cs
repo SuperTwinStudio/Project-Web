@@ -1,5 +1,4 @@
 using System.Collections;
-using Botpa;
 using UnityEngine;
 
 public class WeaponAbanico : Weapon {
@@ -8,7 +7,7 @@ public class WeaponAbanico : Weapon {
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
-    [SerializeField, Min(0)] private float primaryDamage = 10f;
+    [SerializeField, Min(0)] private float primaryDamage = 12f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
     [SerializeField] private AudioClip primaryAttackSound;
 
@@ -18,17 +17,21 @@ public class WeaponAbanico : Weapon {
 
     //Secondary
     [Header("Secondary")]
-    [SerializeField, Min(0)] private float _secondaryCooldown = 2f;
-    [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.3f;
-    [SerializeField, Min(0)] private float secondaryPushDelay = 1f;
+    [SerializeField, Min(0)] private float _secondaryCooldown = 5f;
+    [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.8f;
+    [SerializeField, Min(0)] private float secondaryDamage = 25f;
+    [SerializeField, Min(0)] private float secondaryDamagePerLevel = 5f;
+    [SerializeField, Min(0)] private float secondaryPushDelay = 0.6f;
     [SerializeField, Min(0)] private float secondaryPushForce = 10f;
     [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 3f;
-    [SerializeField] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
+    [SerializeField] private Vector2 secondaryAttackSphereCast = new(2f, 0f);
     [SerializeField] private AudioClip secondaryAttackSound;
 
-    private float SecondaryPushForce => secondaryPushForce + (SecondaryUpgrade.Level - 1) * secondaryPushForcePerLevel;
-
     public override float SecondaryCooldownDuration => _secondaryCooldown;
+
+    public override float SecondaryDamage => secondaryDamage + (SecondaryUpgrade.Level - 1) * secondaryDamagePerLevel;
+
+    public float SecondaryPushForce => secondaryPushForce + (SecondaryUpgrade.Level - 1) * secondaryPushForcePerLevel;
 
     //Passive
     [Header("Passive")]
@@ -58,16 +61,18 @@ public class WeaponAbanico : Weapon {
     }
 
     //Weapon 
-    private void Push(IDamageable damageable, float force, Vector3 direction = new Vector3()) {
+    private void Push(IDamageable damageable, float force, float damage = -1) {
         //Check if an enemy
         if (damageable is not EnemyBase) return;
 
         //Get enemy
         EnemyBase enemy = damageable as EnemyBase;
 
+        //Damage enemy
+        if (damage > 0) enemy.Damage(damage, Player, DamageType.Ranged);
+
         //Push enemy
-        if (direction.IsEmpty()) direction = enemy.transform.position - Player.transform.position;
-        enemy.Push(force * direction);
+        enemy.Push(force * (enemy.transform.position - Player.transform.position));
     }
 
     //Primary
@@ -111,7 +116,7 @@ public class WeaponAbanico : Weapon {
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,
-            (damageable) => Push(damageable, SecondaryPushForce)
+            (damageable) => Push(damageable, SecondaryPushForce, SecondaryDamage)
         );
 
         //Play sound

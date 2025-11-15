@@ -27,7 +27,7 @@ MonoBehaviour:
   _maxLevel: 5
   _action:
     _type: 1
-    _value: 10
+    _value: 20
   references:
     version: 2
     RefIds: []
