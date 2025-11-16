@@ -145,6 +145,7 @@ public class ShopMenu : Menu {
     public void SelectWeaponTab(Item item) {
         //Select weapon
         selectedWeapon = Loadout.GetWeapon(item);
+        Loadout.SelectWeapon(item);
 
         //Update UI
         UpdateWeaponUI();
