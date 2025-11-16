@@ -319,7 +319,7 @@ A lo largo de una “run” el jugador podrá obtener diversos objetos que otorg
 
 | Icono | Nombre                                          | Rareza     | Descripción                                                                                               |
 | ----- | ----------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-|       | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
+|  ![Filo Oculto](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Hidden_Blade.jpg?raw=true)     | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
 |       | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
 |       | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
 |       | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
