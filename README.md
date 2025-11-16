@@ -68,12 +68,11 @@ Historial de versiones y cambios realizados en el documento.
 - **Versión 0.4 - 6/10/25:** desarrollo del apartado Audio y SFX. Desarrollo del apartado Interfaces. Balanceo de las clases de armas.
 - **Versión 0.5 - 11/10/25:** segunda revisión y cambios menores en todo el documento. Desarrollo del apartado Generación procedimental de mazmorras. Refinado del apartado Interfaces, Diagrama de flujo y Mejoras.
 - **Versión 0.6 - 15/11/25:** ampliación del documento con el contenido de la beta, enfatizando en el apartado de las mecánicas:
-	- **Jugador:** adición de la habilidad *Dash* al moveset y el botón de pausado.
-		- Ajustes en el feedback del jugador.
-	- **Armas:** cambios en las descripciones de las clases de armas y ajustes en las habilidades y propiedades de las clases Lanza y Espada. Exclusión de la clase Mental por la complejidad de desarrollo.
-	- **Mejoras permanentes:** cambios y adiciones (Purpurina) en las mejoras permanentes.
-	- **Objetos:** diseño y desarrollo de una categoría de objetos para mejorar el Game Flow.
-	- **Enemigos:** reajuste en el nivel de dificultad de los enemigos. Cambios en el moveset del jefe Miso Beast y exclusión del jefe Calamarcillo.
+	- **Jugador:** adición de un *Dash* y feedback de combate.
+	- **Armas:** balanceo de daños y cooldowns. Cambios en el funcionamiento de las clases Cerilla y Abanico. Exclusión de la clase Mental para la Beta.
+    - **Mejoras permanentes:** cambios y adiciones (Purpurina) en las mejoras permanentes.
+	- **Objetos:** adición de objetos con habilidades pasivas para mejorar el Game Flow.
+	- **Enemigos:** ajuste en el nivel de dificultad de los enemigos. Cambios en el moveset del jefe Miso Beast y exclusión del jefe Calamarcillo.
 
 
 
