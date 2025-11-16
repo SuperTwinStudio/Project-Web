@@ -41,6 +41,22 @@ Trabajo desarrollado para la asignatura de ***Juegos para Web*** del grado de **
 
 # GDD
 
+## Índice
+
+1. [Historial de Versiones](#1-historial-de-versiones)
+2. [Introducción](#2-introducción)
+3. [Monetización & Planificación](#3-monetización--planificación)
+4. [Trasfondo](#4-trasfondo)
+5. [Game Flow](#5-game-flow)
+6. [Mecánicas](#6-mecánicas)
+7. [Level Design](#7-level-design)
+8. [Enemigos & Bosses](#8-enemigos--bosses)
+9. [Arte](#9-arte)
+10. [Audio](#10-audio)
+11. [Interfaces](#11-interfaces)
+
+
+
 ## 1. Historial de Versiones
 
 **Versión 0.5**
@@ -76,15 +92,15 @@ Se identifican dos tipos de público objetivo para este juego:
 - **Jugadores experimentados:** al igual que el resto de juegos rogue-lite,  el público diana son jóvenes de entre 16 a 35 años que disfruten de tanto acción rápida como progresión gradual, y que ya se encuentren familiarizados con títulos análogos como Enter The Gungeon, Hades, o The Binding of Isaac.
 - **Nuevos jugadores:** personas jóvenes que no hayan probado videojuegos del género con anterioridad pero que estén interesadas en probar algo novedoso, conocer la historia del juego o simplemente disfrutar de su estética.
 
-Project Paper está pensado para ejecutarse en navegadores de ordenadores a través de [itch.io](http://itch.io) y en móviles, con posibilidad de ampliar a otros mercados de la plataforma PC como Steam o Epic Store.
+Project Paper está pensado para ejecutarse en navegadores de ordenadores a través de [itch.io](https://supertwinstudio.itch.io/project-paper) y en móviles, con posibilidad de ampliar a otros mercados de la plataforma PC como Steam o Epic Store.
 
 
 
-## 3. Monetización y Planificación
+## 3. Monetización & Planificación
 
 ### Modelo de monetización
 
-La versión Release del juego se lanzará en [itch.io](http://itch.io) y será free-to-play, con opción de donación a través de la plataforma. En función del grado de éxito en el desarrollo y el impacto mediático en redes sociales, se plantean más otras opciones de monetización:
+La versión Release del juego se lanzará en [itch.io](https://supertwinstudio.itch.io/project-paper) y será free-to-play, con opción de donación a través de la plataforma. En función del grado de éxito en el desarrollo y el impacto mediático en redes sociales, se plantean más otras opciones de monetización:
 
 #### Opción 1 - Kickstarter
 
@@ -139,12 +155,30 @@ El proyecto cuenta con un equipo de desarrollo polivalente, por lo que todos los
 Por la naturaleza del proyecto y el tiempo asignado se espera trabajar en un formato parecido al de los sprints de Scrum (de dos a cuatro semanas por versión lanzada). 
 
 - **Alpha - 14/10/25:** se espera cubrir toda la parte de las mecánicas del juego e iniciar el despliegue de RRSS para dar visibilidad al proyecto. 
-- **Beta - (fecha por determinar):** corrección de bugs importantes, cobertura casi completa de la parte artística, testeo intensivo.  
+- **Beta - 16/11/25:** implementación de mecanicas restantes, corrección de bugs importantes, cobertura casi completa de la parte artística, testeo intensivo.  
 - **Release - (fecha por determinar):** corrección de bugs identificados durante la fase de testeo, pulido de mecánicas, arte y game feel.
 
 
 
-## 4. Game Flow
+## 4. Trasfondo
+
+### Lore
+
+En el trasfondo se narran los eventos previos a los eventos del juego y explican el arranque de la trama. 
+
+La historia se desarrolla en el interior de una habitación, en un escritorio genérico de estudiante que está encantado. Todos los trozos de papel fueron alcanzados por un poder sagrado y cobraron vida. Así comenzaron una existencia pacífica sobre el tablero de la mesa, formando un reino mágico gobernado por un rey. Sin embargo, no todos los origamis se encontraban a favor de vivir bajo su gobierno, por lo que descendieron a las profundidades de los cajones del escritorio y desaparecieron durante un tiempo. Sin embargo, la oscuridad corrompió sus corazones, y cuando un día hallaron un poder malvado en el cajón más profundo, no dudaron en liberarlo y enviarlo contra el reino. Era Akarigami, deidad destructora del papel, que había despertado gracias al odio y el resentimiento acumulados por los habitantes subterráneos durante tanto tiempo. Cuando llegó a la superficie arrasó con el castillo, poniendo en peligro el ecosistema del escritorio y a todo ser animado. El rey, en un intento desesperado de salvar a su pueblo, dividió su cuerpo en pedazos de papel insuflados con una magia secreta capaz de derrotar a la bestia, los llamados Papiros Sagrados”. Akarigami cayó de nuevo a las profundidades y fue sellado, cayendo en el olvido hasta convertirse en un cuento para asustar a los más pequeños. Los sublevados que acompañaron a la deidad en su camino de caos y destrucción fueron desterrados a los cajones, y se construyó una enorme puerta en la entrada para evitar que volviesen a acceder al reino. 
+
+El rey desapareció y su hijo tomó el trono, conservando los papiros en memoria a su padre. Así sucedieron las generaciones de longevos reyes hasta llegar a la actualidad, una época próspera gobernada por el príncipe Kami, hermano gemelo de Washi. Una vez más, el reino existía ajeno a las confabulaciones de los habitantes más malvados del otro lado de la Gran Puerta, que se organizaban en un culto con el objetivo de traer a Akarigami de vuelta y repetir los pasos de sus ancestros. Para lograr su cometido requerían romper los sellos de los Papiros Sagrados y un receptáculo de papel capaz de contener a la bestia. A partir de este punto comienza la trama del juego.
+
+### Trama
+
+Hayashi es un reino cuyos habitantes están hechos de un tipo de papel especial que les otorga carácter. El reino se mantiene a salvo gracias a unos ancestrales papiros mágicos que mantienen el orden. El equilibrio de Hayashi se ve amenazado cuando el Culto de la Llama quebranta la gran puerta e irrumpe en el pueblo para robar los papiros y secuestrar al príncipe Kami, hermano de Washi, para emplearlo como receptáculo y resucitar a Akarigami, una deidad temible que pretende destruir el mundo. 
+
+Los jugadores acompañarán al pequeño Washi, un guerrero origami cuyo objetivo es liberar a su hermano de las garras del culto y recuperar los papiros sagrados para devolver el orden al reino y sellar a Akarigami.
+
+
+
+## 5. Game Flow
 
 En una partida de Project Paper se distinguen dos tipos de espacios según su función por los que el jugador irá rotando: 
 - **Lobby principal:** la partida siempre comienza en el castillo, un lugar seguro para el jugador en el que podrá aprovisionarse y planificar su estrategia para la “run” por las mazmorras. El lobby cuenta con una tienda de mejoras y una sala de entrenamiento, además de una puerta que conduce a la mazmorra.  
@@ -168,13 +202,13 @@ Derrotar al boss de un nivel o piso dará varias opciones al jugador: continuar 
 
 
 
-## 5. Mecánicas 
+## 6. Mecánicas 
 
 ### Muerte permanente
 
 Esta mecánica proviene del género rogue-lite. Durante la “run” por la mazmorra el personaje muere permanentemente si su medidor de vida llega a cero. Cuando esto ocurre, este perderá todos los tesoros que llevase en su inventario y regresará al castillo con la mitad de dinero que tenía antes de entrar. Difiere de los rogue-like porque algunas propiedades como el arma o las mejoras del personaje se mantienen de forma permanente, incluso cuando el personaje muere.
 
-### Controles del Jugador
+### Controles
 
 El jugador será un personaje de origami con un arma, un inventario y la capacidad de moverse. Las posibles acciones a realizar se contemplan en la siguiente tabla:
 
@@ -289,34 +323,36 @@ Algunos enemigos y armas del personaje serán capaces de aplicar efectos especia
 
 En la tienda se podrán obtener mejoras de los atributos del personaje de índole permanente para progresar en el juego.
 - **Gramaje:** aumenta la vida.
-- **Rugosidad:** mejora la resistencia y reduce el daño físico recibido.
-- **Absorción:** aumenta la resistencia a los estados alterados, reduciendo el daño o la duración en función del tipo.
-- **Color:** otorga inmunidad al elemento correspondiente
-	- **Rojo:** inmunidad al fuego
-	- **Azul:** inmunidad al agua
-	- **Verde:** inmunidad al pegamento
-	- **Morado:** inmunidad a la tinta    
+- **Rugosidad:** reduce el daño recibido.
+- **Purpurina:** reduce el cooldown del dash.    
 
 ### Tesoros
 
-Tesoros que sueltan los enemigos al morir que se pueden vender en la tienda. Son el principal motor de economía dentro del juego que permitirá el avance del jugador. Los tesoros se organizan en categorías o tiers, y a mayor categoría, más valor. 
+Tesoros que se pueden encontrar en salas dentro de las mazmorras y que se pueden vender en la tienda. Son el principal motor de economía dentro del juego y permite el avance del jugador. Los tesoros se organizan en categorías o tiers y, a mayor categoría, más valor. 
 - **Tier 1:**
-	- Gotitas de celulosa.
-	- Trozo de chicle.
+	- Estrella de papel.
 - **Tier 2:**
-	- Clip doblado.
+	- Pila de estrellas de papel.
 - **TIer 3:** 
-	- Pedazos de origami.
-    
+	- Bolsa de estrellas de papel.
 
 **Ejemplos de posibles drops en niveles:**
 - **Nivel 1:** drops de tier 1 (100%)
 - **Nivel 2:** drops de tier 1 (70%) y 2 (30%)
 - **Nivel 3:** drops de tier 1 (30%), 2 (65%) y 3 (5%)
 
+### Feedback
+
+Para transmitir una sensación de combate al jugador, se utilizarán tecnicas como:
+- Realentizar el tiempo tras un golpe.
+- Cambiar el color de los enemigos a rojo.
+- Screen shake.
+- Mover la cámara en dirección contraria a los golpes.
+- Mostrar el daño en un pequeño texto flotante.
 
 
-## 6. Level Design
+
+## 7. Level Design
 
 Cada nivel de Project Paper equivale a un piso de la mazmorra que el jugador deberá explorar y despejar para pasar al siguiente. El  piso o nivel se genera de forma procedimental. Las salas se compondrán de escenarios interiores (dentro de los cajones del escritorio), y algunas contarán con tesoros o elementos útiles con el fin de incentivar la exploración. Sólo hay tres formas de salir de un nivel:
 - **Completar el nivel derrotando al jefe**: opción de regresar al lobby o continuar al siguiente piso.
@@ -336,7 +372,7 @@ Al avanzar de sala en sala las puertas se irán cerrando, obligando al jugador a
 
 
 
-## 7. Enemigos & Bosses
+## 8. Enemigos & Bosses
 
 ### Enemigos
 
@@ -392,24 +428,6 @@ Un animal de origami con un tamaño mayor a lo normal con diferentes fases.
     - Una vez se rompan las cadenas, el boss se suelta y comienza su comportamiento normal. 
     - Para atacar, el boss apunta en la dirección del jugador, se queda quieto unos segundos para indicar que va a atacar, y carga hacia él. 
     - Una vez el boss choque contra la pared, este se stuneará a sí mismo durante un tiempo para permitir al jugador golpearle.
-
-
-
-## 8. Trasfondo
-
-### Lore
-
-En el trasfondo se narran los eventos previos a los eventos del juego y explican el arranque de la trama. 
-
-La historia se desarrolla en el interior de una habitación, en un escritorio genérico de estudiante que está encantado. Todos los trozos de papel fueron alcanzados por un poder sagrado y cobraron vida. Así comenzaron una existencia pacífica sobre el tablero de la mesa, formando un reino mágico gobernado por un rey. Sin embargo, no todos los origamis se encontraban a favor de vivir bajo su gobierno, por lo que descendieron a las profundidades de los cajones del escritorio y desaparecieron durante un tiempo. Sin embargo, la oscuridad corrompió sus corazones, y cuando un día hallaron un poder malvado en el cajón más profundo, no dudaron en liberarlo y enviarlo contra el reino. Era Akarigami, deidad destructora del papel, que había despertado gracias al odio y el resentimiento acumulados por los habitantes subterráneos durante tanto tiempo. Cuando llegó a la superficie arrasó con el castillo, poniendo en peligro el ecosistema del escritorio y a todo ser animado. El rey, en un intento desesperado de salvar a su pueblo, dividió su cuerpo en pedazos de papel insuflados con una magia secreta capaz de derrotar a la bestia, los llamados Papiros Sagrados”. Akarigami cayó de nuevo a las profundidades y fue sellado, cayendo en el olvido hasta convertirse en un cuento para asustar a los más pequeños. Los sublevados que acompañaron a la deidad en su camino de caos y destrucción fueron desterrados a los cajones, y se construyó una enorme puerta en la entrada para evitar que volviesen a acceder al reino. 
-
-El rey desapareció y su hijo tomó el trono, conservando los papiros en memoria a su padre. Así sucedieron las generaciones de longevos reyes hasta llegar a la actualidad, una época próspera gobernada por el príncipe Kami, hermano gemelo de Washi. Una vez más, el reino existía ajeno a las confabulaciones de los habitantes más malvados del otro lado de la Gran Puerta, que se organizaban en un culto con el objetivo de traer a Akarigami de vuelta y repetir los pasos de sus ancestros. Para lograr su cometido requerían romper los sellos de los Papiros Sagrados y un receptáculo de papel capaz de contener a la bestia. A partir de este punto comienza la trama del juego.
-
-### Trama
-
-Hayashi es un reino cuyos habitantes están hechos de un tipo de papel especial que les otorga carácter. El reino se mantiene a salvo gracias a unos ancestrales papiros mágicos que mantienen el orden. El equilibrio de Hayashi se ve amenazado cuando el Culto de la Llama quebranta la gran puerta e irrumpe en el pueblo para robar los papiros y secuestrar al príncipe Kami, hermano de Washi, para emplearlo como receptáculo y resucitar a Akarigami, una deidad temible que pretende destruir el mundo. 
-
-Los jugadores acompañarán al pequeño Washi, un guerrero origami cuyo objetivo es liberar a su hermano de las garras del culto y recuperar los papiros sagrados para devolver el orden al reino y sellar a Akarigami.
 
 
 
