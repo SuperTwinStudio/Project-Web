@@ -1,5 +1,6 @@
 using System.Collections;
 using Botpa;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -124,9 +125,15 @@ public class EnemyBase : Character {
     }
 
     //Health
-    private IEnumerator DestroyCoroutine() {
-        //Wait
-        yield return new WaitForSeconds(5.0f);
+    private IEnumerator DestroyCoroutine(float percent = 0) {
+        while (percent < 1) {
+            //Update percent
+            percent = Mathf.Clamp01(percent + (Time.deltaTime / 3.0f)); //3 seconds
+            Renderer.material.SetFloat("_Disintegration", percent);
+            
+            //Wait
+            yield return new WaitForNextFrameUnit();
+        }
 
         //Destroy enemy object
         Destroy(gameObject);
