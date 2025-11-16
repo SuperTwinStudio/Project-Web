@@ -10,8 +10,14 @@ public class ParticleHelper : MonoBehaviour
 
     void Start()
     {
+        activeWeapon = Game.Current.Level.Player.Loadout.CurrentWeapon;
         ChangeActiveWeaponAction += ChangeActiveWeapon;
         Game.Current.Level.Player.Loadout.AddOnWeaponChanged(ChangeActiveWeaponAction);
+    }
+
+    private void OnDestroy() {
+        Game.Current.Level.Player.Loadout.RemoveOnWeaponChanged(ChangeActiveWeaponAction);
+        ChangeActiveWeaponAction -= ChangeActiveWeapon;
     }
 
     private void ChangeActiveWeapon(Weapon oldWeapon, Weapon newWeapon)
