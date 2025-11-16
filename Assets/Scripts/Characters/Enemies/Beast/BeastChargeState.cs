@@ -6,7 +6,7 @@ public class BeastChargeState : BeastState {
     //Charge
     private readonly Timer timeoutTimer = new(); //To prevent the enemy from staying permanently in charge mode (happened once in testing)
 
-    private const float TIMEOUT_DURATION = 3.0f;
+    private const float TIMEOUT_DURATION = 2.0f;
 
 
     //Constructor
