@@ -2584,7 +2584,7 @@
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
-    "m_ZWriteControl": 0,
+    "m_ZWriteControl": 1,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": false,
@@ -3890,7 +3890,7 @@
     "m_ObjectId": "b13b8d9271694f2a8e919f4d4ef43546",
     "m_Title": "Transparency",
     "m_Position": {
-        "x": -2404.00048828125,
+        "x": -2404.0,
         "y": 988.7999877929688
     }
 }

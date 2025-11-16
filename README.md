@@ -306,11 +306,11 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
 
 | **Arma**                 | **Primario**                 | **Secundario**     | **Pasiva**          |
 | ------------------------ | ---------------------------- | ------------------ | ------------------- |
-| Espada | ![Espada Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Primary.PNG?raw=true)                | ![Espada Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Secondary.PNG?raw=true)           | ![Espada Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Passive.PNG?raw=true)  |
-| Cerilla | ![Cerilla Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Primary.PNG?raw=true)                | ![Cerilla Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Secondary.PNG?raw=true)           | ![Cerilla Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Passive.PNG?raw=true)  |
-| Guantelete | ![Guantelete Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Primary.PNG?raw=true)                | ![Guantelete Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Secondary.PNG?raw=true)           | ![Guantelete Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Passive.PNG?raw=true)  |
-| Grapadora | ![Grapadora Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Primary.PNG?raw=true)                | ![Grapadora Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Secondary.PNG?raw=true)           | ![Grapadora Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Passive.PNG?raw=true)  |
-| Abanico | ![Abanico Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Primary.PNG?raw=true)                | ![Abanico Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Secondary.PNG?raw=true)           | ![Abanico Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Passive.PNG?raw=true)  |
+| Espada | ![Espada Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Primary.PNG?raw=true)                | ![Espada Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Secondary.PNG?raw=true)           | ![Espada Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Passive.PNG?raw=true)  |
+| Cerilla | ![Cerilla Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Match_Primary.PNG?raw=true)                | ![Cerilla Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Match_Secondary.PNG?raw=true)           | ![Cerilla Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Match_Passive.PNG?raw=true)  |
+| Guantelete | ![Guantelete Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Tack_Primary.PNG?raw=true)                | ![Guantelete Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Tack_Secondary.PNG?raw=true)           | ![Guantelete Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Tack_Passive.PNG?raw=true)  |
+| Grapadora | ![Grapadora Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Stapler_Primary.PNG?raw=true)                | ![Grapadora Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Stapler_Secondary.PNG?raw=true)           | ![Grapadora Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Stapler_Passive.PNG?raw=true)  |
+| Abanico | ![Abanico Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Fan_Primary.PNG?raw=true)                | ![Abanico Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Fan_Secondary.PNG?raw=true)           | ![Abanico Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Fan_Passive.PNG?raw=true)  |
 | Canica |            |            |            |
 
 ### Estados alterados
@@ -353,8 +353,8 @@ En la tienda se podrán obtener mejoras de los atributos del personaje de índol
 
 | **Icono**                 | **Mejora**                 | **Descripción**     |
 | ------------------------- | -------------------------- | ------------------- |
-|  ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.PNG?raw=true) | Gramaje |  aumenta la vida |
-|  ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.PNG?raw=true) | Rugosidad |  reduce el daño recibido |
+|  ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.png?raw=true) | Gramaje |  aumenta la vida |
+|  ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.png?raw=true) | Rugosidad |  reduce el daño recibido |
 |  | Purpurina |  reduce el cooldown del dash |
 
 ### Tesoros
@@ -364,9 +364,9 @@ Tesoros que se pueden encontrar en salas dentro de las mazmorras y que se pueden
 
 | Icono | Tier | Nombre                       | Valor |
 | ----- | ---- | ---------------------------- | ----- |
-|   ![Estrella de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star.PNG?raw=true)    | 1    | Estrella de papel            | 20    |
-|   ![Montón de estrellas de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Pile.PNG?raw=true)     | 2    | Montón de estrellas de papel | 40    |
-|    ![Saco de estrellas de papel ](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Bag.PNG?raw=true)    | 3    | Saco de estrellas de papel   | 60    |
+|  ![Estrella de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star.png?raw=true)    | 1    | Estrella de papel            | 20    |
+|   ![Montón de estrellas de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Pile.png?raw=true)     | 2    | Montón de estrellas de papel | 40    |
+|    ![Saco de estrellas de papel ](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Bag.png?raw=true)    | 3    | Saco de estrellas de papel   | 60    |
 
 
 **Ejemplos de posibles drops en niveles:**

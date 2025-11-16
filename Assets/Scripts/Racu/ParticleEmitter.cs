@@ -68,7 +68,7 @@ public class ParticleEmitterEditor : Editor{
     public override void OnInspectorGUI(){
         DrawDefaultInspector();
 
-        if(!Application.isPlaying){
+        // if(!Application.isPlaying){
 
             var manager = (ParticleEmitter)target;
             if(manager == null) return;
@@ -114,7 +114,7 @@ public class ParticleEmitterEditor : Editor{
             }
 
             GUILayout.EndVertical();
-        }
+        // }
     }
 }
 #endif
