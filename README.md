@@ -89,7 +89,7 @@ El juego sigue la historia de Washi, un pequeño origami que se embarca en una m
 
 Project Paper combina los géneros acción y rogue-lite. Algunas características destacables de estos géneros presentes en el juego:
 - **Acción:** el juego es dinámico, requiere cierto grado de velocidad y destreza para despejar los mapas y derrotar a los jefes.
-- **Rogue-lite:** el juego cuenta con un sistema de mazmorras generadas procedimentalmente, y cada “run” es parcialmente aleatoria. La muerte en partida es permanente, pero hay ciertos elementos, como mejoras o armas que se conservan entre partidas para facilitar el avance del jugador (meta-progresión).  
+- **Rogue-lite:** el juego cuenta con un sistema de mazmorras generadas procedimentalmente, y cada “run” es parcialmente aleatoria. La muerte en partida es permanente, pero hay ciertos elementos, como mejoras o  que se conservan entre partidas para facilitar el avance del jugador (meta-progresión).  
 
 ### Propósito, Público Objetivo y Plataformas
 
@@ -193,11 +193,11 @@ En una partida de Project Paper se distinguen dos tipos de espacios según su fu
 
 ### Sala de entrenamiento
 
-En el castillo se encontrará habilitada una zona de entrenamiento que servirá como tutorial para el jugador para que este entienda las mecánicas básicas del juego. Se podrá utilizar posteriormente para poner en práctica nuevas habilidades o armas adquiridas en las mazmorras o en la tienda.
+En el castillo se encontrará habilitada una zona de entrenamiento que servirá como tutorial para el jugador para que este entienda las mecánicas básicas del juego. Se podrá utilizar posteriormente para poner en práctica nuevas habilidades o  adquiridas en las mazmorras o en la tienda.
 
 ### Tienda
 
-En la tienda el jugador será capaz de comprar mejoras permanentes para su personaje (vida, resistencia, etc) con el dinero que obtenga en las incursiones a la mazmorra. Además, se podrán mejorar las armas y pasivas de sus clases.
+En la tienda el jugador será capaz de comprar mejoras permanentes para su personaje (vida, resistencia, etc) con el dinero que obtenga en las incursiones a la mazmorra. Además, se podrán mejorar las  y pasivas de sus clases.
 
 ### Mazmorras
 
@@ -230,9 +230,9 @@ El jugador será un personaje de origami con un arma, un inventario y la capacid
 | Pausa                      | Escape          | Start              |
 | Inventario                 | TAB/I           | Select             |
 
-### Armas
+### 
 
-El jugador tendrá diferentes clases de armas entre las que escoger que podrá desbloquear tras eliminar a los jefes. Las armas contarán con un ataque primario, uno secundario y una pasiva especial que podrán mejorarse en la tienda utilizando el dinero del jugador.
+El jugador tendrá diferentes clases de  entre las que escoger que podrá desbloquear tras eliminar a los jefes. Las  contarán con un ataque primario, uno secundario y una pasiva especial que podrán mejorarse en la tienda utilizando el dinero del jugador.
 
 #### Espada de papel
 
@@ -260,7 +260,7 @@ Clase de combate cuerpo a cuerpo que sacrifica daño por rango y quemadura.
 	- **Mejora:** aumenta la duración de la quemadura.
 - **Pasiva** 
     - **Descripción:** tras dar varios golpes, el siguiente quema a los enemigos.
-	- **Mejora:** aumenta la duración de la quemadura.    
+	- **Mejora:** aumenta la duración de la quemadura.
 
 #### Guantelete de chinchetas
 
@@ -304,6 +304,15 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
     - **Descripción:** tras lanzar varias ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
 	- **Mejora:** aumenta la distancia de empuje.
 
+| **Arma**                 | **Primario**                 | **Secundario**     | **Pasiva**          |
+| ------------------------ | ---------------------------- | ------------------ | ------------------- |
+| Espada | ![Espada Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Primary.PNG?raw=true)                | ![Espada Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Secondary.PNG?raw=true)           | ![Espada Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sword_Passive.PNG?raw=true)  |
+| Cerilla | ![Cerilla Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Primary.PNG?raw=true)                | ![Cerilla Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Secondary.PNG?raw=true)           | ![Cerilla Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Match_Passive.PNG?raw=true)  |
+| Guantelete | ![Guantelete Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Primary.PNG?raw=true)                | ![Guantelete Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Secondary.PNG?raw=true)           | ![Guantelete Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Gauntlet_Passive.PNG?raw=true)  |
+| Grapadora | ![Grapadora Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Primary.PNG?raw=true)                | ![Grapadora Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Secondary.PNG?raw=true)           | ![Grapadora Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Stapler_Passive.PNG?raw=true)  |
+| Abanico | ![Abanico Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Primary.PNG?raw=true)                | ![Abanico Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Secondary.PNG?raw=true)           | ![Abanico Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Fan_Passive.PNG?raw=true)  |
+| Canica |            |            |            |
+
 ### Estados alterados
 
 Algunos enemigos y armas del personaje serán capaces de aplicar efectos especiales, entre los que se encuentran: 
@@ -319,20 +328,20 @@ A lo largo de una “run” el jugador podrá obtener diversos objetos que otorg
 
 | Icono | Nombre                                          | Rareza     | Descripción                                                                                               |
 | ----- | ----------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-|  ![Filo Oculto](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Hidden_Blade.png?raw=true)     | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
-|    ![Escudo Inverso](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Inverse_Shield.png?raw=true)    | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
-|    ![Yesca](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Kindling.png?raw=true)    | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
-|    ![Compañero orbital](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Orbital_Buddy.png?raw=true)    | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
-|     ![Folio sin doblar](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Unfolded_Sheet.png?raw=true)   | Folio sin doblar<br><br>*Unfolded sheet*        | Raro       | Al morir, vuelve a la vida con el 50% de la vida TOTAL. Se consume al usarse.                             |
-|    ![Diseño Aerodinámico](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Aerodynamic_Design.png?raw=true)    | Diseño aerodinámico<br><br>*Aerodynamic design* | Común      | +25% de velocidad (+15% por objeto extra)                                                                 |
-|    ![Abanico de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Paper_Fan.png?raw=true)    | Abanico de papel<br><br>*Paper fan*             | Poco común | Al esquivar, lanza una brisa de aire hacia delante, empujando a enemigos                                  |
-|    ![Suelas de cartón](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Cardboard_Soles.png?raw=true)   | Suelas de cartón<br><br>*Cardboard soles*       | Poco común | Hacer dash a un enemigo le hace 25% de daño base (+10% por extra)                                         |
-|   ![Cutter](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Box_Cutter.png?raw=true)    | Cutter<br><br>*Box cutter*                      | Común      | +10% de daño base<br>                                                                                     |
-|    ![Piel de cartulina](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Card_Stock_Skin.png?raw=true)   | Piel de cartulina<br><br>*Card stock skin*      | Común      | +10% de vida base                                                                                         |
-|    ![Purpurina brillante](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sparkling_Glitter.png?raw=true)   | Purpurina brillante<br><br>*Sparkling glitter*  | Poco común | Probabilidad de 15% (+2% por objeto extra) de aturdir a un enemigo por 5 segundos                         |
-|    ![Pegamento de barra](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Glue_Stick.png?raw=true)   | Pegamento de barra<br><br>*Glue stick*          | Común      | Probabilidad de 10% (+5% por objeto extra) de pegar a un enemigo al suelo                                 |
-|    ![Esponja mojada](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Wet_Sponge.png?raw=true)   | Esponja mojada<br><br>*Wet sponge*              | Común      | Probabilidad 15% (+5% por objeto extra) de debilitar a un enemigo                                         |
-|   ![Pluma rota](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Broken_Fountain_Pen.png?raw=true)    | Pluma rota<br><br>*Broken fountain pen*         | Poco común | Probabilidad de 10% (+5% por objeto extra) de aplicar tinta a un enemigo                                  |
+|  ![Filo Oculto](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Hidden_Blade.PNG?raw=true)     | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
+|    ![Escudo Inverso](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Inverse_Shield.PNG?raw=true)    | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
+|    ![Yesca](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Kindling.PNG?raw=true)    | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
+|    ![Compañero orbital](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Orbital_Buddy.PNG?raw=true)    | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
+|     ![Folio sin doblar](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Unfolded_Sheet.PNG?raw=true)   | Folio sin doblar<br><br>*Unfolded sheet*        | Raro       | Al morir, vuelve a la vida con el 50% de la vida TOTAL. Se consume al usarse.                             |
+|    ![Diseño Aerodinámico](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Aerodynamic_Design.PNG?raw=true)    | Diseño aerodinámico<br><br>*Aerodynamic design* | Común      | +25% de velocidad (+15% por objeto extra)                                                                 |
+|    ![Abanico de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Paper_Fan.PNG?raw=true)    | Abanico de papel<br><br>*Paper fan*             | Poco común | Al esquivar, lanza una brisa de aire hacia delante, empujando a enemigos                                  |
+|    ![Suelas de cartón](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Cardboard_Soles.PNG?raw=true)   | Suelas de cartón<br><br>*Cardboard soles*       | Poco común | Hacer dash a un enemigo le hace 25% de daño base (+10% por extra)                                         |
+|   ![Cutter](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Box_Cutter.PNG?raw=true)    | Cutter<br><br>*Box cutter*                      | Común      | +10% de daño base<br>                                                                                     |
+|    ![Piel de cartulina](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Card_Stock_Skin.PNG?raw=true)   | Piel de cartulina<br><br>*Card stock skin*      | Común      | +10% de vida base                                                                                         |
+|    ![Purpurina brillante](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sparkling_Glitter.PNG?raw=true)   | Purpurina brillante<br><br>*Sparkling glitter*  | Poco común | Probabilidad de 15% (+2% por objeto extra) de aturdir a un enemigo por 5 segundos                         |
+|    ![Pegamento de barra](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Glue_Stick.PNG?raw=true)   | Pegamento de barra<br><br>*Glue stick*          | Común      | Probabilidad de 10% (+5% por objeto extra) de pegar a un enemigo al suelo                                 |
+|    ![Esponja mojada](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Wet_Sponge.PNG?raw=true)   | Esponja mojada<br><br>*Wet sponge*              | Común      | Probabilidad 15% (+5% por objeto extra) de debilitar a un enemigo                                         |
+|   ![Pluma rota](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Broken_Fountain_Pen.PNG?raw=true)    | Pluma rota<br><br>*Broken fountain pen*         | Poco común | Probabilidad de 10% (+5% por objeto extra) de aplicar tinta a un enemigo                                  |
 
 
 ### Mejoras
@@ -340,7 +349,13 @@ A lo largo de una “run” el jugador podrá obtener diversos objetos que otorg
 En la tienda se podrán obtener mejoras de los atributos del personaje de índole permanente para progresar en el juego.
 - **Gramaje:** aumenta la vida.
 - **Rugosidad:** reduce el daño recibido.
-- **Purpurina:** reduce el cooldown del dash.    
+- **Purpurina:** reduce el cooldown del dash.
+
+| **Icono**                 | **Mejora**                 | **Descripción**     |
+| ------------------------- | -------------------------- | ------------------- |
+|  ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.PNG?raw=true) | Gramaje |  aumenta la vida |
+|  ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.PNG?raw=true) | Rugosidad |  reduce el daño recibido |
+|  | Purpurina |  reduce el cooldown del dash |
 
 ### Tesoros
 
@@ -349,9 +364,9 @@ Tesoros que se pueden encontrar en salas dentro de las mazmorras y que se pueden
 
 | Icono | Tier | Nombre                       | Valor |
 | ----- | ---- | ---------------------------- | ----- |
-|   ![Estrella de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star.png?raw=true)    | 1    | Estrella de papel            | 20    |
-|   ![Montón de estrellas de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Pile.png?raw=true)     | 2    | Montón de estrellas de papel | 40    |
-|    ![Saco de estrellas de papel ](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Bag.png?raw=true)    | 3    | Saco de estrellas de papel   | 60    |
+|   ![Estrella de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star.PNG?raw=true)    | 1    | Estrella de papel            | 20    |
+|   ![Montón de estrellas de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Pile.PNG?raw=true)     | 2    | Montón de estrellas de papel | 40    |
+|    ![Saco de estrellas de papel ](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Bag.PNG?raw=true)    | 3    | Saco de estrellas de papel   | 60    |
 
 
 **Ejemplos de posibles drops en niveles:**
