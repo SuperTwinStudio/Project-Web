@@ -1,4 +1,4 @@
-<img width="512" height="512" alt="Paper_Star_Pile" src="https://github.com/user-attachments/assets/9a0bdc5e-e762-4860-868b-4c54eec5c6aa" /># Washi's Adventure
+# Washi's Adventure
 
 Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño origami a encontrar a su hermano en un vasto mundo fantástico. 
 
