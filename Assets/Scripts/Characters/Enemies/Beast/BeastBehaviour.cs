@@ -22,14 +22,14 @@ public class BeastBehaviour : EnemyBehaviour {
     //Pillars
     [Header("Pillars")]
     [SerializeField] private List<BeastPillar> _pillars = new();
-    [SerializeField] private GameObject _minionPrefab;
     [SerializeField] private List<Transform> _minionSpawns = new();
+    [SerializeField] private GameObject _minionPrefab;
 
     private event Action<BeastPillar> OnPillarDestroyed;
 
     public IReadOnlyList<BeastPillar> Pillars => _pillars;
-    public GameObject MinionPrefab => _minionPrefab;
     public IReadOnlyList<Transform> MinionSpawns => _minionSpawns;
+    public GameObject MinionPrefab => _minionPrefab;
 
     //States
     [Header("States")]
