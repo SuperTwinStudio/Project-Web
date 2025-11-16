@@ -579,6 +579,8 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 
 ![Menú Principal](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Main%20Menu.png?raw=true)
 
+![Menú Principal Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Main_Menu.png?raw=true)
+
 Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Componentes del Menú Principal:
 - **Botón Play:** al pulsarlo conduce a la pantalla de juego. Usando el botón play de ejemplo, al hacer hover sobre un botón adquiere un fondo y se invierte el color del texto (por ejemplo, si el botón es blanco al hacer hover se volverá negro con borde blanco).
 - **Botón Settings:** conduce a la pantalla de configuración.
@@ -592,13 +594,17 @@ Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Comp
 
 ![Créditos](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Credits.png?raw=true)
 
+![Créditos Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Credits.png?raw=true)
+
 Se accede desde el menú principal, y contendrá el logo del estudio, los nombres de cada miembro del equipo y su rol principal en el desarrollo del videojuego.
 - **Botón Return:** regresa a la pantalla Menú Principal.
 - **Dev Logo:** logo del estudio.
 
 #### Ajustes
 
-![Settings](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Settings.png?raw=true)
+![Ajustes](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Settings.png?raw=true)
+
+![Ajustes Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Settings.png?raw=true)
 
 Pantalla de ajustes a la que se podrá acceder desde la pantalla Menú Principal. Contiene los siguientes elementos:
 - **Slider de música:** permite controlar el valor del volumen de la música del juego en un rango de cero a cien.
@@ -627,6 +633,8 @@ Se podrá acceder a esta pantalla desde el Lobby, y se compondrá de dos seccion
 
 ![Personaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Char%20tab.png?raw=true)
 
+![Personaje Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Shop.png?raw=true)
+
 Similar a la Pestaña Armas, contará con los siguientes elementos:
 - **Texto Character Upgrade:** título y descripción de la función de la pantalla.
 - **Mejoras:** mismo que para las armas. Para una característica existen los siguientes elementos:
@@ -638,6 +646,8 @@ Similar a la Pestaña Armas, contará con los siguientes elementos:
 ### Juego
 
 ![Juego](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Game.png?raw=true)
+
+![Juego Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Game.png?raw=true)
 
 Pantalla que se mostrará durante el tiempo de juego dentro de las mazmorras. Contiene los siguientes elementos:
 - **Rectángulo Life:** espacio designado para representar la vida del personaje, en forma de barra o de contenedores con forma de corazón.
@@ -659,13 +669,17 @@ Desde este menú se podrá detener la partida, realizar cambios menores en los a
 
 ### Pantallas de victoria y derrota
 
-![Stage Cleared](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Stage%20Cleared.png?raw=true)
+![Victoria](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Stage%20Cleared.png?raw=true)
+
+![Victoria Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Victory.png?raw=true)
 
 La pantalla de victoria se mostrará al salir de la sala del boss tras haberlo derrotado, y mostrará estadísticas del jugador de dicho nivel, como las monedas e ítems recogidos y el tiempo invertido en superar dicho piso. 
 - **Botón Return to Castle:** devuelve al jugador al Hub.
 - **Botón Continue:** empieza un nuevo piso.
 
 ![Stage Cleared](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Game%20Over.png?raw=true)
+
+![Derrota](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Defeat.png?raw=true)
 
 La pantalla Game Over se mostrará siempre que el jugador muera en combate o abandone la partida a través del Menú de Pausa. En función de la causa, la sprite del personaje se mostrará de formas distintas. 
 - **Mensaje Game Over:** mensaje motivacional relacionado con la historia del juego que aparecerá debajo del letrero de Game Over.
