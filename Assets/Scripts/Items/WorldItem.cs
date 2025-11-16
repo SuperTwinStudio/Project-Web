@@ -4,8 +4,20 @@ public class WorldItem : MonoBehaviour {
 
     //Item
     [Header("Item")]
+    [SerializeField] private bool setItemAtStart;
     [SerializeField] private Item item;
     [SerializeField, Min(1)] private int amount = 1;
+
+    private void Start()
+    {
+        if(!setItemAtStart) return;
+
+        LevelDefinition def = Game.Current.Level.Definition;
+        bool rare = def.RareTreasure.Length != 0 ? Random.Range(0, 100) < def.RareTreasureChance : false;
+
+        int itemId = rare ? Random.Range(0, def.RareTreasure.Length) : Random.Range(0, def.NormalTreasure.Length);
+        SetItem(rare ? def.RareTreasure[itemId] : def.NormalTreasure[itemId]);
+    }
 
     public void SetItem(Item item)
     {

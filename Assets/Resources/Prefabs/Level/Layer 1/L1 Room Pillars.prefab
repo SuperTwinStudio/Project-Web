@@ -2886,7 +2886,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75e7ebb7c91a6b94ea0346ec75dd06f6, type: 2}
+  - {fileID: 2100000, guid: e35f3f9082e3540468e6b5cb0c233542, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3327,7 +3327,7 @@ MonoBehaviour:
   - {fileID: 5151279411830697316}
   - {fileID: 7181594930795534953}
   m_BossRoom: 0
-  m_BossObject: {fileID: 0}
+  m_Boss: {fileID: 0}
   m_Elevator: {fileID: 0}
   m_MinimapUnvisited: {fileID: 2484632846941641868}
   m_MinimapVisited: {fileID: 2869144767293467466}

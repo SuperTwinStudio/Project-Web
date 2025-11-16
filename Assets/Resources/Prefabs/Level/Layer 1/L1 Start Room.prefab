@@ -873,7 +873,7 @@ MonoBehaviour:
   m_EnemyRoom: 0
   m_EnemySpawnPoints: []
   m_BossRoom: 0
-  m_BossObject: {fileID: 0}
+  m_Boss: {fileID: 0}
   m_Elevator: {fileID: 0}
   m_MinimapUnvisited: {fileID: 2448917367366894904}
   m_MinimapVisited: {fileID: 2908209460615328729}
@@ -3017,7 +3017,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d52226f77dc9df4a83c5bfafafdd6b4, type: 2}
+  - {fileID: 2100000, guid: e35f3f9082e3540468e6b5cb0c233542, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
