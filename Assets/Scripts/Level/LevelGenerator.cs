@@ -222,10 +222,17 @@ public class LevelGenerator
         // Remove boss room from further processing
         endRooms.RemoveAt(furthestRoom);
 
+        // Divide end rooms between treasure & item rooms (1/3 item, 2/3 treasure)
+        int remainingEndRooms = endRooms.Count;
+        int maxItemRooms = remainingEndRooms / 3;
+        int maxTreasureRooms = remainingEndRooms * 2 / 3;
+
+        int treasureCount = Random.Range(2, maxTreasureRooms);
+        int itemCount = Random.Range(1, maxItemRooms);
+
         // Create treasure rooms
         if (def.TreasureRooms.Length > 0)
         {
-            int treasureCount = Random.Range(2, 5);
             for (int i = 0; i < treasureCount; i++)
             {
                 int rand = Random.Range(0, endRooms.Count);
@@ -243,7 +250,6 @@ public class LevelGenerator
         // Create item rooms
         if (def.ItemRooms.Length > 0)
         {
-            int itemCount = Random.Range(1, 3);
             for (int i = 0; i < itemCount; i++)
             {
                 int rand = Random.Range(0, endRooms.Count);
