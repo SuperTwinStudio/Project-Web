@@ -59,8 +59,6 @@ Trabajo desarrollado para la asignatura de ***Juegos para Web*** del grado de **
 
 ## 1. Historial de Versiones
 
-**Versión 0.5**
-
 Historial de versiones y cambios realizados en el documento.
 - **Versión 0.1 - 27/09/25:** esquema inicial, formato y borrador de documento. Adición de los apartados del concepto del juego, el Game Flow, Enemigos y jefes, y Tesoros.
 - **Versión 0.2 - 29/09/25:** desarrollo del apartado introductorio (Concepto, Género y Público Objetivo), adición del apartado Temática en la sección de Arte, expansión de la sección Mecánicas (tutorial, tienda, mazmorras y efectos de estado). Breve desarrollo de la narrativa.
