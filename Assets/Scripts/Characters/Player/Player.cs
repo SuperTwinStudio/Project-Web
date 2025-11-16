@@ -55,6 +55,7 @@ public class Player : Character, ISavable {
 
     //Movement & Rotation
     [Header("Movement & Rotation")]
+    [SerializeField] private AudioClip dashSound;
     [SerializeField] private float moveSpeed = 6.5f;
     [SerializeField] private float dashCooldown = 2.5f;
     [SerializeField] private float dashForce = 15f;
@@ -171,6 +172,9 @@ public class Player : Character, ISavable {
         if (dashAction.Triggered() && !dashTimer.IsCounting) {
             //Start dash timer
             dashTimer.Count(dashCooldown);
+
+            //Play dash sound
+            PlaySound(dashSound);
 
             //Push player (dash)
             Vector3 direction = isMoving ? moveDirection : Model.forward;

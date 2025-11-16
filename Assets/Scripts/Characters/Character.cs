@@ -11,10 +11,12 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] private Transform _top;
     [SerializeField] private Transform _eyes;
     [SerializeField] private Transform _bot;
+    [SerializeField] private AudioSource _audio;
 
     public Transform Top => _top;
     public Transform Eyes => _eyes;
     public Transform Bot => _bot;
+    public AudioSource Audio => _audio;
 
     //Health
     [Header("Health")]
@@ -354,6 +356,12 @@ public class Character : MonoBehaviour, IDamageable {
     //Attack
     public virtual float CalculateDamage(float damage) {
         return damage * EffectDamageDealtMultiplier;
+    }
+
+    //Sound
+    public void PlaySound(AudioClip clip) {
+        Audio.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
+        Audio.PlayOneShot(clip);
     }
 
 }

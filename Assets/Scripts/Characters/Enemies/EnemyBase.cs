@@ -14,7 +14,6 @@ public class EnemyBase : Character {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Collider _collider;
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private AudioSource _audio;
     [SerializeField] private AttackHelper _attack;
     [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
@@ -27,7 +26,6 @@ public class EnemyBase : Character {
     public NavMeshAgent Agent => _agent;
     public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rigidbody;
-    public AudioSource Audio => _audio;
     public AttackHelper Attack => _attack;
     public Transform Model => _model;
     public Animator Animator => _animator;
@@ -248,11 +246,6 @@ public class EnemyBase : Character {
     }
 
     //Helpers
-    public void PlaySound(AudioClip clip) {
-        Audio.pitch = Random.Range(0.92f, 1.08f);
-        Audio.PlayOneShot(clip);
-    }
-
     public EnemyBase SpawnEnemy(GameObject prefab, Transform spawn) {
         if (Room) {
             //Spawn with room
