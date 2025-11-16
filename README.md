@@ -1,4 +1,4 @@
-# Washi's Adventure
+<img width="512" height="512" alt="Paper_Star_Pile" src="https://github.com/user-attachments/assets/9a0bdc5e-e762-4860-868b-4c54eec5c6aa" /># Washi's Adventure
 
 Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño origami a encontrar a su hermano en un vasto mundo fantástico. 
 
@@ -319,20 +319,20 @@ A lo largo de una “run” el jugador podrá obtener diversos objetos que otorg
 
 | Icono | Nombre                                          | Rareza     | Descripción                                                                                               |
 | ----- | ----------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-|  ![Filo Oculto](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Hidden_Blade.jpg?raw=true)     | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
-|       | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
-|       | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
-|       | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
-|       | Folio sin doblar<br><br>*Unfolded sheet*        | Raro       | Al morir, vuelve a la vida con el 50% de la vida TOTAL. Se consume al usarse.                             |
-|       | Diseño aerodinámico<br><br>*Aerodynamic design* | Común      | +25% de velocidad (+15% por objeto extra)                                                                 |
-|       | Abanico de papel<br><br>*Paper fan*             | Poco común | Al esquivar, lanza una brisa de aire hacia delante, empujando a enemigos                                  |
-|       | Suelas de cartón<br><br>*Cardboard soles*       | Poco común | Hacer dash a un enemigo le hace 25% de daño base (+10% por extra)                                         |
-|       | Cutter<br><br>*Box cutter*                      | Común      | +10% de daño base<br>                                                                                     |
-|       | Piel de cartulina<br><br>*Card stock skin*      | Común      | +10% de vida base                                                                                         |
-|       | Purpurina brillante<br><br>*Sparkling glitter*  | Poco común | Probabilidad de 15% (+2% por objeto extra) de aturdir a un enemigo por 5 segundos                         |
-|       | Pegamento de barra<br><br>*Glue stick*          | Común      | Probabilidad de 10% (+5% por objeto extra) de pegar a un enemigo al suelo                                 |
-|       | Esponja mojada<br><br>*Wet sponge*              | Común      | Probabilidad 15% (+5% por objeto extra) de debilitar a un enemigo                                         |
-|       | Pluma rota<br><br>*Broken fountain pen*         | Poco común | Probabilidad de 10% (+5% por objeto extra) de aplicar tinta a un enemigo                                  |
+|  ![Filo Oculto](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Hidden_Blade.png?raw=true)     | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
+|    ![Escudo Inverso](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Inverse_Shield.png?raw=true)    | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
+|    ![Yesca](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Kindling.png?raw=true)    | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
+|    ![Compañero orbital](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Orbital_Buddy.png?raw=true)    | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
+|     ![Folio sin doblar](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Unfolded_Sheet.png?raw=true)   | Folio sin doblar<br><br>*Unfolded sheet*        | Raro       | Al morir, vuelve a la vida con el 50% de la vida TOTAL. Se consume al usarse.                             |
+|    ![Diseño Aerodinámico](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Aerodynamic_Design.png?raw=true)    | Diseño aerodinámico<br><br>*Aerodynamic design* | Común      | +25% de velocidad (+15% por objeto extra)                                                                 |
+|    ![Abanico de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Paper_Fan.png?raw=true)    | Abanico de papel<br><br>*Paper fan*             | Poco común | Al esquivar, lanza una brisa de aire hacia delante, empujando a enemigos                                  |
+|    ![Suelas de cartón](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Cardboard_Soles.png?raw=true)   | Suelas de cartón<br><br>*Cardboard soles*       | Poco común | Hacer dash a un enemigo le hace 25% de daño base (+10% por extra)                                         |
+|   ![Cutter](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Box_Cutter.png?raw=true)    | Cutter<br><br>*Box cutter*                      | Común      | +10% de daño base<br>                                                                                     |
+|    ![Piel de cartulina](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Card_Stock_Skin.png?raw=true)   | Piel de cartulina<br><br>*Card stock skin*      | Común      | +10% de vida base                                                                                         |
+|    ![Purpurina brillante](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Sparkling_Glitter.png?raw=true)   | Purpurina brillante<br><br>*Sparkling glitter*  | Poco común | Probabilidad de 15% (+2% por objeto extra) de aturdir a un enemigo por 5 segundos                         |
+|    ![Pegamento de barra](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Glue_Stick.png?raw=true)   | Pegamento de barra<br><br>*Glue stick*          | Común      | Probabilidad de 10% (+5% por objeto extra) de pegar a un enemigo al suelo                                 |
+|    ![Esponja mojada](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Wet_Sponge.png?raw=true)   | Esponja mojada<br><br>*Wet sponge*              | Común      | Probabilidad 15% (+5% por objeto extra) de debilitar a un enemigo                                         |
+|   ![Pluma rota](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Items/Broken_Fountain_Pen.png?raw=true)    | Pluma rota<br><br>*Broken fountain pen*         | Poco común | Probabilidad de 10% (+5% por objeto extra) de aplicar tinta a un enemigo                                  |
 
 
 ### Mejoras
@@ -349,9 +349,9 @@ Tesoros que se pueden encontrar en salas dentro de las mazmorras y que se pueden
 
 | Icono | Tier | Nombre                       | Valor |
 | ----- | ---- | ---------------------------- | ----- |
-|       | 1    | Estrella de papel            | 20    |
-|       | 2    | Montón de estrellas de papel | 40    |
-|       | 3    | Saco de estrellas de papel   | 60    |
+|   ![Estrella de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star.png?raw=true)    | 1    | Estrella de papel            | 20    |
+|   ![Montón de estrellas de papel](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Pile.png?raw=true)     | 2    | Montón de estrellas de papel | 40    |
+|    ![Saco de estrellas de papel ](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Treasures/Paper_Star_Bag.png?raw=true)    | 3    | Saco de estrellas de papel   | 60    |
 
 
 **Ejemplos de posibles drops en niveles:**
