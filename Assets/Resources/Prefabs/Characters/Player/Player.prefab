@@ -189,7 +189,7 @@ MonoBehaviour:
   _loadout: {fileID: 8538115829238214355}
   _model: {fileID: 3154183115244130666}
   _animator: {fileID: 2393395648455993377}
-  dashSound: {fileID: 8300000, guid: daa0f6cd5386d3b4c8d38aaedd378384, type: 3}
+  dashSound: {fileID: 8300000, guid: ab6925b518fc61f449c8e323ac7324dd, type: 3}
   moveSpeed: 6.5
   dashCooldown: 2.5
   dashForce: 15
