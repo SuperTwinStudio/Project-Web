@@ -304,20 +304,6 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
     - **Descripción:** tras lanzar varias ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
 	- **Mejora:** aumenta la distancia de empuje.
 
-#### Canica
-
-Arma de rango centrada en provocar daño de forma indirecta, generando minions u obstáculos en el mapa.
-
-- **Ataque primario**
-    - **Descripción:** invoca a un minion que ataca al enemigo más cercano.
-	- **Mejora:** aumenta el daño de los minions.
-- **Ataque secundario**
-    - **Descripción:** lanza la canica hacia el enemigo, le daña y regresa hacia el personaje.
-	- **Mejora:** aumenta el daño de la canica.
-- **Pasiva**
-    - **Descripción:** cada cierta cantidad de invocaciones aparece un minion extra.
-	- **Mejora:** aumenta el daño del minion extra.
-
 ### Estados alterados
 
 Algunos enemigos y armas del personaje serán capaces de aplicar efectos especiales, entre los que se encuentran: 
@@ -325,6 +311,29 @@ Algunos enemigos y armas del personaje serán capaces de aplicar efectos especia
 - **Paralizado (al aplicar pegamento):** congela al personaje por unos segundos.
 - **Mojado (al aplicar agua):** el papel se reblandece y se recibe más daño.
 - **Manchado (al aplicar tinta):** ralentiza el movimiento del personaje y hace que falle algunos de sus ataques.    
+
+### Objetos
+
+A lo largo de una “run” el jugador podrá obtener diversos objetos que otorgan una mejora, pero se pierden al morir.
+
+
+| Icono | Nombre                                          | Rareza     | Descripción                                                                                               |
+| ----- | ----------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
+|       | Filo oculto<br><br>*Hidden blade*               | Poco común | Probabilidad de 10% (+5% por objeto extra) de disparar dos filos al usar la habilidad primaria            |
+|       | Escudo inverso<br><br>*Inverse shield*          | Poco común | Lleva un escudo en la espalda para bloquear golpes (el área incrementa un 10% por objeto extra)           |
+|       | Yesca<br><br>*Kindling*                         | Poco común | Probabilidad de 15% (+5% por objeto extra) de quemar a un enemigo                                         |
+|       | Compañero orbital<br><br>*Orbital buddy*        | Raro       | Un compañero orbitará al jugador, disparando a enemigos haciendo 50% de daño base (+25% por objeto extra) |
+|       | Folio sin doblar<br><br>*Unfolded sheet*        | Raro       | Al morir, vuelve a la vida con el 50% de la vida TOTAL. Se consume al usarse.                             |
+|       | Diseño aerodinámico<br><br>*Aerodynamic design* | Común      | +25% de velocidad (+15% por objeto extra)                                                                 |
+|       | Abanico de papel<br><br>*Paper fan*             | Poco común | Al esquivar, lanza una brisa de aire hacia delante, empujando a enemigos                                  |
+|       | Suelas de cartón<br><br>*Cardboard soles*       | Poco común | Hacer dash a un enemigo le hace 25% de daño base (+10% por extra)                                         |
+|       | Cutter<br><br>*Box cutter*                      | Común      | +10% de daño base<br>                                                                                     |
+|       | Piel de cartulina<br><br>*Card stock skin*      | Común      | +10% de vida base                                                                                         |
+|       | Purpurina brillante<br><br>*Sparkling glitter*  | Poco común | Probabilidad de 15% (+2% por objeto extra) de aturdir a un enemigo por 5 segundos                         |
+|       | Pegamento de barra<br><br>*Glue stick*          | Común      | Probabilidad de 10% (+5% por objeto extra) de pegar a un enemigo al suelo                                 |
+|       | Esponja mojada<br><br>*Wet sponge*              | Común      | Probabilidad 15% (+5% por objeto extra) de debilitar a un enemigo                                         |
+|       | Pluma rota<br><br>*Broken fountain pen*         | Poco común | Probabilidad de 10% (+5% por objeto extra) de aplicar tinta a un enemigo                                  |
+
 
 ### Mejoras
 
@@ -336,12 +345,14 @@ En la tienda se podrán obtener mejoras de los atributos del personaje de índol
 ### Tesoros
 
 Tesoros que se pueden encontrar en salas dentro de las mazmorras y que se pueden vender en la tienda. Son el principal motor de economía dentro del juego y permite el avance del jugador. Los tesoros se organizan en categorías o tiers y, a mayor categoría, más valor. 
-- **Tier 1:**
-	- Estrella de papel.
-- **Tier 2:**
-	- Pila de estrellas de papel.
-- **TIer 3:** 
-	- Bolsa de estrellas de papel.
+
+
+| Icono | Tier | Nombre                       | Valor |
+| ----- | ---- | ---------------------------- | ----- |
+|       | 1    | Estrella de papel            | 20    |
+|       | 2    | Montón de estrellas de papel | 40    |
+|       | 3    | Saco de estrellas de papel   | 60    |
+
 
 **Ejemplos de posibles drops en niveles:**
 - **Nivel 1:** drops de tier 1 (100%)
@@ -500,7 +511,7 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 
 #### Efectos del jugador
 
-- **Movimiento:** sonido de dos papeles rozándose suavemente al ritmo del paso del personaje.
+- **Movimiento:** sonido de dos papeles rozándose suavemente al ritmo del paso del personaje  (obtenido en pixabay.com).
 - **Dash:** sonido largo de dos papeles al rozarse y efecto de corriente de aire.
 - **Recibir daño:** sonido de golpe contundente y efecto de voz del personaje. Al recibir daño, por un tiempo breve el resto de sonidos se escucharán más bajos. Para referencia del efecto,  consultar Hollow Knight o Cult of the Lamb.    
 - **Morir:** sonido de un papel rompiéndose y efecto de voz del personaje.
@@ -512,7 +523,6 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 - **Garra:** igual que la clase Espada, con un tono más agudo y una duración menor.
 - **Grapadora:** estallido compacto, como el de un disparo.
 - **Abanico:** silbido suave, imitando corrientes de viento.
-- **Mental:** efecto con sintetizador y sonidos metálicos. 
 
 #### Efectos de estados alterados:
 
