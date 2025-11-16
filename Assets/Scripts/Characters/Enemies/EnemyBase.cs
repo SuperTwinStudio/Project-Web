@@ -11,6 +11,7 @@ public class EnemyBase : Character {
 
     //Enemy
     [Header("Enemy")]
+    [SerializeField] private bool _isBoss;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Collider _collider;
     [SerializeField] private Rigidbody _rigidbody;
@@ -23,6 +24,7 @@ public class EnemyBase : Character {
 
     public EnemyBehaviour Behaviour { get; private set; }
 
+    public bool IsBoss => _isBoss;
     public NavMeshAgent Agent => _agent;
     public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rigidbody;
@@ -104,9 +106,21 @@ public class EnemyBase : Character {
     }
 
     public void SetEnabled(bool enabled) {
+        //Enable
         IsEnabled = enabled;
         Agent.enabled = enabled;
         Collider.enabled = enabled && IsAlive;
+    }
+
+    public void NotifyPlayerEnteredRoom() {
+        //Enable enemy
+        SetEnabled(true);
+
+        //Assign as boss if needed
+        if (enabled && IsBoss && Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.AssignBoss(this);
+
+        //Call event
+        Behaviour.OnPlayerEnteredRoom();
     }
 
     //Health
@@ -242,7 +256,7 @@ public class EnemyBase : Character {
     //Room
     public void SetRoom(Room room) {
         Room = room;
-        SetEnabled(false); //Disable on creation
+        SetEnabled(false); //Disable until room is entered
     }
 
     //Helpers

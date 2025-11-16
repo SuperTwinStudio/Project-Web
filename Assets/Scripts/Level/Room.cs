@@ -211,7 +211,7 @@ public class Room : MonoBehaviour
         Game.Current.Level.UpdateWalkableSurface();
 
         //Enable enemies
-        foreach (var enemy in _enemies) enemy.SetEnabled(true);
+        for (int i = Enemies.Count - 1; i >= 0 ; i--) Enemies[i].NotifyPlayerEnteredRoom();
     }
 
     private void UnlockDoors()

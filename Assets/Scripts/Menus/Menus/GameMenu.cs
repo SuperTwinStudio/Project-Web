@@ -73,6 +73,13 @@ public class GameMenu : Menu {
     [SerializeField] private GameObject minimapCamera;
     [SerializeField] private GameObject minimap;
 
+    //Boss Healthbar
+    [Header("Boss Healthbar")]
+    [SerializeField] private GameObject bossHealthbar;
+    [SerializeField] private Image bossHealthbarFill;
+
+    private EnemyBase boss;
+
 
       /*$$$$$   /$$                 /$$
      /$$__  $$ | $$                | $$
@@ -125,7 +132,7 @@ public class GameMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     //Health
-    private void OnHealthChanged(float health) {
+    private void OnHealthChanged(float health, float healthMax) {
         //Check if health is init
         if (lastKnownHealth >= 0) damageIndicator.SetTrigger("Damage");
 
@@ -222,6 +229,18 @@ public class GameMenu : Menu {
         itemAnimator.SetTrigger("Show");
     }
 
+    //Boss healthbar
+    private void OnBossHealthChange(float health, float healthMax) {
+        bossHealthbarFill.fillAmount = health / healthMax;
+        bossHealthbar.SetActive(health > 0);
+    }
+
+    public void AssignBoss(EnemyBase enemy) {
+        boss = enemy;
+        enemy.AddOnHealthChanged(OnBossHealthChange);
+        bossHealthbar.SetActive(true);
+    }
+
 
      /*$$$$$$$                            /$$
     |__  $$__/                           | $$
@@ -251,6 +270,9 @@ public class GameMenu : Menu {
 
         //Add item obtain event
         Player.Loadout.AddOnObtainItem(OnObtainItem);
+
+        //Hide boss healthbar
+        bossHealthbar.SetActive(false);
     }
 
     protected override void OnClose() {
@@ -263,13 +285,16 @@ public class GameMenu : Menu {
         if (!Game.InGame) return;
 
         //Remove player health change event
-        Player.AddOnHealthChanged(UpdateHealthIndicator);
+        Player.RemoveOnHealthChanged(OnHealthChanged);
 
         //Remove weapon change event
         Player.Loadout.RemoveOnWeaponChanged(OnWeaponChanged);
 
-        //Add item obtain event
+        //Remove item obtain event
         Player.Loadout.RemoveOnObtainItem(OnObtainItem);
+
+        //Remove boss health change event
+        if (boss) boss.RemoveOnHealthChanged(OnBossHealthChange);
     }
 
 

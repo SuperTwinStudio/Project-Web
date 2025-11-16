@@ -17,7 +17,7 @@ public class BeastPillarsState : BeastState {
         //Check remaining pillars
         if (Beast.Pillars.Count >= 2) {
             //Still 2+ pillars -> Spawn minions
-            foreach (var spawn in Beast.MinionSpawns) Enemy.SpawnEnemy(Beast.MinionPrefab, spawn);
+            Beast.SpawnMinions();
         } else if (Beast.Pillars.Count == 1) {
             //Only 1 pillar remaining -> Destroy it
             BeastPillar remainingPillar = Beast.Pillars[0];

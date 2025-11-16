@@ -96,4 +96,14 @@ public class BeastBehaviour : EnemyBehaviour {
         OnPillarDestroyed?.Invoke(pillar);
     }
 
+    //Room
+    public override void OnPlayerEnteredRoom() {
+        SpawnMinions();
+    }
+
+    //Helpers
+    public void SpawnMinions() {
+        foreach (var spawn in MinionSpawns) Enemy.SpawnEnemy(MinionPrefab, spawn);
+    }
+
 }

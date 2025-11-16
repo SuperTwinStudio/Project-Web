@@ -1085,9 +1085,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 1801451465853676353}
-  _primaryCooldown: 0.3
+  _primaryCooldown: 0.4
   primarySecondaryCooldown: 0.2
-  primaryDamage: 12
+  primaryDamage: 15
   primaryDamagePerLevel: 5
   primaryAttackSound: {fileID: 8300000, guid: fe9171e54a0aaf04f8cb2a4de67fee2a, type: 3}
   _secondaryCooldown: 5

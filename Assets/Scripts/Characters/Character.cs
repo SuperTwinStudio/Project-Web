@@ -22,7 +22,7 @@ public class Character : MonoBehaviour, IDamageable {
     [Header("Health")]
     [SerializeField] private float _baseHealth = DEFAULT_HEALTH_MAX;
 
-    private event Action<float> OnHealthChanged;
+    private event Action<float, float> OnHealthChanged;
     private Coroutine damageFeedbackCoroutine = null;
 
     public bool IgnoreNextDamage { get; set; } = false;
@@ -136,7 +136,7 @@ public class Character : MonoBehaviour, IDamageable {
         IsAlive = true;
 
         //Call event
-        OnHealthChanged?.Invoke(Health);
+        CallOnHealthChanged();
 
         //Revived
         return true;
@@ -153,7 +153,7 @@ public class Character : MonoBehaviour, IDamageable {
         Health = Mathf.Min(Health + amount, HealthMax);
 
         //Call event
-        OnHealthChanged?.Invoke(Health);
+        CallOnHealthChanged();
 
         //Healed
         return true;
@@ -192,7 +192,7 @@ public class Character : MonoBehaviour, IDamageable {
         }
 
         //Call event
-        OnHealthChanged?.Invoke(Health);
+        CallOnHealthChanged();
 
         //Damaged
         return true;
@@ -201,14 +201,14 @@ public class Character : MonoBehaviour, IDamageable {
     protected virtual void OnDeath() {}
 
     protected void CallOnHealthChanged() {
-        OnHealthChanged?.Invoke(Health);
+        OnHealthChanged?.Invoke(Health, HealthMax);
     }
 
-    public void AddOnHealthChanged(Action<float> action) {
+    public void AddOnHealthChanged(Action<float, float> action) {
         OnHealthChanged += action;
     }
 
-    public void RemoveOnHealthChanged(Action<float> action) {
+    public void RemoveOnHealthChanged(Action<float, float> action) {
         OnHealthChanged -= action;
     }
 

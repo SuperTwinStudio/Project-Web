@@ -61,4 +61,7 @@ public class EnemyBehaviour : MonoBehaviour {
         //Enemy died
     }
 
+    //Room
+    public virtual void OnPlayerEnteredRoom() {}
+
 }

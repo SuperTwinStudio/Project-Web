@@ -7,7 +7,7 @@ public class WeaponAbanico : Weapon {
     [Header("Primary")]
     [SerializeField, Min(0)] private float _primaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.2f;
-    [SerializeField, Min(0)] private float primaryDamage = 12f;
+    [SerializeField, Min(0)] private float primaryDamage = 15f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
     [SerializeField] private AudioClip primaryAttackSound;
 
@@ -62,14 +62,14 @@ public class WeaponAbanico : Weapon {
 
     //Weapon 
     private void Push(IDamageable damageable, float force, float damage = -1) {
+        //Damage damageable
+        if (damage > 0) damageable.Damage(damage, Player, DamageType.Ranged);
+
         //Check if an enemy
         if (damageable is not EnemyBase) return;
 
         //Get enemy
         EnemyBase enemy = damageable as EnemyBase;
-
-        //Damage enemy
-        if (damage > 0) enemy.Damage(damage, Player, DamageType.Ranged);
 
         //Push enemy
         enemy.Push(force * (enemy.transform.position - Player.transform.position));
