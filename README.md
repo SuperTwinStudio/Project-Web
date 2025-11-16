@@ -2,7 +2,7 @@
 
 Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño origami a encontrar a su hermano en un vasto mundo fantástico. 
 
-Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y desarrollo de videojuegos* de la URJC.
+Trabajo desarrollado para la asignatura de ***Juegos para Web*** del grado de ***Diseño y Desarrollo de Videojuegos*** de la URJC.
 
 
 
@@ -10,27 +10,38 @@ Trabajo desarrollado para la asignatura *Juegos para Web* del grado *Diseño y d
 
 ## Redes Sociales
 
-- **Portfolio:** http://supertwinstudio.github.io/Portfolio/
-- **Itch.io:** https://supertwinstudio.itch.io/
-- **Instagram:** https://www.instagram.com/supertwinstudio/
-- **X (Twitter):** https://x.com/superTwinStudio
-- **Youtube:** https://www.youtube.com/@superTwinStudio
-- **Linktree:** https://linktr.ee/supertwinstudio
+- [Portfolio](http://supertwinstudio.github.io/Portfolio/)
+- [Itch.io](https://supertwinstudio.itch.io/)
+- [Instagram](https://www.instagram.com/supertwinstudio/)
+- [X (Twitter)](https://x.com/superTwinStudio)
+- [Youtube](https://www.youtube.com/@superTwinStudio)
+- [Linktree](https://linktr.ee/supertwinstudio)
 
 ## Desarrolladores
 
-- Alejandro Paniagua Moreno (@BOTPanzer) -> a.paniagua.2022@alumnos.urjc.es
-- Raúl Alfonso Pérez (@racurrandom) -> r.alfonso.2022@alumnos.urjc.es
-- Pablo Quiñones Gonzalez (@ThatBit345) -> p.quinones.2022@alumnos.urjc.es
-- Sara María Romero Bermejo (@SaraRomBer) -> sm.romero.2022@alumnos.urjc.es
--  María Marquez García (@martesytrece) -> m.marquezg.2022@alumnos.urjc.es
-- Carlos Vega San Román (@CarlosVSR) -> 
+- Alejandro Paniagua Moreno  
+  - [@BOTPanzer](https://github.com/BOTPanzer)  
+  - a.paniagua.2022@alumnos.urjc.es
+- Raúl Alfonso Pérez  
+  - [@racurrandom](https://github.com/racurrandom)  
+  - r.alfonso.2022@alumnos.urjc.es
+- Pablo Quiñones Gonzalez  
+  - [@ThatBit345](https://github.com/ThatBit345)  
+  - p.quinones.2022@alumnos.urjc.es
+- Sara María Romero Bermejo  
+  - [@SaraRomBer](https://github.com/SaraRomBer)  
+  - sm.romero.2022@alumnos.urjc.es
+- María Marquez García  
+  - [@martesytrece](https://github.com/martesytrece)  
+  - m.marquezg.2022@alumnos.urjc.es
+- Carlos Vega San Román  
+  - [@CarlosVSR](https://github.com/CarlosVSR)
 
 
 
 # GDD
 
-## 1. Historial de versiones
+## 1. Historial de Versiones
 
 **Versión 0.5**
 
@@ -69,7 +80,7 @@ Project Paper está pensado para ejecutarse en navegadores de ordenadores a trav
 
 
 
-## 3. Monetización y planificación
+## 3. Monetización y Planificación
 
 ### Modelo de monetización
 
@@ -171,10 +182,12 @@ El jugador será un personaje de origami con un arma, un inventario y la capacid
 | -------------------------- | --------------- | ------------------ |
 | Movimiento                 | WASD            | Joystick izquierdo |
 | Dirección de ataque        | Cursor          | Joystick derecho   |
-| Efectuar ataque primario   | Click Izquierdo | Shoulder derecho   |
-| Efectuar ataque secundario | Click Derecho   | Shoulder izquierdo |
+| Ataque primario            | Click izquierdo | Shoulder derecho   |
+| Ataque secundario          | Click derecho   | Shoulder izquierdo |
+| Dash                       | Espacio         | A/Crúz             |
 | Atrás (Navegación UI)      | Escape          | B/Círculo          |
-| Inventario                 | TAB/I           | X/Cuadrado         |
+| Pausa                      | Escape          | Start              |
+| Inventario                 | TAB/I           | Select             |
 
 ### Armas
 
@@ -185,84 +198,84 @@ El jugador tendrá diferentes clases de armas entre las que escoger que podrá d
 Clase de combate cuerpo a cuerpo genérica con un estilo de juego balanceado.
 
 - **Ataque primario**
-    - **Descripción:** Golpea hacia el frente, dañando a los enemigos que estén en su rango.
-	- **Mejora:** Aumenta el daño.
+    - **Descripción:** golpea hacia el frente, dañando a los enemigos que estén en su rango.
+	- **Mejora:** aumenta el daño.
 - **Ataque secundario**
-    - **Descripción:** Golpea girando sobre sí mismo, dañando a los enemigos que estén en el área de corte.
-	- **Mejora:** Aumenta el daño.
+    - **Descripción:** golpea girando sobre sí mismo, dañando a los enemigos que estén en el área de corte.
+	- **Mejora:** aumenta el daño.
 - **Pasiva**
-    - **Descripción:** Tras dar varios golpes, el siguiente golpe realiza daño extra.
-	- **Mejora:** Aumenta el daño.
+    - **Descripción:** tras dar varios golpes, el siguiente golpe realiza daño extra.
+	- **Mejora:** aumenta el daño.
 
 #### Cerilla centelleante
 
-Clase de combate cuerpo a cuerpo que sacrifica velocidad por potencia y algo más de rango.
+Clase de combate cuerpo a cuerpo que sacrifica daño por rango y quemadura.
 
 - **Ataque primario**
-    - **Descripción:** Golpea hacia el frente, dañando a los enemigos que estén en su rango.    
-	- **Mejora:** Aumenta el daño.
+    - **Descripción:** golpea hacia el frente, dañando a los enemigos que estén en su rango.    
+	- **Mejora:** aumenta el daño.
 - **Ataque secundario**
-    - **Descripción:** Crea una explosión que daña y quema un área a su alrededor.
-	- **Mejora:** Aumenta la duración de la quemadura.
+    - **Descripción:** crea una explosión que daña y quema un área a su alrededor.
+	- **Mejora:** aumenta la duración de la quemadura.
 - **Pasiva** 
-    - **Descripción:** Tras dar varios golpes, el siguiente quema a los enemigos.
-	- **Mejora:** Aumenta la duración de la quemadura.    
+    - **Descripción:** tras dar varios golpes, el siguiente quema a los enemigos.
+	- **Mejora:** aumenta la duración de la quemadura.    
 
 #### Guantelete de chinchetas
 
-Clase de combate cuerpo a cuerpo que sacrifica área de daño por velocidad de ataque.
+Clase de combate cuerpo a cuerpo que sacrifica rango por daño progresivo.
 
 - **Ataque primario**
-    - **Descripción:** Golpea hacia el frente, dañando a los enemigos que estén en su rango.
-	- **Mejora:** Aumenta el daño del golpe.
+    - **Descripción:** golpea hacia el frente, dañando a los enemigos que estén en su rango.
+	- **Mejora:** aumenta el daño del golpe.
 - **Ataque secundario**
-    - **Descripción** Realiza un plunge attack con daño en área.
-	- **Mejora:** Aumenta el daño del golpe.
+    - **Descripción** realiza un plunge attack con daño en área.
+	- **Mejora:** aumenta el daño del golpe.
 - **Pasiva**
-    - **Descripción:** Dañar a un enemigo le clava una chincheta, hasta un máximo de 5, aumentando el daño de los ataques por cada chincheta clavada.
-	- **Mejora:** Aumenta el daño extra.
+    - **Descripción:** dañar a un enemigo le clava una chincheta, hasta un máximo de 5, aumentando el daño de los ataques por cada chincheta clavada.
+	- **Mejora:** aumenta el daño extra.
 
 #### Grapadora
 
 Clase de combate a rango que utiliza munición y tiene un estilo de juego balanceado.
 
 - **Ataque primario**
-    - **Descripción:** Dispara una grapa hacia el frente.
-	- **Mejora:** Aumenta el daño de la grapa.
+    - **Descripción:** dispara una grapa hacia el frente.
+	- **Mejora:** aumenta el daño de la grapa.
 - **Ataque secundario**
-    - **Descripción:** Dispara una ráfaga de grapas hacia el frente.
-	- **Mejora:** Aumenta el daño de la rafaga.
+    - **Descripción:** dispara una ráfaga de grapas hacia el frente.
+	- **Mejora:** aumenta el daño de la rafaga.
 - **Pasiva**
-    - **Descripción:** Si un enemigo está cerca, le pega con la grapadora cuerpo a cuerpo en vez de dispararle.
-	- **Mejora:** Aumenta el daño del golpe melee.
+    - **Descripción:** si un enemigo está cerca, le pega con la grapadora cuerpo a cuerpo en vez de dispararle.
+	- **Mejora:** aumenta el daño del golpe melee.
 
 #### Abanico
 
 Clase de combate a rango que no utiliza munición y sacrifica daño por golpes en área.
 
 - **Ataque primario**
-    - **Descripción:** Bate el abanico para lanzar una rafaga de aire hacia el frente que daña a los enemigos en área.
-	- **Mejora:** Aumenta el daño de la rafaga de aire.
+    - **Descripción:** bate el abanico para lanzar una rafaga de aire hacia el frente que daña a los enemigos en área.
+	- **Mejora:** aumenta el daño de la rafaga de aire.
 - **Ataque secundario**
-    - **Descripción:** Bate el abanico para dañar y empujar a los enemigos que tiene enfrente.
-	- **Mejora:** Aumenta la distancia de empuje.
+    - **Descripción:** bate el abanico para dañar y empujar a los enemigos que tiene enfrente.
+	- **Mejora:** aumenta la distancia de empuje.
 - **Pasiva**
-    - **Descripción:** Tras lanzar varias ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
-	- **Mejora:** Aumenta la distancia de empuje.
+    - **Descripción:** tras lanzar varias ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
+	- **Mejora:** aumenta la distancia de empuje.
 
 #### Canica
 
 Arma de rango centrada en provocar daño de forma indirecta, generando minions u obstáculos en el mapa.
 
 - **Ataque primario**
-    - **Descripción:** Invoca a un minion que ataca al enemigo más cercano.
-	- **Mejora:** Aumenta el daño de los minions.
+    - **Descripción:** invoca a un minion que ataca al enemigo más cercano.
+	- **Mejora:** aumenta el daño de los minions.
 - **Ataque secundario**
-    - **Descripción:** Lanza la canica hacia el enemigo, le daña y regresa hacia el personaje.
-	- **Mejora:** Aumenta el daño de la canica.
+    - **Descripción:** lanza la canica hacia el enemigo, le daña y regresa hacia el personaje.
+	- **Mejora:** aumenta el daño de la canica.
 - **Pasiva**
-    - **Descripción:** Cada cierta cantidad de invocaciones aparece un minion extra.
-	- **Mejora:** Aumenta el daño del minion extra.
+    - **Descripción:** cada cierta cantidad de invocaciones aparece un minion extra.
+	- **Mejora:** aumenta el daño del minion extra.
 
 ### Estados alterados
 
@@ -306,11 +319,12 @@ Tesoros que sueltan los enemigos al morir que se pueden vender en la tienda. Son
 ## 6. Level Design
 
 Cada nivel de Project Paper equivale a un piso de la mazmorra que el jugador deberá explorar y despejar para pasar al siguiente. El  piso o nivel se genera de forma procedimental. Las salas se compondrán de escenarios interiores (dentro de los cajones del escritorio), y algunas contarán con tesoros o elementos útiles con el fin de incentivar la exploración. Sólo hay tres formas de salir de un nivel:
-- **Completar** el nivel derrotando al jefe, con opción de regresar al lobby o continuar al siguiente piso.
-- **Morir**, perdiendo los tesoros recogidos y la mitad del dinero. El personaje regresará al lobby y el nivel se reseteará.
-- **Cerra**r el juego, el progreso realizado en el interior de la mazmorra se perderá y al reabrir el juego el personaje aparecerá en el lobby.
+- **Completar el nivel derrotando al jefe**: opción de regresar al lobby o continuar al siguiente piso.
+- **Morir**: perder los tesoros recogidos y la mitad del dinero. El personaje regresará al lobby y el nivel se reseteará.
+- **Cerrar el juego**: el progreso realizado en el interior de la mazmorra se perderá y al reabrir el juego el personaje aparecerá en el lobby.
 
 ### Generación procedimental de mazmorras
+
 Las mazmorras de Project Paper son creadas a partir de diferentes tipos de salas:
 - **Jefe:** Salas finales de la mazmorra, aparecen en el hueco más lejano con respecto a la sala inicial, esto se hace para incentivar la exploración de la mazmorra. Al derrotar al jefe podemos progresar a la siguiente zona.
 - **Tesoro:** Las salas de tesoro contienen objetos que pueden venderse al completar una run, si contienen un tesoro raro (de más valor) estas tendrán sus puertas cerradas, requiriendo una llave para abrirlas.
@@ -328,44 +342,56 @@ Al avanzar de sala en sala las puertas se irán cerrando, obligando al jugador a
 
 Unidades inteligentes que se encontrarán repartidas por las mazmorras. Cada clase de enemigo tendrá un comportamiento único y algunos tendrán diferentes comportamientos en función de si actúan en solitario o en grupo. En función de la dificultad que supone derrotarlos se pueden clasificar en fácil, media y alta. 
 
-#### **Duendecillos** 
-**Dificultad:** fácil.
-**Descripción:** pequeños duendes armados con lanzas que atacan al jugador desde la distancia.
-**Estados de los duendecillos:**
-- Si el jugador está muy lejos y no llega el rango de ataque, el duendecillo se acerca a una velocidad normal.
-- Si el jugador está muy cerca, el duendecillo se echa hacia atrás a una velocidad más lenta de lo normal mientras sigue atacando. 
-- Si el jugador está en rango, el duendecillo se queda quieto y le ataca lanzando lanzas.
-
 #### **Ladronzuelos**
-**Dificultad:** media.
-**Descripción:** pequeños bichos muy rápidos que actúan de manera diferente dependiendo de los enemigos que haya en la sala.
-**Estados de los ladronzuelos:**
-- Si solo hay ladronzuelos en la sala, vienen corriendo hacia el jugador, le atacan y se retractan lentamente para repetir el ataque. Los ladronzuelos se comunican entre ellos para coordinar atacar en diferentes momentos y no todos a la vez.
-- Si hay otros tipos de enemigos en la sala, se dedican a hacer de soporte a los demás acercándose al jugador para robarle un objeto, corriendo a la otra punta de la sala y dejándolo en el suelo. Robar objetos tendría cooldown y solo lo podría hacer un ladronzuelo a la vez, por lo que se tendrían que comunicar entre ellos para ver quien lo hace. Cuando robar está en cooldown, los ladronzuelos se dedican a escapar del jugador.
+
+Pequeños bichos muy rápidos que actúan de manera diferente dependiendo de los enemigos que haya en la sala.  
+
+- **Dificultad:** baja.
+- **Comportamiento:**
+  - En la generación de salas, si hay varios tipos de enemigos sólo puede aparecer un ladronzuelo.
+  - Si solo hay ladronzuelos en la sala, se acercan al jugador a atacar.
+  - Si hay otros tipos de enemigo en la sala y solo un ladronzuelo, actúa de la siguiente manera:
+    - Si el jugador no tiene oro, le ataca.
+    - Si el jugador tiene oro, le roba y huye para que no lo recupere.
+  - Si el jugador mata al ladronzuelo, este le devuelve lo robado.
+
+#### **Duendecillos** 
+
+Pequeños duendes armados con lanzas que atacan al jugador desde la distancia.  
+
+- **Dificultad:** media.
+- **Comportamiento:**
+  - Si el jugador está muy lejos y no llega el rango de ataque, el duendecillo se acerca a una velocidad normal.
+  - Si el jugador está muy cerca, el duendecillo se echa hacia atrás a una velocidad más lenta de lo normal mientras sigue atacando. 
+  - Si el jugador está en rango, el duendecillo se queda quieto y le ataca lanzando lanzas.
 
 #### **Caballero** 
-**Dificultad:** alta.
-**Descripción:** Armadura poseída de tamaño medio que arrastra una espada gigante y realiza ataques lentos pero devastadores. Cuenta con un escudo que protege la parte frontal del personaje y deja la parte trasera al descubierto.
-**Estados de los caballeros:** 
-- Si el jugador no se encuentra dentro del rango de visión, el caballero no se moverá. 
-- Si se encuentra dentro del rango de visión, se acercará al jugador con el escudo desenvainado hasta estar a una distancia corta.
-- Si el jugador está dentro de su rango de ataque, envainará el escudo dejando sus puntos débiles expuestos y realizará ataques lentos pero potentes.
-- Si el jugador ataca a melé mientras tiene el escudo envainado, este hará parry y enlazará con un ataque rápido de menor daño. Si el jugador ataca a rango, el caballero simplemente se quedará detenido para frenar la munición y justo después seguirá caminando. 
+
+Armadura poseída de tamaño medio que arrastra una espada gigante y realiza ataques lentos pero devastadores. Cuenta con un escudo que protege la parte frontal del personaje y deja la parte trasera al descubierto.  
+
+- **Dificultad:** alta.
+- **Comportamiento:**  
+  - Si el jugador no se encuentra dentro del rango de visión, el caballero no se moverá. 
+  - Si se encuentra dentro del rango de visión, se acercará al jugador con el escudo desenvainado hasta estar a una distancia corta.
+  - Si el jugador está dentro de su rango de ataque, envainará el escudo dejando sus puntos débiles expuestos y realizará ataques lentos pero potentes.
+  - Si el jugador ataca a melé mientras tiene el escudo envainado, este hará parry y enlazará con un ataque rápido de menor daño. Si el jugador ataca a rango, el caballero simplemente se quedará detenido para frenar la munición y justo después seguirá caminando. 
 
 ### Bosses
 
 #### **Miso Beast**
+
 Un animal de origami con un tamaño mayor a lo normal con diferentes fases.
 
-**Fase 1**
-- El boss se encuentra en el centro de la sala conectado por unas cadenas a 4 pilares en cada esquina. El jugador debe destruir 3 de los 4 pilares para liberarlo.
-- Al entrar en la sala aparecen varios enemigos para impedirlo. Destruir un pilar hace que aparezcan más. 
-- Al boss no se le puede dañar mientras está encadenado y, si se acerca el jugador, se hará daño y será empujado hacia atrás.
-
-**Fase 2**
-- Una vez se rompan las cadenas, el boss se suelta y comienza su comportamiento normal. 
-- Para atacar, el boss pilla la dirección del jugador, se queda quieto unos segundos indicando que va a atacar y carga hacia él. Si el jugador se mueve, el boss puede girar ligeramente pero no mucho. 
-- Una vez el boss golpee algo mientras carga, ya sea el jugador o una pared, este se stunea a sí mismo durante un tiempo, momento donde el jugador le puede golpearle. Si al cargar golpea al jugador, este será dañado y ambos se stunearán por la misma duración.
+- **Dificultad:** baja.
+- **Comportamiento:**  
+  - **Fase 1**
+    - El boss se encuentra en el centro de la sala conectado por unas cadenas a 4 pilares en cada esquina. El jugador debe destruir 3 de los 4 pilares para liberarlo.
+    - Al entrar en la sala aparecen varios enemigos para impedirlo. Destruir un pilar hace que aparezcan más. 
+    - Al boss no se le puede dañar mientras está encadenado y, si se acerca el jugador, se hará daño y será empujado para alejarlo.
+  - **Fase 2**
+    - Una vez se rompan las cadenas, el boss se suelta y comienza su comportamiento normal. 
+    - Para atacar, el boss apunta en la dirección del jugador, se queda quieto unos segundos para indicar que va a atacar, y carga hacia él. 
+    - Una vez el boss choque contra la pared, este se stuneará a sí mismo durante un tiempo para permitir al jugador golpearle.
 
 
 
@@ -407,15 +433,10 @@ Los distintos elementos interactuables también incluirán la estética de escri
 ### Arte conceptual
 
 ![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Armas.jpg?raw=true)
-
 ![Columnas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Columnas.jpg?raw=true)
-
 ![Arte del concepto general](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/ConceptGeneral.jpg?raw=true)
-
 ![Escenario detallado](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/DetallesEscenario.jpg?raw=true)
-
 ![Ejemplo enfermería](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Enfermeria.jpg?raw=true)
-
 ![Ejemplo vendedor](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Vendedor.jpg?raw=true)
 
 ### Cámara e iluminación
@@ -431,7 +452,7 @@ Uso de una cámara isométrica, en 3º persona, con una distancia focal alta y p
 La música servirá como herramienta de refuerzo para la experiencia inmersiva. Todas las melodías deben ser seamless para poder reproducirse en bucle sin interrupciones. Se incluyen algunas referencias de videojuegos ya existentes para ejemplificar el estilo y emociones que deben suscitar las melodías.
 
 **Tema principal:** 
-- **Uso:** pantalla de Menú Principal y Hub.
+- **Uso:** pantalla de Menú Principal y Lobby.
 - **Descripción:** melodía ambiental tranquila. Debe ayudar a enfatizar la sensación de calma de la aldea y evocar cierta sensación de tristeza o soledad. Utilizará instrumentos de viento suaves e instrumentos de cuerdas pulsadas, como el arpa o la kalimba. Debe contar con un leitmotiv o un conjunto de notas memorable y característico que se pueda emplear en otras melodías del juego. 
 
 **Tema de exploración:** 
@@ -462,9 +483,9 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 #### Efectos de armas:
 
 - **Espada:** corte limpio y silbante de tono medio.
-- **Lanza:** igual que la clase Espada, con un tono más grave y una duración mayor.
+- **Cerilla:** igual que la clase Espada, con un tono más grave y una duración mayor.
 - **Garra:** igual que la clase Espada, con un tono más agudo y una duración menor.
-- **Trabuco:** estallido compacto, como el de un disparo.
+- **Grapadora:** estallido compacto, como el de un disparo.
 - **Abanico:** silbido suave, imitando corrientes de viento.
 - **Mental:** efecto con sintetizador y sonidos metálicos. 
 
@@ -536,7 +557,9 @@ Pantalla de ajustes a la que se podrá acceder desde la pantalla Menú Principal
 - **Botón Return:**  regresa a la pantalla Menú Principal.
 
 ### Tienda
+
 Se podrá acceder a esta pantalla desde el Lobby, y se compondrá de dos secciones de elementos que el jugador podrá mejorar progresivamente. Las secciones están separadas por pestañas (a modo de archivador).
+
 #### Pestaña Armas
 
 ![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/weapon%20tab.png?raw=true)
@@ -561,6 +584,7 @@ Similar a la Pestaña Armas, contará con los siguientes elementos:
 - **Nombre, nivel y descripción de la propiedad.**
 - **Botón Upgrade:** misma función que en Pestaña Armas.
 - **Imagen Render:** render del personaje.  
+
 ### Juego
 
 ![Juego](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Game.png?raw=true)
