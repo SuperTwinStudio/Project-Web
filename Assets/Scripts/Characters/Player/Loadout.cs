@@ -9,6 +9,7 @@ public class Loadout : MonoBehaviour, ISavable {
     //Events
     public delegate void ClassChanged(Weapon oldWeapon, Weapon newWeapon);
     public delegate void ItemObtained(PassiveItemObject item);
+    public delegate void TreasureObtained(Item item);
 
     //Components
     [Header("Components")]
@@ -24,6 +25,7 @@ public class Loadout : MonoBehaviour, ISavable {
     private readonly SerializableDictionary<Item, int> _inventory = new();
 
     public int InventoryValue { get; private set; }
+    private event TreasureObtained OnObtainTreasure;
 
     public IReadOnlyDictionary<Item, int> Inventory => _inventory;
 
@@ -88,7 +90,7 @@ public class Loadout : MonoBehaviour, ISavable {
         InventoryValue = 0;
     }
 
-    public void AddToInventory(Item item, int amount) {
+    public void AddToInventory(Item item, int amount, bool silent = false) {
         //Invalid item
         if (!item) return;
 
@@ -97,6 +99,8 @@ public class Loadout : MonoBehaviour, ISavable {
             _inventory[item] += amount;
         else
             _inventory[item] = amount;
+
+        if (!silent) OnObtainTreasure.Invoke(item);
 
         //Update value
         InventoryValue += item.Value * amount;
@@ -115,6 +119,14 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Return added value
         return addedValue;
+    }
+
+    public void AddOnObtainTreasure(TreasureObtained action) {
+        OnObtainTreasure += action;
+    }
+
+    public void RemoveOnObtainTreasure(TreasureObtained action) {
+        OnObtainTreasure -= action;
     }
 
     //Weapons
@@ -323,7 +335,7 @@ public class Loadout : MonoBehaviour, ISavable {
 
         //Load inventory (and sell it if in lobby)
         ClearInventory();
-        foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value);
+        foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value, true);
         if (Level.IsLobby) {
             //In lobby -> Sell inventory
             int addedValue = SellInventory();

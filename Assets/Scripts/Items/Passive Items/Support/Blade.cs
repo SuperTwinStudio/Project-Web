@@ -12,6 +12,6 @@ public class Blade : MonoBehaviour
 
         if(m_Lifetime <= 0) Destroy(gameObject);
 
-        transform.position += transform.forward * m_Speed;
+        transform.position += transform.forward * m_Speed* Time.deltaTime;
     }
 }

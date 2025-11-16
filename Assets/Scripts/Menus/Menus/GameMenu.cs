@@ -68,6 +68,12 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemDesc;
 
+    //Treasure
+    [Header("Treasure Item")]
+    [SerializeField] private Animator treasureAnimator;
+    [SerializeField] private Image treasureIcon;
+    [SerializeField] private TMP_Text treasureName;
+
     //Minimap
     [Header("Minimap")]
     [SerializeField] private GameObject minimapCamera;
@@ -241,6 +247,14 @@ public class GameMenu : Menu {
         bossHealthbar.SetActive(true);
     }
 
+    private void OnObtainTreasure(Item item) 
+    {
+        treasureIcon.sprite = item.Icon;
+        treasureName.text = $"{item.Name} x1";
+
+        treasureAnimator.SetTrigger("Show");
+    }
+
 
      /*$$$$$$$                            /$$
     |__  $$__/                           | $$
@@ -273,6 +287,9 @@ public class GameMenu : Menu {
 
         //Hide boss healthbar
         bossHealthbar.SetActive(false);
+        
+        //Add treasure obtain event
+        Player.Loadout.AddOnObtainTreasure(OnObtainTreasure);
     }
 
     protected override void OnClose() {
@@ -295,6 +312,9 @@ public class GameMenu : Menu {
 
         //Remove boss health change event
         if (boss) boss.RemoveOnHealthChanged(OnBossHealthChange);
+        
+        //Remove treasure obtain event
+        Player.Loadout.RemoveOnObtainTreasure(OnObtainTreasure);
     }
 
 
