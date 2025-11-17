@@ -301,6 +301,20 @@ Clase de combate a rango que no utiliza munición y sacrifica daño por golpes e
     - **Descripción:** tras lanzar varias ráfagas de aire, la siguiente empuja a los enemigos con los que colisiona.
 	- **Mejora:** aumenta la distancia de empuje.
 
+ #### Amiwi
+
+Arma de rango centrada en provocar daño de forma indirecta con minions.
+
+- **Ataque primario**
+    - **Descripción:** lanza un minion hacia delante para que pegue al enemigo más cercano.
+	- **Mejora:** aumenta el daño de los minions.
+- **Ataque secundario**
+    - **Descripción:** bufa el daño de los minions durante un tiempo.
+	- **Mejora:** aumenta el daño y duracion del bufo.
+- **Pasiva**
+    - **Descripción:** muestra la cantidad de minions disponible y genera nuevos hasta un límite.
+	- **Mejora:** aumenta la cantidad máxima de minions.
+
 | **Arma**                 | **Primario**                 | **Secundario**     | **Pasiva**          |
 | ------------------------ | ---------------------------- | ------------------ | ------------------- |
 | Espada | ![Espada Primario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Primary.PNG?raw=true)                | ![Espada Secundario](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Secondary.PNG?raw=true)           | ![Espada Pasiva](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Weapons/Sword_Passive.PNG?raw=true)  |
