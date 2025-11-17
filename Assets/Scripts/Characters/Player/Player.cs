@@ -50,14 +50,15 @@ public class Player : Character, ISavable {
     public Animator Animator => _animator;
 
     //Health
-    public override float HealthMax => base.HealthMax + (GramajeUpgrade.Level - 1) * gramajeHealthPerLevel;
+    public override float HealthMax => base.HealthMax + (UpgradeGramaje.Level - 1) * gramajeHealthPerLevel;
 
     //Movement & Rotation
     [Header("Movement & Rotation")]
     [SerializeField] private AudioClip dashSound;
-    [SerializeField] private float moveSpeed = 6.5f;
     [SerializeField] private float dashCooldown = 2.5f;
+    [SerializeField] private float dashCooldownPerLevel = 0.3f;
     [SerializeField] private float dashForce = 15f;
+    [SerializeField] private float moveSpeed = 6.5f;
     [SerializeField] private float pushDeceleration = 50f;
 
     private readonly HashSet<object> controlBlockers = new();
@@ -77,9 +78,9 @@ public class Player : Character, ISavable {
     [SerializeField] private float gramajeHealthPerLevel = 10;
     [SerializeField] private float rugosidadResistancePerLevel = 0.1f;
 
-    public Upgrade GramajeUpgrade { get; private set; } = new("GRAMAJE");
-    public Upgrade RugosidadUpgrade { get; private set; } = new("RUGOSIDAD");
-    public Upgrade DashUpgrade { get; private set; } = new("DASH");
+    public Upgrade UpgradeGramaje { get; private set; } = new("GRAMAJE");
+    public Upgrade UpgradeRugosidad { get; private set; } = new("RUGOSIDAD");
+    public Upgrade UpgradeDash { get; private set; } = new("DASH");
 
 
     //State
@@ -171,7 +172,7 @@ public class Player : Character, ISavable {
         //Check for dash
         if (dashAction.Triggered() && !dashTimer.IsCounting) {
             //Start dash timer
-            dashTimer.Count(dashCooldown);
+            dashTimer.Count(dashCooldown - (UpgradeDash.Level - 1) * dashCooldownPerLevel);
 
             //Play dash sound
             PlaySound(dashSound);
@@ -236,7 +237,7 @@ public class Player : Character, ISavable {
 
     public override bool Damage(float amount, DamageType type, object source) {
         //Calculate resistance
-        float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
+        float resistance = amount * (UpgradeRugosidad.Level - 1) * rugosidadResistancePerLevel;
 
         //Hurt item hooks
         foreach (var pair in Loadout.PassiveItems) pair.Key.OnHurtHook(this, pair.Value, (source is Character character) ? character : null);
@@ -276,9 +277,9 @@ public class Player : Character, ISavable {
     //Upgrades
     public Upgrade GetUpgrade(PlayerUpgrade type) {
         return type switch  {
-            PlayerUpgrade.Weight => GramajeUpgrade,
-            PlayerUpgrade.Rugosity => RugosidadUpgrade,
-            _ => DashUpgrade
+            PlayerUpgrade.Weight => UpgradeGramaje,
+            PlayerUpgrade.Rugosity => UpgradeRugosidad,
+            _ => UpgradeDash
         };
     }
 
@@ -350,9 +351,9 @@ public class Player : Character, ISavable {
         Loadout.OnLoad(save.loadout);
 
         //Load upgrades
-        GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
-        RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
-        DashUpgrade.SetLevel(Loadout.GetUpgrade(DashUpgrade.Key));
+        UpgradeGramaje.SetLevel(Loadout.GetUpgrade(UpgradeGramaje.Key));
+        UpgradeRugosidad.SetLevel(Loadout.GetUpgrade(UpgradeRugosidad.Key));
+        UpgradeDash.SetLevel(Loadout.GetUpgrade(UpgradeDash.Key));
 
         //Load health
         Health = Level.IsLobby ? HealthMax : save.health;

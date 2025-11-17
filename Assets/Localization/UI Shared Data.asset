@@ -223,6 +223,14 @@ MonoBehaviour:
     m_Key: end_info_weapon
     m_Metadata:
       m_Items: []
+  - m_Id: 17365525739737088
+    m_Key: shop_character_dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17365530319917056
+    m_Key: shop_character_dash_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

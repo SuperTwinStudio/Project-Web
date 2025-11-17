@@ -232,6 +232,14 @@ MonoBehaviour:
       y la mitad del oro."
     m_Metadata:
       m_Items: []
+  - m_Id: 17365525739737088
+    m_Localized: Purpurina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17365530319917056
+    m_Localized: Reduce el enfriamiento del dash.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

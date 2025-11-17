@@ -15,7 +15,7 @@ public class ShopMenu : Menu {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Selectable _defaultSelected;
+    [SerializeField] private Selectable defaultSelection;
 
     private Loadout Loadout => Player.Loadout;
 
@@ -32,6 +32,7 @@ public class ShopMenu : Menu {
     [Header("Character")]
     [SerializeField] private CharacterUpgrade characterGramaje;
     [SerializeField] private CharacterUpgrade characterRugosidad;
+    [SerializeField] private CharacterUpgrade characterDash;
 
     //Weapon
     [Header("Weapon")]
@@ -89,14 +90,15 @@ public class ShopMenu : Menu {
     //Character
     private void UpdateCharacterUI() {
         //Update upgrades
-        characterGramaje.UpdateUI(Player.GramajeUpgrade, Loadout.Gold);
-        characterRugosidad.UpdateUI(Player.RugosidadUpgrade, Loadout.Gold);
+        characterGramaje.UpdateUI(Player.UpgradeGramaje, Loadout.Gold);
+        characterRugosidad.UpdateUI(Player.UpgradeRugosidad, Loadout.Gold);
+        characterDash.UpdateUI(Player.UpgradeDash, Loadout.Gold);
     }
 
     public void UpgradeCharacter(int type) {
         //Try to upgrade player
         if (!Player.TryUpgrade((PlayerUpgrade) type)) {
-            _defaultSelected.Select();
+            defaultSelection.Select();
             return; 
         }
 
@@ -219,7 +221,7 @@ public class ShopMenu : Menu {
         selectedWeapon = Loadout.CurrentWeapon;
 
         //Select default button (for controller navigation)
-        _defaultSelected.Select();
+        defaultSelection.Select();
 
         //Update UI
         UpdateUI();

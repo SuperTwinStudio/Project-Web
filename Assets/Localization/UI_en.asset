@@ -234,6 +234,14 @@ MonoBehaviour:
       to a more difficult dungeon and risk loosing your treasures and half your gold.'
     m_Metadata:
       m_Items: []
+  - m_Id: 17365525739737088
+    m_Localized: Glitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17365530319917056
+    m_Localized: Reduces the dash cooldown.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
