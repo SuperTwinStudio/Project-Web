@@ -63,7 +63,7 @@ public class WeaponAbanico : Weapon {
     //Weapon 
     private void Push(IDamageable damageable, float force, float damage = -1) {
         //Damage damageable
-        if (damage > 0) damageable.Damage(damage, Player, DamageType.Ranged);
+        if (damage > 0) damageable.Damage(damage, DamageType.Ranged, Player);
 
         //Check if an enemy
         if (damageable is not EnemyBase) return;

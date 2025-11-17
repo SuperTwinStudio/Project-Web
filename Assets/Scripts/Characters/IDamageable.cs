@@ -6,12 +6,12 @@ public interface IDamageable {
     public float Health { get; }
     public float HealthMax { get; }
 
+    protected void OnDeath() {}
+
     public bool Revive(float health); //Returns true if success
 
     public bool Heal(float amount); //Returns true if success
 
-    public bool Damage(float amount, object source, DamageType type = DamageType.None); //Returns true if success
-
-    protected void OnDeath() {}
+    public bool Damage(float amount, DamageType type, object source); //Returns true if success
 
 }

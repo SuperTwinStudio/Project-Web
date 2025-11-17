@@ -24,11 +24,6 @@ public class LadronzueloFleeState : LadronzueloState {
         Enemy.SetAutomaticRotation(true);
     }
 
-    public override void OnDamage() {
-        //Flee from player
-        Flee();
-    }
-
     public override void Execute() {
         //Stopped
         if (Enemy.Agent.isStopped) return;
@@ -39,6 +34,11 @@ public class LadronzueloFleeState : LadronzueloState {
             Enemy.StopMovement();
             Enemy.SetAutomaticRotation(true);
         }
+    }
+
+    public override void OnDamage(DamageType type, object source) {
+        //Flee from player
+        if (type != DamageType.Burn) Flee();
     }
 
     //Helpers

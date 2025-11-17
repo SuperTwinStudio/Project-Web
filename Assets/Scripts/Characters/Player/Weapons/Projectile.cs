@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour {
             if (isPlayer == other.CompareTag("Player")) return;
 
             //Deal damage
-            damageable.Damage(Damage, source, DamageType.Ranged);
+            damageable.Damage(Damage, DamageType.Ranged, source);
             if (isPlayer) Game.Current.Level.Player.Loadout.OnDamageableHit(other.gameObject);
 
             //Call on hit event

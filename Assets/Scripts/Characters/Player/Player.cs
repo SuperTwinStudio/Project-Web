@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public enum PlayerUpgrade {
-    Gramaje,    //Extra max health
-    Rugosidad   //Resists a % of damage
+    Weight,     //Extra max health
+    Rugosity,   //Resists a % of damage
+    Dash        //Reduces dash cooldown
 }
 
 public class Player : Character, ISavable {
@@ -41,13 +42,11 @@ public class Player : Character, ISavable {
     [Header("Player")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Loadout _loadout;
-    [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
 
     private Transform cameraTransform;
 
     public Loadout Loadout => _loadout;
-    public Transform Model => _model;
     public Animator Animator => _animator;
 
     //Health
@@ -80,6 +79,7 @@ public class Player : Character, ISavable {
 
     public Upgrade GramajeUpgrade { get; private set; } = new("GRAMAJE");
     public Upgrade RugosidadUpgrade { get; private set; } = new("RUGOSIDAD");
+    public Upgrade DashUpgrade { get; private set; } = new("DASH");
 
 
     //State
@@ -225,20 +225,6 @@ public class Player : Character, ISavable {
     }
 
     //Health
-    public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
-        //Calculate resistance
-        float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
-
-        //Hurt item hooks
-        foreach (var pair in Loadout.PassiveItems) pair.Key.OnHurtHook(this, pair.Value, (source is Character character) ? character : null);
-
-        //Damage
-        bool success = base.Damage(amount - resistance, source, type);
-
-        //Return success
-        return success;
-    }
-
     protected override void OnDeath() {
         //Death item hooks
         foreach (var pair in Loadout.PassiveItems) pair.Key.OnDeathHook(this, pair.Value);
@@ -248,7 +234,26 @@ public class Player : Character, ISavable {
         if (!IsAlive) MenuManager.Open(MenusList.Death);
     }
 
+    public override bool Damage(float amount, DamageType type, object source) {
+        //Calculate resistance
+        float resistance = amount * (RugosidadUpgrade.Level - 1) * rugosidadResistancePerLevel;
+
+        //Hurt item hooks
+        foreach (var pair in Loadout.PassiveItems) pair.Key.OnHurtHook(this, pair.Value, (source is Character character) ? character : null);
+
+        //Damage
+        bool success = base.Damage(amount - resistance, type, source);
+
+        //Return success
+        return success;
+    }
+
     //Movement
+    private void StopMovement() {
+        isMoving = false;
+        Animator.SetBool("IsMoving", isMoving);
+    }
+
     public override void TeleportTo(Vector3 position) {
         controller.enabled = false;
         transform.position = position;
@@ -257,11 +262,6 @@ public class Player : Character, ISavable {
 
     public override void Push(Vector3 direction) {
         pushVelocity += direction;
-    }
-
-    private void StopMovement() {
-        isMoving = false;
-        Animator.SetBool("IsMoving", isMoving);
     }
 
     public void BlockControls(object obj) {
@@ -276,8 +276,9 @@ public class Player : Character, ISavable {
     //Upgrades
     public Upgrade GetUpgrade(PlayerUpgrade type) {
         return type switch  {
-            PlayerUpgrade.Gramaje => GramajeUpgrade,
-            _ => RugosidadUpgrade
+            PlayerUpgrade.Weight => GramajeUpgrade,
+            PlayerUpgrade.Rugosity => RugosidadUpgrade,
+            _ => DashUpgrade
         };
     }
 
@@ -289,7 +290,7 @@ public class Player : Character, ISavable {
         //Check for upgrade changes
         switch (type) {
             //Reset player health
-            case PlayerUpgrade.Gramaje:
+            case PlayerUpgrade.Weight:
                 Heal(HealthMax);
                 break;
         }
@@ -351,6 +352,7 @@ public class Player : Character, ISavable {
         //Load upgrades
         GramajeUpgrade.SetLevel(Loadout.GetUpgrade(GramajeUpgrade.Key));
         RugosidadUpgrade.SetLevel(Loadout.GetUpgrade(RugosidadUpgrade.Key));
+        DashUpgrade.SetLevel(Loadout.GetUpgrade(DashUpgrade.Key));
 
         //Load health
         Health = Level.IsLobby ? HealthMax : save.health;

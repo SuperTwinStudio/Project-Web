@@ -24,7 +24,7 @@ public class EnemyState {
         //State logic loop
     }
 
-    public virtual void OnDamage() {
+    public virtual void OnDamage(DamageType type, object source) {
         //Called when the enemy gets damaged
     }
 

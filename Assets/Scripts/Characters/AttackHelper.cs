@@ -37,7 +37,7 @@ public class AttackHelper : MonoBehaviour {
             //Damage
             if (damage > 0) {
                 //Damage
-                damageable.Damage(damage, Source, DamageType.Melee);
+                damageable.Damage(damage, DamageType.Melee, Source);
 
                 //Tell loadout a damageable was hit
                 if (IsPlayer) Loadout.OnDamageableHit(hit.collider.gameObject);

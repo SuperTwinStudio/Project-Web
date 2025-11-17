@@ -176,6 +176,7 @@ MonoBehaviour:
   _eyes: {fileID: 1142675718610680985}
   _bot: {fileID: 1936036416147092579}
   _audio: {fileID: 6517096784467179232}
+  _model: {fileID: 3154183115244130666}
   _baseHealth: 100
   _level: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -187,7 +188,6 @@ MonoBehaviour:
   dashAction: {fileID: 3545898801410580973, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   controller: {fileID: 3851105479952359991}
   _loadout: {fileID: 8538115829238214355}
-  _model: {fileID: 3154183115244130666}
   _animator: {fileID: 2393395648455993377}
   dashSound: {fileID: 8300000, guid: ab6925b518fc61f449c8e323ac7324dd, type: 3}
   moveSpeed: 6.5
@@ -523,14 +523,14 @@ MonoBehaviour:
   primarySecondaryCooldown: 0.3
   primaryDamage: 25
   primaryDamagePerLevel: 5
-  primaryAttackSphereCast: {x: 1, y: 0}
+  primaryAttackSphereCast: {x: 1, y: 0.25}
   primaryAttackSound: {fileID: 8300000, guid: 5889ba25c176f254eac5598ce85ae60e, type: 3}
   _secondaryCooldown: 3
   secondarySlowDuration: 0.2
   secondaryPrimaryCooldown: 0.5
   secondaryDamage: 40
   secondaryDamagePerLevel: 15
-  secondaryAttackSphereCast: {x: 1, y: 0}
+  secondaryAttackSphereCast: {x: 1.5, y: 0}
   secondaryAttackSound: {fileID: 8300000, guid: 54c1c1e17d12c324cbc80cd2b80dc771, type: 3}
   passiveDamage: 4
   passiveDamagePerLevel: 2
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   primarySecondaryCooldown: 0.3
   primaryDamage: 30
   primaryDamagePerLevel: 10
-  primaryAttackSphereCast: {x: 0.5, y: 1.5}
+  primaryAttackSphereCast: {x: 0.75, y: 1.5}
   primaryAttackSound: {fileID: 8300000, guid: 5889ba25c176f254eac5598ce85ae60e, type: 3}
   _secondaryCooldown: 4.5
   secondarySlowDuration: 0.2

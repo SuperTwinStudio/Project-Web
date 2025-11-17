@@ -21,7 +21,7 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primaryDamage = 25f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 5f;
-    [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private Vector2 primaryAttackSphereCast = new(1f, 0.25f);
     [SerializeField] private AudioClip primaryAttackSound;
 
     public override float PrimaryCooldownDuration => _primaryCooldown;
@@ -35,7 +35,7 @@ public class WeaponGauntlet : Weapon {
     [SerializeField, Min(0)] private float secondaryPrimaryCooldown = 0.5f;
     [SerializeField, Min(0)] private float secondaryDamage = 40f;
     [SerializeField, Min(0)] private float secondaryDamagePerLevel = 15f;
-    [SerializeField] private Vector2 secondaryAttackSphereCast = new(1f, 0f);
+    [SerializeField] private Vector2 secondaryAttackSphereCast = new(1.5f, 0f);
     [SerializeField] private AudioClip secondaryAttackSound;
 
     public override float SecondaryCooldownDuration => _secondaryCooldown;
@@ -114,7 +114,7 @@ public class WeaponGauntlet : Weapon {
         //Check type
         if (damageable is not Character) {
             //Not a character -> Default damage
-            damageable.Damage(CalculateDamage(damage), this, DamageType.Melee);
+            damageable.Damage(CalculateDamage(damage), DamageType.Melee, this);
             return;
         }
 
@@ -126,8 +126,8 @@ public class WeaponGauntlet : Weapon {
             character.TryGetEffect(chinchetaEffect, out float endTimestamp, out int level) ?
                 CalculateDamage(damage + PassiveDamage * level) :
                 CalculateDamage(damage),
-            this,
-            DamageType.Melee
+            DamageType.Melee,
+            this
         );
 
         //Add a new chincheta effect

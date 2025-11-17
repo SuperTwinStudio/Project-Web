@@ -34,7 +34,7 @@ public class BeastPillar : MonoBehaviour, IDamageable {
     }
 
     //Health
-    public bool Damage(float amount, object source, DamageType type = DamageType.None) {
+    public bool Damage(float amount, DamageType type, object source) {
         //Already destroyed
         if (!IsAlive) return false;
 

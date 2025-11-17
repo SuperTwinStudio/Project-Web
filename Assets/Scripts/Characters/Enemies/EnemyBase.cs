@@ -17,7 +17,6 @@ public class EnemyBase : Character {
     [SerializeField] private Collider _collider;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private AttackHelper _attack;
-    [SerializeField] private Transform _model;
     [SerializeField] private Animator _animator;
     [SerializeField] private Renderer _renderer;
 
@@ -30,7 +29,6 @@ public class EnemyBase : Character {
     public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rigidbody;
     public AttackHelper Attack => _attack;
-    public Transform Model => _model;
     public Animator Animator => _animator;
     public Renderer Renderer => _renderer;
 
@@ -139,15 +137,17 @@ public class EnemyBase : Character {
         Destroy(gameObject);
     }
 
-    protected override void OnDamageFeedbackStart() {
-        base.OnDamageFeedbackStart();
+    protected override void OnDamageFeedbackStart(DamageType type) {
+        //Slow time
+        if (type != DamageType.Burn) Game.SlowTime(this);
 
         //Update color
         if (Renderer) Renderer.material.SetColor("_Color", Color.red);
     }
 
-    protected override void OnDamageFeedbackEnd() {
-        base.OnDamageFeedbackEnd();
+    protected override void OnDamageFeedbackEnd(DamageType type) {
+        //Stop slowing time
+        if (type != DamageType.Burn) Game.UnslowTime(this);
 
         //Update color
         if (Renderer) Renderer.material.SetColor("_Color", Color.white);
@@ -173,12 +173,12 @@ public class EnemyBase : Character {
         Level.StartCoroutine(DestroyCoroutine()); //Start coroutine in level cause its always active (when a gameobject, in this case the room, gets disabled, it stops all child coroutines)
     }
 
-    public override bool Damage(float amount, object source, DamageType type = DamageType.None) {
+    public override bool Damage(float amount, DamageType type, object source) {
         //Check if damage is allowed
-        amount = Behaviour.OnBeforeDamage(amount, source, type);
+        amount = Behaviour.OnBeforeDamage(amount, type, source);
 
         //Damage
-        bool damaged = base.Damage(amount, source, type);
+        bool damaged = base.Damage(amount, type, source);
 
         //Check if damaged
         if (damaged) {
@@ -186,7 +186,7 @@ public class EnemyBase : Character {
             if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount *= EffectDamageTakenMultiplier, type);
 
             //Call behaviour event
-            Behaviour.OnDamage();
+            Behaviour.OnDamage(type, source);
         }
 
         //Return if damaged
@@ -226,12 +226,12 @@ public class EnemyBase : Character {
         UseAutomaticRotation = automaticRotation;
     }
 
-    public void LookTowards(Vector3 position) {
+    public override void LookTowards(Vector3 position) {
         //Using automatic rotation -> Ignore
         if (UseAutomaticRotation) return;
-        
+
         //Update rotation
-        Model.rotation = Quaternion.LookRotation((position - Model.position).normalized);
+        base.LookTowards(position);
     }
 
     //Targets

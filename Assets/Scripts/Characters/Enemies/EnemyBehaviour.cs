@@ -47,14 +47,14 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     //Health
-    public virtual float OnBeforeDamage(float amount, object source, DamageType type = DamageType.None) {
+    public virtual float OnBeforeDamage(float amount, DamageType type, object source) {
         //Before the enemy was damaged
         return amount;
     }
 
-    public virtual void OnDamage() {
+    public virtual void OnDamage(DamageType type, object source) {
         //Enemy was damaged
-        State?.OnDamage();
+        State?.OnDamage(type, source);
     }
 
     public virtual void OnDeath() {

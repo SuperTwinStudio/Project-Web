@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public class WeaponMatch : Weapon {
     [SerializeField, Min(0)] private float primarySecondaryCooldown = 0.3f;
     [SerializeField, Min(0)] private float primaryDamage = 30f;
     [SerializeField, Min(0)] private float primaryDamagePerLevel = 10f;
-    [SerializeField] private Vector2 primaryAttackSphereCast = new(0.5f, 1.5f);
+    [SerializeField] private Vector2 primaryAttackSphereCast = new(0.75f, 1.5f);
     [SerializeField] private AudioClip primaryAttackSound;
 
     public override float PrimaryCooldownDuration => _primaryCooldown;

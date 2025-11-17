@@ -21,7 +21,7 @@ public class BeastPillarsState : BeastState {
         } else if (Beast.Pillars.Count == 1) {
             //Only 1 pillar remaining -> Destroy it
             BeastPillar remainingPillar = Beast.Pillars[0];
-            remainingPillar.Damage(remainingPillar.Health, Enemy, DamageType.None);
+            remainingPillar.Damage(remainingPillar.Health, DamageType.None, Enemy);
 
             //Update walkable surface (to fix pillars holes in navmesh)
             Game.Current.Level.UpdateWalkableSurface();

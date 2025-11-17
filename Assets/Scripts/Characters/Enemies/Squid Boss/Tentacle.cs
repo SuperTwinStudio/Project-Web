@@ -10,7 +10,7 @@ public class Tentacle : MonoBehaviour, IDamageable
 
     public float HealthMax { get; set; } = 200;
 
-    public bool Damage(float amount, object source, DamageType type = DamageType.None)
+    public bool Damage(float amount, DamageType type, object source)
     {
         Health -= amount;
 

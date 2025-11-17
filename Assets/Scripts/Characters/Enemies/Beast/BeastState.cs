@@ -15,11 +15,6 @@ public class BeastState : EnemyState {
     }
 
     //Actions
-    public override void OnDamage() {
-        //Play sound
-        Enemy.PlaySound(Beast.DamageSound);
-    }
-
     public override void Execute() {
         //Enemy is vulnerable, aura is in cooldown or not triggering
         if (!Enemy.IsInvulnerable || damageTimer.IsCounting || !Beast.AuraDetector.isTriggered) return;
@@ -28,11 +23,16 @@ public class BeastState : EnemyState {
         Vector3 direction = (Enemy.Player.transform.position - Enemy.Model.position).normalized;
 
         //Damage & player
-        Enemy.Player.Damage(Beast.AuraDamage, Enemy, DamageType.Melee);
+        Enemy.Player.Damage(Beast.AuraDamage, DamageType.Melee, Enemy);
         Enemy.Player.Push(Beast.AuraPushForce * direction);
 
         //Start cooldown
         damageTimer.Count(Beast.AuraCooldown);
+    }
+
+    public override void OnDamage(DamageType type, object source) {
+        //Play sound
+        if (type != DamageType.Burn) Enemy.PlaySound(Beast.DamageSound);
     }
 
 }

@@ -35,7 +35,7 @@ public class OrbitalBuddy : MonoBehaviour
         else if (m_TargetEnemy != null)
         {
             m_Cooldown = m_CooldownMax;
-            m_TargetEnemy.Damage(m_Damage, m_Player.GetComponent<Player>(), DamageType.Ranged);
+            m_TargetEnemy.Damage(m_Damage, DamageType.Ranged, m_Player.GetComponent<Player>());
         }
 
         if (m_DetectionCooldown > 0)

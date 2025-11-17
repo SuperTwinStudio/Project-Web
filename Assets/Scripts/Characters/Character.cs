@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Botpa;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable {
@@ -12,11 +13,13 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] private Transform _eyes;
     [SerializeField] private Transform _bot;
     [SerializeField] private AudioSource _audio;
+    [SerializeField] private Transform _model;
 
     public Transform Top => _top;
     public Transform Eyes => _eyes;
     public Transform Bot => _bot;
     public AudioSource Audio => _audio;
+    public Transform Model => _model;
 
     //Health
     [Header("Health")]
@@ -103,7 +106,7 @@ public class Character : MonoBehaviour, IDamageable {
         return false;
     }
 
-    //Movement
+    //Movement & Rotation
     public virtual void TeleportTo(Vector3 position) {
         transform.position = position;
     }
@@ -112,20 +115,34 @@ public class Character : MonoBehaviour, IDamageable {
         Debug.Log("Push not implemented");
     }
 
-    //Health
-    private IEnumerator DamageFeedbackCoroutine() {
-        OnDamageFeedbackStart();
-        yield return new WaitForSeconds(0.08f);
-        OnDamageFeedbackEnd();
+    public virtual void LookTowards(Vector3 position) {
+        //Update rotation
+        Model.rotation = Quaternion.LookRotation(Util.RemoveY(position - Model.position).normalized);
     }
 
-    protected virtual void OnDamageFeedbackStart() {
+    //Health
+    private IEnumerator DamageFeedbackCoroutine(DamageType type) {
+        OnDamageFeedbackStart(type);
+        yield return new WaitForSeconds(0.08f);
+        OnDamageFeedbackEnd(type);
+    }
+
+    protected virtual void OnDamageFeedbackStart(DamageType type) {
+        //Slow time
         Game.SlowTime(this);
     }
 
-    protected virtual void OnDamageFeedbackEnd() {
+    protected virtual void OnDamageFeedbackEnd(DamageType type) {
+        //Stop slowing time
         Game.UnslowTime(this);
     }
+
+    protected virtual void OnDamageFeedbackCancel() {
+        //Stop slowing time
+        Game.UnslowTime(this);
+    }
+
+    protected virtual void OnDeath() {}
 
     public virtual bool Revive(float health) {
         //Character is already alive
@@ -159,7 +176,7 @@ public class Character : MonoBehaviour, IDamageable {
         return true;
     }
 
-    public virtual bool Damage(float amount, object source, DamageType type = DamageType.None) {
+    public virtual bool Damage(float amount, DamageType type, object source) {
         //Character is already dead or invulnerable -> Ignore damage
         if (!IsAlive || IsInvulnerable) return false;
 
@@ -187,8 +204,11 @@ public class Character : MonoBehaviour, IDamageable {
         //Start damage feedback coroutine (if object was not destroyed)
         if (this) {
             //Use game for coroutine cause it will never get destroyed
-            if (damageFeedbackCoroutine != null) Game.Current.StopCoroutine(damageFeedbackCoroutine);
-            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine());
+            if (damageFeedbackCoroutine != null) {
+                Game.Current.StopCoroutine(damageFeedbackCoroutine);
+                OnDamageFeedbackCancel();
+            }
+            damageFeedbackCoroutine = Game.Current.StartCoroutine(DamageFeedbackCoroutine(type));
         }
 
         //Call event
@@ -197,8 +217,6 @@ public class Character : MonoBehaviour, IDamageable {
         //Damaged
         return true;
     }
-
-    protected virtual void OnDeath() {}
 
     protected void CallOnHealthChanged() {
         OnHealthChanged?.Invoke(Health, HealthMax);
@@ -235,7 +253,7 @@ public class Character : MonoBehaviour, IDamageable {
             switch (effect.Action.Type) {
                 //Damage
                 case EffectType.Damage:
-                    Damage(Time.deltaTime * value, this, DamageType.Burn); //Take value as damage per second
+                    Damage(Time.deltaTime * value, DamageType.Burn, this); //Take value as damage per second
                     break;
                 //Heal
                 case EffectType.Heal:
