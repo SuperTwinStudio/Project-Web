@@ -102,12 +102,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You inventory has <gold> in cash and treasures valued at <treasures>.
-
-
-    You
-    can continue to a more difficult dungeon and risk loosing half your gold and
-    all of your treasures, or exit to keep it all.'
+  m_text: Your inventory has treasures valued in <treasures>. You can exit and keep
+    your inventory or continue to a more difficult dungeon and risk loosing your
+    treasures.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}

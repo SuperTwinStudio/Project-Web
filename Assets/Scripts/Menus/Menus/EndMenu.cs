@@ -91,7 +91,6 @@ public class EndMenu : Menu {
             //Update text
             infoText.SetText(
                 infoDefaultLocale.GetLocalizedString()
-                    .Replace("<gold>", $"{Loadout.Gold}G")
                     .Replace("<treasures>", $"{Loadout.InventoryValue}G")
             );
         } else {
@@ -103,7 +102,6 @@ public class EndMenu : Menu {
             infoText.SetText(
                 infoWeaponLocale.GetLocalizedString()
                     .Replace("<weapon>", item.Name)
-                    .Replace("<gold>", $"{Loadout.Gold}G")
                     .Replace("<treasures>", $"{Loadout.InventoryValue}G")
             );
         }

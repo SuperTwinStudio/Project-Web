@@ -215,23 +215,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13722598425628672
-    m_Localized: You have <gold> and treasures valued in <treasures>. You can exit
+    m_Localized: Your inventory has treasures valued in <treasures>. You can exit
       and keep your inventory or continue to a more difficult dungeon and risk loosing
-      your treasures and half your gold.
+      your treasures.
     m_Metadata:
       m_Items: []
   - m_Id: 13737919144398848
-    m_Localized: While fleeing, all of your treasures and half of your gold fell
-      to the ground.
+    m_Localized: While fleeing, all of your treasures fell to the ground...
     m_Metadata:
       m_Items: []
   - m_Id: 14865746547838976
     m_Localized: 'You unlocked a new weapon: <weapon>.
 
+      
 
-      You have <gold> and
-      treasures valued in <treasures>. You can exit and keep your inventory or continue
-      to a more difficult dungeon and risk loosing your treasures and half your gold.'
+      Your inventory
+      has treasures valued in <treasures>. You can exit and keep your inventory or
+      continue to a more difficult dungeon and risk loosing your treasures.'
     m_Metadata:
       m_Items: []
   - m_Id: 17365525739737088

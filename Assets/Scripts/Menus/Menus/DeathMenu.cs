@@ -35,9 +35,8 @@ public class DeathMenu : Menu {
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
     private void OnDeath() {
-        //Empty inventory & lose half gold
+        //Empty inventory
         Player.Loadout.ClearInventory();
-        Player.Loadout.SpendGold(Player.Loadout.Gold / 2);
     }
 
     public void ReturnToHome() {

@@ -215,21 +215,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13722598425628672
-    m_Localized: "Tienes <gold> y tesoros valorados en <treasures>. Puedes salir
+    m_Localized: "Tu inventario tiene tesoros valorados en <treasures>. Puedes salir
       y conservar tu inventario o continuar a una mazmorra m\xE1s dificil y arriesgarte
-      a perder tus tesoros y la mitad del oro."
+      a perder tus tesoros."
     m_Metadata:
       m_Items: []
   - m_Id: 13737919144398848
-    m_Localized: Mientras huias, todos tus tesoros y la mitad de tu oro cayeron al
-      suelo.
+    m_Localized: Mientras huias, todos tus tesoros cayeron al suelo...
     m_Metadata:
       m_Items: []
   - m_Id: 14865746547838976
-    m_Localized: "Has desbloqueado un nuevo arma: <weapon>.\r\n\r\nTienes <gold>
-      y tesoros valorados en <treasures>. Puedes salir y conservar tu inventario
-      o continuar a una mazmorra m\xE1s dificil y arriesgarte a perder tus tesoros
-      y la mitad del oro."
+    m_Localized: "Has desbloqueado un nuevo arma: <weapon>.\n\r\nTu inventario tiene
+      tesoros valorados en <treasures>. Puedes salir y conservar tu inventario o
+      continuar a una mazmorra m\xE1s dificil y arriesgarte a perder tus tesoros."
     m_Metadata:
       m_Items: []
   - m_Id: 17365525739737088
