@@ -19,11 +19,8 @@ public class LadronzueloApproachState : LadronzueloState {
             if (Ladronzuelo.CheckIfAllowedToSteal()) {
                 //Allowed to steal -> Steal
                 Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
-            } else if (Ladronzuelo.HasStolen) {
-                //Has stolen already -> Flee
-                Behaviour.SetState(new LadronzueloFleeState(Behaviour));
             } else {
-                //Stole nothin -> Attack
+                //Not allowed -> Attack
                 Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
             }
         } else {

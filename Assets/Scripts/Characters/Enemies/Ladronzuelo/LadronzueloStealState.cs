@@ -41,7 +41,7 @@ public class LadronzueloStealState : LadronzueloState {
         yield return new WaitForSeconds(0.5f);
 
         //Check next state
-        if (Ladronzuelo.StolenAmount > 0) {
+        if (Ladronzuelo.HasStolen) {
             //Stole gold -> Go to flee
             Behaviour.SetState(new LadronzueloFleeState(Behaviour));
         } else {
