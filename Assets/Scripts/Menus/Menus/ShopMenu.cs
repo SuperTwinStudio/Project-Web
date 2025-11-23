@@ -225,12 +225,6 @@ public class ShopMenu : Menu {
 
         //Update UI
         UpdateUI();
-
-        //Start camera cinematic
-        if (args != null) {
-            ShopArgs shopArgs = (ShopArgs) args;
-            Level.CameraController.EnterCutscene(shopArgs.positionTarget, shopArgs.viewTarget);
-        }
     }
 
     protected override void OnClose() {
@@ -245,12 +239,5 @@ public class ShopMenu : Menu {
         //Stop camera cinematic
         Level.CameraController.ExitCutscene();
     }
-
-}
-
-public class ShopArgs {
-    
-    public Transform positionTarget;
-    public Transform viewTarget;
 
 }

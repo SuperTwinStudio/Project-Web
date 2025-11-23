@@ -59,8 +59,8 @@ public class CameraController : MonoBehaviour {
         //Get depth of field
         postproVolume.profile.TryGet(out DOF);
 
-        //Update follow
-        UpdateFollow(playerViewTarget, playerPositionTarget);
+        //Exit cutscene on start
+        ExitCutscene();
     }
 
     private void LateUpdate() {
@@ -147,7 +147,7 @@ public class CameraController : MonoBehaviour {
 
     public void ExitCutscene() {
         StartTravel(playerPositionTarget, playerViewTarget);
-        IsOnCutscene = true;
+        IsOnCutscene = false;
     }
 
     //Camera knockback

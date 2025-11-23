@@ -168,6 +168,7 @@ public class Game : MonoBehaviour, ISavable {
         //Load scene
         SceneManager.LoadScene(name);
         yield return new WaitForNextFrameUnit();
+        yield return new WaitForNextFrameUnit(); //Wait again in case scenes take too long to load
 
         //Animate in
         MenuManager.MenuTransitions.SetTrigger(triggerIn);

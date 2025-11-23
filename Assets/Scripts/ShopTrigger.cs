@@ -22,11 +22,11 @@ public class ShopTrigger : MonoBehaviour {
         //Hide
         meshRenderer.enabled = false;
 
+        //Enter camera cutscene
+        Game.Current.Level.CameraController.EnterCutscene(positionTarget, viewTarget);
+
         //Open shop
-        MenuManager.Open(MenusList.Shop, new ShopArgs() {
-            positionTarget = positionTarget,
-            viewTarget = viewTarget
-        });
+        MenuManager.Open(MenusList.Shop);
     }
 
     private void OnTriggerExit(Collider other) {
