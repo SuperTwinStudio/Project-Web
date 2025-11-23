@@ -12,10 +12,12 @@ public class AttackHelper : MonoBehaviour {
     [SerializeField] private bool _isPlayer = true;
     [SerializeField] private Character _source;
     [SerializeField] private Transform _model;
+    [SerializeField] private GameObject _AOEIndicator;
 
     public bool IsPlayer => _isPlayer;
     public Character Source => _source;
     public Transform Model => _model;
+    public GameObject AOEIndicator => _AOEIndicator;
 
 
     //Melee
@@ -52,25 +54,40 @@ public class AttackHelper : MonoBehaviour {
         return somethingHit;
     }
 
-    protected RaycastHit[] AttackForwardCheck(float radius, float forward) {
+    protected RaycastHit[] AttackForwardCheck(bool showAOE, float radius, float forward) {
         //Get forward direction
         Vector3 forwardDirection = Model.forward;
+
+        //Show AOE indicator
+        if (showAOE) ShowAOE(radius, forward, true);
 
         //Casts a sphere of <radius> radius in front of the player and moves it forward <forward> amount to check for collisions
         return Physics.SphereCastAll(Model.position + radius * forwardDirection, radius, forwardDirection, forward);
     }
 
-    protected RaycastHit[] AttackAroundCheck(float radius) {
+    protected RaycastHit[] AttackAroundCheck(bool showAOE, float radius) {
+        //Show AOE indicator
+        if (showAOE) ShowAOE(radius, 0, false);
+
         //Casts a sphere of <radius> radius around the player
         return Physics.SphereCastAll(Model.position, radius, Vector3.up, 0);
     }
 
-    public bool Forward(float radius, float forward, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackForwardCheck(radius, forward), damage, onHit);
+    public bool Forward(float radius, float forward, float damage, bool showAOE = true, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackForwardCheck(showAOE, radius, forward), damage, onHit);
     }
 
-    public bool Around(float radius, float damage, Action<IDamageable> onHit = null) {
-        return DamageHits(AttackAroundCheck(radius), damage, onHit);
+    public bool Around(float radius, float damage, bool showAOE = true, Action<IDamageable> onHit = null) {
+        return DamageHits(AttackAroundCheck(showAOE, radius), damage, onHit);
+    }
+
+    public void ShowAOE(float radius, float forward, bool inFront) {
+        //No prefab or disabled in settings -> Return
+        if (!AOEIndicator || !Preferences.ShowAOE) return;
+
+        //Create indicator
+        AttackAreaIndicator indicator = Instantiate(AOEIndicator, Model.position + 0.05f * Vector3.up, Model.rotation).GetComponent<AttackAreaIndicator>();
+        indicator.GenerateIndicator(radius, forward, inFront);
     }
 
     //Ranged

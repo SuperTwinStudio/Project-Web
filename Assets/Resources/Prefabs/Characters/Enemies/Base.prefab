@@ -319,6 +319,7 @@ MonoBehaviour:
   _isPlayer: 0
   _source: {fileID: 224953861418605601}
   _model: {fileID: 2739467051366623611}
+  _AOEIndicator: {fileID: 9113265026473319284, guid: b51ba3cc1110cee40b85b610ec45a75c, type: 3}
 --- !u!114 &224953861418605601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,13 +336,13 @@ MonoBehaviour:
   _eyes: {fileID: 1764233524365519611}
   _bot: {fileID: 5495191504116420431}
   _audio: {fileID: 4993619310403022831}
+  _model: {fileID: 2739467051366623611}
   _baseHealth: 100
   _isBoss: 0
   _agent: {fileID: 4960207987092544457}
   _collider: {fileID: 2354158519484372618}
   _rigidbody: {fileID: 5988547702214694839}
   _attack: {fileID: 570689097395807571}
-  _model: {fileID: 2739467051366623611}
   _animator: {fileID: 0}
   _renderer: {fileID: 0}
   moveSpeed: 3

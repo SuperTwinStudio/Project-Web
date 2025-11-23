@@ -82,22 +82,22 @@ public class WeaponAbanico : Weapon {
         //Set cooldown on secondary so it can't be used while using primary
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
-        //Shoot
-        Projectile projectile = Attack.Throw(bulletPrefab, PrimaryDamage, bulletOrigin);
-        if (isPassiveHit) projectile.AddOnHit((damageable) => Push(damageable, PassivePushForce));
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
         Animator.SetFloat("HitCounter", hitCount % 2);
         Animator.SetTrigger(isPassiveHit ? "ShootStrong" : "Shoot");
 
+        //Shoot
+        Projectile projectile = Attack.Throw(bulletPrefab, PrimaryDamage, bulletOrigin);
+        if (isPassiveHit) projectile.AddOnHit((damageable) => Push(damageable, PassivePushForce));
+
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
@@ -111,16 +111,17 @@ public class WeaponAbanico : Weapon {
         //Wait
         yield return new WaitForSeconds(secondaryPushDelay);
 
+        //Play sound
+        PlaySound(secondaryAttackSound);
+
         //Push enemies back
         Attack.Forward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,
+            true,
             (damageable) => Push(damageable, SecondaryPushForce, SecondaryDamage)
         );
-
-        //Play sound
-        PlaySound(secondaryAttackSound);
     }
 
     //Passive

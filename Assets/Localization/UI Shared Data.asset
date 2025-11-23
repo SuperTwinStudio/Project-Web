@@ -231,6 +231,14 @@ MonoBehaviour:
     m_Key: shop_character_dash_description
     m_Metadata:
       m_Items: []
+  - m_Id: 19504872358285312
+    m_Key: settings_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19505774595018752
+    m_Key: settings_aoe
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

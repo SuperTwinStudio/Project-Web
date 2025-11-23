@@ -76,18 +76,18 @@ public class WeaponStapler : Weapon {
         //No ammo
         if (ammo <= 0) return;
 
-        //Shoot
-        Attack.Throw(bulletPrefab, damage, bulletOrigin);
-
-        //Update ammo
-        SetAmmo(ammo - 1);
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
 
         //Animate
         PlaySound(shootAttackSound);
         Animator.SetTrigger("Attack");
 
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
+        //Shoot
+        Attack.Throw(bulletPrefab, damage, bulletOrigin);
+
+        //Update ammo
+        SetAmmo(ammo - 1);
     }
 
     private void SetAmmo(int newAmmo) {
@@ -106,7 +106,8 @@ public class WeaponStapler : Weapon {
         bool hit = Attack.Forward(
             passiveAttackSphereCast.x, 
             passiveAttackSphereCast.y,
-            PassiveDamage
+            PassiveDamage,
+            false
         );
 
         //Check if melee attack hit something
@@ -117,6 +118,13 @@ public class WeaponStapler : Weapon {
             //Animate attack
             PlaySound(passiveAttackSound);
             Animator.SetTrigger("AttackMelee");
+
+            //Show AOE
+            Attack.ShowAOE(
+                passiveAttackSphereCast.x, 
+                passiveAttackSphereCast.y,
+                true
+            );
         } else {
             //Didn't hit anything -> Use primary (shoot)
             Shoot(PrimaryDamage);

@@ -34,6 +34,7 @@ public class LadronzueloStealState : LadronzueloState {
             Ladronzuelo.InteractRange / 2,
             0,
             0,
+            true,
             (damageable) => Ladronzuelo.StealGoldFromPlayer()
         );
 

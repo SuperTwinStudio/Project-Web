@@ -26,6 +26,11 @@ public class Preferences : MonoBehaviour {
     public static float VolumeMusic { get => volumeMusicPreference.Value; set => volumeMusicPreference.Value = value; }
     public static float VolumeSFX { get => volumeSFXPreference.Value; set => volumeSFXPreference.Value = value; }
 
+    //Game
+    private static readonly BoolPreference showAOE = new("Game.ShowAOE", true);
+
+    public static bool ShowAOE { get => showAOE.Value; set => showAOE.Value = value; }
+
     //UI (Audio)
     [Header("Audio")]
     [SerializeField] private Slider volumeMasterSlider;
@@ -35,6 +40,7 @@ public class Preferences : MonoBehaviour {
     //UI (Game)
     [Header("Game")]
     [SerializeField] private TMP_Dropdown languageDropdown;
+    [SerializeField] private Toggle AOEToggle;
 
 
     //UI
@@ -161,6 +167,22 @@ public class Preferences : MonoBehaviour {
 
         protected override void SaveValue(string value) {
             PlayerPrefs.SetString(key, value);
+        }
+
+    }
+
+    public class BoolPreference : Preference<bool> {
+
+        //Constructor
+        public BoolPreference(string key, bool defaultValue, Action<bool> onValueChanged = null) : base(key, defaultValue, onValueChanged) {}
+
+        //Load/Save
+        protected override bool LoadValue() {
+            return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
+        }
+
+        protected override void SaveValue(bool value) {
+            PlayerPrefs.SetInt(key, value ? 1 : 0);
         }
 
     }

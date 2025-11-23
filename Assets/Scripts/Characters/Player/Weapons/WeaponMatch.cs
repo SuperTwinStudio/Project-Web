@@ -71,28 +71,29 @@ public class WeaponMatch : Weapon {
         //Set cooldown on secondary so it can't be used while using primary
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
-        //Attack
-        Attack.Forward(
-            primaryAttackSphereCast.x, 
-            primaryAttackSphereCast.y,
-            PrimaryDamage,
-            isPassiveHit ? (damageable) => ApplyBurn(damageable, PassiveBurnDuration) : null
-        );
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
 
         //Animate
         PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
         Animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
 
+        //Attack
+        Attack.Forward(
+            primaryAttackSphereCast.x, 
+            primaryAttackSphereCast.y,
+            PrimaryDamage,
+            true,
+            isPassiveHit ? (damageable) => ApplyBurn(damageable, PassiveBurnDuration) : null
+        );
+
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
-
-        //Slow player
-        Player.AddEffect(attackSlowEffect, primarySlowDuration);
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
@@ -102,22 +103,28 @@ public class WeaponMatch : Weapon {
         //Set cooldown on primary so it can't be used while using secondary
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
-        //Attack
-        Attack.Around(
-            secondaryRadius,
-            SecondaryDamage, 
-            (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
-        );
-
-        //Animate
-        PlaySound(secondaryAttackSound);
-        Animator.SetTrigger("AttackSlam");
-
+        //Apply camera knockback
+        CameraController.AddShake();
+    
         //Slow player
         Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
-        //Apply camera knockback
-        CameraController.AddShake();
+        //Animate
+        Animator.SetTrigger("AttackSlam");
+
+        //Wait for animation
+        yield return new WaitForSeconds(0.25f);
+
+        //Play sound
+        PlaySound(secondaryAttackSound);
+
+        //Attack
+        Attack.Around(
+            secondaryRadius,
+            SecondaryDamage,
+            true,
+            (damageable) => ApplyBurn(damageable, SecondaryBurnDuration)
+        );
     }
 
     //Passive

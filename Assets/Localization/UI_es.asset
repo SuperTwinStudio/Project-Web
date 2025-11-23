@@ -240,6 +240,14 @@ MonoBehaviour:
     m_Localized: Reduce el enfriamiento del dash.
     m_Metadata:
       m_Items: []
+  - m_Id: 19504872358285312
+    m_Localized: Juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19505774595018752
+    m_Localized: Mostrar Efectos de Area
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

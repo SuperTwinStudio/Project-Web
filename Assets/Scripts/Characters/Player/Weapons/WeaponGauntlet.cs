@@ -60,27 +60,28 @@ public class WeaponGauntlet : Weapon {
         //Set cooldown on secondary so it can't be used while using primary
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
+
+        //Animate
+        PlaySound(primaryAttackSound);
+        Animator.SetFloat("HitCounter", hitCount % 2);
+        Animator.SetTrigger("Attack");
+
         //Attack
         Attack.Forward(
             primaryAttackSphereCast.x,
             primaryAttackSphereCast.y,
             0,
+            true,
             (damageable) => ApplyChincheta(damageable, PrimaryDamage)
         );
 
-        //Animate
-        PlaySound(primaryAttackSound);
-
-        Animator.SetFloat("HitCounter", hitCount % 2);
-        Animator.SetTrigger("Attack");
-
-        //Slow player
-        Player.AddEffect(attackSlowEffect, primarySlowDuration);
-
+        //Next hit
         hitCount = (hitCount + 1) % 2;
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
@@ -90,23 +91,29 @@ public class WeaponGauntlet : Weapon {
         //Set cooldown on primary so it can't be used while using secondary
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
+        //Apply camera knockback
+        CameraController.AddShake(secondaryPrimaryCooldown / 2);
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
+
+        //Animate
+        Animator.SetTrigger("AttackDown");
+
+        //Wait for animation
+        yield return new WaitForSeconds(0.25f);
+
+        //Play sound
+        PlaySound(secondaryAttackSound);
+
         //Attack
         Attack.Forward(
             secondaryAttackSphereCast.x,
             secondaryAttackSphereCast.y,
             0,
+            true,
             (damageable) => ApplyChincheta(damageable, SecondaryDamage)
         );
-
-        //Animate
-        PlaySound(secondaryAttackSound);
-        Animator.SetTrigger("AttackDown");
-
-        //Slow player
-        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
-
-        //Apply camera knockback
-        CameraController.AddShake(secondaryPrimaryCooldown / 2);
     }
 
     //Passive

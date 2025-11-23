@@ -64,6 +64,17 @@ public class WeaponSword : Weapon {
         //Set cooldown on secondary so it can't be used while using primary
         SetCooldown(WeaponAction.Secondary, primarySecondaryCooldown);
 
+        //Apply camera knockback
+        CameraController.AddKnockback(-transform.forward);
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, primarySlowDuration);
+
+        //Animate
+        PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
+        Animator.SetFloat("HitCounter", hitCount % 2);
+        Animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
+
         //Attack
         Attack.Forward(
             primaryAttackSphereCast.x,
@@ -71,21 +82,10 @@ public class WeaponSword : Weapon {
             PrimaryDamage + (isPassiveHit ? PassiveDamage : 0)
         );
 
-        //Animate
-        PlaySound(isPassiveHit ? passiveAttackSound : primaryAttackSound);
-        Animator.SetFloat("HitCounter", hitCount % 2);
-        Animator.SetTrigger(isPassiveHit ? "AttackStrong" : "Attack");
-
         //Next hit
         hitCount = (hitCount + 1) % passiveHit;
         isPassiveHit = hitCount == passiveHit - 1;
         UpdatePassiveValue();
-
-        //Slow player
-        Player.AddEffect(attackSlowEffect, primarySlowDuration);
-
-        //Apply camera knockback
-        CameraController.AddKnockback(-transform.forward);
     }
 
     //Secondary
@@ -95,21 +95,21 @@ public class WeaponSword : Weapon {
         //Set cooldown on primary so it can't be used while using secondary
         SetCooldown(WeaponAction.Primary, secondaryPrimaryCooldown);
 
-        //Attack
-        Attack.Around(
-            secondarySpinRadius,
-            SecondaryDamage
-        );
+        //Apply camera knockback
+        CameraController.AddShake(secondaryPrimaryCooldown);
+
+        //Slow player
+        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
 
         //Animate
         PlaySound(secondaryAttackSound);
         Animator.SetTrigger("AttackSpin");
 
-        //Slow player
-        Player.AddEffect(attackSlowEffect, secondarySlowDuration);
-
-        //Apply camera knockback
-        CameraController.AddShake(secondaryPrimaryCooldown);
+        //Attack
+        Attack.Around(
+            secondarySpinRadius,
+            SecondaryDamage
+        );
     }
 
     //Passive

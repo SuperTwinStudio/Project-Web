@@ -242,6 +242,14 @@ MonoBehaviour:
     m_Localized: Reduces the dash cooldown.
     m_Metadata:
       m_Items: []
+  - m_Id: 19504872358285312
+    m_Localized: Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19505774595018752
+    m_Localized: Show Area of Effect
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

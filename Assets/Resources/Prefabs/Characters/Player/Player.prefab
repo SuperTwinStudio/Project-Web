@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 275417671378692547}
   - component: {fileID: 6517096784467179232}
   - component: {fileID: 3851105479952359991}
-  - component: {fileID: 468255279070448659}
   - component: {fileID: 5015934107059590354}
   - component: {fileID: 8538115829238214355}
+  - component: {fileID: 468255279070448659}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -160,6 +160,41 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &5015934107059590354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314232767875138061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666641ca2fbeef047bd3fa3b0abf4c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPlayer: 1
+  _source: {fileID: 468255279070448659}
+  _model: {fileID: 3154183115244130666}
+  _AOEIndicator: {fileID: 5018759037538314143, guid: 6be4fa2fc2fd98a4e99da4b0559b409b, type: 3}
+--- !u!114 &8538115829238214355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314232767875138061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee531d3e9bbbe034b89d8576619385ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 468255279070448659}
+  _weapons:
+  - {fileID: 6276396774210786200}
+  - {fileID: 3499355174417952672}
+  - {fileID: 7252970620708159940}
+  - {fileID: 846072094820107339}
+  - {fileID: 1122487539104593671}
 --- !u!114 &468255279070448659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,46 +225,13 @@ MonoBehaviour:
   _loadout: {fileID: 8538115829238214355}
   _animator: {fileID: 2393395648455993377}
   dashSound: {fileID: 8300000, guid: ab6925b518fc61f449c8e323ac7324dd, type: 3}
-  moveSpeed: 6.5
   dashCooldown: 2.5
+  dashCooldownPerLevel: 0.3
   dashForce: 15
+  moveSpeed: 6.5
   pushDeceleration: 50
   gramajeHealthPerLevel: 10
   rugosidadResistancePerLevel: 0.1
---- !u!114 &5015934107059590354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314232767875138061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 666641ca2fbeef047bd3fa3b0abf4c7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPlayer: 1
-  _source: {fileID: 468255279070448659}
-  _model: {fileID: 3154183115244130666}
---- !u!114 &8538115829238214355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314232767875138061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee531d3e9bbbe034b89d8576619385ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 468255279070448659}
-  _weapons:
-  - {fileID: 6276396774210786200}
-  - {fileID: 3499355174417952672}
-  - {fileID: 7252970620708159940}
-  - {fileID: 846072094820107339}
-  - {fileID: 1122487539104593671}
 --- !u!1 &1588256840926952031
 GameObject:
   m_ObjectHideFlags: 0
