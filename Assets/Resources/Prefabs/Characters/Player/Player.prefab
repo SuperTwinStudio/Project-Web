@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 403091629657982332}
   - component: {fileID: 6276396774210786200}
   - component: {fileID: 5487478310553497482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 5835956054949143995}
   - component: {fileID: 7252970620708159940}
   - component: {fileID: 8843916554162638499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gauntlet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2919929628914546220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Abanico (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5860380924851828079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stapler (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 1522470169753867797}
   - component: {fileID: 846072094820107339}
   - component: {fileID: 6325080915746571348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stapler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4183402215411670126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7162894825253278290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6849242891339637249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 4829512223886480836}
   - component: {fileID: 1122487539104593671}
   - component: {fileID: 7136729457388564981}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Abanico
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1216,7 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6713001859621090456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Match (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1249,7 +1249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142675718610680985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 3499355174417952672}
   - component: {fileID: 4547025912353158846}
   - component: {fileID: 7163236552808989687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Match
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151680765440771274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1537,7 +1537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3336465458431586321}
   - component: {fileID: 6921905436315680496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gauntlet (Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1591,7 +1591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3154183115244130666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1624,7 +1624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3640619533063552155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1658,7 +1658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1936036416147092579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1689,7 +1689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 794176676061406782}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1779,6 +1779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8576734611b5ef342ac4a266db642fd5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1808,6 +1812,10 @@ PrefabInstance:
     - target: {fileID: -9117820735870370429, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -9070829736879046736, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1853,6 +1861,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 11acd7a76bc0764468cb6a86d74a5ed5, type: 2}
+    - target: {fileID: -5915675372845295744, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5330520212495243477, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1412092348503287166, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 4.862056
@@ -1864,6 +1880,10 @@ PrefabInstance:
     - target: {fileID: -1412092348503287166, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.4932756
+      objectReference: {fileID: 0}
+    - target: {fileID: -1358996713251865709, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -1327011952096708544, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1881,6 +1901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LittleMan
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1820849000876332199, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.307727
@@ -1892,6 +1916,14 @@ PrefabInstance:
     - target: {fileID: 1820849000876332199, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.03393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164394864897238483, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944517472383829259, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3818357414157580433, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1916,6 +1948,18 @@ PrefabInstance:
     - target: {fileID: 4993247010217307183, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 179.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767559492127519299, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909848542033764120, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8873470525695072491, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2185,6 +2229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gauntlet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d7c53b15d81dabd4aa3442ac3a1326ef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2251,6 +2299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Abanico
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8ff0e37f05ada8499619fec691af544, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2309,6 +2361,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5266956992375400328, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3383321965651764309, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1948801911511477976, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1681462872464351197, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2321,9 +2385,37 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 556787879857244679, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
       propertyPath: m_Name
       value: Stapler
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457536708822989220, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983859549989537295, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473858492697540477, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086674100662740013, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687569734251824815, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8282909117703725295, guid: a1fd30ca64b57394181e816bfc20b67a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2394,6 +2486,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ca9ea489b0467d24abb51329ec60a91c, type: 3}
       propertyPath: m_Name
       value: Match
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca9ea489b0467d24abb51329ec60a91c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
