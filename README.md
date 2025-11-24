@@ -451,10 +451,11 @@ Armadura poseída de tamaño medio que arrastra una espada gigante y realiza ata
 
 - **Dificultad:** alta.
 - **Comportamiento:**  
-  - Si el jugador no se encuentra dentro del rango de visión, el caballero no se moverá. 
-  - Si se encuentra dentro del rango de visión, se acercará al jugador con el escudo desenvainado hasta estar a una distancia corta.
-  - Si el jugador está dentro de su rango de ataque, envainará el escudo dejando sus puntos débiles expuestos y realizará ataques lentos pero potentes.
-  - Si el jugador ataca a melé mientras tiene el escudo envainado, este hará parry y enlazará con un ataque rápido de menor daño. Si el jugador ataca a rango, el caballero simplemente se quedará detenido para frenar la munición y justo después seguirá caminando. 
+  - El caballero tiene un escudo que, cuando lo tiene fuera, bloquea cualquier ataque procedente del frente.
+  - Si el jugador entra en rango de visión, el caballero se movera hacia él.
+  - Si el jugador entra en rango de ataque, el caballero guardará el escudo y atacará al frente con su espada.
+  - Si acierta un ataque, sacará el escudo de nuevo y volverá a acercarse. 
+  - Si falla un ataque, se quedará stuneado durante un pequeño tiempo con el escudo guardado y el jugador podrá pegarle.
 
 ### Bosses
 
