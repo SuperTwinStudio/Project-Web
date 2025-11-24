@@ -47,6 +47,7 @@ public class Preferences : MonoBehaviour {
     private void Awake() {
         //Game
         languageDropdown.value = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
+        AOEToggle.isOn = ShowAOE;
 
         //Audio
         volumeMasterSlider.value = VolumeMaster;
