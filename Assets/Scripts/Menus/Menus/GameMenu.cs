@@ -1,8 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using Botpa;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class GameMenu : Menu {
@@ -25,41 +26,26 @@ public class GameMenu : Menu {
     //Weapon
     private Weapon currentWeapon;
 
-    //Primary
-    [Header("Primary")]
-    [SerializeField] private Image primaryIcon;
-    [SerializeField] private GameObject primaryValueBadge;
-    [SerializeField] private TMP_Text primaryValueText;
-    [SerializeField] private Image primaryCooldown;
-
-    //Secondary
-    [Header("Secondary")]
-    [SerializeField] private Image secondaryIcon;
-    [SerializeField] private GameObject secondaryValueBadge;
-    [SerializeField] private TMP_Text secondaryValueText;
-    [SerializeField] private Image secondaryCooldown;
-
-    //Passive
-    [Header("Passive")]
-    [SerializeField] private Image passiveIcon;
-    [SerializeField] private GameObject passiveValueBadge;
-    [SerializeField] private TMP_Text passiveValueText;
-    [SerializeField] private Image passiveCooldown;
-
-    //Dash
-    [Header("Dash")]
-    [SerializeField] private Image dashCooldown;
+    //Actions
+    [Header("Actions")]
+    [SerializeField] private GameMenuAction primaryAction;
+    [SerializeField] private GameMenuAction secondaryAction;
+    [SerializeField] private GameMenuAction passiveAction;
+    [SerializeField] private GameMenuAction dashAction;
 
     //Reload
     [Header("Reload")]
     [SerializeField] private GameObject reloadIndicator;
     [SerializeField] private Slider reloadSlider;
 
-    //Inventory Sold
-    [Header("Inventory Sold")]
-    [SerializeField] private Animator soldAnimator;
-    [SerializeField] private TMP_Text soldText;
-    [SerializeField] private LocalizedString soldLocale;
+    //Messages
+    [Header("Messages")]
+    [SerializeField] private Animator messageAnimator;
+    [SerializeField] private TMP_Text messageText;
+
+    private readonly List<string> messages = new();
+
+    public bool ShowingMessage { get; private set; } = false;
 
     //Item
     [Header("Passive Item")]
@@ -76,8 +62,8 @@ public class GameMenu : Menu {
 
     //Minimap
     [Header("Minimap")]
-    [SerializeField] private GameObject minimapCamera;
     [SerializeField] private GameObject minimap;
+    [SerializeField] private Transform minimapCamera;
 
     //Boss Healthbar
     [Header("Boss Healthbar")]
@@ -99,22 +85,22 @@ public class GameMenu : Menu {
     private void Update() {
         //Update icons cooldown
         if (currentWeapon) {
-            primaryCooldown.fillAmount = currentWeapon.PrimaryCooldown;
-            secondaryCooldown.fillAmount = currentWeapon.SecondaryCooldown;
-            passiveCooldown.fillAmount = currentWeapon.PassiveCooldown;
+            primaryAction.SetCooldown(currentWeapon.PrimaryCooldown);
+            secondaryAction.SetCooldown(currentWeapon.SecondaryCooldown);
+            passiveAction.SetCooldown(currentWeapon.PassiveCooldown);
         }
 
         //Update dash cooldown
-        dashCooldown.fillAmount = Player.DashCooldown;
+        dashAction.SetCooldown(Player.DashCooldown);
     }
 
     public override void OnUpdate() {
         //Open pause
-        if (pauseAction.Triggered()) MenuManager.Open(MenusList.Settings);
+        if (pauseAction.Triggered()) OpenPause();
         //Open inventory
-        else if (inventoryAction.Triggered()) MenuManager.Open(MenusList.Inventory);
+        else if (inventoryAction.Triggered()) OpenInventory();
 
-        //Disable minimap if in lobby
+        //Disable minimap in lobby
         minimap.SetActive(!Level.IsLobby);
 
         //Move minimap camera
@@ -154,16 +140,6 @@ public class GameMenu : Menu {
         healthText.SetText($"{health}HP");
     }
 
-    //Gold
-    public void ShowInventorySold(int value) {
-        //No value
-        if (value <= 0) return;
-
-        //Show animation
-        soldText.SetText($"{soldLocale.GetLocalizedString()} {value}G");
-        soldAnimator.SetTrigger("Show");
-    }
-
     //Weapon
     private void OnWeaponChanged(Weapon oldWeapon, Weapon newWeapon) {
         //No weapon -> Ignore
@@ -173,14 +149,14 @@ public class GameMenu : Menu {
         currentWeapon = newWeapon;
 
         //Update icons
-        primaryIcon.sprite = newWeapon.PrimaryIcon;
-        secondaryIcon.sprite = newWeapon.SecondaryIcon;
-        passiveIcon.sprite = newWeapon.PassiveIcon;
+        primaryAction.SetSprite(newWeapon.PrimaryIcon);
+        secondaryAction.SetSprite(newWeapon.SecondaryIcon);
+        passiveAction.SetSprite(newWeapon.PassiveIcon);
 
         //Update cooldowns
-        primaryCooldown.fillAmount = newWeapon.PrimaryCooldown;
-        secondaryCooldown.fillAmount = newWeapon.SecondaryCooldown;
-        passiveCooldown.fillAmount = newWeapon.PassiveCooldown;
+        primaryAction.SetCooldown(newWeapon.PrimaryCooldown);
+        secondaryAction.SetCooldown(newWeapon.SecondaryCooldown);
+        passiveAction.SetCooldown(newWeapon.PassiveCooldown);
 
         //Update reload
         reloadIndicator.SetActive(newWeapon.IsReloading);
@@ -195,35 +171,17 @@ public class GameMenu : Menu {
     }
 
     private void OnWeaponValueChanged(WeaponAction action, int value) {
-        switch (action) {
+        if (action == WeaponAction.Reload) {
             //Reload
-            case WeaponAction.Reload: {
-                reloadIndicator.SetActive(value >= 0);
-                reloadSlider.value = value;
-                break;   
-            }
-
+            reloadIndicator.SetActive(value >= 0);
+            reloadSlider.value = value;
+        } else {
             //Abilities
-            default: {
-                //Get badge
-                GameObject badge = action switch {
-                    WeaponAction.Primary => primaryValueBadge,
-                    WeaponAction.Secondary => secondaryValueBadge,
-                    _ => passiveValueBadge,
-                };
-
-                //Get text
-                TMP_Text text = action switch {
-                    WeaponAction.Primary => primaryValueText,
-                    WeaponAction.Secondary => secondaryValueText,
-                    _ => passiveValueText,
-                };
-
-                //Update value
-                badge.SetActive(value > 0);
-                text.SetText($"{value}");
-                break;
-            }
+            (action switch {
+                WeaponAction.Primary => primaryAction,
+                WeaponAction.Secondary => secondaryAction,
+                _ => passiveAction,
+            }).SetValue(value > 0, $"{value}");
         }
     }
 
@@ -243,16 +201,55 @@ public class GameMenu : Menu {
 
     public void AssignBoss(EnemyBase enemy) {
         boss = enemy;
-        enemy.AddOnHealthChanged(OnBossHealthChange);
-        bossHealthbar.SetActive(true);
+        boss.AddOnHealthChanged(OnBossHealthChange);
+        OnBossHealthChange(boss.Health, boss.HealthMax);
     }
 
-    private void OnObtainTreasure(Item item) 
-    {
+    private void OnObtainTreasure(Item item) {
         treasureIcon.sprite = item.Icon;
         treasureName.text = $"{item.Name} x1";
 
         treasureAnimator.SetTrigger("Show");
+    }
+
+    //Messages
+    private IEnumerator ShowMessageCoroutine() {
+        //Start
+        ShowingMessage = true;
+
+        //Show message
+        messageText.SetText(messages[0]);
+        messageAnimator.SetTrigger("Show");
+        messages.RemoveAt(0);
+
+        //Wait until animation finishes
+        yield return new WaitForSeconds(3);
+
+        //Check if there are more messages
+        if (!messages.IsEmpty()) {
+            //More -> Show next
+            StartCoroutine(ShowMessageCoroutine());
+        } else {
+            //Finish
+            ShowingMessage = false;
+        }
+    }
+
+    public void ShowMessage(string message) {
+        //Add message to list
+        messages.Add(message);
+
+        //Show message if not showing any yet
+        if (!ShowingMessage) StartCoroutine(ShowMessageCoroutine());
+    }
+
+    //Menus
+    public void OpenPause() {
+        MenuManager.Open(MenusList.Settings);
+    }
+
+    public void OpenInventory() {
+        MenuManager.Open(MenusList.Inventory);
     }
 
 

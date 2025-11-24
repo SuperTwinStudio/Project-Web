@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: -160, y: -200}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: -160, y: -150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6270634256036558315
 CanvasRenderer:
@@ -66,12 +66,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You couldn''t save your brother...
-
-
-
-    While fleeing, all of your treasures
-    and half of your gold fell to the ground.'
+  m_text: While fleeing, all of your treasures and half of your gold fell to the
+    ground.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
   m_sharedMaterial: {fileID: -4266509366161634752, guid: e4c7a8edb873b6841b6dafdd40838458, type: 2}
@@ -369,7 +365,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &2065370085258357176
 GameObject:
@@ -407,8 +403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
-  m_SizeDelta: {x: 800, y: -375}
+  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_SizeDelta: {x: 800, y: -425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1017418086952433422
 CanvasRenderer:
@@ -496,7 +492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2930322631551567681
@@ -913,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1248,7 +1244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

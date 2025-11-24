@@ -266,6 +266,10 @@ MonoBehaviour:
     m_Localized: Pila de estrellas
     m_Metadata:
       m_Items: []
+  - m_Id: 19903248140734464
+    m_Localized: Pausa
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

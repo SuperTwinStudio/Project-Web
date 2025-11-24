@@ -189,12 +189,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 468255279070448659}
+  goldSoldLocale:
+    m_TableReference:
+      m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+    m_TableEntryReference:
+      m_KeyId: 2904888255057920
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _weapons:
   - {fileID: 6276396774210786200}
   - {fileID: 3499355174417952672}
   - {fileID: 7252970620708159940}
   - {fileID: 846072094820107339}
   - {fileID: 1122487539104593671}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &468255279070448659
 MonoBehaviour:
   m_ObjectHideFlags: 0

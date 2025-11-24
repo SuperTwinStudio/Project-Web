@@ -565,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 910, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7263275305445398060
@@ -743,8 +743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
-  m_SizeDelta: {x: 570, y: -375}
+  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_SizeDelta: {x: 570, y: -425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8962458238755760877
 CanvasRenderer:
@@ -1378,7 +1378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4462320358868650844, guid: 261f352cb15b8dc4bbb6bd250bc8bb5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1559,6 +1559,16 @@ MonoBehaviour:
   _state: 0
   inventoryAction: {fileID: -7972526189184036601, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   defaultSelectable: {fileID: 7288393847181497546}
+  valueText: {fileID: 5429396308301577305}
+  valueLocale:
+    m_TableReference:
+      m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+    m_TableEntryReference:
+      m_KeyId: 2902393453678592
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   goldText: {fileID: 2020802779473367635}
   goldLocale:
     m_TableReference:
@@ -1571,16 +1581,6 @@ MonoBehaviour:
     m_LocalVariables: []
   emptyMessage: {fileID: 567643817323133238}
   itemsGrid: {fileID: 4816508237183168789}
-  valueText: {fileID: 5429396308301577305}
-  valueLocale:
-    m_TableReference:
-      m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
-    m_TableEntryReference:
-      m_KeyId: 2902393453678592
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
   itemPrefab: {fileID: 4308707538748850477, guid: 053401e475f0d714fabec11b3b8a4bf1, type: 3}
   references:
     version: 2

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Botpa;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class Loadout : MonoBehaviour, ISavable {
 
@@ -19,6 +20,9 @@ public class Loadout : MonoBehaviour, ISavable {
     public Level Level => Player.Level;
 
     //Gold
+    [Header("Gold")]
+    [SerializeField] private LocalizedString goldSoldLocale;
+
     public int Gold { get; private set; }
 
     //Inventory
@@ -338,10 +342,10 @@ public class Loadout : MonoBehaviour, ISavable {
         foreach (var pair in save.inventory) AddToInventory(Item.GetFromName(pair.Key), pair.Value, true);
         if (Level.IsLobby) {
             //In lobby -> Sell inventory
-            int addedValue = SellInventory();
+            int soldValue = SellInventory();
 
-            //Show items sold animation
-            if (Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowInventorySold(addedValue);
+            //Show items sold message
+            if (soldValue > 0 && Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowMessage($"{goldSoldLocale.GetLocalizedString()} {soldValue}G");
         }
 
         //Load unlocked weapons
