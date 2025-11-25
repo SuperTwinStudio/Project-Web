@@ -43,6 +43,11 @@ public class SettingsMenu : Menu {
         Game.Current.LoadScene("Lobby");
     }
 
+    public void OpenTutorial() {
+        //Open tutorial menu
+        Debug.Log("Open tutorial menu when it's done");
+    }
+
 
      /*$$$$$$$                            /$$
     |__  $$__/                           | $$

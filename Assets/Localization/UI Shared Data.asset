@@ -239,6 +239,30 @@ MonoBehaviour:
     m_Key: settings_aoe
     m_Metadata:
       m_Items: []
+  - m_Id: 20210124401508352
+    m_Key: settings_pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20210148682334208
+    m_Key: settings_quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213911929323520
+    m_Key: settings_quality_low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213955151626240
+    m_Key: settings_quality_high
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215833990103040
+    m_Key: settings_tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215922280202240
+    m_Key: settings_tutorial_show
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

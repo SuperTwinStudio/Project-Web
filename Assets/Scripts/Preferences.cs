@@ -10,9 +10,9 @@ public class Preferences : MonoBehaviour {
 
     //Audio
     private static AudioMixer _audioMixer;
-    private static readonly FloatPreference volumeMasterPreference = new("Game.VolumeMaster", 1.0f, (value) => AudioMixer.SetFloat("Master", Util.VolumeToDB(value)));
-    private static readonly FloatPreference volumeMusicPreference = new("Game.VolumeMusic", 0.8f, (value) => AudioMixer.SetFloat("Music", Util.VolumeToDB(value)));
-    private static readonly FloatPreference volumeSFXPreference = new("Game.VolumeSFX", 0.8f, (value) => AudioMixer.SetFloat("SFX", Util.VolumeToDB(value)));
+    private static readonly FloatPreference volumeMasterPreference = new("Settings.VolumeMaster", 1.0f, (value) => AudioMixer.SetFloat("Master", Util.VolumeToDB(value)));
+    private static readonly FloatPreference volumeMusicPreference = new("Settings.VolumeMusic", 0.8f, (value) => AudioMixer.SetFloat("Music", Util.VolumeToDB(value)));
+    private static readonly FloatPreference volumeSFXPreference = new("Settings.VolumeSFX", 0.8f, (value) => AudioMixer.SetFloat("SFX", Util.VolumeToDB(value)));
 
     private static AudioMixer AudioMixer {
         get {
@@ -27,9 +27,11 @@ public class Preferences : MonoBehaviour {
     public static float VolumeSFX { get => volumeSFXPreference.Value; set => volumeSFXPreference.Value = value; }
 
     //Game
-    private static readonly BoolPreference showAOE = new("Game.ShowAOE", true);
+    private static readonly BoolPreference showAOE = new("Settings.ShowAOE", true);
+    private static readonly IntPreference quality = new("Settings.Quality", 0);
 
     public static bool ShowAOE { get => showAOE.Value; set => showAOE.Value = value; }
+    public static int Quality { get => quality.Value; set => quality.Value = value; }
 
     //UI (Audio)
     [Header("Audio")]
@@ -41,36 +43,47 @@ public class Preferences : MonoBehaviour {
     [Header("Game")]
     [SerializeField] private TMP_Dropdown languageDropdown;
     [SerializeField] private Toggle AOEToggle;
+    [SerializeField] private TMP_Dropdown qualityDropdown;
 
 
     //UI
     private void Awake() {
-        //Game
-        languageDropdown.value = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
-        AOEToggle.isOn = ShowAOE;
-
         //Audio
         volumeMasterSlider.value = VolumeMaster;
         volumeMusicSlider.value = VolumeMusic;
         volumeSFXSlider.value = VolumeSFX;
+
+        //Game
+        languageDropdown.value = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
+        AOEToggle.isOn = ShowAOE;
+        qualityDropdown.value = QualitySettings.GetQualityLevel();
     }
 
     //Init preferences
-    public static void InitAudio() {
+    public static void Init() {
         //Assign values to a random variable so that the getters get executed & the audio mixer updates
         float f;
         f = VolumeMaster;
         f = VolumeMusic;
         f = VolumeSFX;
+
+        //Set quality level
+        SetQuality(Quality);
     }
 
     //Update values
-    public void SetLanguage(int newLanguage) {
+    public static void SetLanguage(int newLanguage) {
         //Update locale
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[newLanguage];
 
         //Update preferences
         PlayerPrefs.SetString("Settings.Locale", LocalizationSettings.SelectedLocale.Identifier.Code);
+    }
+
+    public static void SetQuality(int newQuality) {
+        //Update quality
+        QualitySettings.SetQualityLevel(newQuality);
+        Quality = QualitySettings.GetQualityLevel();
     }
 
 

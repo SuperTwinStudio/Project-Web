@@ -243,7 +243,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 19505774595018752
-    m_Localized: Mostrar Efectos de Area
+    m_Localized: Mostrar Area de Ataque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20210124401508352
+    m_Localized: Pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20210148682334208
+    m_Localized: Calidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213911929323520
+    m_Localized: "R\xE1pido"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213955151626240
+    m_Localized: Que lindo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215833990103040
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215922280202240
+    m_Localized: Abrir Tutorial
     m_Metadata:
       m_Items: []
   references:

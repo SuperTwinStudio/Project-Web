@@ -247,10 +247,6 @@ MonoBehaviour:
     m_Key: treasure_pile
     m_Metadata:
       m_Items: []
-  - m_Id: 19903248140734464
-    m_Key: settings_pause
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

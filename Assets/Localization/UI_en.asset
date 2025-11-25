@@ -227,11 +227,11 @@ MonoBehaviour:
   - m_Id: 14865746547838976
     m_Localized: 'You unlocked a new weapon: <weapon>.
 
-      
 
-      Your inventory
-      has treasures valued in <treasures>. You can exit and keep your inventory or
-      continue to a more difficult dungeon and risk loosing your treasures.'
+
+      Your inventory has
+      treasures valued in <treasures>. You can exit and keep your inventory or continue
+      to a more difficult dungeon and risk loosing your treasures.'
     m_Metadata:
       m_Items: []
   - m_Id: 17365525739737088
@@ -247,7 +247,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 19505774595018752
-    m_Localized: Show Area of Effect
+    m_Localized: Show Attack Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20210124401508352
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20210148682334208
+    m_Localized: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213911929323520
+    m_Localized: Fast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20213955151626240
+    m_Localized: Holy moly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215833990103040
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20215922280202240
+    m_Localized: Open Tutorial
     m_Metadata:
       m_Items: []
   references:

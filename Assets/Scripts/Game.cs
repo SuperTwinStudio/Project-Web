@@ -83,7 +83,7 @@ public class Game : MonoBehaviour, ISavable {
 
     private void Start() {
         //Init audio preferences (AudioMixer can't be init in Awake)
-        Preferences.InitAudio();
+        Preferences.Init();
     }
 
     private void OnNewGame(Game newGame) {
