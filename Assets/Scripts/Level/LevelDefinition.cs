@@ -12,6 +12,10 @@ public class LevelDefinition : ScriptableObject
 	public int MaxStep = 5;
 	public int BaseDoorChance = 80;
 
+	[Header("Lighting")]
+	public Color LightColor;
+	public float LightIntensity;
+
 	[Header("Rooms")]
 	public GameObject StartRoom;
 	public GameObject[] StandardRooms;

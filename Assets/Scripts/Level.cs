@@ -30,6 +30,7 @@ public class Level : MonoBehaviour {
     [SerializeField] private bool _isLobby = false;
     [SerializeField] private bool _isHandmade = true;
     [SerializeField] private NavMeshSurface _surface;
+    [SerializeField] private Light _mainLight;
 
     public LevelDefinition Definition;
 
@@ -51,6 +52,9 @@ public class Level : MonoBehaviour {
     }
 
     private void InitializeLevel() {
+        _mainLight.color = Definition.LightColor;
+        _mainLight.intensity = Definition.LightIntensity;
+
         LevelGenerator generator = new();
         generator.GenerateLevel(Definition);
 
