@@ -111,6 +111,16 @@ namespace Botpa {
         }
 
         ///<summary>
+        ///Returns a random item from a list, the fallback if it's empty.
+        ///</summary>
+        public static T GetRandom<T>(this IReadOnlyList<T> list, T fallback) {
+            if (list.IsEmpty())
+                return fallback;
+            else
+                return list[Random.Range(0, list.Count)];
+        }
+
+        ///<summary>
         ///Swaps two items in a list.
         ///</summary>
         public static void Swap<T>(this IList<T> list, int indexA, int indexB) {

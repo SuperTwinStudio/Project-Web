@@ -4,22 +4,36 @@ public class KnightFollowState : KnightState {
     public KnightFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
+    public override void OnEnter() {
+        //Show shield
+        Knight.ToggleShield(true);
+    }
+
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
     }
 
     public override void Execute() {
-        //Check player visibility
-        if (!Enemy.TargetIsVisible) {
-            //Player not visible -> Go to idle
-            Behaviour.SetState(new KnightIdleState(Behaviour));
+        //Check target visibility
+        if (!Enemy.TargetPositionIsKnown) {
+            //Target position is unknown -> Go to idle
+            Knight.SetState(new KnightIdleState(Knight));
         } else if (Enemy.TargetLastKnownDistance <= Knight.AttackRange) {
-            //Player in attack range -> Attack it
-            Behaviour.SetState(new KnightSheatheState(Behaviour), true);
+            //Target in attack range -> Attack it
+            Knight.SetState(new KnightAttackState(Knight));
         } else {
-            //Move towards player
+            //Move towards target
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
+
+            //Check if reached destination
+            if (Enemy.AgentReachedDestination) {
+                //Notify target position was reached
+                Enemy.NotifyTargetPositionReached();
+
+                //Check if should stop following
+                if (!Enemy.TargetIsVisible) Knight.SetState(new KnightIdleState(Knight));
+            }
         }
     }
 

@@ -451,7 +451,7 @@ Armadura poseída de tamaño medio que arrastra una espada gigante y realiza ata
 
 - **Dificultad:** alta.
 - **Comportamiento:**  
-  - El caballero tiene un escudo que, cuando lo tiene fuera, bloquea cualquier ataque procedente del frente.
+  - El caballero tiene un escudo que, cuando está fuera, bloquea cualquier ataque procedente del frente.
   - Si el jugador entra en rango de visión, el caballero se movera hacia él.
   - Si el jugador entra en rango de ataque, el caballero guardará el escudo y atacará al frente con su espada.
   - Si acierta un ataque, sacará el escudo de nuevo y volverá a acercarse. 

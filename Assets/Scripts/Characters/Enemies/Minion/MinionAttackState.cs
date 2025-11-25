@@ -30,7 +30,7 @@ public class MinionAttackState : MinionState {
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(0.75f, 0, Minion.AttackDamage);
+        Enemy.Attack.Forward(Minion.AttackRadius, 0, Minion.AttackDamage);
 
         //Wait
         yield return new WaitForSeconds(0.5f);

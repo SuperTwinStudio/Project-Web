@@ -2005,13 +2005,13 @@ PrefabInstance:
       addedObject: {fileID: 2393395648455993377}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 450623291229666792}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3880980672206202124}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2080418253032889954}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6250271446769174754}
   m_SourcePrefab: {fileID: 100100000, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}
 --- !u!4 &1282539342242928326 stripped
 Transform:
@@ -2033,7 +2033,7 @@ Animator:
   m_GameObject: {fileID: 1911687950759496828}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84c80267d71bb6647b2fbaa691dd7a48, type: 2}
+  m_Controller: {fileID: 9100000, guid: ad6ddf1c6933d2c4a9fcc38180c023e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2045,36 +2045,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &450623291229666792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911687950759496828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6260a305d1015a440b85e7c345448b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 0ec73058469a2b6409ecec4f2a77ff5f, type: 3}
-  - {fileID: 8300000, guid: 0ce3715d6318a5b45ade6ccfdd9216f8, type: 3}
-  - {fileID: 8300000, guid: 1762546815ec70b4dbdc06902f037865, type: 3}
-  - {fileID: 8300000, guid: 063260fd1ca575f44a57fc8e262c5f56, type: 3}
-  - {fileID: 8300000, guid: 0dc451a65ee1eaa41a5b44a861b485f8, type: 3}
-  names:
-  - paso1
-  - paso2
-  - paso3
-  - paso4
-  - paso5
-  volumes:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
 --- !u!82 &3880980672206202124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2184,6 +2154,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e180b10a32bae0e48954c28ca29be113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6250271446769174754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911687950759496828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651aab4298858b443be211ea59a921f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPacks:
+  - _name: steps
+    _clips:
+    - {fileID: 8300000, guid: 0ec73058469a2b6409ecec4f2a77ff5f, type: 3}
+    - {fileID: 8300000, guid: 0ce3715d6318a5b45ade6ccfdd9216f8, type: 3}
+    - {fileID: 8300000, guid: 1762546815ec70b4dbdc06902f037865, type: 3}
+    - {fileID: 8300000, guid: 063260fd1ca575f44a57fc8e262c5f56, type: 3}
+    - {fileID: 8300000, guid: 0dc451a65ee1eaa41a5b44a861b485f8, type: 3}
 --- !u!4 &7881899320982841798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8873470525695072491, guid: 821ddca5a0457a4438b7a90bd1abd7ae, type: 3}

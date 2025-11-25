@@ -4,7 +4,7 @@ using UnityEngine;
 public class KnightAttackState : KnightState {
 
     //Attack
-    private Coroutine attackCoroutine = null;
+    private Coroutine coroutine = null;
 
 
     //Constructor
@@ -12,31 +12,46 @@ public class KnightAttackState : KnightState {
 
     //Actions
     public override void OnEnter() {
+        //Hide shield
+        Knight.ToggleShield(false);
+
         //Start coroutine
-        attackCoroutine = Enemy.StartCoroutine(AttackCoroutine());
+        coroutine = Enemy.StartCoroutine(AttackCoroutine());
     }
 
     public override void OnExit() {
         //Stop coroutine
-        if (attackCoroutine != null) Enemy.StopCoroutine(attackCoroutine);
+        if (coroutine != null) Enemy.StopCoroutine(coroutine);
     }
 
     //Attack
     private IEnumerator AttackCoroutine() {
         //Animate
-        Debug.Log("Knight Attacking");
         Enemy.Animator.SetTrigger("Attack");
     
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(2f, 0, Knight.AttackDamage);
+        bool hit = Enemy.Attack.Forward(Knight.AttackRadius, 0, Knight.AttackDamage);
     
-        //Wait
-        yield return new WaitForSeconds(2f);
+        //Check if missed
+        if (!hit) {
+            //Missed -> Stun knight
+            Knight.SetState(new KnightStunState(Knight));
+        } else {
+            //Wait
+            yield return new WaitForSeconds(0.5f);
+        
+            //Show shield
+            Knight.ToggleShield(true);
+        
+            //Wait
+            yield return new WaitForSeconds(1f);
 
-        Behaviour.SetState(new KnightFollowState(Behaviour), true);
+            //Return to follow
+            Knight.SetState(new KnightFollowState(Knight), true);
+        }
     }
 
 }

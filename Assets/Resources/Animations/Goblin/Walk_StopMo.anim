@@ -6292,15 +6292,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.29166666
-    functionName: InvokeEvent
-    data: 
+    functionName: Play
+    data: steps
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
   - time: 0.625
-    functionName: InvokeEvent
-    data: 
+    functionName: Play
+    data: steps
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
