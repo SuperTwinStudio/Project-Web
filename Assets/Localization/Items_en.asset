@@ -265,10 +265,6 @@ MonoBehaviour:
     m_Localized: Stars pile
     m_Metadata:
       m_Items: []
-  - m_Id: 19903248140734464
-    m_Localized: Pause
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []
