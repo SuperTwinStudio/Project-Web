@@ -274,6 +274,10 @@ MonoBehaviour:
     m_Localized: Open Tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 20362867877445632
+    m_Localized: Passive Items
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

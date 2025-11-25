@@ -263,6 +263,10 @@ MonoBehaviour:
     m_Key: settings_tutorial_show
     m_Metadata:
       m_Items: []
+  - m_Id: 20362867877445632
+    m_Key: inventory_passive_title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

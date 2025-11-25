@@ -30,6 +30,9 @@ public class InventoryMenu : Menu {
     [SerializeField] private GameObject emptyMessage;
     [SerializeField] private RectTransform itemsGrid;
     [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private RectTransform passiveItemsGrid;
+    [SerializeField] private GameObject passiveItemPrefab;
+    [SerializeField] private TMP_Text passiveDescriptionBox;
 
 
       /*$$$$$   /$$                 /$$
@@ -63,9 +66,11 @@ public class InventoryMenu : Menu {
 
         //Clear old items
         Util.DestroyChildren(itemsGrid);
+        Util.DestroyChildren(passiveItemsGrid);
 
         //Add new items
         foreach (var pair in Loadout.Inventory) Instantiate(itemPrefab, itemsGrid).GetComponent<InventoryItem>().Init(pair.Key, pair.Value);
+        foreach (var pair in Loadout.PassiveItems) Instantiate(passiveItemPrefab, passiveItemsGrid).GetComponent<InventoryPassive>().Init(pair.Key, pair.Value, passiveDescriptionBox);
 
         //Toggle empty message
         emptyMessage.SetActive(Loadout.Inventory.Count <= 0);
