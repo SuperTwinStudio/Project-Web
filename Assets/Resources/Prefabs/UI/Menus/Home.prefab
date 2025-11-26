@@ -978,6 +978,7 @@ MonoBehaviour:
   _canvas: {fileID: 0}
   _state: 0
   defaultSelectable: {fileID: 5453439554788545724}
+  menu: {fileID: 7502372350623845026}
   versionText: {fileID: 4445587222178282448}
 --- !u!224 &7480469518259031152 stripped
 RectTransform:

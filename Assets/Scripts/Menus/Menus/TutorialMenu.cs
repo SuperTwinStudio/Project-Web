@@ -4,16 +4,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialMenu : Menu {
     
     //Prefab
-    public override string Name => MenusList.Home;
+    public override string Name => MenusList.Tutorial;
 
     //Components
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
+    [SerializeField] private GameObject backgroundHome;
+    [SerializeField] private GameObject backgroundGame;
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
 
@@ -84,11 +87,18 @@ public class TutorialMenu : Menu {
         //Not playing
         if (!Application.isPlaying) return;
 
-        //Select default button (for controller navigation)
-        defaultSelectable.Select();
-
         //Select tutorial
         SelectTutorial(0);
+
+        //Get scene name
+        string scene = SceneManager.GetActiveScene().name;
+
+        //Toggle backgrounds
+        backgroundHome.SetActive(scene == "Home");
+        backgroundGame.SetActive(scene != "Home");
+
+        //Select default button (for controller navigation)
+        defaultSelectable.Select();
 
         //Pause game
         Game.Pause(this);

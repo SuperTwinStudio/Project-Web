@@ -265,44 +265,6 @@ MonoBehaviour:
     m_Localized: Stars pile
     m_Metadata:
       m_Items: []
-  - m_Id: 20586446868844544
-    m_Localized: Tutorial
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20586570936356864
-    m_Localized: Previous
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20586597867982848
-    m_Localized: Close
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20586608102084608
-    m_Localized: Next
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20587903332519936
-    m_Localized: Welcome to Washi's Adventures! We'll teach you the basics to start
-      playing.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20587929425285120
-    m_Localized: Washi's Adventures is somewhat of a extraction-roguelite. You'll
-      be able to combat enemies in a dungeon, find treasures, extract them and sell
-      them for gold.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20587944508002304
-    m_Localized: 'Each dungeon has a boss in one of the rooms. Defeating them will
-      unlock new weapons and give you two choices: leave and keep your loot or risk
-      loosing everything by continuing to a more difficult dungeon.'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20587949767659520
-    m_Localized: After leaving, you'll be able to spend your gold in the castle shop.
-      There you can purchase upgrades for your character and for your unlocked weapons.
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

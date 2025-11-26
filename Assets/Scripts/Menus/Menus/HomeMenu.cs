@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class HomeMenu : Menu {
     
     //Prefab
-    public override string Name => MenusList.Tutorial;
+    public override string Name => MenusList.Home;
 
     //Components
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
+    [SerializeField] private GameObject menu;
 
     //Version
     [Header("Version")]
@@ -106,10 +107,14 @@ public class HomeMenu : Menu {
      \______/  \______/     \_/    \_______/|_*/
 
     protected override void OnCovered() {
-        //Don't do nothin
+        //Hide menu (not bg)
+        menu.SetActive(false);
     }
 
     protected override void OnUncovered() {
+        //Show menu
+        menu.SetActive(true);
+
         //Select default button (for controller navigation)
         defaultSelectable.Select();
     }
