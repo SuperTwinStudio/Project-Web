@@ -1,0 +1,16 @@
+html { width: 100%; height: 100%; padding: 0; margin: 0; background-color: #8aacb2; color: black; }
+body { width: 100%; height: 100%; padding: 0; margin: 0; display: flex; align-items: center; justify-content: center; }
+#unity-container { height: fit-content; position: relative; display: flex; flex-direction: column; }
+#unity-container.unity-desktop { background: #dee7e7; }
+#unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
+#unity-canvas { background: #231F20 }
+.unity-mobile #unity-canvas { width: 100%; height: 100% }
+#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
+#unity-logo { width: 154px; height: 130px; background: url('unity-logo-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-footer { height: 38px; display: flex; align-items: center; justify-content: space-between; }
+.unity-mobile #unity-footer { display: none }
+#unity-build-title { margin-left: 10px; line-height: 38px; font-family: arial; font-size: 18px }
+#unity-fullscreen-button { width: 38px; height: 38px; padding: 5px; box-sizing: border-box; cursor: pointer; }
+#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
