@@ -1,7 +1,7 @@
-public class LadronzueloApproachState : LadronzueloState {
+public class ThiefApproachState : ThiefState {
 
     //Constructor
-    public LadronzueloApproachState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public ThiefApproachState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -13,15 +13,15 @@ public class LadronzueloApproachState : LadronzueloState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Behaviour.SetState(new LadronzueloIdleState(Behaviour));
-        } else if (Enemy.TargetLastKnownDistance <= Ladronzuelo.InteractRange) {
+            Behaviour.SetState(new ThiefIdleState(Behaviour));
+        } else if (Enemy.TargetLastKnownDistance <= Thief.InteractRange) {
             //Target in interact range -> Check if allowed to steal
-            if (Ladronzuelo.CheckIfAllowedToSteal()) {
+            if (Thief.CheckIfAllowedToSteal()) {
                 //Allowed to steal -> Steal
-                Behaviour.SetState(new LadronzueloStealState(Behaviour), true);
+                Behaviour.SetState(new ThiefStealState(Behaviour), true);
             } else {
                 //Not allowed -> Attack
-                Behaviour.SetState(new LadronzueloAttackState(Behaviour), true);
+                Behaviour.SetState(new ThiefAttackState(Behaviour), true);
             }
         } else {
             //Target too far -> Move towards it
@@ -33,7 +33,7 @@ public class LadronzueloApproachState : LadronzueloState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new LadronzueloIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new ThiefIdleState(Behaviour));
             }
         }
     }

@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3717477471731449574, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_Name
-      value: Ladronzuelo
+      value: Thief
       objectReference: {fileID: 0}
     - target: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -276,13 +276,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8f3f79193adc04995af02fc6ebb1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
   stolenAmountText: {fileID: 8425290379161956104}
   _fleeEffect: {fileID: 11400000, guid: 02cbc4760edca054aa93eb9e9551e6b8, type: 2}
   _interactRange: 1.5
   _attackDamage: 10
   _stealAmount: 25
   _maxFleeDistance: 25
+  _attackSound: {fileID: 8300000, guid: 5bda3e9ce4707c14483cc67dfc3514af, type: 3}
+  _fleeSound: {fileID: 8300000, guid: 5b748a0116c401a41abe555fb55c7b03, type: 3}
+  _damageSound: {fileID: 8300000, guid: 9d1cb9e8b8b59d14fbbdda94fd4d5d42, type: 3}
+  _deathSound: {fileID: 8300000, guid: 05a2e766d432486468d464e6b57107c6, type: 3}
 --- !u!4 &5693178922483284373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5093985615932988921, guid: 1e5afb73c0b3c9a49b9fd7767132e8b3, type: 3}

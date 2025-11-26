@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class LadronzueloAttackState : LadronzueloState {
+public class ThiefAttackState : ThiefState {
 
     //Attack
     private Coroutine attackCoroutine = null;
 
 
     //Constructor
-    public LadronzueloAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public ThiefAttackState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {
@@ -31,16 +31,19 @@ public class LadronzueloAttackState : LadronzueloState {
 
         //Attack
         Enemy.Attack.Forward(
-            Ladronzuelo.InteractRange / 2,
+            Thief.InteractRange / 2,
             0,
-            Ladronzuelo.AttackDamage
+            Thief.AttackDamage
         );
+    
+        //Play sound
+        Enemy.PlaySound(Thief.AttackSound);
 
         //Wait
         yield return new WaitForSeconds(0.5f);
 
         //Go to aproach
-        Behaviour.SetState(new LadronzueloApproachState(Behaviour));
+        Behaviour.SetState(new ThiefApproachState(Behaviour));
     }
 
 }

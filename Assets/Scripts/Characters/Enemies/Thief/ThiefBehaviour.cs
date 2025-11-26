@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class LadronzueloBehaviour : EnemyBehaviour {
+public class ThiefBehaviour : EnemyBehaviour {
 
     //Components
     private Loadout Loadout => Enemy.Player.Loadout;
@@ -15,6 +15,10 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     [SerializeField] private float _attackDamage = 10f;
     [SerializeField] private int _stealAmount = 50;
     [SerializeField] private float _maxFleeDistance = 25;
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _fleeSound;
+    [SerializeField] private AudioClip _damageSound;
+    [SerializeField] private AudioClip _deathSound;
 
     public int StolenAmount { get; private set; }
 
@@ -25,18 +29,22 @@ public class LadronzueloBehaviour : EnemyBehaviour {
     public int StealAmount => _stealAmount;
     public bool HasStolen => StolenAmount > 0;
     public float MaxFleeDistance => _maxFleeDistance;
+    public AudioClip AttackSound => _attackSound;
+    public AudioClip FleeSound => _fleeSound;
+    public AudioClip DamageSound => _damageSound;
+    public AudioClip DeathSound => _deathSound;
 
 
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new LadronzueloIdleState(this));
+        SetState(new ThiefIdleState(this));
     }
 
     //Health
     public override void OnDeath() {
         //Go to death
-        SetState(new LadronzueloDeathState(this));
+        SetState(new ThiefDeathState(this));
     }
 
     //Helpers
@@ -58,28 +66,28 @@ public class LadronzueloBehaviour : EnemyBehaviour {
 
         //Result variables
         bool otherTypes = false;
-        int ladronzuelos = 0;
+        int thiefs = 0;
 
         //Check if enemy is in a room
         if (Enemy.Room) {
             //Has room -> Check room for enemies
             foreach (EnemyBase enemy in Enemy.Room.Enemies)
-                if (enemy.Behaviour is LadronzueloBehaviour)
-                    ladronzuelos++;
+                if (enemy.Behaviour is ThiefBehaviour)
+                    thiefs++;
                 else
                     otherTypes = true;
         } else {
             //No room -> Check enemy gameobjects (slower)
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
-                if (enemy.GetComponent<LadronzueloBehaviour>())
-                    ladronzuelos++;
+                if (enemy.GetComponent<ThiefBehaviour>())
+                    thiefs++;
                 else
                     otherTypes = true;
             }
         }
 
         //Check if allowed to steal
-        return otherTypes && ladronzuelos == 1;
+        return otherTypes && thiefs == 1;
     }
 
     public bool StealGoldFromPlayer() {

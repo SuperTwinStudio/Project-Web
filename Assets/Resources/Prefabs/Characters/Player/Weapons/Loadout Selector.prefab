@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f398a66b189ade4ca59944aef71a753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 1947764258348317678}
   meshRenderer: {fileID: 6897647606335006140}
   weapon: {fileID: 0}
 --- !u!4 &5760791321337142995 stripped

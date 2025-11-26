@@ -1,15 +1,15 @@
 using System.Linq;
 using UnityEngine;
 
-public class LadronzueloFleeState : LadronzueloState {
+public class ThiefFleeState : ThiefState {
 
     //Constructor
-    public LadronzueloFleeState(EnemyBehaviour behaviour) : base(behaviour) { }
+    public ThiefFleeState(EnemyBehaviour behaviour) : base(behaviour) { }
 
     //Actions
     public override void OnEnter() {
         //Add flee effect (extra move speed)
-        Enemy.AddEffect(Ladronzuelo.FleeEffect);
+        Enemy.AddEffect(Thief.FleeEffect);
 
         //Flee from player
         Flee();
@@ -17,7 +17,7 @@ public class LadronzueloFleeState : LadronzueloState {
 
     public override void OnExit() {
         //Remove flee effect
-        Enemy.RemoveEffect(Ladronzuelo.FleeEffect);
+        Enemy.RemoveEffect(Thief.FleeEffect);
 
         //Stop movement & enable rotation
         Enemy.StopMovement();
@@ -45,10 +45,10 @@ public class LadronzueloFleeState : LadronzueloState {
     private void Flee() {
         //Look for a good flee spot & move towards it
         Vector3 randomDirection = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)).normalized;
-        (Vector3 point1, float distance1) = Enemy.GetFurthestPointAndDistance(randomDirection, Ladronzuelo.MaxFleeDistance);
-        (Vector3 point2, float distance2) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(90, Vector3.up) * randomDirection, Ladronzuelo.MaxFleeDistance);
-        (Vector3 point3, float distance3) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(180, Vector3.up) * randomDirection, Ladronzuelo.MaxFleeDistance);
-        (Vector3 point4, float distance4) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(270, Vector3.up) * randomDirection, Ladronzuelo.MaxFleeDistance);
+        (Vector3 point1, float distance1) = Enemy.GetFurthestPointAndDistance(randomDirection, Thief.MaxFleeDistance);
+        (Vector3 point2, float distance2) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(90, Vector3.up) * randomDirection, Thief.MaxFleeDistance);
+        (Vector3 point3, float distance3) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(180, Vector3.up) * randomDirection, Thief.MaxFleeDistance);
+        (Vector3 point4, float distance4) = Enemy.GetFurthestPointAndDistance(Quaternion.AngleAxis(270, Vector3.up) * randomDirection, Thief.MaxFleeDistance);
 
         //Get closest pair
         var closestPair = new PointDistancePair[] {
@@ -62,6 +62,9 @@ public class LadronzueloFleeState : LadronzueloState {
         Enemy.MoveTowards(closestPair.point);
         Enemy.SetAutomaticRotation(false);
         Enemy.LookTowards(closestPair.point);
+    
+        //Play sound
+        Enemy.PlaySound(Thief.FleeSound);
     }
 
     private struct PointDistancePair {

@@ -26,13 +26,6 @@ public class MinionBehaviour : EnemyBehaviour {
     }
 
     //Health
-    public override void OnDamage(DamageType type, object source) {
-        base.OnDamage(type, source);
-
-        //Play sound
-        Enemy.PlaySound(DamageSound);
-    }
-
     public override void OnDeath() {
         //Go to death
         SetState(new MinionDeathState(this));

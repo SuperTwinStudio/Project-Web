@@ -1,12 +1,12 @@
-public class LadronzueloIdleState : LadronzueloState {
+public class ThiefIdleState : ThiefState {
 
     //Constructor
-    public LadronzueloIdleState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public ThiefIdleState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {
         //Update gold text
-        Ladronzuelo.UpdateGoldText();
+        Thief.UpdateGoldText();
     }
 
     public override void Execute() {
@@ -14,7 +14,7 @@ public class LadronzueloIdleState : LadronzueloState {
         if (!Enemy.TargetIsVisible) return;
 
         //Aproach target
-        Behaviour.SetState(new LadronzueloApproachState(Behaviour), true);
+        Behaviour.SetState(new ThiefApproachState(Behaviour), true);
     }
 
 }

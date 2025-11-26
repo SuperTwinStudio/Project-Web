@@ -9,4 +9,10 @@ public class MinionState : EnemyState {
         Minion = behaviour as MinionBehaviour;
     }
 
+    //Actions
+    public override void OnDamage(DamageType type, object source) {
+        //Play sound
+        if (type != DamageType.Burn) Enemy.PlaySound(Minion.DamageSound);
+    }
+
 }
