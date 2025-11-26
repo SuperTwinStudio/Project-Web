@@ -6,6 +6,9 @@ public class ShopTrigger : MonoBehaviour {
     [Header("Components")]
     [SerializeField] private MeshRenderer meshRenderer;
 
+    private CameraController cameraController;
+    private Player player;
+
     private MenuManager MenuManager => Game.Current.MenuManager;
 
     //Camera
@@ -15,6 +18,11 @@ public class ShopTrigger : MonoBehaviour {
 
 
     //State
+    private void Start() {
+        cameraController = Game.Current.Level.CameraController;
+        player = Game.Current.Level.Player;
+    }
+
     private void OnTriggerEnter(Collider other) {
         //Check if player
         if (!other.CompareTag("Player")) return;
@@ -23,7 +31,10 @@ public class ShopTrigger : MonoBehaviour {
         meshRenderer.enabled = false;
 
         //Enter camera cutscene
-        Game.Current.Level.CameraController.EnterCutscene(positionTarget, viewTarget);
+        cameraController.EnterCutscene(positionTarget, viewTarget);
+
+        //Rotate player
+        player.LookTowards(player.Model.position + Vector3.back);
 
         //Open shop
         MenuManager.Open(MenusList.Shop);
