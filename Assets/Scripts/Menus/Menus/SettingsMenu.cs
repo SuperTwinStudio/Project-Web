@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class SettingsMenu : Menu {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Selectable defaultSelection;
+    [SerializeField] private List<Selectable> defaultSelectables;
     [SerializeField] private GameObject backgroundGame;
     [SerializeField] private GameObject backgroundHome;
     [SerializeField] private GameObject buttonsHome;
@@ -25,6 +26,14 @@ public class SettingsMenu : Menu {
     | $$  | $$| $$        | $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
+
+    private void SelectDefault() {
+        foreach (var selectable in defaultSelectables) {
+            if (!selectable.gameObject.activeInHierarchy) continue;
+            selectable.Select();
+            return;
+        }
+    }
 
     public void ReturnToHome() {
         //Show confirmation that player will lose all their items
@@ -45,7 +54,7 @@ public class SettingsMenu : Menu {
 
     public void OpenTutorial() {
         //Open tutorial menu
-        Debug.Log("Open tutorial menu when it's done");
+        MenuManager.Open(MenusList.Tutorial);
     }
 
 
@@ -66,9 +75,6 @@ public class SettingsMenu : Menu {
 
         //Not playing
         if (!Application.isPlaying) return;
-
-        //Select default button (for controller navigation)
-        defaultSelection.Select();
 
         //Get scene name
         string scene = SceneManager.GetActiveScene().name;
@@ -99,6 +105,9 @@ public class SettingsMenu : Menu {
                 break;
         }
 
+        //Select default button (for controller navigation)
+        SelectDefault();
+
         //Pause game
         Game.Pause(this);
     }
@@ -111,6 +120,23 @@ public class SettingsMenu : Menu {
 
         //Unpause game
         Game.Unpause(this);
+    }
+
+
+      /*$$$$$
+     /$$__  $$
+    | $$  \__/  /$$$$$$  /$$    /$$ /$$$$$$   /$$$$$$
+    | $$       /$$__  $$|  $$  /$$//$$__  $$ /$$__  $$
+    | $$      | $$  \ $$ \  $$/$$/| $$$$$$$$| $$  \__/
+    | $$    $$| $$  | $$  \  $$$/ | $$_____/| $$
+    |  $$$$$$/|  $$$$$$/   \  $/  |  $$$$$$$| $$
+     \______/  \______/     \_/    \_______/|_*/
+
+    protected override void OnUncovered() {
+        base.OnUncovered();
+
+        //Select default button (for controller navigation)
+        SelectDefault();
     }
 
 }

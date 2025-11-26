@@ -34,10 +34,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7290226221669051057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 360}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 275, y: -240}
+  m_SizeDelta: {x: 640, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6745928034667612739
 CanvasRenderer:
@@ -977,8 +977,8 @@ MonoBehaviour:
   _menuManager: {fileID: 0}
   _canvas: {fileID: 0}
   _state: 0
-  versionText: {fileID: 4445587222178282448}
   defaultSelectable: {fileID: 5453439554788545724}
+  versionText: {fileID: 4445587222178282448}
 --- !u!224 &7480469518259031152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4446580270089251012, guid: 08daa5b523e43f346be000d2c81f14b7, type: 3}

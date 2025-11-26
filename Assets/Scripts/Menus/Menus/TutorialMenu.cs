@@ -1,34 +1,29 @@
-using Botpa;
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class HomeMenu : Menu {
+public class TutorialMenu : Menu {
     
     //Prefab
-    public override string Name => MenusList.Tutorial;
+    public override string Name => MenusList.Home;
 
     //Components
     [Header("Components")]
     [SerializeField] private Selectable defaultSelectable;
+    [SerializeField] private Button previousButton;
+    [SerializeField] private Button nextButton;
 
-    //Version
-    [Header("Version")]
-    [SerializeField] private TMP_Text versionText;
+    //Tutorials
+    [Header("Tutorials")]
+    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private Image tutorialImage;
+    [SerializeField] private List<TutorialItem> tutorials = new();
 
-
-      /*$$$$$   /$$                 /$$
-     /$$__  $$ | $$                | $$
-    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-     \______/   \___/   \_______/   \___/   \______*/
-
-    public override bool OnBack() {
-        return false; //Block closing menu
-    }
+    private int tutorialIndex = 0;
 
 
       /*$$$$$              /$$     /$$
@@ -40,20 +35,34 @@ public class HomeMenu : Menu {
     | $$  | $$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$ /$$$$$$$/
     |__/  |__/ \_______/   \___/  |__/ \______/ |__/  |__/|______*/
 
-    public void Play() {
-        Game.Current.LoadScene("Lobby");
+    //Navigation
+    private void SelectTutorial(int index) {
+        //Out of bounds -> Close tutorial
+        if (index >= tutorials.Count) {
+            CloseFromUI();
+            return;
+        }
+
+        //Select tutorial
+        TutorialItem tutorial = tutorials[index];
+        tutorialIndex = index;
+        tutorialText.SetText(tutorial.Name);
+        tutorialImage.sprite = tutorial.Image;
+
+        //Toggle buttons
+        previousButton.interactable = index > 0;
+        nextButton.interactable = index < tutorials.Count - 1;
+
+        //Nothing selected -> Select default
+        if (!EventSystem.current.currentSelectedGameObject) defaultSelectable.Select();
     }
 
-    public void OpenSettings() {
-        MenuManager.Open(MenusList.Settings);
+    public void PreviousTutorial() {
+        SelectTutorial(tutorialIndex - 1);
     }
 
-    public void OpenCredits() {
-        MenuManager.Open(MenusList.Credits);
-    }
-
-    public void Quit() {
-        Util.Quit();
+    public void NextTutorial() {
+        SelectTutorial(tutorialIndex + 1);
     }
 
 
@@ -75,11 +84,11 @@ public class HomeMenu : Menu {
         //Not playing
         if (!Application.isPlaying) return;
 
-        //Update version
-        versionText.SetText($"v{Application.version}");
-
         //Select default button (for controller navigation)
         defaultSelectable.Select();
+
+        //Select tutorial
+        SelectTutorial(0);
 
         //Pause game
         Game.Pause(this);
@@ -95,23 +104,15 @@ public class HomeMenu : Menu {
         Game.Unpause(this);
     }
 
+}
 
-      /*$$$$$
-     /$$__  $$
-    | $$  \__/  /$$$$$$  /$$    /$$ /$$$$$$   /$$$$$$
-    | $$       /$$__  $$|  $$  /$$//$$__  $$ /$$__  $$
-    | $$      | $$  \ $$ \  $$/$$/| $$$$$$$$| $$  \__/
-    | $$    $$| $$  | $$  \  $$$/ | $$_____/| $$
-    |  $$$$$$/|  $$$$$$/   \  $/  |  $$$$$$$| $$
-     \______/  \______/     \_/    \_______/|_*/
-
-    protected override void OnCovered() {
-        //Don't do nothin
-    }
-
-    protected override void OnUncovered() {
-        //Select default button (for controller navigation)
-        defaultSelectable.Select();
-    }
+[Serializable]
+public class TutorialItem {
+    
+    [SerializeField] private LocalizedString _name;
+    [SerializeField] private Sprite _image;
+    
+    public string Name => _name.GetLocalizedString();
+    public Sprite Image => _image;
 
 }

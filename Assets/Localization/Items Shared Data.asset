@@ -247,6 +247,38 @@ MonoBehaviour:
     m_Key: treasure_pile
     m_Metadata:
       m_Items: []
+  - m_Id: 20586446868844544
+    m_Key: tutorial_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20586570936356864
+    m_Key: tutorial_previous
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20586597867982848
+    m_Key: tutorial_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20586608102084608
+    m_Key: tutorial_next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20587903332519936
+    m_Key: tutorial_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20587929425285120
+    m_Key: tutorial_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20587944508002304
+    m_Key: tutorial_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20587949767659520
+    m_Key: tutorial_3
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
