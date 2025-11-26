@@ -32,6 +32,9 @@ public class MinionAttackState : MinionState {
         //Attack
         Enemy.Attack.Forward(Minion.AttackRadius, 0, Minion.AttackDamage);
 
+        //Play sound
+        Enemy.PlaySound(Minion.AttackSound);
+
         //Wait
         yield return new WaitForSeconds(0.5f);
 

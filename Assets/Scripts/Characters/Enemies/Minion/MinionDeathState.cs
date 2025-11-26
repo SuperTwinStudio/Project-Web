@@ -7,6 +7,9 @@ public class MinionDeathState : MinionState {
     public override void OnEnter() {
         //Animate
         Enemy.Animator.SetTrigger("Die");
+
+        //Play sound
+        Enemy.PlaySound(Minion.DeathSound);
     }
 
 }
