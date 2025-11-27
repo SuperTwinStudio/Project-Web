@@ -97,9 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101ab599fd71326419fa3b3f4cd56ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 0.75
+  _attackRange: 1.25
   _attackRadius: 1
   _attackDamage: 10
+  _attackSound: {fileID: 8300000, guid: bba16d6b82f522640afd39a4b174fed5, type: 3}
+  _damageSound: {fileID: 8300000, guid: 46e97b1641eb8804ea69c0795252bee9, type: 3}
+  _deathSound: {fileID: 8300000, guid: 568821e66c229bd48a8a4268a7a554d8, type: 3}
 --- !u!1001 &6607394646074702040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,15 +113,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c09c9ff40315d7e499f41dafc88fb398, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c09c9ff40315d7e499f41dafc88fb398, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c09c9ff40315d7e499f41dafc88fb398, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c09c9ff40315d7e499f41dafc88fb398, type: 3}
       propertyPath: m_LocalPosition.x

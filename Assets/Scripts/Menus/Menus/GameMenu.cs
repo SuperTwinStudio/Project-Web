@@ -287,6 +287,12 @@ public class GameMenu : Menu {
         
         //Add treasure obtain event
         Player.Loadout.AddOnObtainTreasure(OnObtainTreasure);
+
+        //Show tutorial
+        /*if (!Preferences.TutorialShown) {
+            Preferences.TutorialShown = true;
+            MenuManager.Open(MenusList.Tutorial);
+        }*/
     }
 
     protected override void OnClose() {

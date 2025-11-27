@@ -8,21 +8,24 @@ public class HomeMenu : Menu {
     //Prefab
     public override string Name => MenusList.Home;
 
+    //Components
+    [Header("Components")]
+    [SerializeField] private Selectable defaultSelectable;
+    [SerializeField] private GameObject menu;
+
     //Version
     [Header("Version")]
     [SerializeField] private TMP_Text versionText;
 
-    [Header("Components")]
-    [SerializeField] private Selectable defaultSelectable;
 
-    /*$$$$$   /$$                 /$$
-   /$$__  $$ | $$                | $$
-  | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
-  |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
-   \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
-   /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
-  |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
-   \______/   \___/   \_______/   \___/   \______*/
+      /*$$$$$   /$$                 /$$
+     /$$__  $$ | $$                | $$
+    | $$  \__//$$$$$$    /$$$$$$  /$$$$$$    /$$$$$$
+    |  $$$$$$|_  $$_/   |____  $$|_  $$_/   /$$__  $$
+     \____  $$ | $$      /$$$$$$$  | $$    | $$$$$$$$
+     /$$  \ $$ | $$ /$$ /$$__  $$  | $$ /$$| $$_____/
+    |  $$$$$$/ |  $$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$
+     \______/   \___/   \_______/   \___/   \______*/
 
     public override bool OnBack() {
         return false; //Block closing menu
@@ -104,10 +107,14 @@ public class HomeMenu : Menu {
      \______/  \______/     \_/    \_______/|_*/
 
     protected override void OnCovered() {
-        //Don't do nothin
+        //Hide menu (not bg)
+        menu.SetActive(false);
     }
 
     protected override void OnUncovered() {
+        //Show menu
+        menu.SetActive(true);
+
         //Select default button (for controller navigation)
         defaultSelectable.Select();
     }

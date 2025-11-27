@@ -263,8 +263,36 @@ MonoBehaviour:
     m_Key: settings_tutorial_show
     m_Metadata:
       m_Items: []
-  - m_Id: 20362867877445632
-    m_Key: inventory_passive_title
+  - m_Id: 20600486491983872
+    m_Key: tutorial_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600490711453696
+    m_Key: tutorial_previous
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600514707066880
+    m_Key: tutorial_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600526170099712
+    m_Key: tutorial_next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600535573729280
+    m_Key: tutorial_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600541508669440
+    m_Key: tutorial_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600545619087360
+    m_Key: tutorial_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20600549725310976
+    m_Key: tutorial_3
     m_Metadata:
       m_Items: []
   m_Metadata:

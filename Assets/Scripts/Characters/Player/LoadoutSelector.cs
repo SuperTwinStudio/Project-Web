@@ -5,6 +5,7 @@ public class LoadoutSelector : MonoBehaviour {
 
     //Components
     [Header("Components")]
+    [SerializeField] private GameObject model;
     [SerializeField] private MeshRenderer meshRenderer;
 
     //Weapon
@@ -19,7 +20,7 @@ public class LoadoutSelector : MonoBehaviour {
 
     public void ToggleActive() {
         //Show if
-        gameObject.SetActive(!weapon || Game.Current.Level.Player.Loadout.Unlocked.Contains(weapon));
+        model.SetActive(!weapon || Game.Current.Level.Player.Loadout.Unlocked.Contains(weapon));
     }
 
     private void OnTriggerEnter(Collider other) {

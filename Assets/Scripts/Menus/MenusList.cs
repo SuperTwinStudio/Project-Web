@@ -6,6 +6,7 @@ public class MenusList {
     public const string Settings = "Settings";
     public const string Credits = "Credits";
 
+    public const string Tutorial = "Tutorial";
     public const string Game = "Game";
     public const string Shop = "Shop";
     public const string Inventory = "Inventory";

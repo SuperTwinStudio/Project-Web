@@ -44,7 +44,7 @@ public class KnightBehaviour : EnemyBehaviour {
 
     public override void OnDeath() {
         //Go to death
-        SetState(new MinionDeathState(this));
+        SetState(new KnightDeathState(this));
     }
 
     //Shield

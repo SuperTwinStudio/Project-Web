@@ -27,11 +27,13 @@ public class Preferences : MonoBehaviour {
     public static float VolumeSFX { get => volumeSFXPreference.Value; set => volumeSFXPreference.Value = value; }
 
     //Game
-    private static readonly BoolPreference showAOE = new("Settings.ShowAOE", true);
     private static readonly IntPreference quality = new("Settings.Quality", 0);
+    private static readonly BoolPreference tutorialShown = new("Settings.TutorialShown", false);
+    private static readonly BoolPreference showAOE = new("Settings.ShowAOE", true);
 
-    public static bool ShowAOE { get => showAOE.Value; set => showAOE.Value = value; }
     public static int Quality { get => quality.Value; set => quality.Value = value; }
+    public static bool TutorialShown { get => tutorialShown.Value; set => tutorialShown.Value = value; }
+    public static bool ShowAOE { get => showAOE.Value; set => showAOE.Value = value; }
 
     //UI (Audio)
     [Header("Audio")]
@@ -42,8 +44,8 @@ public class Preferences : MonoBehaviour {
     //UI (Game)
     [Header("Game")]
     [SerializeField] private TMP_Dropdown languageDropdown;
-    [SerializeField] private Toggle AOEToggle;
     [SerializeField] private TMP_Dropdown qualityDropdown;
+    [SerializeField] private Toggle AOEToggle;
 
 
     //UI
