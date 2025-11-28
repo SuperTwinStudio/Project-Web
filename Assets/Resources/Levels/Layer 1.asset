@@ -18,7 +18,7 @@ MonoBehaviour:
   RoomSize: 20
   MaxStep: 2
   BaseDoorChance: 80
-  LightColor: {r: 0.6, g: 0.50595254, b: 0.4368, a: 1}
+  LightColor: {r: 0.799, g: 0.6736667, b: 0.5796667, a: 1}
   reflectionMap: {fileID: 8900000, guid: 39b95b3b0175f064e9461fe1364f02bd, type: 2}
   StartRoom: {fileID: 2154439050273984560, guid: 53411621be473204e98eb7a5a2ef9103, type: 3}
   StandardRooms:
