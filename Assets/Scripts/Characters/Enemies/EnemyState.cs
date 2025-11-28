@@ -1,7 +1,7 @@
 public class EnemyState {
 
     //Enemy
-    public EnemyBase Enemy { get; private set; }
+    public Enemy Enemy { get; private set; }
     public EnemyBehaviour Behaviour { get; private set; }
 
 

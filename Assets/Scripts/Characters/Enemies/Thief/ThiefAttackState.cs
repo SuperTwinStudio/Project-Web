@@ -31,7 +31,7 @@ public class ThiefAttackState : ThiefState {
 
         //Attack
         Enemy.Attack.Forward(
-            Thief.InteractRange / 2,
+            Thief.AttackRadius,
             0,
             Thief.AttackDamage
         );

@@ -1,7 +1,7 @@
-public class DuendeFollowState : DuendeState {
+public class GoblinFollowState : GoblinState {
 
     //Constructor
-    public DuendeFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public GoblinFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -13,10 +13,10 @@ public class DuendeFollowState : DuendeState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Duende.SetState(new DuendeIdleState(Duende));
-        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance > Duende.EvadeRange && Enemy.TargetLastKnownDistance < Duende.MinAttackRange) {
+            Goblin.SetState(new GoblinIdleState(Goblin));
+        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance > Goblin.EvadeRange && Enemy.TargetLastKnownDistance < Goblin.MinAttackRange) {
             //Target in attack range -> Attack it
-            Duende.SetState(new DuendeAttackState(Duende));
+            Goblin.SetState(new GoblinAttackState(Goblin));
         } else {
             //Move towards target
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
@@ -27,7 +27,7 @@ public class DuendeFollowState : DuendeState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new DuendeIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new GoblinIdleState(Behaviour));
             }
         }
     }

@@ -3,14 +3,14 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour {
 
     //Components
-    public EnemyBase Enemy { get; private set; }
+    public Enemy Enemy { get; private set; }
 
     //State
     public EnemyState State { get; private set; }
 
 
     //Init
-    public void Init(EnemyBase enemy) {
+    public void Init(Enemy enemy) {
         //Save enemy
         Enemy = enemy;
 

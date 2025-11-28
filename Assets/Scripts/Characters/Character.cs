@@ -9,18 +9,23 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Character
     [Header("Character")]
+    [SerializeField] private AudioSource _audio;
+    [SerializeField] private AttackHelper _attack;
     [SerializeField] private Transform _top;
     [SerializeField] private Transform _eyes;
     [SerializeField] private Transform _bot;
-    [SerializeField] private AudioSource _audio;
     [SerializeField] private Transform _model;
-    [SerializeField] private ParticleSystem burn;
+    [SerializeField] private Renderer _renderer;
+    [SerializeField] private Animator _animator;
 
+    public AudioSource Audio => _audio;
+    public AttackHelper Attack => _attack;
     public Transform Top => _top;
     public Transform Eyes => _eyes;
     public Transform Bot => _bot;
-    public AudioSource Audio => _audio;
     public Transform Model => _model;
+    public Renderer Renderer => _renderer;
+    public Animator Animator => _animator;
 
     //Health
     [Header("Health")]
@@ -38,10 +43,10 @@ public class Character : MonoBehaviour, IDamageable {
 
     public const float DEFAULT_HEALTH_MAX = 100;
 
-    //Movement & Rotation
-    public virtual Vector3 MoveVelocity => Vector3.zero;
-
     //Effects
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem burn;
+
     protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
 
     public float EffectSlowSpeedMultiplier { get; private set; } = 1;
@@ -51,6 +56,9 @@ public class Character : MonoBehaviour, IDamageable {
     public float EffectExtraHealth { get; private set; } = 0;
 
     public float SpeedMultiplier => EffectSlowSpeedMultiplier * EffectFastSpeedMultiplier;
+
+    //Movement & Rotation
+    public virtual Vector3 MoveVelocity => Vector3.zero;
 
 
     //State

@@ -70,7 +70,7 @@ public class GameMenu : Menu {
     [SerializeField] private GameObject bossHealthbar;
     [SerializeField] private Image bossHealthbarFill;
 
-    private EnemyBase boss;
+    private Enemy boss;
 
 
       /*$$$$$   /$$                 /$$
@@ -199,7 +199,7 @@ public class GameMenu : Menu {
         bossHealthbar.SetActive(health > 0);
     }
 
-    public void AssignBoss(EnemyBase enemy) {
+    public void AssignBoss(Enemy enemy) {
         boss = enemy;
         boss.AddOnHealthChanged(OnBossHealthChange);
         OnBossHealthChange(boss.Health, boss.HealthMax);

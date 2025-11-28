@@ -4,11 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBase : Character {
+public class Enemy : Character {
 
-    //Level & Player
-    public Level Level { get; private set; }
-    public Player Player { get; private set; }
+    //Divider
+    [Header("________________"), Space(10)]
 
     //Enemy
     [Header("Enemy")]
@@ -16,21 +15,17 @@ public class EnemyBase : Character {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Collider _collider;
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private AttackHelper _attack;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private Renderer _renderer;
 
     public bool IsEnabled { get; private set; } = true;
 
+    public Level Level { get; private set; }
+    public Player Player { get; private set; }
     public EnemyBehaviour Behaviour { get; private set; }
 
     public bool IsBoss => _isBoss;
     public NavMeshAgent Agent => _agent;
     public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rigidbody;
-    public AttackHelper Attack => _attack;
-    public Animator Animator => _animator;
-    public Renderer Renderer => _renderer;
 
     //Movement & Rotation
     [Header("Movement & Rotation")]
@@ -269,15 +264,15 @@ public class EnemyBase : Character {
     }
 
     //Helpers
-    public EnemyBase SpawnEnemy(GameObject prefab, Transform spawn) {
+    public Enemy SpawnEnemy(GameObject prefab, Transform spawn) {
         if (Room) {
             //Spawn with room
-            EnemyBase enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
+            Enemy enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, spawn.rotation));
             enemy.SetEnabled(true);
             return enemy;
         } else {
             //Spawn without room
-            return Instantiate(prefab, spawn.position, Quaternion.identity).GetComponent<EnemyBase>();
+            return Instantiate(prefab, spawn.position, Quaternion.identity).GetComponent<Enemy>();
         }
     }
 

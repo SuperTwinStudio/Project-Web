@@ -11,13 +11,13 @@ public class AttackHelper : MonoBehaviour {
     [Header("Opions")]
     [SerializeField] private bool _isPlayer = true;
     [SerializeField] private Character _source;
-    [SerializeField] private Transform _model;
     [SerializeField] private GameObject _AOEIndicator;
+    [SerializeField] private Transform _model;
 
     public bool IsPlayer => _isPlayer;
     public Character Source => _source;
-    public Transform Model => _model;
     public GameObject AOEIndicator => _AOEIndicator;
+    public Transform Model => _model;
 
 
     //Melee
@@ -86,7 +86,7 @@ public class AttackHelper : MonoBehaviour {
         if (!AOEIndicator || !Preferences.ShowAOE) return;
 
         //Create indicator
-        AttackAreaIndicator indicator = Instantiate(AOEIndicator, Model.position + 0.05f * Vector3.up, Model.rotation).GetComponent<AttackAreaIndicator>();
+        AttackAreaIndicator indicator = Instantiate(AOEIndicator, Model.position + 0.1f * Vector3.up, Model.rotation).GetComponent<AttackAreaIndicator>();
         indicator.GenerateIndicator(radius, forward, inFront);
     }
 

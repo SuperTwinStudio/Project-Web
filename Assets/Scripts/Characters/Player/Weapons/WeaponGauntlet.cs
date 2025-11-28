@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class WeaponGauntlet : Weapon {
 
-    //Temp
-    [Header("Temp")]
-    [SerializeField] private Animator _animator;
-
-    protected override Animator Animator => _animator;
-
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
