@@ -312,6 +312,11 @@ MonoBehaviour:
       There you can purchase upgrades for your character and for your unlocked weapons.
     m_Metadata:
       m_Items: []
+  - m_Id: 21300921771102208
+    m_Localized: That's all! You can always open the tutorial again from the pause
+      menu.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

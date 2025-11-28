@@ -308,6 +308,11 @@ MonoBehaviour:
       podr\xE1s comprar mejoras para tu personaje y para tus armas desbloqueadas."
     m_Metadata:
       m_Items: []
+  - m_Id: 21300921771102208
+    m_Localized: "\xA1Eso es todo! Siempre puedes volver a abrir el tutorial desde
+      el men\xFA de pausa."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

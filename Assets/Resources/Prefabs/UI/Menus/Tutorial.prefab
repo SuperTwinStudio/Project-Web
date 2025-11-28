@@ -1414,6 +1414,16 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     _image: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
+  - _name:
+      m_TableReference:
+        m_TableCollectionName: GUID:99c271c4294dded488381bec0342cc95
+      m_TableEntryReference:
+        m_KeyId: 21300921771102208
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    _image: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
   references:
     version: 2
     RefIds: []
