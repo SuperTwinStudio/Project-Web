@@ -15,7 +15,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Transform[] m_EnemySpawnPoints;
     [Space]
     [SerializeField] private bool m_BossRoom;
-    [SerializeField] private EnemyBase m_Boss;
+    [SerializeField] private Enemy m_Boss;
     [SerializeField] private GameObject m_Elevator;
 
     [Header("Minimap")]
@@ -32,10 +32,10 @@ public class Room : MonoBehaviour
     private float m_Size = 1.0f;
 
     //Enemies
-    private readonly List<EnemyBase> _enemies = new();
+    private readonly List<Enemy> _enemies = new();
     private bool _isBossPresent = false;
 
-    public IReadOnlyList<EnemyBase> Enemies => _enemies;
+    public IReadOnlyList<Enemy> Enemies => _enemies;
     public bool IsBossPresent => _isBossPresent;
     public int EnemyCount => _enemies.Count;
 
@@ -83,19 +83,19 @@ public class Room : MonoBehaviour
     }
 
     //Enemies
-    public EnemyBase InitializeEnemy(EnemyBase enemy)
+    public Enemy InitializeEnemy(Enemy enemy)
     {
         enemy.SetRoom(this);
         _enemies.Add(enemy);
         return enemy;
     }
 
-    public EnemyBase InitializeEnemy(GameObject obj)
+    public Enemy InitializeEnemy(GameObject obj)
     {
-        return InitializeEnemy(obj.GetComponent<EnemyBase>());;
+        return InitializeEnemy(obj.GetComponent<Enemy>());;
     }
 
-    public void EnemyKilled(EnemyBase enemy)
+    public void EnemyKilled(Enemy enemy)
     {
         _enemies.Remove(enemy);
 

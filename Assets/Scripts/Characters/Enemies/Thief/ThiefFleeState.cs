@@ -37,6 +37,9 @@ public class ThiefFleeState : ThiefState {
     }
 
     public override void OnDamage(DamageType type, object source) {
+        //Already fleeing
+        if (!Enemy.Agent.isStopped) return;
+
         //Flee from player
         if (type != DamageType.Burn) Flee();
     }

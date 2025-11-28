@@ -16,7 +16,7 @@ public class KnightBehaviour : EnemyBehaviour {
 
     //Stun
     [Header("Stun")]
-    [SerializeField] private float _stunDuration = 2.5f;
+    [SerializeField] private float _stunDuration = 1.5f;
 
     public float StunDuration => _stunDuration;
 

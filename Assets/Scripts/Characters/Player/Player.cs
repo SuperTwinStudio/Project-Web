@@ -12,42 +12,21 @@ public enum PlayerUpgrade {
 
 public class Player : Character, ISavable {
 
-    //Level
-    [Header("Level")]
+    //Divider
+    [Header("________________"), Space(10)]
+
+    //Player
+    [Header("Player")]
     [SerializeField] private Level _level;
+    [SerializeField] private Loadout _loadout;
+    [SerializeField] private CharacterController controller;
+
+    private Transform cameraTransform;
 
     public Level Level => _level;
     public CameraController CameraController => Level.CameraController;
     public MenuManager MenuManager => Game.Current.MenuManager;
-
-    //Input
-    [Header("Input")]
-    [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference lookAction;
-    [SerializeField] private InputActionReference spinAction;
-    [SerializeField] private InputActionReference primaryAction;
-    [SerializeField] private InputActionReference secondaryAction;
-    [SerializeField] private InputActionReference reloadAction;
-    [SerializeField] private InputActionReference dashAction;
-
-    private Vector2 moveInput, lookInput;
-    private readonly Timer primaryCoyote = new();
-    private readonly Timer secondaryCoyote = new();
-    private readonly Timer reloadCoyote = new();
-
-    private const float INPUT_COYOTE_DURATION = 0.25f;
-    private bool isLastInputGamepad = false;
-
-    //Player
-    [Header("Player")]
-    [SerializeField] private CharacterController controller;
-    [SerializeField] private Loadout _loadout;
-    [SerializeField] private Animator _animator;
-
-    private Transform cameraTransform;
-
     public Loadout Loadout => _loadout;
-    public Animator Animator => _animator;
 
     //Health
     public override float HealthMax => base.HealthMax + (UpgradeGramaje.Level - 1) * gramajeHealthPerLevel;
@@ -81,6 +60,24 @@ public class Player : Character, ISavable {
     public Upgrade UpgradeGramaje { get; private set; } = new("GRAMAJE");
     public Upgrade UpgradeRugosidad { get; private set; } = new("RUGOSIDAD");
     public Upgrade UpgradeDash { get; private set; } = new("DASH");
+
+    //Input
+    [Header("Input")]
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private InputActionReference spinAction;
+    [SerializeField] private InputActionReference primaryAction;
+    [SerializeField] private InputActionReference secondaryAction;
+    [SerializeField] private InputActionReference reloadAction;
+    [SerializeField] private InputActionReference dashAction;
+
+    private Vector2 moveInput, lookInput;
+    private readonly Timer primaryCoyote = new();
+    private readonly Timer secondaryCoyote = new();
+    private readonly Timer reloadCoyote = new();
+
+    private const float INPUT_COYOTE_DURATION = 0.25f;
+    private bool isLastInputGamepad = false;
 
 
     //State

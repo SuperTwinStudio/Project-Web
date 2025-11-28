@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaponAbanico : Weapon {
+public class WeaponFan : Weapon {
 
     //Primary
     [Header("Primary")]
@@ -67,10 +67,10 @@ public class WeaponAbanico : Weapon {
         if (damage > 0) damageable.Damage(damage, DamageType.Ranged, Player);
 
         //Check if an enemy
-        if (damageable is not EnemyBase) return;
+        if (damageable is not Enemy) return;
 
         //Get enemy
-        EnemyBase enemy = damageable as EnemyBase;
+        Enemy enemy = damageable as Enemy;
 
         //Push enemy
         enemy.Push(force * (enemy.transform.position - Player.transform.position));

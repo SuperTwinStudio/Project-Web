@@ -1,7 +1,7 @@
 using UnityEngine;
 using Botpa;
 
-public class DuendeBehaviour : EnemyBehaviour {
+public class GoblinBehaviour : EnemyBehaviour {
 
     //Components
     [Header("Components")]
@@ -30,7 +30,7 @@ public class DuendeBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new DuendeIdleState(this));
+        SetState(new GoblinIdleState(this));
     }
 
     //Health
@@ -38,7 +38,7 @@ public class DuendeBehaviour : EnemyBehaviour {
         base.OnDeath();
 
         //Go to death
-        SetState(new DuendeDeathState(this));
+        SetState(new GoblinDeathState(this));
     }
 
     //Attack

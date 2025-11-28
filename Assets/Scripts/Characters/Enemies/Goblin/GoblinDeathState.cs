@@ -1,7 +1,7 @@
-public class DuendeDeathState : DuendeState {
+public class GoblinDeathState : GoblinState {
 
     //Constructor
-    public DuendeDeathState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public GoblinDeathState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnEnter() {

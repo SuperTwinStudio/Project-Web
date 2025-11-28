@@ -10,16 +10,14 @@ public class Weapon : MonoBehaviour {
 
     //Components
     [Header("Components")]
-    [SerializeField] protected AttackHelper _attack;
-    [SerializeField] protected Loadout _loadout;
-    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected Player _player;
+    [SerializeField] protected RuntimeAnimatorController animator;
     [SerializeField] protected ParticleEmitter particleEmitter;
-    [SerializeField] protected RuntimeAnimatorController animatorController;
 
-    protected AttackHelper Attack => _attack;
-    protected Loadout Loadout => _loadout;
-    protected Player Player => Loadout.Player;
-    protected virtual Animator Animator => Player.Animator;
+    protected Player Player => _player;
+    protected AttackHelper Attack => Player.Attack;
+    protected Loadout Loadout => Player.Loadout;
+    protected Animator Animator => Player.Animator;
     protected CameraController CameraController => Player.CameraController;
 
     //Weapon
@@ -140,7 +138,7 @@ public class Weapon : MonoBehaviour {
         model.SetActive(show);
 
         //Change player animator controller (remove the if when all controllers are done)
-        if (show && animatorController) Animator.runtimeAnimatorController = animatorController;
+        if (show && animator) Animator.runtimeAnimatorController = animator;
 
         //Weapon custom on show
         OnShow();
@@ -269,8 +267,7 @@ public class Weapon : MonoBehaviour {
 
     //Helpers
     protected void PlaySound(AudioClip clip) {
-        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
-        audioSource.PlayOneShot(clip);
+        Player.PlaySound(clip);
     }
 
     public virtual void EmitParticle(string name) {

@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class MinionBehaviour : EnemyBehaviour {
 
-    //States
-    [Header("States")]
-    [SerializeField] private float _attackRange = 1f;
-    [SerializeField] private float _attackRadius = 1.25f;
+    //Values
+    [Header("Values")]
+    [SerializeField] private float _attackRange = 1.5f;
+    [SerializeField] private float _attackRadius = 1f;
     [SerializeField] private float _attackDamage = 10f;
-    [SerializeField] private AudioClip _attackSound;
-    [SerializeField] private AudioClip _damageSound;
-    [SerializeField] private AudioClip _deathSound;
 
     public float AttackRange => _attackRange;
     public float AttackRadius => _attackRadius;
     public float AttackDamage => _attackDamage;
+
+    //Sounds
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _damageSound;
+    [SerializeField] private AudioClip _deathSound;
+
     public AudioClip AttackSound => _attackSound;
     public AudioClip DamageSound => _damageSound;
     public AudioClip DeathSound => _deathSound;

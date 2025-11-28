@@ -9,8 +9,8 @@ public class BeastBehaviour : EnemyBehaviour {
     [Header("Invulnerability Aura")]
     [SerializeField] private GameObject _auraModel;
     [SerializeField] private TriggerDetector _auraDetector;
-    [SerializeField, Min(0)] private float _auraDamage = 20.0f;
-    [SerializeField, Min(0)] private float _auraPushForce = 25.0f;
+    [SerializeField, Min(0)] private float _auraDamage = 25f;
+    [SerializeField, Min(0)] private float _auraPushForce = 25f;
     [SerializeField, Min(0)] private float _auraPushCooldown = 0.5f;
 
     public GameObject AuraModel => _auraModel;
@@ -22,21 +22,27 @@ public class BeastBehaviour : EnemyBehaviour {
     //Pillars
     [Header("Pillars")]
     [SerializeField] private List<BeastPillar> _pillars = new();
-    [SerializeField] private List<Transform> _minionSpawns = new();
-    [SerializeField] private GameObject _minionPrefab;
+    [SerializeField] private List<Transform> minionSpawns = new();
+    [SerializeField] private GameObject minionPrefab;
 
     private event Action<BeastPillar> OnPillarDestroyed;
 
     public IReadOnlyList<BeastPillar> Pillars => _pillars;
-    public IReadOnlyList<Transform> MinionSpawns => _minionSpawns;
-    public GameObject MinionPrefab => _minionPrefab;
 
-    //States
-    [Header("States")]
+    //Values
+    [Header("Values")]
     [SerializeField, Min(0)] private float _rageDuration = 2.0f;
     [SerializeField, Min(0)] private float _prechargeDuration = 2.0f;
     [SerializeField, Min(0)] private float _maxChargeDistance = 20.0f;
     [SerializeField, Min(0)] private float _stunDuration = 5.0f;
+
+    public float RageDuration => _rageDuration;
+    public float PrechargeDuration => _prechargeDuration;
+    public float MaxChargeDistance => _maxChargeDistance;
+    public float StunDuration => _stunDuration;
+
+    //Sounds
+    [Header("Sounds")]
     [SerializeField] private AudioClip _rageSound;
     [SerializeField] private AudioClip _prechargeSound;
     [SerializeField] private AudioClip _chargeSound;
@@ -44,10 +50,6 @@ public class BeastBehaviour : EnemyBehaviour {
     [SerializeField] private AudioClip _damageSound;
     [SerializeField] private AudioClip _deathSound;
 
-    public float RageDuration => _rageDuration;
-    public float PrechargeDuration => _prechargeDuration;
-    public float MaxChargeDistance => _maxChargeDistance;
-    public float StunDuration => _stunDuration;
     public AudioClip RageSound => _rageSound;
     public AudioClip PrechargeSound => _prechargeSound;
     public AudioClip ChargeSound => _chargeSound;
@@ -103,7 +105,7 @@ public class BeastBehaviour : EnemyBehaviour {
 
     //Helpers
     public void SpawnMinions() {
-        foreach (var spawn in MinionSpawns) Enemy.SpawnEnemy(MinionPrefab, spawn);
+        foreach (var spawn in minionSpawns) Enemy.SpawnEnemy(minionPrefab, spawn);
     }
 
 }

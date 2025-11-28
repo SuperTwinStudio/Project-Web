@@ -5,30 +5,39 @@ using UnityEngine;
 public class ThiefBehaviour : EnemyBehaviour {
 
     //Components
-    private Loadout Loadout => Enemy.Player.Loadout;
-
-    //States
-    [Header("States")]
+    [Header("Components")]
     [SerializeField] private TMP_Text stolenAmountText;
     [SerializeField] private Effect _fleeEffect;
+
+    private Loadout Loadout => Enemy.Player.Loadout;
+
+    public Effect FleeEffect => _fleeEffect;
+
+    //Values
+    [Header("Values")]
     [SerializeField] private float _interactRange = 1.5f;
+    [SerializeField] private float _attackRadius = 1f;
     [SerializeField] private float _attackDamage = 10f;
-    [SerializeField] private int _stealAmount = 50;
+    [SerializeField] private int _stealAmount = 30;
     [SerializeField] private float _maxFleeDistance = 25;
-    [SerializeField] private AudioClip _attackSound;
-    [SerializeField] private AudioClip _fleeSound;
-    [SerializeField] private AudioClip _damageSound;
-    [SerializeField] private AudioClip _deathSound;
 
     public int StolenAmount { get; private set; }
 
-    public Effect FleeEffect => _fleeEffect;
     public float InteractRange => _interactRange;
+    public float AttackRadius => _attackRadius;
     public float AttackDamage => _attackDamage;
     public bool PlayerHasGold => Loadout.Gold > 0;
     public int StealAmount => _stealAmount;
     public bool HasStolen => StolenAmount > 0;
     public float MaxFleeDistance => _maxFleeDistance;
+    
+    //Sounds
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _fleeSound;
+    [SerializeField] private AudioClip _damageSound;
+    [SerializeField] private AudioClip _deathSound;
+
     public AudioClip AttackSound => _attackSound;
     public AudioClip FleeSound => _fleeSound;
     public AudioClip DamageSound => _damageSound;
@@ -71,7 +80,7 @@ public class ThiefBehaviour : EnemyBehaviour {
         //Check if enemy is in a room
         if (Enemy.Room) {
             //Has room -> Check room for enemies
-            foreach (EnemyBase enemy in Enemy.Room.Enemies)
+            foreach (Enemy enemy in Enemy.Room.Enemies)
                 if (enemy.Behaviour is ThiefBehaviour)
                     thiefs++;
                 else

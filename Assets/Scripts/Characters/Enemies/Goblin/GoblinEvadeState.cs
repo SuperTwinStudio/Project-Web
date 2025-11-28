@@ -1,7 +1,7 @@
-public class DuendeEvadeState : DuendeState {
+public class GoblinEvadeState : GoblinState {
 
     //Constructor
-    public DuendeEvadeState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public GoblinEvadeState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -10,9 +10,9 @@ public class DuendeEvadeState : DuendeState {
     }
 
     public override void Execute() {
-        if (Enemy.TargetLastKnownDistance > Duende.EvadeRange) {
+        if (Enemy.TargetLastKnownDistance > Goblin.EvadeRange) {
             //Target lejos -> Mira a ver que haces
-            Duende.SetState(new DuendeIdleState(Duende));
+            Goblin.SetState(new GoblinIdleState(Goblin));
         } else {
             //Target cerca -> Huye!
             Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.TargetLastKnownPosition).normalized);
