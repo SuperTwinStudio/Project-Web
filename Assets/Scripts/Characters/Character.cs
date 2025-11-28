@@ -47,7 +47,9 @@ public class Character : MonoBehaviour, IDamageable {
     [Header("Effects")]
     [SerializeField] private ParticleSystem burn;
 
-    protected readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
+    private int effectsWithDuration = 0;
+    private event Action OnEffectsUpdated;
+    private readonly Dictionary<Effect, (float, int)> effects = new(); //Stores effects & its duration & level
 
     public float EffectSlowSpeedMultiplier { get; private set; } = 1;
     public float EffectFastSpeedMultiplier { get; private set; } = 1;
@@ -243,12 +245,7 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     //Effects
-    protected virtual void OnEffectsUpdated() {}
-
-    protected void UpdateEffects() {
-        //Get current time
-        float nowTimestamp = Time.time;
-
+    private void UpdateEffectValues() {
         //Reset effects
         EffectSlowSpeedMultiplier = 1;
         EffectFastSpeedMultiplier = 1;
@@ -257,7 +254,7 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Apply effects
         foreach (var effect in effects.Keys.ToList()) {
-            //Get end timestamp
+            //Get end timestamp & level
             (float endTimestamp, int level) = effects[effect];
             float value = effect.Action.Value * level;
 
@@ -288,12 +285,38 @@ public class Character : MonoBehaviour, IDamageable {
                     EffectDamageDealtMultiplier = Mathf.Max(EffectDamageDealtMultiplier, 1 + value); //Take value as damage dealt percentaje
                     break;
             }
+        }
+
+        //Call on effects updated
+        OnEffectsUpdated?.Invoke();
+    }
+
+    private void UpdateEffects() {
+        //No effects with duration -> No need to check if an effect finished
+        if (effectsWithDuration <= 0) return;
+
+        //Should update values
+        bool shouldUpdateValues = false;
+
+        //Get current timestamp
+        float nowTimestamp = Time.time;
+
+        //Check for effects to remove effects
+        foreach (var effect in effects.Keys.ToList()) {
+            //Get end timestamp
+            (float endTimestamp, int level) = effects[effect];
 
             //Check if effect hasn't finished
             if (nowTimestamp < endTimestamp) continue;
 
+            //Update values after checking all effects
+            shouldUpdateValues = true;
+
             //Remove effect
             effects.Remove(effect);
+
+            //Update duration effects counter
+            if (!float.IsInfinity(endTimestamp)) effectsWithDuration--;
 
             //Disable burn particles
             if (effect.FileName == "Burn") burn.Stop();
@@ -307,8 +330,8 @@ public class Character : MonoBehaviour, IDamageable {
             }
         }
 
-        //Call on effects updated
-        OnEffectsUpdated();
+        //Check if should update values
+        if (shouldUpdateValues) UpdateEffectValues();
     }
 
     public bool TryGetEffect(Effect effect, out float endTimestamp, out int level) {
@@ -328,23 +351,26 @@ public class Character : MonoBehaviour, IDamageable {
         if (!IsAlive) return;
 
         //Calculate effect end timestamp
-        float effectEndTimestamp = Time.time + duration;
+        float endTimestamp = Time.time + duration;
 
         //Check if player already has effect
         if (effects.ContainsKey(effect)) {
             //Already has effect -> Update it
             (float currentEndTimestamp, int currentLevel) = effects[effect];
             effects[effect] = (
-                Mathf.Max(currentEndTimestamp, effectEndTimestamp),                             //End timestamp
+                Mathf.Max(currentEndTimestamp, endTimestamp),                                   //End timestamp
                 effect.HasLevels ? Mathf.Min(currentLevel + 1, effect.MaxLevel) : currentLevel  //Level
             );
         } else {
             //Does not have effect -> Add it
             effects[effect] = (
-                effectEndTimestamp, //End timestamp
-                1                   //Level
+                endTimestamp,   //End timestamp
+                1               //Level
             );
         }
+
+        //Update duration effects counter
+        if (!float.IsInfinity(endTimestamp)) effectsWithDuration++;
 
         //Enable burn particles
         if (effect.FileName == "Burn") burn.Play();
@@ -355,6 +381,10 @@ public class Character : MonoBehaviour, IDamageable {
             case EffectType.MaxHealth:
                 EffectExtraHealth += effect.Action.Value;
                 break;
+            //Other
+            default:
+                UpdateEffectValues();
+                break;
         }
     }
 
@@ -363,24 +393,21 @@ public class Character : MonoBehaviour, IDamageable {
         if (!effects.ContainsKey(effect)) return;
 
         //Get effect
-        (float currentEndTimestamp, int currentLevel) = effects[effect];
+        (float endTimestamp, int level) = effects[effect];
 
         //Check if effect has levels
-        if (effect.HasLevels) {
-            //Has levels -> Remove a level
-            int newLevel = currentLevel - 1;
-
-            //Check new level
-            if (newLevel >= 1) {
-                //Still has levels -> Update it
-                effects[effect] = (currentEndTimestamp, newLevel);
-            } else {
-                //No levels -> Remove it
-                effects.Remove(effect);
-            }
+        if (effect.HasLevels && level > 1) {
+            //Still has levels -> Update it
+            effects[effect] = (endTimestamp, level - 1);
         } else {
-            //No levels -> Remove it
+            //No levels / Level 1 -> Remove it
             effects.Remove(effect);
+
+            //Update duration effects counter
+            if (!float.IsInfinity(endTimestamp)) effectsWithDuration--;
+
+            //Disable burn particles
+            if (effect.FileName == "Burn") burn.Stop();
         }
 
         //Unapply instant application effects
@@ -389,7 +416,19 @@ public class Character : MonoBehaviour, IDamageable {
             case EffectType.MaxHealth:
                 EffectExtraHealth -= effect.Action.Value;
                 break;
+            //Other
+            default:
+                UpdateEffectValues();
+                break;
         }
+    }
+
+    public void AddOnEffectsUpdated(Action action) {
+        OnEffectsUpdated += action;
+    }
+
+    public void RemoveOnEffectsUpdated(Action action) {
+        OnEffectsUpdated -= action;
     }
 
     //Attack

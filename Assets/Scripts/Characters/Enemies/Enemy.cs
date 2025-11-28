@@ -76,6 +76,7 @@ public class Enemy : Character {
         Heal(HealthMax);
 
         //Update effects
+        AddOnEffectsUpdated(OnEffectsUpdated);
         OnEffectsUpdated();
     
         //Init behaviour
@@ -252,7 +253,7 @@ public class Enemy : Character {
     }
 
     //Effects
-    protected override void OnEffectsUpdated() {
+    private void OnEffectsUpdated() {
         //Update move speed
         Agent.speed = moveSpeed * SpeedMultiplier;
     }

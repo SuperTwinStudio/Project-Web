@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23cc99f797bd0d84b980522cba2e1f9d, type: 3}
-  m_Name: ItemCardSkin
+  m_Name: E_Flee
   m_EditorClassIdentifier: 
   _show: 0
   _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
@@ -23,11 +23,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _hasLevels: 1
-  _maxLevel: 999
+  _hasLevels: 0
+  _maxLevel: 5
   _action:
-    _type: 7
-    _value: 10
+    _type: 4
+    _value: 2
   references:
     version: 2
     RefIds: []

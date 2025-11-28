@@ -85,7 +85,7 @@ public class Player : Character, ISavable {
         //Get transforms
         cameraTransform = CameraController.Camera.transform;
 
-        //Events
+        //Menu events
         Game.AddOnLoadingChanged(OnGameLoadingChanged);
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
         MenuManager.AddOnMenuChanged(OnMenuChanged);
