@@ -52,8 +52,8 @@ public class Level : MonoBehaviour {
     }
 
     private void InitializeLevel() {
-        _mainLight.color = Definition.LightColor;
-        _mainLight.intensity = Definition.LightIntensity;
+        RenderSettings.ambientLight = Definition.LightColor;
+        RenderSettings.customReflectionTexture = Definition.reflectionMap;
 
         LevelGenerator generator = new();
         generator.GenerateLevel(Definition);

@@ -13,8 +13,8 @@ public class LevelDefinition : ScriptableObject
 	public int BaseDoorChance = 80;
 
 	[Header("Lighting")]
-	public Color LightColor;
-	public float LightIntensity;
+	[ColorUsage(false, true)] public Color LightColor;
+	public Cubemap reflectionMap;
 
 	[Header("Rooms")]
 	public GameObject StartRoom;
