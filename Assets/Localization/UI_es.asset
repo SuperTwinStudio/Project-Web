@@ -313,6 +313,10 @@ MonoBehaviour:
       el men\xFA de pausa."
     m_Metadata:
       m_Items: []
+  - m_Id: 21433240496734208
+    m_Localized: Objetos Pasivos
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

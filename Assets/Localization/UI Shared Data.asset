@@ -299,6 +299,10 @@ MonoBehaviour:
     m_Key: tutorial_4
     m_Metadata:
       m_Items: []
+  - m_Id: 21433240496734208
+    m_Key: "inventory_passive_label\t"
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -317,6 +317,10 @@ MonoBehaviour:
       menu.
     m_Metadata:
       m_Items: []
+  - m_Id: 21433240496734208
+    m_Localized: Passive Items
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
