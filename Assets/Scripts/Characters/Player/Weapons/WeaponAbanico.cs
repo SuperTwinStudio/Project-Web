@@ -26,6 +26,7 @@ public class WeaponAbanico : Weapon {
     [SerializeField, Min(0)] private float secondaryPushForcePerLevel = 3f;
     [SerializeField] private Vector2 secondaryAttackSphereCast = new(2f, 0f);
     [SerializeField] private AudioClip secondaryAttackSound;
+    [SerializeField] private Transform secondaryTornadoPoint;
 
     public override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -113,6 +114,9 @@ public class WeaponAbanico : Weapon {
 
         //Play sound
         PlaySound(secondaryAttackSound);
+
+        //Show VFX
+        particleEmitter.PlayOnPosition("airtornado", Vector3.up, Player.Model.position + (secondaryAttackSphereCast.x + secondaryAttackSphereCast.y / 2) * Player.Model.forward);
 
         //Push enemies back
         Attack.Forward(

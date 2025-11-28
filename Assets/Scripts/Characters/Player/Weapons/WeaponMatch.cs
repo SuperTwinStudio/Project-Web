@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class WeaponMatch : Weapon {
 
-    [SerializeField] protected Transform tip;
-    
     //Effects
     [Header("Effects")]
     [SerializeField] private Effect attackSlowEffect;
@@ -35,6 +33,7 @@ public class WeaponMatch : Weapon {
     [SerializeField, Min(0)] private float secondaryDurationPerLevel = 0.5f;
     [SerializeField, Min(0)] private float secondaryRadius = 3f;
     [SerializeField] private AudioClip secondaryAttackSound;
+    [SerializeField] private Transform tip;
 
     public override float SecondaryCooldownDuration => _secondaryCooldown;
 
@@ -143,6 +142,7 @@ public class WeaponMatch : Weapon {
         character.AddEffect(burnEffect, duration);
     }
 
+    //Helpers
     public override void EmitParticle(string name) {
         particleEmitter.PlayOnPosition(name, Vector3.up, tip.position);
     }

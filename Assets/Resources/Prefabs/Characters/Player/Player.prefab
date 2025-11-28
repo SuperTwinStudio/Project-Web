@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 4829512223886480836}
   - component: {fileID: 1122487539104593671}
   - component: {fileID: 7136729457388564981}
+  - component: {fileID: 3513852005296046526}
   m_Layer: 6
   m_Name: Abanico
   m_TagString: Untagged
@@ -1065,7 +1066,7 @@ MonoBehaviour:
   _attack: {fileID: 5015934107059590354}
   _loadout: {fileID: 8538115829238214355}
   audioSource: {fileID: 7136729457388564981}
-  particleEmitter: {fileID: 0}
+  particleEmitter: {fileID: 3513852005296046526}
   animatorController: {fileID: 9100000, guid: 4806ae76ce08c744aa209df6a9ce954e, type: 2}
   _item: {fileID: 11400000, guid: ced40d40167627e40893da77d3ad12fb, type: 2}
   _primaryIcon: {fileID: 21300000, guid: 39239cb9f3693b74181517c2f8850082, type: 3}
@@ -1113,6 +1114,7 @@ MonoBehaviour:
   secondaryPushForcePerLevel: 3
   secondaryAttackSphereCast: {x: 2, y: 0}
   secondaryAttackSound: {fileID: 8300000, guid: 368628df9baa6f94b9b4e5a9e9ccf6da, type: 3}
+  secondaryTornadoPoint: {fileID: 0}
   passivePushForce: 6
   passivePushForcePerLevel: 2
   passiveHit: 8
@@ -1219,6 +1221,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3513852005296046526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123386452864677109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6295b46297ff9604eaa78388fa5768aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 2315251190082324787, guid: 0b0f610143627964c9f62d72768d85b1, type: 3}
+  names:
+  - airtornado
+  volumes:
+  - 1
 --- !u!1 &5403484492777555683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1387,6 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   model: {fileID: 5403484492777555683}
-  tip: {fileID: 6849242891339637249}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   burnEffect: {fileID: 11400000, guid: 994c091a1743dc643953eaa4fecff2d2, type: 2}
   _primaryCooldown: 0.4
@@ -1386,6 +1405,7 @@ MonoBehaviour:
   secondaryDurationPerLevel: 0.5
   secondaryRadius: 3
   secondaryAttackSound: {fileID: 8300000, guid: 28c3005c7a090884f8646af62a4d43f9, type: 3}
+  tip: {fileID: 6849242891339637249}
   passiveDuration: 1
   passiveDurationPerLevel: 0.5
   passiveHit: 4
