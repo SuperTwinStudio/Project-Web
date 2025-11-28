@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class TutorialMenu : Menu {
     
@@ -23,7 +24,7 @@ public class TutorialMenu : Menu {
     //Tutorials
     [Header("Tutorials")]
     [SerializeField] private TMP_Text tutorialText;
-    [SerializeField] private Image tutorialImage;
+    [SerializeField] private VideoPlayer tutorialVideo;
     [SerializeField] private List<TutorialItem> tutorials = new();
 
     private int tutorialIndex = 0;
@@ -50,7 +51,8 @@ public class TutorialMenu : Menu {
         TutorialItem tutorial = tutorials[index];
         tutorialIndex = index;
         tutorialText.SetText(tutorial.Name);
-        tutorialImage.sprite = tutorial.Image;
+        tutorialVideo.clip = tutorial.Video;
+        tutorialVideo.Play();
 
         //Toggle buttons
         previousButton.interactable = index > 0;
@@ -120,9 +122,9 @@ public class TutorialMenu : Menu {
 public class TutorialItem {
     
     [SerializeField] private LocalizedString _name;
-    [SerializeField] private Sprite _image;
+    [SerializeField] private VideoClip _video;
     
     public string Name => _name.GetLocalizedString();
-    public Sprite Image => _image;
+    public VideoClip Video => _video;
 
 }
