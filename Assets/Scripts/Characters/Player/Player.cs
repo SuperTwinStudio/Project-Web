@@ -227,6 +227,8 @@ public class Player : Character, ISavable {
 
     //Health
     protected override void OnDeath() {
+        base.OnDeath();
+
         //Death item hooks
         foreach (var pair in Loadout.PassiveItems) pair.Key.OnDeathHook(this, pair.Value);
         Loadout.RemoveQueuedPassiveItems();

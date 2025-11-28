@@ -14,6 +14,7 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] private Transform _bot;
     [SerializeField] private AudioSource _audio;
     [SerializeField] private Transform _model;
+    [SerializeField] private ParticleSystem burn;
 
     public Transform Top => _top;
     public Transform Eyes => _eyes;
@@ -142,7 +143,10 @@ public class Character : MonoBehaviour, IDamageable {
         Game.UnslowTime(this);
     }
 
-    protected virtual void OnDeath() {}
+    protected virtual void OnDeath() {
+        //Stop burn particles
+        burn.Stop();
+    }
 
     public virtual bool Revive(float health) {
         //Character is already alive
@@ -283,6 +287,9 @@ public class Character : MonoBehaviour, IDamageable {
             //Remove effect
             effects.Remove(effect);
 
+            //Disable burn particles
+            if (effect.FileName == "Burn") burn.Stop();
+
             //Unapply instant application effects
             switch (effect.Action.Type) {
                 //Max health
@@ -309,6 +316,9 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     public void AddEffect(Effect effect, float duration = float.PositiveInfinity) {
+        //Dead -> Ignore
+        if (!IsAlive) return;
+
         //Calculate effect end timestamp
         float effectEndTimestamp = Time.time + duration;
 
@@ -327,6 +337,9 @@ public class Character : MonoBehaviour, IDamageable {
                 1                   //Level
             );
         }
+
+        //Enable burn particles
+        if (effect.FileName == "Burn") burn.Play();
 
         //Apply instant application effects
         switch (effect.Action.Type) {

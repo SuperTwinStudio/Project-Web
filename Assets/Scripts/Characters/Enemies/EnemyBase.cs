@@ -154,6 +154,8 @@ public class EnemyBase : Character {
     }
 
     protected override void OnDeath() {
+        base.OnDeath();
+
         //Notify room that enemy was killed
         if (Room) Room.EnemyKilled(this);
 
