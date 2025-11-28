@@ -19,7 +19,7 @@ MonoBehaviour:
   MaxStep: 2
   BaseDoorChance: 80
   LightColor: {r: 1, g: 0.8235294, b: 0.5568628, a: 1}
-  LightIntensity: 0.99
+  LightIntensity: 0
   StartRoom: {fileID: 2154439050273984560, guid: 53411621be473204e98eb7a5a2ef9103, type: 3}
   StandardRooms:
   - {fileID: 9134466352977747744, guid: 494567db75df3f94a876f4ad3a552a11, type: 3}

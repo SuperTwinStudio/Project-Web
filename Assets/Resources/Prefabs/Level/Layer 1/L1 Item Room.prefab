@@ -5626,18 +5626,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 199128608076693113}
     m_Modifications:
     - target: {fileID: 311399420894613395, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1856
-      objectReference: {fileID: 0}
-    - target: {fileID: 311399420894613395, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1856
-      objectReference: {fileID: 0}
-    - target: {fileID: 311399420894613395, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.1856
-      objectReference: {fileID: 0}
-    - target: {fileID: 311399420894613395, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.97
       objectReference: {fileID: 0}
@@ -5680,38 +5668,6 @@ PrefabInstance:
     - target: {fileID: 1088042291326604585, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
       propertyPath: m_Name
       value: Torch (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624686725420334274, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_Range
-      value: 11.4263
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624686725420334274, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.43660998
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624686725420334274, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.65591025
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624686725420334274, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_Color.r
-      value: 0.995283
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624686725420334274, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_Intensity
-      value: 6.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 4450476450301396444, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4450476450301396444, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 4450476450301396444, guid: 20dbc303f52453e4a9a7d35a0bc9f3f5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.351
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
