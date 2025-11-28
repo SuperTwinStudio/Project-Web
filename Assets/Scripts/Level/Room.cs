@@ -173,6 +173,7 @@ public class Room : MonoBehaviour
 
             m_MinimapUnvisited.SetActive(true);
             m_MinimapVisited.SetActive(false);
+            m_GeometryTransform.gameObject.SetActive(false);
         }
         else
         {
@@ -191,7 +192,7 @@ public class Room : MonoBehaviour
         m_MinimapUnvisited.SetActive(false);
         m_MinimapVisited.SetActive(true);
 
-        //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again)
+        //Ñapa to fix enemies spawning in the center of the room (move them to their spawn point again) <-payadita
         foreach (var enemy in Enemies) if (enemy && enemy.IsAlive) enemy.transform.localPosition = Vector3.zero;
     }
 
