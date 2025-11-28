@@ -81,7 +81,14 @@ public class Player : Character, ISavable {
 
 
     //State
-    private void Start() {
+    private void OnDestroy() {
+        //Menu events
+        Game.RemoveOnLoadingChanged(OnGameLoadingChanged);
+        MenuManager.RemoveOnMenuChanged(OnMenuChanged);
+        MenuManager.RemoveOnTransitionStart(OnMenuTransitionStart);
+    }
+
+    protected override void OnStart() {
         //Get transforms
         cameraTransform = CameraController.Camera.transform;
 
@@ -90,13 +97,6 @@ public class Player : Character, ISavable {
         OnMenuChanged(MenusList.None, MenuManager.CurrentMenuName);
         MenuManager.AddOnMenuChanged(OnMenuChanged);
         MenuManager.AddOnTransitionStart(OnMenuTransitionStart);
-    }
-
-    private void OnDestroy() {
-        //Events
-        Game.RemoveOnLoadingChanged(OnGameLoadingChanged);
-        MenuManager.RemoveOnMenuChanged(OnMenuChanged);
-        MenuManager.RemoveOnTransitionStart(OnMenuTransitionStart);
     }
 
     protected override void OnUpdate() {

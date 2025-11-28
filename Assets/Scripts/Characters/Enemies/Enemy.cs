@@ -61,7 +61,7 @@ public class Enemy : Character {
 
 
     //State
-    private void Start() {
+    protected override void OnStart() {
         //Get behaviour
         Behaviour = GetComponent<EnemyBehaviour>();
     
@@ -224,12 +224,20 @@ public class Enemy : Character {
         UseAutomaticRotation = automaticRotation;
     }
 
-    public override void LookTowards(Vector3 position) {
+    public override void LookInDirection(Vector3 direction) {
         //Using automatic rotation -> Ignore
         if (UseAutomaticRotation) return;
 
         //Update rotation
-        base.LookTowards(position);
+        base.LookInDirection(direction);
+    }
+
+    public override void LookTowardsPoint(Vector3 point) {
+        //Using automatic rotation -> Ignore
+        if (UseAutomaticRotation) return;
+
+        //Update rotation
+        base.LookTowardsPoint(point);
     }
 
     //Targets
@@ -268,7 +276,8 @@ public class Enemy : Character {
     public Enemy SpawnEnemy(GameObject prefab, Transform spawn) {
         if (Room) {
             //Spawn with room
-            Enemy enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, spawn.rotation));
+            Enemy enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
+            enemy.LookInDirection(spawn.forward);
             enemy.SetEnabled(true);
             return enemy;
         } else {

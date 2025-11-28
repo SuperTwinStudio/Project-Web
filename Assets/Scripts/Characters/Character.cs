@@ -9,7 +9,8 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Character
     [Header("Character")]
-    [SerializeField] private AudioSource _audio;
+    [SerializeField] private EffectsVisualizer effectsVisualizer;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AttackHelper _attack;
     [SerializeField] private Transform _top;
     [SerializeField] private Transform _eyes;
@@ -18,7 +19,6 @@ public class Character : MonoBehaviour, IDamageable {
     [SerializeField] private Renderer _renderer;
     [SerializeField] private Animator _animator;
 
-    public AudioSource Audio => _audio;
     public AttackHelper Attack => _attack;
     public Transform Top => _top;
     public Transform Eyes => _eyes;
@@ -64,6 +64,16 @@ public class Character : MonoBehaviour, IDamageable {
 
 
     //State
+    private void Start() {
+        //Init effects visualizer
+        effectsVisualizer.Init(this, effects);
+
+        //Start character
+        OnStart();
+    }
+
+    protected virtual void OnStart() {}
+
     private void Update() {
         //Game is paused | Character is dead | A menu is transitioning
         if (Game.IsPaused || !IsAlive || Game.Current.MenuManager.InTransition) return;
@@ -126,9 +136,14 @@ public class Character : MonoBehaviour, IDamageable {
         Debug.Log("Push not implemented");
     }
 
-    public virtual void LookTowards(Vector3 position) {
+    public virtual void LookInDirection(Vector3 direction) {
         //Update rotation
-        Model.rotation = Quaternion.LookRotation(Util.RemoveY(position - Model.position).normalized);
+        Model.rotation = Quaternion.LookRotation(Util.RemoveY(direction).normalized);
+    }
+
+    public virtual void LookTowardsPoint(Vector3 point) {
+        //Update rotation
+        LookInDirection(point - Model.position);
     }
 
     //Health
@@ -154,6 +169,9 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     protected virtual void OnDeath() {
+        //Clear effects
+        ClearEffects();
+
         //Stop burn particles
         burn.Stop();
     }
@@ -246,7 +264,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Effects
     private void UpdateEffectValues() {
-        //Reset effects
+        //Reset effect values
         EffectSlowSpeedMultiplier = 1;
         EffectFastSpeedMultiplier = 1;
         EffectDamageTakenMultiplier = 1;
@@ -286,6 +304,21 @@ public class Character : MonoBehaviour, IDamageable {
                     break;
             }
         }
+
+        //Call on effects updated
+        OnEffectsUpdated?.Invoke();
+    }
+
+    private void ClearEffects() {
+        //Reset effect values
+        EffectSlowSpeedMultiplier = 1;
+        EffectFastSpeedMultiplier = 1;
+        EffectDamageTakenMultiplier = 1;
+        EffectDamageDealtMultiplier = 1;
+        EffectExtraHealth = 0;
+
+        //Empty dictionary
+        effects.Clear();
 
         //Call on effects updated
         OnEffectsUpdated?.Invoke();
@@ -438,8 +471,8 @@ public class Character : MonoBehaviour, IDamageable {
 
     //Sound
     public void PlaySound(AudioClip clip) {
-        Audio.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
-        Audio.PlayOneShot(clip);
+        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
+        audioSource.PlayOneShot(clip);
     }
 
 }

@@ -1103,6 +1103,7 @@ MonoBehaviour:
   model: {fileID: 5403484492777555683}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   burnEffect: {fileID: 11400000, guid: 994c091a1743dc643953eaa4fecff2d2, type: 2}
+  testEffect: {fileID: 11400000, guid: d1f17fb4b13a87a429b8e017bdb3eda4, type: 2}
   _primaryCooldown: 0.4
   primarySlowDuration: 0.2
   primarySecondaryCooldown: 0.3
@@ -1864,6 +1865,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5495191504116420431, guid: 84038da77a49fb54fab0db36e1693afc, type: 3}
   m_PrefabInstance: {fileID: 5930379203272686480}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3178732669141230697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9102286061278142457, guid: 84038da77a49fb54fab0db36e1693afc, type: 3}
+  m_PrefabInstance: {fileID: 5930379203272686480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016245064491c424b8e0da2a1546eda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3317553590478488068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8955022062811117972, guid: 84038da77a49fb54fab0db36e1693afc, type: 3}
@@ -1958,7 +1970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c336ab3c3c94841885f13ef9c62b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audio: {fileID: 3513182107315586358}
+  effectsVisualizer: {fileID: 3178732669141230697}
+  audioSource: {fileID: 3513182107315586358}
   _attack: {fileID: 3317553590478488068}
   _top: {fileID: 1890423009879628936}
   _eyes: {fileID: 5347779899166478699}

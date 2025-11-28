@@ -68,6 +68,18 @@ PrefabInstance:
       propertyPath: '_pillars.Array.data[3]'
       value: 
       objectReference: {fileID: 5925163558342404353}
+    - target: {fileID: 134124820956530462, guid: 288cfe312af27284aa44545aa475b064, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 134124820956530462, guid: 288cfe312af27284aa44545aa475b064, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134124820956530462, guid: 288cfe312af27284aa44545aa475b064, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 538493292575701093, guid: 288cfe312af27284aa44545aa475b064, type: 3}
       propertyPath: m_Name
       value: Miso Beast
@@ -92,22 +104,6 @@ PrefabInstance:
       propertyPath: '_pillars.Array.data[3]'
       value: 
       objectReference: {fileID: 5925163558342404353}
-    - target: {fileID: 7019269007695410076, guid: 288cfe312af27284aa44545aa475b064, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7019269007695410076, guid: 288cfe312af27284aa44545aa475b064, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7019269007695410076, guid: 288cfe312af27284aa44545aa475b064, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7019269007695410076, guid: 288cfe312af27284aa44545aa475b064, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7019269007695410076, guid: 288cfe312af27284aa44545aa475b064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180

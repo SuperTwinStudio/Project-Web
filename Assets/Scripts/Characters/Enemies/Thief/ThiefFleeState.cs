@@ -64,7 +64,7 @@ public class ThiefFleeState : ThiefState {
         //Move to point
         Enemy.MoveTowards(closestPair.point);
         Enemy.SetAutomaticRotation(false);
-        Enemy.LookTowards(closestPair.point);
+        Enemy.LookTowardsPoint(closestPair.point);
     
         //Play sound
         Enemy.PlaySound(Thief.FleeSound);

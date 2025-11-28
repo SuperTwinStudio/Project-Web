@@ -34,7 +34,7 @@ public class ShopTrigger : MonoBehaviour {
         cameraController.EnterCutscene(positionTarget, viewTarget);
 
         //Rotate player
-        player.LookTowards(player.Model.position + Vector3.back);
+        player.LookInDirection(Vector3.back);
 
         //Open shop
         MenuManager.Open(MenusList.Shop);
