@@ -4,6 +4,7 @@ public class KnightBehaviour : EnemyBehaviour {
 
     //Attack
     [Header("Attack")]
+    [SerializeField] private GameObject shield;
     [SerializeField] private float _attackRange = 1.3f;
     [SerializeField] private float _attackRadius = 1.6f;
     [SerializeField] private float _attackDamage = 20f;
@@ -16,7 +17,7 @@ public class KnightBehaviour : EnemyBehaviour {
 
     //Stun
     [Header("Stun")]
-    [SerializeField] private float _stunDuration = 1.5f;
+    [SerializeField] private float _stunDuration = 2f;
 
     public float StunDuration => _stunDuration;
 
@@ -43,13 +44,26 @@ public class KnightBehaviour : EnemyBehaviour {
     }
 
     public override void OnDeath() {
+        //Disable shield
+        ToggleShield(false);
+
         //Go to death
         SetState(new KnightDeathState(this));
     }
 
-    //Shield
+    //Shield & Sword
     public void ToggleShield(bool use) {
         IsShieldOut = use;
+        shield.SetActive(use);
+    }
+
+    public void AttackForward() {
+        Enemy.Attack.Forward(AttackRadius, 0, AttackDamage);
+    }
+
+    public void FinishAttack() {
+        //Return to follow
+        SetState(new KnightFollowState(this), true);
     }
 
 }

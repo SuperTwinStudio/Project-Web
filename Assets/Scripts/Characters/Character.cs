@@ -139,7 +139,7 @@ public class Character : MonoBehaviour, IDamageable {
 
     public virtual void LookInDirection(Vector3 direction) {
         //Update rotation
-        Model.rotation = Quaternion.LookRotation(Util.RemoveY(direction).normalized);
+        Model.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(direction, Vector3.up).normalized, Vector3.up);
     }
 
     public virtual void LookTowardsPoint(Vector3 point) {

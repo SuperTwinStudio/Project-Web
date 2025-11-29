@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class KnightFollowState : KnightState {
 
     //Constructor
@@ -19,8 +21,8 @@ public class KnightFollowState : KnightState {
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
             Knight.SetState(new KnightIdleState(Knight));
-        } else if (Enemy.TargetLastKnownDistance <= Knight.AttackRange) {
-            //Target in attack range -> Attack it
+        } else if (Enemy.TargetLastKnownDistance <= Knight.AttackRange && Vector3.Angle(Enemy.Model.forward, (Enemy.TargetLastKnownPosition - Enemy.Model.position).normalized) < 10) {
+            //Target in attack range & in front -> Attack it
             Knight.SetState(new KnightAttackState(Knight));
         } else {
             //Move towards target

@@ -91,7 +91,7 @@ public class Enemy : Character {
 
         //Rotate model
         if (UseAutomaticRotation) {
-            Vector3 lookDirection = TargetIsVisible ? (TargetLastKnownPosition - transform.position) : Agent.desiredVelocity;
+            Vector3 lookDirection = Util.RemoveY(TargetIsVisible ? (TargetLastKnownPosition - transform.position) : Agent.desiredVelocity);
             if (!lookDirection.IsEmpty()) Model.rotation = Quaternion.RotateTowards(Model.rotation, Quaternion.LookRotation(lookDirection.normalized, Vector3.up), Time.deltaTime * rotateSpeed);
         }
     }
