@@ -1,4 +1,4 @@
-# Washi's Adventure
+# Washi & The Paper Kingdom
 
 Juego de acción y exploración de mazmorras donde deberás ayudar a un pequeño origami a encontrar a su hermano en un vasto mundo fantástico. 
 
@@ -78,13 +78,13 @@ Historial de versiones y cambios realizados en el documento.
 
 ### Concepto
 
-Project Paper es un videojuego de acción rogue-lite en perspectiva isométrica ambientado en un reino fantástico en miniatura. El juego está centrado en el combate y en la exploración de mazmorras generadas procedimentalmente, siguiendo un ciclo de meta-progresión.
+*Washi & The Paper Kingdom* es un videojuego de acción rogue-lite en perspectiva isométrica ambientado en un reino fantástico en miniatura. El juego está centrado en el combate y en la exploración de mazmorras generadas procedimentalmente, siguiendo un ciclo de meta-progresión.
 
 El juego sigue la historia de Washi, un pequeño origami que se embarca en una misión para rescatar a su gemelo Kami de las garras del Culto de la Llama. Durante su viaje deberá abrirse paso a través de las mazmorras hasta alcanzar y derrotar a cada uno de los miembros que forman la secta, y así recuperar los papiros que su hermano dejó atrás para truncar los malvados planes del culto.
 
 ### Género
 
-Project Paper combina los géneros acción y rogue-lite. Algunas características destacables de estos géneros presentes en el juego:
+*Washi & The Paper Kingdom* combina los géneros acción y rogue-lite. Algunas características destacables de estos géneros presentes en el juego:
 - **Acción:** el juego es dinámico, requiere cierto grado de velocidad y destreza para despejar los mapas y derrotar a los jefes.
 - **Rogue-lite:** el juego cuenta con un sistema de mazmorras generadas procedimentalmente, y cada “run” es parcialmente aleatoria. La muerte en partida es permanente, pero hay ciertos elementos, como mejoras o  que se conservan entre partidas para facilitar el avance del jugador (meta-progresión).  
 
@@ -96,7 +96,7 @@ Se identifican dos tipos de público objetivo para este juego:
 - **Jugadores experimentados:** al igual que el resto de juegos rogue-lite,  el público diana son jóvenes de entre 16 a 35 años que disfruten de tanto acción rápida como progresión gradual, y que ya se encuentren familiarizados con títulos análogos como Enter The Gungeon, Hades, o The Binding of Isaac.
 - **Nuevos jugadores:** personas jóvenes que no hayan probado videojuegos del género con anterioridad pero que estén interesadas en probar algo novedoso, conocer la historia del juego o simplemente disfrutar de su estética.
 
-Project Paper está pensado para ejecutarse en navegadores de ordenadores a través de [itch.io](https://supertwinstudio.itch.io/project-paper) y en móviles, con posibilidad de ampliar a otros mercados de la plataforma PC como Steam o Epic Store.
+*Washi & The Paper Kingdom* está pensado para ejecutarse en navegadores de ordenadores a través de [itch.io](https://supertwinstudio.itch.io/project-paper) y en móviles, con posibilidad de ampliar a otros mercados de la plataforma PC como Steam o Epic Store.
 
 
 
@@ -184,7 +184,7 @@ Los jugadores acompañarán al pequeño Washi, un guerrero origami cuyo objetivo
 
 ## 5. Game Flow
 
-En una partida de Project Paper se distinguen dos tipos de espacios según su función por los que el jugador irá rotando: 
+En una partida se distinguen dos tipos de espacios según su función por los que el jugador irá rotando: 
 - **Lobby principal:** la partida siempre comienza en el castillo, un lugar seguro para el jugador en el que podrá aprovisionarse y planificar su estrategia para la “run” por las mazmorras. El lobby cuenta con una tienda de mejoras y una sala de entrenamiento, además de una puerta que conduce a la mazmorra.  
 - **Mazmorras:** si el jugador atraviesa la puerta del lobby se encontrará con un laberinto de salas que podrá saquear y con enemigos que deberá derrotar para avanzar. Tras salir de la mazmorra, este podrá usar los tesoros obtenidos en la tienda para conseguir dinero y comprar mejoras.
 
@@ -398,14 +398,14 @@ Para transmitir una sensación de combate al jugador, se utilizarán tecnicas co
 
 ## 7. Level Design
 
-Cada nivel de Project Paper equivale a un piso de la mazmorra que el jugador deberá explorar y despejar para pasar al siguiente. El  piso o nivel se genera de forma procedimental. Las salas se compondrán de escenarios interiores (dentro de los cajones del escritorio), y algunas contarán con tesoros o elementos útiles con el fin de incentivar la exploración. Sólo hay tres formas de salir de un nivel:
+Cada nivel equivale a un piso de la mazmorra que el jugador deberá explorar y despejar para pasar al siguiente. El  piso o nivel se genera de forma procedimental. Las salas se compondrán de escenarios interiores (dentro de los cajones del escritorio), y algunas contarán con tesoros o elementos útiles con el fin de incentivar la exploración. Sólo hay tres formas de salir de un nivel:
 - **Completar el nivel derrotando al jefe**: opción de regresar al lobby o continuar al siguiente piso.
 - **Morir**: perder los tesoros recogidos y la mitad del dinero. El personaje regresará al lobby y el nivel se reseteará.
 - **Cerrar el juego**: el progreso realizado en el interior de la mazmorra se perderá y al reabrir el juego el personaje aparecerá en el lobby.
 
 ### Generación procedimental de mazmorras
 
-Las mazmorras de Project Paper son creadas a partir de diferentes tipos de salas:
+Las mazmorras son creadas a partir de diferentes tipos de salas:
 - **Jefe:** Salas finales de la mazmorra, aparecen en el hueco más lejano con respecto a la sala inicial, esto se hace para incentivar la exploración de la mazmorra. Al derrotar al jefe podemos progresar a la siguiente zona.
 - **Tesoro:** Las salas de tesoro contienen objetos que pueden venderse al completar una run, si contienen un tesoro raro (de más valor) estas tendrán sus puertas cerradas, requiriendo una llave para abrirlas.
 - **Objeto:** Las salas de objeto contienen consumibles que pueden usarse en el transcurso de la run, algunos ejemplos serían llaves o curaciones.
