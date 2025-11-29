@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectsVisualizer: {fileID: 7883521725151459103}
+  damageVisualizer: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
   audioSource: {fileID: 8195303631858193984}
   _attack: {fileID: 8030081761128436082}
   _top: {fileID: 6577195058656972798}
@@ -222,7 +223,6 @@ MonoBehaviour:
   rotateSpeed: 500
   pushForceResistance: 0
   viewDistance: 12
-  damageIndicatorPrefab: {fileID: 5016826544264677911, guid: d9a33b6ba2f10654e8a7fe7bdc382aec, type: 3}
 --- !u!4 &3833336287052104093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2739467051366623611, guid: 84038da77a49fb54fab0db36e1693afc, type: 3}

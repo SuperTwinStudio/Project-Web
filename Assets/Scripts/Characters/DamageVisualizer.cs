@@ -2,7 +2,7 @@ using Botpa;
 using TMPro;
 using UnityEngine;
 
-public class DamageTextIndicator : MonoBehaviour {
+public class DamageVisualizer : MonoBehaviour {
 
     //Components
     [Header("Components")]
@@ -17,12 +17,6 @@ public class DamageTextIndicator : MonoBehaviour {
 
     private Vector3 spawn, moveDirection;
     private readonly Timer animationTimer = new();
-
-    //Colors
-    [Header("Colors")]
-    [SerializeField] private Color colorDefault;
-    [SerializeField] private Color colorMelee;
-    [SerializeField] private Color colorRanged;
 
 
     //State
@@ -64,11 +58,6 @@ public class DamageTextIndicator : MonoBehaviour {
     //Text
     public void SetDamage(float damage, DamageType type) {
         text.SetText($"{type switch {DamageType.Melee => "🔪", DamageType.Ranged => "🏹", _ => ""}}{damage}");
-        text.color = type switch {
-            DamageType.Melee => colorMelee,
-            DamageType.Ranged => colorRanged,
-            _ => colorDefault
-        };
     }
 
 }

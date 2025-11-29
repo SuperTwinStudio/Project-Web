@@ -10,6 +10,7 @@ public class Character : MonoBehaviour, IDamageable {
     //Character
     [Header("Character")]
     [SerializeField] private EffectsVisualizer effectsVisualizer;
+    [SerializeField] private GameObject damageVisualizer;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AttackHelper _attack;
     [SerializeField] private Transform _top;
@@ -225,6 +226,9 @@ public class Character : MonoBehaviour, IDamageable {
 
         //Damage character
         Health = Mathf.Max(Health - damage, 0);
+
+        //Show damage indicator
+        if (type != DamageType.Burn) Instantiate(damageVisualizer, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageVisualizer>().SetDamage(amount, type);
 
         //Check if character died
         if (Health <= 0) {

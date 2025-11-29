@@ -42,7 +42,7 @@ public class BeastPillar : MonoBehaviour, IDamageable {
         Health = Mathf.Clamp(Health - amount, 0, Health);
 
         //Show damage indicator
-        Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount, type);
+        Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageVisualizer>().SetDamage(amount, type);
 
         //Check if destroyed
         if (Health <= 0) {

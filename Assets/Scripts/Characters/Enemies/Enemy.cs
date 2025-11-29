@@ -49,10 +49,6 @@ public class Enemy : Character {
     public float TargetLastKnownDistance { get; private set; }
     public Vector3 TargetLastKnownPosition { get; private set; }
 
-    //Feedback
-    [Header("Feedback")]
-    [SerializeField] private GameObject damageIndicatorPrefab;
-
     //Room
     public Room Room { get; private set; } = null;
 
@@ -180,10 +176,7 @@ public class Enemy : Character {
 
         //Check if damaged
         if (damaged) {
-            //Show damage indicator
-            if (type != DamageType.Burn) Instantiate(damageIndicatorPrefab, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageTextIndicator>().SetDamage(amount *= EffectDamageTakenMultiplier, type);
-
-            //Call behaviour event
+            //Damaged -> Call behaviour event
             Behaviour.OnDamage(type, source);
         }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7468904569584900571}
   - component: {fileID: 1343815448840300841}
   m_Layer: 0
-  m_Name: Damage Text Indicator
+  m_Name: Damage Visualizer (Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,8 +112,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283190527
-  m_fontColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
+    rgba: 4282664189
+  m_fontColor: {r: 1, g: 0.29411766, b: 0.29411766, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -194,6 +194,3 @@ MonoBehaviour:
   coneAngle: 25
   endScale: 1.5
   endDistance: 1
-  colorDefault: {r: 0.87058824, g: 0.48235294, b: 0.2627451, a: 1}
-  colorMelee: {r: 0.87169814, g: 0.4837924, b: 0.26150936, a: 1}
-  colorRanged: {r: 0.2980392, g: 0.6346574, b: 1, a: 1}

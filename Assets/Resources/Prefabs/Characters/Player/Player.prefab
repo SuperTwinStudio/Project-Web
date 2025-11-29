@@ -1103,7 +1103,6 @@ MonoBehaviour:
   model: {fileID: 5403484492777555683}
   attackSlowEffect: {fileID: 11400000, guid: 890768fe8c8d897479b4e62343dabec1, type: 2}
   burnEffect: {fileID: 11400000, guid: 994c091a1743dc643953eaa4fecff2d2, type: 2}
-  testEffect: {fileID: 11400000, guid: d1f17fb4b13a87a429b8e017bdb3eda4, type: 2}
   _primaryCooldown: 0.4
   primarySlowDuration: 0.2
   primarySecondaryCooldown: 0.3
@@ -1971,6 +1970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectsVisualizer: {fileID: 3178732669141230697}
+  damageVisualizer: {fileID: 5016826544264677911, guid: fd45bd607484e824190ac024d013d468, type: 3}
   audioSource: {fileID: 3513182107315586358}
   _attack: {fileID: 3317553590478488068}
   _top: {fileID: 1890423009879628936}
