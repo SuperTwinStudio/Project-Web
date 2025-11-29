@@ -147,17 +147,7 @@ public class Room : MonoBehaviour
                 int skipRandom = Random.Range(0, 100);
                 if (skipRandom < 10) continue;
 
-                bool isRare = Random.Range(0, 100) < def.RareEnemyChance;
-                if (isRare)
-                {
-                    int id = Random.Range(0, def.RareEnemies.Length);
-                    InitializeEnemy(Instantiate(def.RareEnemies[id], spawnPoint));
-                }
-                else
-                {
-                    int id = Random.Range(0, def.FodderEnemies.Length);
-                    InitializeEnemy(Instantiate(def.FodderEnemies[id], spawnPoint));
-                }
+                InitializeEnemy(Instantiate(def.GetRandomEnemyPrefab(), spawnPoint));
             }
         }
         else if (m_BossRoom)

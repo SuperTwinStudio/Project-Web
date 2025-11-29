@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [Serializable, CreateAssetMenu(fileName = "Level", menuName = "Paper/Level")]
@@ -29,12 +30,42 @@ public class LevelDefinition : ScriptableObject
 	public GameObject[] SecretRooms;
 
 	[Header("Enemies")]
-	public int RareEnemyChance = 25;
-	public GameObject[] FodderEnemies;
-	public GameObject[] RareEnemies;
+	public EnemyWeight[] EnemiesWeights;
 
 	[Header("Treasure")]
 	public int RareTreasureChance = 25;
 	public Item[] NormalTreasure;
 	public Item[] RareTreasure;
+
+
+    //Helpers
+    public GameObject GetRandomEnemyPrefab() {
+        //Claculate total weight
+        float totalWeight = EnemiesWeights.Sum(e => Math.Max(0, e.weight));
+
+        //Get random weight
+        float randomWeight = (float) (new System.Random().NextDouble() * totalWeight);
+
+        //Find enemy with random weight
+        float currentWeight = 0;
+        foreach (var enemy in EnemiesWeights)  {
+            //Add the current item's weight to the running total
+            currentWeight += Math.Max(0, enemy.weight);
+
+            //If the random value falls within the range of this item's weight, select it
+            if (randomWeight < currentWeight) return enemy.prefab;
+        }
+
+        //Return last
+        return EnemiesWeights.Last().prefab;
+    }
+
+    [Serializable]
+    public class EnemyWeight {
+
+        public GameObject prefab;
+        public float weight = 1;
+
+    }
+
 }

@@ -13,12 +13,12 @@ public class RootMotionNavMesh : MonoBehaviour {
         t = navMeshAgent.gameObject.transform;
     }
 
-    private void OnAnimatorMove()
-    {
+    private void OnAnimatorMove() {
         if (ApplyRootmotion) Move();
     }
 
-    void Move() {
+    private void Move() {
+        if (!navMeshAgent.isOnNavMesh) return;
         Vector3 newPosition = t.position + animator.deltaPosition;
         Vector3 vel = newPosition - t.position;
         navMeshAgent.Move(vel);

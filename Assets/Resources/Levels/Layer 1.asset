@@ -34,11 +34,13 @@ MonoBehaviour:
   SecretRoomsHaveDoors: 1
   SecretRoomChance: 10
   SecretRooms: []
-  RareEnemyChance: 25
-  FodderEnemies:
-  - {fileID: 2959519311001760364, guid: 16578441a536ec64d80a967e61534ac9, type: 3}
-  RareEnemies:
-  - {fileID: 942808692006269173, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
+  EnemiesWeights:
+  - prefab: {fileID: 2959519311001760364, guid: 16578441a536ec64d80a967e61534ac9, type: 3}
+    weight: 70
+  - prefab: {fileID: 942808692006269173, guid: 441c195b5f3facc4fbd76d5eeca07367, type: 3}
+    weight: 25
+  - prefab: {fileID: 942808692006269173, guid: ed5d1283271d6b94c86fc4290daf6c28, type: 3}
+    weight: 5
   RareTreasureChance: 25
   NormalTreasure:
   - {fileID: 11400000, guid: 0cf1e182dcc1d0d41966172186324886, type: 2}

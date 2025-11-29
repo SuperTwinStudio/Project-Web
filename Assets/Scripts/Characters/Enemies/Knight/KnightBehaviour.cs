@@ -5,8 +5,8 @@ public class KnightBehaviour : EnemyBehaviour {
     //Attack
     [Header("Attack")]
     [SerializeField] private GameObject shield;
-    [SerializeField] private float _attackRange = 1.3f;
-    [SerializeField] private float _attackRadius = 1.6f;
+    [SerializeField] private float _attackRange = 2f;
+    [SerializeField] private float _attackRadius = 2f;
     [SerializeField] private float _attackDamage = 20f;
 
     public bool IsShieldOut { get; private set; } = false;
