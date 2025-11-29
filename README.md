@@ -360,13 +360,13 @@ A lo largo de una “run” el jugador podrá obtener diversos objetos que otorg
 En la tienda se podrán obtener mejoras de los atributos del personaje de índole permanente para progresar en el juego.
 - **Gramaje:** aumenta la vida.
 - **Rugosidad:** reduce el daño recibido.
-- **Purpurina:** reduce el cooldown del dash.
+- **Porosidad:** reduce el cooldown del dash.
 
 | **Icono**                 | **Mejora**                 | **Descripción**     |
 | ------------------------- | -------------------------- | ------------------- |
 |  ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.png?raw=true) | Gramaje |  aumenta la vida |
 |  ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.png?raw=true) | Rugosidad |  reduce el daño recibido |
-|  | Purpurina |  reduce el cooldown del dash |
+|  | Porosidad |  reduce el cooldown del dash |
 
 ### Tesoros
 
