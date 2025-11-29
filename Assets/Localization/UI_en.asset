@@ -291,14 +291,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20600535573729280
-    m_Localized: Welcome to Washi's Adventures! We'll teach you the basics to start
-      playing.
+    m_Localized: Welcome to Washi & The Paper Kingdom! We'll teach you the basics
+      to start playing.
     m_Metadata:
       m_Items: []
   - m_Id: 20600541508669440
-    m_Localized: Washi's Adventures is somewhat of a extraction-roguelite. You'll
-      be able to combat enemies in a dungeon, find treasures, extract them and sell
-      them for gold.
+    m_Localized: Washi & The Paper Kingdom is somewhat of a extraction-roguelite.
+      You'll be able to combat enemies in a dungeon, find treasures, extract them
+      and sell them for gold.
     m_Metadata:
       m_Items: []
   - m_Id: 20600545619087360
