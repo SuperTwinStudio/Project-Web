@@ -364,9 +364,9 @@ En la tienda se podrán obtener mejoras de los atributos del personaje de índol
 
 | **Icono**                 | **Mejora**                 | **Descripción**     |
 | ------------------------- | -------------------------- | ------------------- |
-|  ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.png?raw=true) | Gramaje |  aumenta la vida |
-|  ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.png?raw=true) | Rugosidad |  reduce el daño recibido |
-|  | Porosidad |  reduce el cooldown del dash |
+| ![Gramaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Gramaje_Icon.png?raw=true) | Gramaje |  aumenta la vida |
+| ![Rugosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Rugosity_Icon.png?raw=true) | Rugosidad |  reduce el daño recibido |
+| ![Porosidad](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Upgrades/Dash_Icon.png?raw=true) | Porosidad |  reduce el cooldown del dash |
 
 ### Tesoros
 
@@ -494,12 +494,12 @@ Los distintos elementos interactuables también incluirán la estética de escri
 
 ### Arte conceptual
 
-![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Armas.jpg?raw=true)
-![Columnas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Columnas.jpg?raw=true)
-![Arte del concepto general](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/ConceptGeneral.jpg?raw=true)
-![Escenario detallado](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/DetallesEscenario.jpg?raw=true)
-![Ejemplo enfermería](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Enfermeria.jpg?raw=true)
-![Ejemplo vendedor](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Vendedor.jpg?raw=true)
+![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/Armas.jpg?raw=true)
+![Columnas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/Columnas.jpg?raw=true)
+![Arte del concepto general](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/ConceptGeneral.jpg?raw=true)
+![Escenario detallado](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/DetallesEscenario.jpg?raw=true)
+![Ejemplo enfermería](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/Enfermeria.jpg?raw=true)
+![Ejemplo vendedor](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Concept/Vendedor.jpg?raw=true)
 
 ### Cámara e iluminación
 
@@ -588,9 +588,8 @@ Efectos de sonido que acompañan a la música refuerzan la retroalimentación de
 
 #### Menú Principal
 
-![Menú Principal](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Main%20Menu.png?raw=true)
-
-![Menú Principal Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Main_Menu.png?raw=true)
+![Home Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Home_Old.webp?raw=true)
+![Home New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Home_New.webp?raw=true)
 
 Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Componentes del Menú Principal:
 - **Botón Play:** al pulsarlo conduce a la pantalla de juego. Usando el botón play de ejemplo, al hacer hover sobre un botón adquiere un fondo y se invierte el color del texto (por ejemplo, si el botón es blanco al hacer hover se volverá negro con borde blanco).
@@ -603,9 +602,8 @@ Pantalla inicial desde la que se podrá acceder a la partida, ajustes, etc. Comp
 
 #### Créditos
 
-![Créditos](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Credits.png?raw=true)
-
-![Créditos Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Credits.png?raw=true)
+![Credits Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Credits_Old.webp?raw=true)
+![Credits New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Credits_New.webp?raw=true)
 
 Se accede desde el menú principal, y contendrá el logo del estudio, los nombres de cada miembro del equipo y su rol principal en el desarrollo del videojuego.
 - **Botón Return:** regresa a la pantalla Menú Principal.
@@ -613,9 +611,8 @@ Se accede desde el menú principal, y contendrá el logo del estudio, los nombre
 
 #### Ajustes
 
-![Ajustes](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Settings.png?raw=true)
-
-![Ajustes Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Settings.png?raw=true)
+![Settings Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Settings_Old.webp?raw=true)
+![Settings New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Settings_New.webp?raw=true)
 
 Pantalla de ajustes a la que se podrá acceder desde la pantalla Menú Principal. Contiene los siguientes elementos:
 - **Slider de música:** permite controlar el valor del volumen de la música del juego en un rango de cero a cien.
@@ -627,9 +624,23 @@ Pantalla de ajustes a la que se podrá acceder desde la pantalla Menú Principal
 
 Se podrá acceder a esta pantalla desde el Lobby, y se compondrá de dos secciones de elementos que el jugador podrá mejorar progresivamente. Las secciones están separadas por pestañas (a modo de archivador).
 
+#### Pestaña Personaje
+
+![Shop1 Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Shop_Old1.webp?raw=true)
+![Shop1 New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Shop_New1.webp?raw=true)
+
+Similar a la Pestaña Armas, contará con los siguientes elementos:
+- **Texto Character Upgrade:** título y descripción de la función de la pantalla.
+- **Mejoras:** mismo que para las armas. Para una característica existen los siguientes elementos:
+- **Cuadrado Icono:** representación visual de la propiedad
+- **Nombre, nivel y descripción de la propiedad.**
+- **Botón Upgrade:** misma función que en Pestaña Armas.
+- **Imagen Render:** render del personaje.  
+  
 #### Pestaña Armas
 
-![Armas](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/weapon%20tab.png?raw=true)
+![Shop2 Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Shop_Old2.webp?raw=true)
+![Shop2 New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Shop_New2.webp?raw=true)
 
 - **Texto Weapon Upgrade:** título y descripción de la función de la pantalla.
 - **Selector de clases:** debajo del texto habrá una sección de botones que permitirá escoger qué clase se desea mejorar. La clase seleccionada aparecerá resaltada en colores más claros, y para las clases bloqueadas el botón estará desactivado hasta desbloquearlas.
@@ -640,25 +651,10 @@ Se podrá acceder a esta pantalla desde el Lobby, y se compondrá de dos seccion
 - **Texto Equipped class:** con el nombre de la clase actualmente equipada
 - **Imagen Render:** render del personaje con el arma equipada.
 
-#### Pestaña Personaje
-
-![Personaje](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Char%20tab.png?raw=true)
-
-![Personaje Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Shop.png?raw=true)
-
-Similar a la Pestaña Armas, contará con los siguientes elementos:
-- **Texto Character Upgrade:** título y descripción de la función de la pantalla.
-- **Mejoras:** mismo que para las armas. Para una característica existen los siguientes elementos:
-- **Cuadrado Icono:** representación visual de la propiedad
-- **Nombre, nivel y descripción de la propiedad.**
-- **Botón Upgrade:** misma función que en Pestaña Armas.
-- **Imagen Render:** render del personaje.  
-
 ### Juego
 
-![Juego](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Game.png?raw=true)
-
-![Juego Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Game.png?raw=true)
+![Game Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Game_Old.webp?raw=true)
+![Game New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Game_New.webp?raw=true)
 
 Pantalla que se mostrará durante el tiempo de juego dentro de las mazmorras. Contiene los siguientes elementos:
 - **Rectángulo Life:** espacio designado para representar la vida del personaje, en forma de barra o de contenedores con forma de corazón.
@@ -671,8 +667,9 @@ Pantalla que se mostrará durante el tiempo de juego dentro de las mazmorras. Co
 
 #### Menú Pausa (in game)
 
-![Pausa](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/pausa1.png?raw=true)
-![Pausa America de los 90](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/pausa2.png?raw=true)
+![Pause Old1](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Pause_Old1.webp?raw=true)
+![Pause Old2](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Pause_Old2.webp?raw=true)
+![Pause New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Pause_New.webp?raw=true)
 
 Desde este menú se podrá detener la partida, realizar cambios menores en los ajustes y abandonar la partida. Contiene los mismos ajustes descritos en la pantalla de ajustes anterior. 
 - **Botón Return:** desactiva el modo pausa y continúa la partida.
@@ -680,17 +677,15 @@ Desde este menú se podrá detener la partida, realizar cambios menores en los a
 
 ### Pantallas de victoria y derrota
 
-![Victoria](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Stage%20Cleared.png?raw=true)
-
-![Victoria Final](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Victory.png?raw=true)
+![Victoria Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Victory_Old.webp?raw=true)
+![Victoria New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Victory_New.webp?raw=true)
 
 La pantalla de victoria se mostrará al salir de la sala del boss tras haberlo derrotado, y mostrará estadísticas del jugador de dicho nivel, como las monedas e ítems recogidos y el tiempo invertido en superar dicho piso. 
 - **Botón Return to Castle:** devuelve al jugador al Hub.
 - **Botón Continue:** empieza un nuevo piso.
 
-![Stage Cleared](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Game%20Over.png?raw=true)
-
-![Derrota](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Final_UI/Defeat.png?raw=true)
+![Derrota Old](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Defeat_Old.webp?raw=true)
+![Derrota New](https://github.com/SuperTwinStudio/Project-Web/blob/main/PicturesGDD/Menus/Defeat_New.webp?raw=true)
 
 La pantalla Game Over se mostrará siempre que el jugador muera en combate o abandone la partida a través del Menú de Pausa. En función de la causa, la sprite del personaje se mostrará de formas distintas. 
 - **Mensaje Game Over:** mensaje motivacional relacionado con la historia del juego que aparecerá debajo del letrero de Game Over.
