@@ -5,6 +5,7 @@ public class AirGust : MonoBehaviour
     private Rigidbody m_Rigidbody => GetComponent<Rigidbody>();
 
     private float m_Speed = 15;
+    private float m_PushForce = 5;
 
     private void Start()
     {
@@ -20,14 +21,11 @@ public class AirGust : MonoBehaviour
         //Ignore player/other
         if (other.CompareTag("Player")) return;
         
-        //Check if damageable
-        if (other.TryGetComponent(out IDamageable damageable))
+        //Check if pushable
+        if (other.TryGetComponent(out Character character))
         {
-            if(other.TryGetComponent(out Character character))
-            {
-                Vector3 direction = other.transform.position - transform.position;
-                character.Push(direction * 2);
-            }
+            Vector3 direction = other.transform.position - transform.position;
+            character.Push(direction * m_PushForce);
         }
         
         //Destroy self

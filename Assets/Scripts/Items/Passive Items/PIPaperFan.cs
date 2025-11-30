@@ -6,6 +6,6 @@ public class PIPaperFan : PassiveItem
 
     public override void OnDashHook(Player player, int itemCount, Vector3 direction)
     {
-        Instantiate(m_Projectile, player.transform.position + direction.normalized * 2f, Quaternion.LookRotation(direction));
+        Instantiate(m_Projectile, player.transform.position + Vector3.up, Quaternion.LookRotation(direction));
     }
 }

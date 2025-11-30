@@ -836,6 +836,7 @@ Transform:
   - {fileID: 39948308774186126}
   - {fileID: 2251465985977451428}
   - {fileID: 3036504832568781587}
+  - {fileID: 3911792960311980327}
   m_Father: {fileID: 8996336781087037718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375968832069440045
@@ -2922,7 +2923,6 @@ Transform:
   - {fileID: 6770083442001062292}
   - {fileID: 6239940966876236477}
   - {fileID: 9179696387063210599}
-  - {fileID: 3911792960311980327}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6305736318910507697
@@ -3126,7 +3126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8996336781087037718}
+  m_Father: {fileID: 2484199866640006821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2775364574403073847
 MeshRenderer:
@@ -3192,7 +3192,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 18, y: 6, z: 18}
+  m_Size: {x: 16, y: 6, z: 16}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3289212276349099407
 MonoBehaviour:
