@@ -66,11 +66,11 @@ Historial de versiones y cambios realizados en el documento.
 - **Versión 0.4 - 6/10/25:** desarrollo del apartado Audio y SFX. Desarrollo del apartado Interfaces. Balanceo de las clases de armas.
 - **Versión 0.5 - 11/10/25:** segunda revisión y cambios menores en todo el documento. Desarrollo del apartado Generación procedimental de mazmorras. Refinado del apartado Interfaces, Diagrama de flujo y Mejoras.
 - **Versión 0.6 - 15/11/25:** ampliación del documento con el contenido de la beta, enfatizando en el apartado de las mecánicas:
-	- **Jugador:** adición de un *Dash* y feedback de combate.
-	- **Armas:** balanceo de daños y cooldowns. Cambios en el funcionamiento de las clases Cerilla y Abanico. Exclusión de la clase Mental para la Beta.
-    - **Mejoras permanentes:** cambios y adiciones (Purpurina) en las mejoras permanentes.
-	- **Objetos:** adición de objetos con habilidades pasivas para mejorar el Game Flow.
-	- **Enemigos:** ajuste en el nivel de dificultad de los enemigos. Cambios en el moveset del jefe Miso Beast y exclusión del jefe Calamarcillo.
+  - **Jugador:** adición de un *Dash* y feedback de combate.
+  - **Armas:** balanceo de daños y cooldowns. Cambios en el funcionamiento de las clases Cerilla y Abanico. Exclusión de la clase Mental para la Beta.
+  - **Mejoras permanentes:** cambios y adiciones (Purpurina) en las mejoras permanentes.
+  - **Objetos:** adición de objetos con habilidades pasivas para mejorar el Game Flow.
+  - **Enemigos:** ajuste en el nivel de dificultad de los enemigos. Cambios en el moveset del jefe Miso Beast y exclusión del jefe Calamarcillo.
 
 
 
@@ -511,75 +511,36 @@ Uso de una cámara isométrica, en 3º persona, con una distancia focal alta y p
 
 ### Música
 
-La música servirá como herramienta de refuerzo para la experiencia inmersiva. Todas las melodías deben ser seamless para poder reproducirse en bucle sin interrupciones. Se incluyen algunas referencias de videojuegos ya existentes para ejemplificar el estilo y emociones que deben suscitar las melodías.
+La música servirá como herramienta de refuerzo para la inmersión. Todas las melodías deben ser seamless para poder reproducirse en bucle sin interrupciones. Se incluyen algunas referencias de videojuegos ya existentes para ejemplificar el estilo y emociones que deben suscitar las melodías.
 
 **Tema principal:** 
-- **Uso:** pantalla de Menú Principal y Lobby.
+- **Uso:** menú principal y castillo.
 - **Descripción:** melodía ambiental tranquila. Debe ayudar a enfatizar la sensación de calma de la aldea y evocar cierta sensación de tristeza o soledad. Utilizará instrumentos de viento suaves e instrumentos de cuerdas pulsadas, como el arpa o la kalimba. Debe contar con un leitmotiv o un conjunto de notas memorable y característico que se pueda emplear en otras melodías del juego. 
 
-**Tema de exploración:** 
+**Tema de combate:** 
 - **Uso:** mazmorras.
 - **Descripción:** melodía entretenida y dinámica. Debe producir una sensación de tensión, y no debe ser distractiva. El loop debe ser lo suficientemente largo como para que no se vuelva repetitivo y debe ser fácilmente combinable con el tema de combate.
 - **Tema de referencia:** Darkwood OST Extended de Cult of The Lamb.
 
-**Tema de combate:** 
-- **Uso:** al entrar en combate con enemigos en las mazmorras.
-- **Descripción:** variación de la melodía de exploración a la que se le añaden instrumentos de percusión y efectos sonoros. 
+### SFX
 
-**Tema de la tienda:** 
-- **Uso:** tienda del Hub.
-- **Descripción:** melodía tranquila con un toque juguetón. Debe transmitir calidez. Variación del tema principal, añadiendo sintetizadores. 
-- **Tema de referencia:** Tom Nook de Animal Crossing.
-
-### Ambiente sonoro (SFX)
-
-Efectos de sonido que acompañan a la música refuerzan la retroalimentación del juego. A continuación se describen los sonidos a utilizar:
+Efectos de sonido que acompañan a las acciones del juego y refuerzan su retroalimentación. A continuación se describen los sonidos a utilizar:
 
 #### Efectos del jugador
 
-- **Movimiento:** sonido de dos papeles rozándose suavemente al ritmo del paso del personaje  (obtenido en pixabay.com).
+- **Movimiento:** sonido de dos papeles rozándose suavemente al ritmo del paso del personaje (obtenido en pixabay.com).
 - **Dash:** sonido largo de dos papeles al rozarse y efecto de corriente de aire.
-- **Recibir daño:** sonido de golpe contundente y efecto de voz del personaje. Al recibir daño, por un tiempo breve el resto de sonidos se escucharán más bajos. Para referencia del efecto,  consultar Hollow Knight o Cult of the Lamb.    
-- **Morir:** sonido de un papel rompiéndose y efecto de voz del personaje.
 
 #### Efectos de armas:
 
-- **Espada:** corte limpio y silbante de tono medio.
-- **Cerilla:** igual que la clase Espada, con un tono más grave y una duración mayor.
-- **Garra:** igual que la clase Espada, con un tono más agudo y una duración menor.
-- **Grapadora:** estallido compacto, como el de un disparo.
-- **Abanico:** silbido suave, imitando corrientes de viento.
-
-#### Efectos de estados alterados:
-
-- **Quemado:** crujido suave y chisporroteo de madera quemándose.
-- **Paralizado:** crujido fuerte al inicio, y pequeños crujidos con un zumbido durante el efecto. Al finalizar, suena otro crujido fuerte.
-- **Mojado:** sonido de burbujas y agua, como si el personaje estuviese sumergiéndose bajo el agua.
-- **Manchado:** leve chapoteo viscoso al hacer cualquier movimiento.  
+Sonidos para las habilidades primaria y secundaria de la espada, cerilla, chincheta, grapadora y abanico.
 
 #### Efectos de enemigos
 
-- **Goblin:**
-	- **Por defecto:** sonidos nasales y risas burlonas.
-	- **Atacar:** efecto de Woosh al tirar una lanza
-	- **Recibir daño/ morir:** sonidos nasales tristes.
-- **Ladronzuelo**:
-	- **Por defecto:** susurros y risas agudas.
-	- **Atacar:** sonido de tirar o arañar tela.
-	- **Recibir daño/ morir:** grito grave.
-    
-#### Efectos del entorno
-
-- **Sonido de puerta:** se reproducirá al internarse en la mazmorra. Sonará como una puerta pesada arrastrándose con efectos de eco.
-- **Sonido de sala cerrándose:** al internarse en una nueva sala con enemigos. Reproducirá un golpe seco o sonidos de cadenas para indicar que las salidas han quedado bloqueadas
-- **Sonidos de NPCs:** los NPCs emitirán sonidos puntualmente al interactuar con ellos. Las voces serán similares a las de los cultistas de Cult of the Lamb o los aldeanos de Animal Crossing.
-
-### Efectos de la UI
-
-- **Al hacer clic sobre un botón**
-- **Al comprar un objeto:** sonido de monedas tintineando o sonido de caja registradora.
-- **Al abrir el inventario:** efecto de sonido de libro pasando una hoja de papel.
-
+- **Ladronzuelo**: Sonidos al atacar, huir, recibir daño y morir.
+- **Duende:** Sonidos al atacar, y moverse.
+- **Caballero:** Sonidos al atacar, recibir daño y morir.
+- **Miso Beast:** Sonidos al enfadarse, cargar, recibir daño y morir.
 
 
 ## 11. Interfaces
