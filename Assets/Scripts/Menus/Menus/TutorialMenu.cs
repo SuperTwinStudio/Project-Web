@@ -51,7 +51,8 @@ public class TutorialMenu : Menu {
         TutorialItem tutorial = tutorials[index];
         tutorialIndex = index;
         tutorialText.SetText(tutorial.Name);
-        tutorialVideo.clip = tutorial.Video;
+        //tutorialVideo.clip = tutorial.Video;
+        tutorialVideo.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Tutorials", tutorial.FileName);
         tutorialVideo.Play();
 
         //Toggle buttons
@@ -122,9 +123,9 @@ public class TutorialMenu : Menu {
 public class TutorialItem {
     
     [SerializeField] private LocalizedString _name;
-    [SerializeField] private VideoClip _video;
+    [SerializeField] private string _fileName;
     
     public string Name => _name.GetLocalizedString();
-    public VideoClip Video => _video;
+    public string FileName => _fileName;
 
 }
