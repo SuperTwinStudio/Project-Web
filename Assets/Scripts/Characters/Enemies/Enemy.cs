@@ -35,7 +35,7 @@ public class Enemy : Character {
 
     public bool UseAutomaticRotation { get; private set; } = true;
 
-    public bool AgentReachedDestination => !Agent.pathPending && Agent.remainingDistance <= 0.1f; // && Agent.hasPath
+    public bool AgentReachedDestination => Agent.isOnNavMesh && !Agent.pathPending && Agent.remainingDistance <= 0.1f; // && Agent.hasPath
 
     public override Vector3 MoveVelocity => Agent.desiredVelocity;
 
