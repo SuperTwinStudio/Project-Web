@@ -35,7 +35,7 @@ public class Enemy : Character {
 
     public bool UseAutomaticRotation { get; private set; } = true;
 
-    public bool AgentReachedDestination => Agent.hasPath && !Agent.pathPending && Agent.remainingDistance <= 0.1f;
+    public bool AgentReachedDestination => !Agent.pathPending && Agent.remainingDistance <= 0.1f; // && Agent.hasPath
 
     public override Vector3 MoveVelocity => Agent.desiredVelocity;
 
@@ -281,9 +281,10 @@ public class Enemy : Character {
 
     public Vector3 GetFurthestPoint(Vector3 moveDirection, float maxDistance) {
         //Gather info
+        Vector3 position = Model.position;
         CapsuleCollider capsule = Collider as CapsuleCollider;
-        Vector3 capsuleStart = Model.position + GET_POINT_ERROR * Vector3.up;
-        Vector3 capsuleEnd = Model.position + (capsule.height - 2 * GET_POINT_ERROR) * Vector3.up;
+        Vector3 capsuleStart = position + GET_POINT_ERROR * Vector3.up;
+        Vector3 capsuleEnd = position + (capsule.height - 2 * GET_POINT_ERROR) * Vector3.up;
         float radius = capsule.radius - GET_POINT_ERROR;
 
         //Check for max forward distance
@@ -292,9 +293,9 @@ public class Enemy : Character {
         //Return furthest point
         return hit ?
             //Hit something -> Move right before the hit
-            capsuleStart + (hitInfo.distance - radius) * moveDirection :
+            position + (hitInfo.distance - radius) * moveDirection :
             //Didn't hit nothing -> Max distance possible
-            capsuleStart + maxDistance * moveDirection;
+            position + maxDistance * moveDirection;
     }
 
     public (Vector3 point, float distance) GetFurthestPointAndDistance(Vector3 moveDirection, float maxDistance) {
