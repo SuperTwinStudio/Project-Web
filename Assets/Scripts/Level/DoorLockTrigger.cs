@@ -6,9 +6,6 @@ public class DoorLockTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            m_Room.TryLockDoors();
-        }
+        if (other.CompareTag("Player") && m_Room.TryLockDoors()) Destroy(gameObject);
     }
 }

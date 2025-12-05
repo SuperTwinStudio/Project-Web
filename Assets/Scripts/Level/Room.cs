@@ -187,11 +187,16 @@ public class Room : MonoBehaviour
         m_FadeTrigger = true;
     }
 
-    public void TryLockDoors()
+    public bool TryLockDoors()
     {
         if ((m_EnemyRoom && EnemyCount != 0) || (m_BossRoom && IsBossPresent)) 
         {
             LockDoors();
+            return true;
+        }
+        else 
+        {
+            return false;
         }
     }
 
