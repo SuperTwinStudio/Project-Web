@@ -436,6 +436,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2082121092}
     - target: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
+      propertyPath: _definition
+      value: 
+      objectReference: {fileID: 11400000, guid: d1b3decb0f9fc6c4993fba677df134d1, type: 2}
+    - target: {fileID: 3232228542684844082, guid: 1056979970049e54f890b3a1a7661df6, type: 3}
       propertyPath: _isHandmade
       value: 0
       objectReference: {fileID: 0}
@@ -613,7 +617,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2082121093}
   - {fileID: 874276537}
   - {fileID: 1533864499}
+  - {fileID: 2082121093}
   - {fileID: 672118084}

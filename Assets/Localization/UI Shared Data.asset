@@ -303,6 +303,10 @@ MonoBehaviour:
     m_Key: "inventory_passive_label\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 24199146941321216
+    m_Key: indicator_floor
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

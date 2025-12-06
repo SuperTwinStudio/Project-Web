@@ -321,6 +321,10 @@ MonoBehaviour:
     m_Localized: Passive Items
     m_Metadata:
       m_Items: []
+  - m_Id: 24199146941321216
+    m_Localized: Floor
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

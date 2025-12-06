@@ -317,6 +317,10 @@ MonoBehaviour:
     m_Localized: Objetos Pasivos
     m_Metadata:
       m_Items: []
+  - m_Id: 24199146941321216
+    m_Localized: Piso
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

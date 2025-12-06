@@ -51,7 +51,7 @@ public class Game : MonoBehaviour, ISavable {
     public static bool IsPlaying => !IsPaused && !IsLoading;
 
     //Saving
-    private const int SAVE_VERSION = 2;
+    private const int SAVE_VERSION = 3;
 
     private bool saveFileLoaded = false;
     private bool saveIsLoading = false;
@@ -93,12 +93,12 @@ public class Game : MonoBehaviour, ISavable {
 
         //Check for a level
         InGame = Level;
+    
+        //Load game state
+        if (InGame) LoadGame();
 
         //Init menus with new game menus
         MenuManager.Init(newGame.MenuManager);
-
-        //Load game state
-        if (InGame) LoadGame();
     }
 
     //Cursor
@@ -236,6 +236,8 @@ public class Game : MonoBehaviour, ISavable {
         return JsonUtility.ToJson(new GameSave() {
             //Version
             version = SAVE_VERSION,
+            //Level
+            level = Level.OnSave(),
             //Player
             player = Level.Player.OnSave()
         });
@@ -244,6 +246,9 @@ public class Game : MonoBehaviour, ISavable {
     public void OnLoad(string saveJson) {
         //Parse save
         var save = JsonUtility.FromJson<GameSave>(saveJson);
+
+        //Load level
+        Level.OnLoad(save.level);
 
         //Load player
         Level.Player.OnLoad(save.player);
@@ -254,6 +259,9 @@ public class Game : MonoBehaviour, ISavable {
 
         //Save version
         public int version = SAVE_VERSION;
+
+        //Level
+        public string level = "{}";
 
         //Player
         public string player = "{}";

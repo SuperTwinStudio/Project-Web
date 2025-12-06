@@ -49,6 +49,10 @@ public class Enemy : Character {
     public float TargetLastKnownDistance { get; private set; }
     public Vector3 TargetLastKnownPosition { get; private set; }
 
+    //Attack
+    [Header("Attack")]
+    [SerializeField, Min(0)] private float attackLevelFloorMultiplier = 0.5f;
+
     //Room
     public Room Room { get; private set; } = null;
 
@@ -257,6 +261,11 @@ public class Enemy : Character {
     private void OnEffectsUpdated() {
         //Update move speed
         Agent.speed = moveSpeed * SpeedMultiplier;
+    }
+
+    //Attack
+    public override float CalculateDamage(float damage) {
+        return base.CalculateDamage(damage) * (1 + (Level.Floor - 1) * attackLevelFloorMultiplier);
     }
 
     //Room

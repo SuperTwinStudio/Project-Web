@@ -344,8 +344,8 @@ public class Loadout : MonoBehaviour, ISavable {
             //In lobby -> Sell inventory
             int soldValue = SellInventory();
 
-            //Show items sold message
-            if (soldValue > 0 && Game.Current.MenuManager.TryGetMenu(out GameMenu menu)) menu.ShowMessage($"{goldSoldLocale.GetLocalizedString()} {soldValue}G");
+            //Queue items sold message
+            if (soldValue > 0) GameMenu.QueueMessageBeforeInit($"{goldSoldLocale.GetLocalizedString()} {soldValue}G");
         }
 
         //Load unlocked weapons

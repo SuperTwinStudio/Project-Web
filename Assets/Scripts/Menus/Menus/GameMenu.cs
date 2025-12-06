@@ -4,6 +4,7 @@ using Botpa;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class GameMenu : Menu {
@@ -43,7 +44,7 @@ public class GameMenu : Menu {
     [SerializeField] private Animator messageAnimator;
     [SerializeField] private TMP_Text messageText;
 
-    private readonly List<string> messages = new();
+    private static readonly List<string> messages = new();
 
     public bool ShowingMessage { get; private set; } = false;
 
@@ -61,9 +62,11 @@ public class GameMenu : Menu {
     [SerializeField] private TMP_Text treasureName;
 
     //Minimap
-    [Header("Minimap")]
+    [Header("Minimap + Floor")]
     [SerializeField] private GameObject minimap;
     [SerializeField] private Transform minimapCamera;
+    [SerializeField] private TMP_Text floorText;
+    [SerializeField] private LocalizedString floorLocale;
 
     //Boss Healthbar
     [Header("Boss Healthbar")]
@@ -99,9 +102,6 @@ public class GameMenu : Menu {
         if (pauseAction.Triggered()) OpenPause();
         //Open inventory
         else if (inventoryAction.Triggered()) OpenInventory();
-
-        //Disable minimap in lobby
-        minimap.SetActive(!Level.IsLobby);
 
         //Move minimap camera
         Vector3 playerPos = Player.transform.position;
@@ -228,11 +228,19 @@ public class GameMenu : Menu {
         //Check if there are more messages
         if (!messages.IsEmpty()) {
             //More -> Show next
-            StartCoroutine(ShowMessageCoroutine());
+            StartShowMessageCoroutine(true);
         } else {
             //Finish
             ShowingMessage = false;
         }
+    }
+
+    private void StartShowMessageCoroutine(bool force = false) {
+        if (force || !ShowingMessage) StartCoroutine(ShowMessageCoroutine());
+    }
+
+    public static void QueueMessageBeforeInit(string message) {
+        messages.Add(message);
     }
 
     public void ShowMessage(string message) {
@@ -240,7 +248,7 @@ public class GameMenu : Menu {
         messages.Add(message);
 
         //Show message if not showing any yet
-        if (!ShowingMessage) StartCoroutine(ShowMessageCoroutine());
+        StartShowMessageCoroutine();
     }
 
     //Menus
@@ -250,6 +258,12 @@ public class GameMenu : Menu {
 
     public void OpenInventory() {
         MenuManager.Open(MenusList.Inventory);
+    }
+
+    //Level
+    public void UpdateFloorNumber() {
+        //Update floor number (also called on locale changed)
+        floorText.SetText(Level.IsLobby ? "" : $"{floorLocale.GetLocalizedString()} {Level.Floor}");
     }
 
 
@@ -276,23 +290,31 @@ public class GameMenu : Menu {
         UpdateHealthIndicator(Player.Health);
         lastKnownHealth = -1;
 
-        //Add weapon change event
+        //Add weapon change event & update it
         Player.Loadout.AddOnWeaponChanged(OnWeaponChanged);
+        OnWeaponChanged(null, Player.Loadout.CurrentWeapon);
 
         //Add item obtain event
         Player.Loadout.AddOnObtainItem(OnObtainItem);
 
-        //Hide boss healthbar
-        bossHealthbar.SetActive(false);
-        
         //Add treasure obtain event
         Player.Loadout.AddOnObtainTreasure(OnObtainTreasure);
 
+        //Toggle minimap & level floor text
+        minimap.SetActive(!Level.IsLobby);
+        UpdateFloorNumber();
+
+        //Hide boss healthbar
+        bossHealthbar.SetActive(false);
+
+        //Show queued messages
+        if (!messages.IsEmpty()) StartShowMessageCoroutine();
+
         //Show tutorial
-        /*if (!Preferences.TutorialShown) {
+        if (!Preferences.TutorialShown) {
             Preferences.TutorialShown = true;
             MenuManager.Open(MenusList.Tutorial);
-        }*/
+        }
     }
 
     protected override void OnClose() {

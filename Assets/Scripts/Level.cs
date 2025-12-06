@@ -1,7 +1,8 @@
+using System;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class Level : MonoBehaviour {
+public class Level : MonoBehaviour, ISavable {
 
     //Game
     private Game _game;
@@ -28,15 +29,15 @@ public class Level : MonoBehaviour {
     //Level
     [Header("Level")]
     [SerializeField] private bool _isLobby = false;
-    [SerializeField] private bool _isHandmade = true;
     [SerializeField] private NavMeshSurface _surface;
+    [SerializeField] private LevelDefinition _definition;
     [SerializeField] private Light _mainLight;
 
-    public LevelDefinition Definition;
+    public int Floor { get; private set; } = 0;
 
     public bool IsLobby => _isLobby;
-    public bool IsHandmade => _isHandmade;
     public NavMeshSurface Surface => _surface;
+    public LevelDefinition Definition => _definition;
 
 
     //State
@@ -48,10 +49,10 @@ public class Level : MonoBehaviour {
         Surface.BuildNavMesh();
 
         //Init dungeon
-        if (!IsHandmade) InitializeLevel();
+        if (!IsLobby) InitDungeon();
     }
 
-    private void InitializeLevel() {
+    private void InitDungeon() {
         RenderSettings.ambientLight = Definition.LightColor;
         RenderSettings.customReflectionTexture = Definition.reflectionMap;
 
@@ -79,6 +80,37 @@ public class Level : MonoBehaviour {
 
     public void PauseLevel() {
         Game.Current.MenuManager.Open(MenusList.Settings);
+    }
+
+    //Saving
+    public string OnSave() {
+        return JsonUtility.ToJson(new LevelSave() {
+            //Floor
+            floor = Floor
+        });
+    }
+
+    public void OnLoad(string saveJson) {
+        //Parse save
+        var save = JsonUtility.FromJson<LevelSave>(saveJson);
+
+        //Load floor number (only happens on scene creation, so if not in lobby we are in a dungeon)
+        if (IsLobby) {
+            //In lobby -> Reset floor number
+            Floor = 0;
+            Game.SaveGame();
+        } else {
+            //In dungeon -> Increase previous level floor number by one
+            Floor = save.floor + 1;
+        }
+    }
+
+    [Serializable]
+    private class LevelSave {
+
+        //Floor
+        public int floor = 0;
+
     }
 
 }

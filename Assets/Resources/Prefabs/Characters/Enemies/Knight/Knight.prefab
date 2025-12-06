@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 570962270898252307}
-  _attackRange: 2
+  _attackRange: 2.4
   _attackRadius: 2
   _attackDamage: 20
   _stunDuration: 2
