@@ -223,7 +223,7 @@ public class Character : MonoBehaviour, IDamageable {
         if (amount <= 0) return false;
 
         //Calculate damage
-        float damage = amount * EffectDamageTakenMultiplier;
+        float damage = Mathf.Floor(amount * EffectDamageTakenMultiplier);
 
         //Damage character
         Health = Mathf.Max(Health - damage, 0);
