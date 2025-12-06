@@ -87,7 +87,7 @@ public class ShopMenu : Menu {
     }
 
     //Character
-    private void UpdateCharacterUI() {
+    public void UpdateCharacterUI() {
         //Update upgrades
         characterGramaje.UpdateUI(Player.UpgradeGramaje, Loadout.Gold);
         characterRugosidad.UpdateUI(Player.UpgradeRugosidad, Loadout.Gold);
@@ -129,7 +129,7 @@ public class ShopMenu : Menu {
     }
 
     //Weapon
-    private void UpdateWeaponUI() {
+    public void UpdateWeaponUI() {
         //Prelocalize upgrade text & get current weapon
         if (!selectedWeapon) selectedWeapon = Loadout.CurrentWeapon;
 
