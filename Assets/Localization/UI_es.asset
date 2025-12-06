@@ -321,6 +321,22 @@ MonoBehaviour:
     m_Localized: Piso
     m_Metadata:
       m_Items: []
+  - m_Id: 24301503683366912
+    m_Localized: "Dise\xF1ador de SFX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301613821595648
+    m_Localized: "Dise\xF1ador de UI/UX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301634075889664
+    m_Localized: "Dise\xF1adora de UI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301649024389120
+    m_Localized: "Dise\xF1adora de UX"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

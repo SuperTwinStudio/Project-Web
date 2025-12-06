@@ -324,6 +324,22 @@ MonoBehaviour:
     m_Localized: Floor
     m_Metadata:
       m_Items: []
+  - m_Id: 24301503683366912
+    m_Localized: SFX Designer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301649024389120
+    m_Localized: UX Designer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301634075889664
+    m_Localized: UI Designer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301613821595648
+    m_Localized: UI/UX Designer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

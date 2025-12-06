@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278720811
+  m_fontColor: {r: 0.16862746, g: 0.09803922, b: 0.03137255, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -185,6 +185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2166288679029752010, guid: bfc5d96054d2d224eac0b9f272498467, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278720811
+      objectReference: {fileID: 0}
     - target: {fileID: 3209680087613063625, guid: bfc5d96054d2d224eac0b9f272498467, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -284,6 +288,10 @@ PrefabInstance:
     - target: {fileID: 3432694350696998684, guid: bfc5d96054d2d224eac0b9f272498467, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988902066218196965, guid: bfc5d96054d2d224eac0b9f272498467, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278720811
       objectReference: {fileID: 0}
     - target: {fileID: 6255357705730138662, guid: bfc5d96054d2d224eac0b9f272498467, type: 3}
       propertyPath: m_AnchorMax.y

@@ -307,6 +307,22 @@ MonoBehaviour:
     m_Key: indicator_floor
     m_Metadata:
       m_Items: []
+  - m_Id: 24301503683366912
+    m_Key: credits_sfx_m
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301613821595648
+    m_Key: credits_uiux_m
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301634075889664
+    m_Key: credits_ui_f
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24301649024389120
+    m_Key: credits_ux_f
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
