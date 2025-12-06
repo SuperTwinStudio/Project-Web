@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stun
   m_EditorClassIdentifier: 
   _show: 1
-  _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
+  _icon: {fileID: 21300000, guid: 1389f2943a0b72040b8bb20b2885a128, type: 3}
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29

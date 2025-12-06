@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glue
   m_EditorClassIdentifier: 
   _show: 1
-  _icon: {fileID: 21300000, guid: 1018318610d925841b3a2f37bf912859, type: 3}
+  _icon: {fileID: 21300000, guid: 99e50c7a8c0469f46a8ade93695d9ca1, type: 3}
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:0195ed0b25fa14d4f8ed14a678101c29

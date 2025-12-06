@@ -210,8 +210,8 @@ public class Character : MonoBehaviour, IDamageable {
     }
 
     public virtual bool Damage(float amount, DamageType type, object source) {
-        //Character is already dead or invulnerable -> Ignore damage
-        if (!IsAlive || IsInvulnerable) return false;
+        //Character is invulnerable or already dead -> Ignore damage
+        if (IsInvulnerable || !IsAlive) return false;
 
         //Ignore this tick of damage
         if (IgnoreNextDamage) {
@@ -222,13 +222,14 @@ public class Character : MonoBehaviour, IDamageable {
         //Ignore negative damage
         if (amount <= 0) return false;
 
+        //Calculate damage
         float damage = amount * EffectDamageTakenMultiplier;
 
         //Damage character
         Health = Mathf.Max(Health - damage, 0);
 
         //Show damage indicator
-        if (type != DamageType.Burn) Instantiate(damageVisualizer, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageVisualizer>().SetDamage(amount, type);
+        if (type != DamageType.Burn) Instantiate(damageVisualizer, Top.position + 0.3f * Vector3.up, Quaternion.identity).GetComponent<DamageVisualizer>().SetDamage(damage, type);
 
         //Check if character died
         if (Health <= 0) {
