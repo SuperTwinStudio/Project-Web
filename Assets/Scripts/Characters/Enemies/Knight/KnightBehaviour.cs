@@ -21,6 +21,14 @@ public class KnightBehaviour : EnemyBehaviour {
 
     public float StunDuration => _stunDuration;
 
+    //Sounds
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _damageSound;
+    [SerializeField] private AudioClip _deathSound;
+
+    public AudioClip DamageSound => _damageSound;
+    public AudioClip DeathSound => _deathSound;
+
 
     //Init
     protected override void OnInit() {
@@ -44,9 +52,6 @@ public class KnightBehaviour : EnemyBehaviour {
     }
 
     public override void OnDeath() {
-        //Disable shield
-        ToggleShield(false);
-
         //Go to death
         SetState(new KnightDeathState(this));
     }

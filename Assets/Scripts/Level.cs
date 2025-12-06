@@ -49,7 +49,7 @@ public class Level : MonoBehaviour, ISavable {
         Surface.BuildNavMesh();
 
         //Init dungeon
-        if (!IsLobby) InitDungeon();
+        if (!IsLobby && Definition) InitDungeon();
     }
 
     private void InitDungeon() {

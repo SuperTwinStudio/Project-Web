@@ -9,7 +9,10 @@ public class KnightDeathState : KnightState {
         Enemy.Animator.SetTrigger("Die");
 
         //Play sound
-        //Enemy.PlaySound(Duende.DeathSound);
+        Enemy.PlaySound(Knight.DeathSound);
+
+        //Disable shield
+        Knight.ToggleShield(false);
     }
 
 }
