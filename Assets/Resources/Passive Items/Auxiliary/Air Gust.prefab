@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 1180110299230892319}
   - component: {fileID: 1103532556888978407}
   - component: {fileID: 5684543147009430283}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Air Gust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
