@@ -13,6 +13,7 @@ public class Game : MonoBehaviour, ISavable {
 
     //Components
     [Header("Components")]
+    [SerializeField] private MusicManager _musicManager;
     [SerializeField] private MenuManager _menuManager;
 
     private Level _level;
@@ -99,6 +100,9 @@ public class Game : MonoBehaviour, ISavable {
 
         //Init menus with new game menus
         MenuManager.Init(newGame.MenuManager);
+
+        //Update music
+        _musicManager.NotifyNewScene();
     }
 
     //Cursor

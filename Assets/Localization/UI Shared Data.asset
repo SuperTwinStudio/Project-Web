@@ -323,6 +323,14 @@ MonoBehaviour:
     m_Key: credits_ux_f
     m_Metadata:
       m_Items: []
+  - m_Id: 25296539745353728
+    m_Key: credits_external
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25296555536908288
+    m_Key: credits_music
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

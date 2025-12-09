@@ -340,6 +340,14 @@ MonoBehaviour:
     m_Localized: UI/UX Designer
     m_Metadata:
       m_Items: []
+  - m_Id: 25296539745353728
+    m_Localized: External Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25296555536908288
+    m_Localized: Music by Kevin MacLeod
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
