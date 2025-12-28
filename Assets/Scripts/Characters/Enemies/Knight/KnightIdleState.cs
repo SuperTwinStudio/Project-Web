@@ -10,11 +10,11 @@ public class KnightIdleState : KnightState {
     }
 
     public override void Execute() {
-        //Check if target is visible
-        if (!Enemy.TargetIsVisible) return;
+        //Check if target position is known
+        if (!Enemy.TargetPositionIsKnown) return;
 
         //Follow target
-        Behaviour.SetState(new KnightFollowState(Behaviour), true);
+        Behaviour.SetState(new KnightFollowState(Behaviour));
     }
 
 }

@@ -33,7 +33,7 @@ public class BeastRageState : BeastState {
         yield return new WaitForSeconds(Beast.RageDuration);
 
         //Go start charging
-        Behaviour.SetState(new BeastPrechargeState(Behaviour), true);
+        Behaviour.SetState(new BeastPrechargeState(Behaviour));
     }
 
 }

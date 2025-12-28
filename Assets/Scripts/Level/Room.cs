@@ -215,7 +215,7 @@ public class Room : MonoBehaviour
 
     private void UnlockDoors()
     {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < m_Doors.Length; i++) {
             m_Doors[i].SetActive(((m_Flags >> i) & 0b1) == m_ShowActiveDoors);
         }
     }

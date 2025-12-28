@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Botpa;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable {
@@ -65,10 +64,17 @@ public class Character : MonoBehaviour, IDamageable {
 
 
     //State
-    private void Start() {
+    private void Awake() {
         //Init effects visualizer
         effectsVisualizer.Init(this, effects);
 
+        //Awake character
+        OnAwake();
+    }
+
+    protected virtual void OnAwake() {}
+
+    private void Start() {
         //Start character
         OnStart();
     }
@@ -104,18 +110,20 @@ public class Character : MonoBehaviour, IDamageable {
         int maxChecks = 10;
         for (int i = 0; i < maxChecks; i++) {
             //Get direction
-            float percent = (float)i / (maxChecks - 1);
+            float percent = (float) i / (maxChecks - 1);
             Vector3 direction = top + topToBot * percent - origin;
 
             //Raycast
             if (Physics.Raycast(origin, direction.normalized, out RaycastHit hit, viewDistance, layers, QueryTriggerInteraction.Ignore)) {
-                if (hit.collider.CompareTag("Player")) {
+                //Check if hit this character
+                if (hit.collider.gameObject == gameObject) {
                     //Debug hit
                     Debug.DrawRay(origin, direction.normalized * hit.distance, Color.green);
 
                     //Player is visible
                     return true;
                 }
+
                 //Debug miss
                 Debug.DrawRay(origin, direction.normalized * hit.distance, new Color(1, 0.65f, 0));
             } else {

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Botpa;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,10 +45,12 @@ public class Enemy : Character {
     [SerializeField] private float viewDistance = 5;
 
     public Character Target { get; private set; }
-    public bool TargetIsVisible { get; private set; }
-    public bool TargetPositionIsKnown { get; private set; }
-    public float TargetLastKnownDistance { get; private set; }
-    public Vector3 TargetLastKnownPosition { get; private set; }
+    public bool TargetIsVisible { get; private set; }               //If the target is visible
+    public bool TargetPositionIsKnown { get; private set; }         //If the target was seen at some point and it's position was saved
+    public Vector3 TargetLastKnownPosition { get; private set; }    //The last known target position
+    public float TargetLastKnownDistance { get; private set; }      //The distance to the last known target position
+
+    private const float MAX_NOTIFY_ENEMIES_DISTANCE = 4f;
 
     //Attack
     [Header("Attack")]
@@ -61,7 +64,7 @@ public class Enemy : Character {
 
 
     //State
-    protected override void OnStart() {
+    protected override void OnAwake() {
         //Get behaviour
         Behaviour = GetComponent<EnemyBehaviour>();
     
@@ -78,7 +81,7 @@ public class Enemy : Character {
         //Update effects
         AddOnEffectsUpdated(OnEffectsUpdated);
         OnEffectsUpdated();
-    
+
         //Init behaviour
         Behaviour.Init(this);
     }
@@ -88,7 +91,7 @@ public class Enemy : Character {
         if (!IsEnabled) return;
 
         //Check if target is visible
-        CheckTargetVisible();
+        UpdateTargetInfo();
 
         //Call behaviour event
         Behaviour.OnUpdate();
@@ -238,23 +241,52 @@ public class Enemy : Character {
     }
 
     //Targets
-    private void CheckTargetVisible() {
+    private void OnTargetPositionIsKnown(Vector3 position) {
+        //Mark target position as known
+        TargetPositionIsKnown = true;
+
+        //Save target position & distance
+        TargetLastKnownPosition = position;
+        TargetLastKnownDistance = Vector3.Distance(TargetLastKnownPosition, transform.position);
+    }
+
+    private void UpdateTargetInfo() {
         //Check if target is visible
         TargetIsVisible = Target.IsVisible(Eyes.position, viewDistance, LayerMask.GetMask("Default", "Player"));
 
-        //Save distance
-        TargetLastKnownDistance = Vector3.Distance(Target.transform.position, transform.position);
-
-        //Save position if visible
+        //Check if target is visible
         if (TargetIsVisible) {
-            TargetPositionIsKnown = true;
-            TargetLastKnownPosition = Target.transform.position;
+            //Is visible -> Save its position
+            OnTargetPositionIsKnown(Target.transform.position);
+
+            //Notify other enemies nearby
+            foreach (var enemy in Room.Enemies) {
+                //Check if enemy already knows target position
+                if (enemy.TargetPositionIsKnown) continue;
+
+                //Check if enemy is too far
+                if (Vector3.Distance(transform.position, enemy.transform.position) > MAX_NOTIFY_ENEMIES_DISTANCE) continue;
+
+                //Alert enemy that target position is known
+                enemy.AlertTargetPositionIsKnown(TargetLastKnownPosition);
+            }
+        } else {
+            //Not visible -> Update distance to last known position
+            TargetLastKnownDistance = Vector3.Distance(TargetLastKnownPosition, transform.position);
         }
     }
 
     public void NotifyTargetPositionReached() {
-        //Used for when the enemy reaches the last known position of the player
+        //Used for when the enemy reaches the last known position of the target
         TargetPositionIsKnown = TargetIsVisible;
+    }
+
+    public void AlertTargetPositionIsKnown(Vector3 position) {
+        //Save target position
+        OnTargetPositionIsKnown(position);
+
+        //Do an animation or sum, idk
+        Debug.Log("Enemy alerted, he now knows ball");
     }
 
     //Effects
@@ -276,16 +308,10 @@ public class Enemy : Character {
 
     //Helpers
     public Enemy SpawnEnemy(GameObject prefab, Transform spawn) {
-        if (Room) {
-            //Spawn with room
-            Enemy enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
-            enemy.LookInDirection(spawn.forward);
-            enemy.SetEnabled(true);
-            return enemy;
-        } else {
-            //Spawn without room
-            return Instantiate(prefab, spawn.position, Quaternion.identity).GetComponent<Enemy>();
-        }
+        Enemy enemy = Room.InitializeEnemy(Instantiate(prefab, spawn.position, Quaternion.identity));
+        enemy.LookInDirection(spawn.forward);
+        enemy.SetEnabled(true);
+        return enemy;
     }
 
     public Vector3 GetFurthestPoint(Vector3 moveDirection, float maxDistance) {

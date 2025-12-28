@@ -30,7 +30,7 @@ public class GoblinBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new GoblinIdleState(this));
+        SetState(new GoblinIdleState(this), false);
     }
 
     //Health

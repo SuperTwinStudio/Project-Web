@@ -1,7 +1,7 @@
-public class ThiefApproachState : ThiefState {
+public class ThiefFollowState : ThiefState {
 
     //Constructor
-    public ThiefApproachState(EnemyBehaviour behaviour) : base(behaviour) {}
+    public ThiefFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
     public override void OnExit() {
@@ -13,15 +13,15 @@ public class ThiefApproachState : ThiefState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Behaviour.SetState(new ThiefIdleState(Behaviour));
-        } else if (Enemy.TargetLastKnownDistance <= Thief.InteractRange) {
+            Behaviour.SetState(new ThiefIdleState(Behaviour), false);
+        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance <= Thief.InteractRange) {
             //Target in interact range -> Check if allowed to steal
             if (Thief.CheckIfAllowedToSteal()) {
                 //Allowed to steal -> Steal
-                Behaviour.SetState(new ThiefStealState(Behaviour), true);
+                Behaviour.SetState(new ThiefStealState(Behaviour));
             } else {
                 //Not allowed -> Attack
-                Behaviour.SetState(new ThiefAttackState(Behaviour), true);
+                Behaviour.SetState(new ThiefAttackState(Behaviour));
             }
         } else {
             //Target too far -> Move towards it
@@ -33,7 +33,7 @@ public class ThiefApproachState : ThiefState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new ThiefIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new ThiefIdleState(Behaviour), false);
             }
         }
     }

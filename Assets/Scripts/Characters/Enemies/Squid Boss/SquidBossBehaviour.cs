@@ -16,7 +16,7 @@ public class SquidBossBehaviour : EnemyBehaviour
 	{
 		m_MaxTentacleCount = Tentacles.Count;
 		
-		SetState(new SquidBossIdleState(this));
+		SetState(new SquidBossIdleState(this), false);
     }
 
     public override void OnDeath()

@@ -26,7 +26,7 @@ public class MinionBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new MinionIdleState(this));
+        SetState(new MinionIdleState(this), false);
     }
 
     //Health

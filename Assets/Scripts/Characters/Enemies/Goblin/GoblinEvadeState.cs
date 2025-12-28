@@ -12,7 +12,7 @@ public class GoblinEvadeState : GoblinState {
     public override void Execute() {
         if (Enemy.TargetLastKnownDistance > Goblin.EvadeRange) {
             //Target lejos -> Mira a ver que haces
-            Goblin.SetState(new GoblinIdleState(Goblin));
+            Behaviour.SetState(new GoblinIdleState(Behaviour), false);
         } else {
             //Target cerca -> Huye!
             Enemy.MoveTowards(Enemy.Bot.position + (Enemy.Eyes.position - Enemy.TargetLastKnownPosition).normalized);

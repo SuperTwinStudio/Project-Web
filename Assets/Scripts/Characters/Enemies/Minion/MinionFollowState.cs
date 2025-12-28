@@ -13,10 +13,10 @@ public class MinionFollowState : MinionState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Behaviour.SetState(new MinionIdleState(Behaviour));
-        } else if (Enemy.TargetLastKnownDistance <= Minion.AttackRange) {
+            Behaviour.SetState(new MinionIdleState(Behaviour), false);
+        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance <= Minion.AttackRange) {
             //Target in attack range -> Attack it
-            Behaviour.SetState(new MinionAttackState(Behaviour), true);
+            Behaviour.SetState(new MinionAttackState(Behaviour));
         } else {
             //Target too far -> Move towards it
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
@@ -27,7 +27,7 @@ public class MinionFollowState : MinionState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new MinionIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new MinionIdleState(Behaviour), false);
             }
         }
     }

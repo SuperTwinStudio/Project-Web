@@ -20,16 +20,16 @@ public class GoblinAttackState : GoblinState {
         //Check distance
         if (!Enemy.TargetIsVisible) {
             //Lost target -> Go to last known position
-            Goblin.SetState(new GoblinFollowState(Goblin));
+            Behaviour.SetState(new GoblinFollowState(Behaviour));
         } else if (Enemy.TargetLastKnownDistance < Goblin.EvadeRange) {
             //Target too close -> Evade
-            Goblin.SetState(new GoblinEvadeState(Goblin));
+            Behaviour.SetState(new GoblinEvadeState(Behaviour));
         } else if (Enemy.TargetLastKnownDistance < Goblin.MaxAttackRange) {
             //Target in range -> Attack
             Goblin.Attack();
         } else {
             //Target fuera de rango -> Siguele
-            Goblin.SetState(new GoblinFollowState(Goblin));
+            Behaviour.SetState(new GoblinFollowState(Behaviour));
         }
     }
 

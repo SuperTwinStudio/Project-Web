@@ -40,7 +40,7 @@ public class BeastStunState : BeastState {
         yield return new WaitForSeconds(Beast.StunDuration);
 
         //Start charging
-        Behaviour.SetState(new BeastPrechargeState(Behaviour), true);
+        Behaviour.SetState(new BeastPrechargeState(Behaviour));
     }
 
 }

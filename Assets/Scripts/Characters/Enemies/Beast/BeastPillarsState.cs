@@ -27,7 +27,7 @@ public class BeastPillarsState : BeastState {
             Game.Current.Level.UpdateWalkableSurface();
 
             //Start rage phase
-            Beast.SetState(new BeastRageState(Beast));
+            Behaviour.SetState(new BeastRageState(Behaviour));
         }
     }
 

@@ -13,10 +13,10 @@ public class GoblinFollowState : GoblinState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Goblin.SetState(new GoblinIdleState(Goblin));
+            Behaviour.SetState(new GoblinIdleState(Behaviour), false);
         } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance > Goblin.EvadeRange && Enemy.TargetLastKnownDistance < Goblin.MinAttackRange) {
             //Target in attack range -> Attack it
-            Goblin.SetState(new GoblinAttackState(Goblin));
+            Behaviour.SetState(new GoblinAttackState(Behaviour));
         } else {
             //Move towards target
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
@@ -27,7 +27,7 @@ public class GoblinFollowState : GoblinState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Behaviour.SetState(new GoblinIdleState(Behaviour));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new GoblinIdleState(Behaviour), false);
             }
         }
     }

@@ -70,7 +70,7 @@ public class BeastBehaviour : EnemyBehaviour {
         foreach (var pillar in _pillars) pillar.Init(this);
 
         //Go to idle
-        SetState(new BeastPillarsState(this));
+        SetState(new BeastPillarsState(this), false);
     }
 
     //Health

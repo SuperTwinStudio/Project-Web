@@ -36,7 +36,7 @@ public class BeastPrechargeState : BeastState {
         yield return new WaitForSeconds(Beast.PrechargeDuration);
 
         //Charge
-        Behaviour.SetState(new BeastChargeState(Behaviour), true);
+        Behaviour.SetState(new BeastChargeState(Behaviour));
     }
 
 }

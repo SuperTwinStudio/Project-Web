@@ -33,7 +33,7 @@ public class KnightBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new KnightIdleState(this));
+        SetState(new KnightIdleState(this), false);
     }
 
     //Health
@@ -68,7 +68,7 @@ public class KnightBehaviour : EnemyBehaviour {
 
     public void FinishAttack() {
         //Return to follow
-        SetState(new KnightFollowState(this), true);
+        SetState(new KnightFollowState(this));
     }
 
 }

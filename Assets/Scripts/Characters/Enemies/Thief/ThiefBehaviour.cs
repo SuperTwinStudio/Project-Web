@@ -47,7 +47,7 @@ public class ThiefBehaviour : EnemyBehaviour {
     //Init
     protected override void OnInit() {
         //Go to idle
-        SetState(new ThiefIdleState(this));
+        SetState(new ThiefIdleState(this), false);
     }
 
     //Health
@@ -77,22 +77,12 @@ public class ThiefBehaviour : EnemyBehaviour {
         bool otherTypes = false;
         int thiefs = 0;
 
-        //Check if enemy is in a room
-        if (Enemy.Room) {
-            //Has room -> Check room for enemies
-            foreach (Enemy enemy in Enemy.Room.Enemies)
-                if (enemy.Behaviour is ThiefBehaviour)
-                    thiefs++;
-                else
-                    otherTypes = true;
-        } else {
-            //No room -> Check enemy gameobjects (slower)
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
-                if (enemy.GetComponent<ThiefBehaviour>())
-                    thiefs++;
-                else
-                    otherTypes = true;
-            }
+        //Check room for enemies
+        foreach (Enemy enemy in Enemy.Room.Enemies) {
+            if (enemy.Behaviour is ThiefBehaviour)
+                thiefs++;
+            else
+                otherTypes = true;
         }
 
         //Check if allowed to steal

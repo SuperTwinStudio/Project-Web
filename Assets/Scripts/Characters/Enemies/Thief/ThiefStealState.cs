@@ -50,7 +50,7 @@ public class ThiefStealState : ThiefState {
             Behaviour.SetState(new ThiefFleeState(Behaviour));
         } else {
             //Missed steal attack -> Go to aproach
-            Behaviour.SetState(new ThiefApproachState(Behaviour));   
+            Behaviour.SetState(new ThiefFollowState(Behaviour));
         }
     }
 

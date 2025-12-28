@@ -30,7 +30,11 @@ public class MinionAttackState : MinionState {
         yield return new WaitForSeconds(0.5f);
 
         //Attack
-        Enemy.Attack.Forward(Minion.AttackRadius, 0, Minion.AttackDamage);
+        Enemy.Attack.Forward(
+            Minion.AttackRadius, 
+            0, 
+            Minion.AttackDamage
+        );
 
         //Play sound
         Enemy.PlaySound(Minion.AttackSound);
@@ -38,8 +42,8 @@ public class MinionAttackState : MinionState {
         //Wait
         yield return new WaitForSeconds(0.5f);
 
-        //Return to idle state & execute it
-        Behaviour.SetState(new MinionIdleState(Behaviour), true);
+        //Return to idle
+        Behaviour.SetState(new MinionIdleState(Behaviour), false);
     }
 
 }

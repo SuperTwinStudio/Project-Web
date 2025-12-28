@@ -37,7 +37,7 @@ public class BeastChargeState : BeastState {
         //Check if reached destination
         if (Enemy.AgentReachedDestination || timeoutTimer.IsFinished) {
             //Reached destination -> Go to stunned state
-            Behaviour.SetState(new BeastStunState(Behaviour), true);
+            Behaviour.SetState(new BeastStunState(Behaviour));
         }
     }
 

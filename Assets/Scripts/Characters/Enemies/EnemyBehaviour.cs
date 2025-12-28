@@ -23,7 +23,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     //States
-    public void SetState(EnemyState newState, bool execute = false) {
+    public void SetState(EnemyState newState, bool execute = true) {
         //Check if same state
         if (State == newState) return;
 

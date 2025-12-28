@@ -20,10 +20,10 @@ public class KnightFollowState : KnightState {
         //Check target visibility
         if (!Enemy.TargetPositionIsKnown) {
             //Target position is unknown -> Go to idle
-            Knight.SetState(new KnightIdleState(Knight));
-        } else if (Enemy.TargetLastKnownDistance <= Knight.AttackRange && Vector3.Angle(Enemy.Model.forward, (Enemy.TargetLastKnownPosition - Enemy.Model.position).normalized) < 10) {
+            Behaviour.SetState(new KnightIdleState(Behaviour), false);
+        } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance <= Knight.AttackRange && Vector3.Angle(Enemy.Model.forward, (Enemy.TargetLastKnownPosition - Enemy.Model.position).normalized) < 10) {
             //Target in attack range & in front -> Attack it
-            Knight.SetState(new KnightAttackState(Knight));
+            Behaviour.SetState(new KnightAttackState(Behaviour));
         } else {
             //Move towards target
             Enemy.MoveTowards(Enemy.TargetLastKnownPosition);
@@ -34,7 +34,7 @@ public class KnightFollowState : KnightState {
                 Enemy.NotifyTargetPositionReached();
 
                 //Check if should stop following
-                if (!Enemy.TargetIsVisible) Knight.SetState(new KnightIdleState(Knight));
+                if (!Enemy.TargetIsVisible) Behaviour.SetState(new KnightIdleState(Behaviour), false);
             }
         }
     }

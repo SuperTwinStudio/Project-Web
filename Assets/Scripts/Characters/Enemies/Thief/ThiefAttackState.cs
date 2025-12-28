@@ -42,8 +42,8 @@ public class ThiefAttackState : ThiefState {
         //Wait
         yield return new WaitForSeconds(0.5f);
 
-        //Go to aproach
-        Behaviour.SetState(new ThiefApproachState(Behaviour));
+        //Return to follow
+        Behaviour.SetState(new ThiefFollowState(Behaviour));
     }
 
 }

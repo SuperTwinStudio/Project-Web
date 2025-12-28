@@ -10,11 +10,11 @@ public class ThiefIdleState : ThiefState {
     }
 
     public override void Execute() {
-        //Check if target is visible
-        if (!Enemy.TargetIsVisible) return;
+        //Check if target position is known
+        if (!Enemy.TargetPositionIsKnown) return;
 
-        //Aproach target
-        Behaviour.SetState(new ThiefApproachState(Behaviour), true);
+        //Follow target
+        Behaviour.SetState(new ThiefFollowState(Behaviour));
     }
 
 }

@@ -5,19 +5,19 @@ public class GoblinIdleState : GoblinState {
 
     //Actions
     public override void Execute() {
-        //Check if target is visible
-        if (!Enemy.TargetIsVisible) return;
+        //Check if target position is known
+        if (!Enemy.TargetPositionIsKnown) return;
 
         //Check distance
         if (Enemy.TargetLastKnownDistance > Goblin.MinAttackRange) {
             //Target too far -> Follow it
-            Goblin.SetState(new GoblinFollowState(Goblin));
+            Behaviour.SetState(new GoblinFollowState(Behaviour));
         } else if (Enemy.TargetLastKnownDistance > Goblin.EvadeRange) {
             //Target within attack range -> Attack it
-            Goblin.SetState(new GoblinAttackState(Goblin));
+            Behaviour.SetState(new GoblinAttackState(Behaviour));
         } else {
             //Target too close -> Evade it
-            Goblin.SetState(new GoblinEvadeState(Goblin));
+            Behaviour.SetState(new GoblinEvadeState(Behaviour));
         }
     }
 
