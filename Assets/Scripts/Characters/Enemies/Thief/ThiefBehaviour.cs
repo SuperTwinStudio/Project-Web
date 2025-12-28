@@ -5,13 +5,14 @@ public class ThiefBehaviour : EnemyBehaviour {
 
     //Components
     [Header("Components")]
-    [SerializeField] private Effect _fleeEffect;
+    [SerializeField] private GameObject hat;
     [SerializeField] private Effect _stealEffect;
+    [SerializeField] private Effect _fleeEffect;
 
     private Loadout Loadout => Enemy.Player.Loadout;
 
-    public Effect FleeEffect => _fleeEffect;
     public Effect StealEffect => _stealEffect;
+    public Effect FleeEffect => _fleeEffect;
 
     //Values
     [Header("Values")]
@@ -22,13 +23,14 @@ public class ThiefBehaviour : EnemyBehaviour {
     [SerializeField] private float _maxFleeDistance = 25;
 
     public int StolenAmount { get; private set; }
+    public bool CanSteal { get; private set; }
 
     public float InteractRange => _interactRange;
     public float AttackRadius => _attackRadius;
     public float AttackDamage => _attackDamage;
     public bool PlayerHasGold => Loadout.Gold > 0;
-    public int StealAmount => _stealAmount;
     public bool HasStolen => StolenAmount > 0;
+    public int StealAmount => _stealAmount;
     public float MaxFleeDistance => _maxFleeDistance;
 
     //Sounds
@@ -46,38 +48,48 @@ public class ThiefBehaviour : EnemyBehaviour {
 
     //Init
     protected override void OnInit() {
+        //Add update can steal event
+        Enemy.Room.AddOnEnemiesChanged(UpdateCanSteal);
+        UpdateCanSteal();
+
         //Go to idle
         SetState(new ThiefIdleState(this), false);
     }
 
     //Health
     public override void OnDeath() {
+        //Remove update can steal event
+        Enemy.Room.AddOnEnemiesChanged(UpdateCanSteal);
+
         //Go to death
         SetState(new ThiefDeathState(this));
     }
 
     //Helpers
-    public bool CheckIfAllowedToSteal() {
-        //Player has no gold
-        if (!PlayerHasGold) return false;
+    private void UpdateCanSteal() {
+        //Update using basic checks
+        CanSteal = PlayerHasGold && !HasStolen;
 
-        //Already stole gold
-        if (HasStolen) return false;
+        //Check if basic checks were passed
+        if (CanSteal) {
+            //Result variables
+            bool otherEnemyTypesPresent = false;
+            int thiefsCount = 0;
 
-        //Result variables
-        bool otherTypes = false;
-        int thiefs = 0;
+            //Check room for enemies
+            foreach (Enemy enemy in Enemy.Room.Enemies) {
+                if (enemy.Behaviour is ThiefBehaviour)
+                    thiefsCount++;
+                else
+                    otherEnemyTypesPresent = true;
+            }
 
-        //Check room for enemies
-        foreach (Enemy enemy in Enemy.Room.Enemies) {
-            if (enemy.Behaviour is ThiefBehaviour)
-                thiefs++;
-            else
-                otherTypes = true;
+            //Update using present enemy types
+            CanSteal = otherEnemyTypesPresent && thiefsCount == 1;
         }
 
-        //Check if allowed to steal
-        return otherTypes && thiefs == 1;
+        //Update visuals
+        hat.SetActive(CanSteal);
     }
 
     public bool StealGoldFromPlayer() {

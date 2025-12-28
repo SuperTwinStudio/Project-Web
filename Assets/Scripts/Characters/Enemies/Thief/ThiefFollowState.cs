@@ -15,12 +15,12 @@ public class ThiefFollowState : ThiefState {
             //Target position is unknown -> Go to idle
             Behaviour.SetState(new ThiefIdleState(Behaviour), false);
         } else if (Enemy.TargetIsVisible && Enemy.TargetLastKnownDistance <= Thief.InteractRange) {
-            //Target in interact range -> Check if allowed to steal
-            if (Thief.CheckIfAllowedToSteal()) {
-                //Allowed to steal -> Steal
+            //Target in interact range -> Check if can steal
+            if (Thief.CanSteal) {
+                //Can steal -> Steal
                 Behaviour.SetState(new ThiefStealState(Behaviour));
             } else {
-                //Not allowed -> Attack
+                //Can't steal -> Attack
                 Behaviour.SetState(new ThiefAttackState(Behaviour));
             }
         } else {

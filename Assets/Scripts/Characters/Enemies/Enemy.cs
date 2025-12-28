@@ -81,7 +81,9 @@ public class Enemy : Character {
         //Update effects
         AddOnEffectsUpdated(OnEffectsUpdated);
         OnEffectsUpdated();
+    }
 
+    protected override void OnStart() {
         //Init behaviour
         Behaviour.Init(this);
     }
@@ -156,7 +158,7 @@ public class Enemy : Character {
         base.OnDeath();
 
         //Notify room that enemy was killed
-        if (Room) Room.EnemyKilled(this);
+        if (Room) Room.NotifyEnemyKilled(this);
 
         //Stop moving
         StopMovement();

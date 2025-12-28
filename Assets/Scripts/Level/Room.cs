@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class Room : MonoBehaviour
     //Enemies
     private readonly List<Enemy> _enemies = new();
     private bool _isBossPresent = false;
+    private Action OnEnemiesChanged;
 
     public IReadOnlyList<Enemy> Enemies => _enemies;
     public bool IsBossPresent => _isBossPresent;
@@ -78,35 +80,44 @@ public class Room : MonoBehaviour
     }
 
     //Enemies
-    public Enemy InitializeEnemy(Enemy enemy)
-    {
+    public void InitializeEnemy(Enemy enemy) {
         enemy.SetRoom(this);
         _enemies.Add(enemy);
+        OnEnemiesChanged?.Invoke();
+    }
+
+    public Enemy InitializeEnemy(GameObject obj) {
+        Enemy enemy = obj.GetComponent<Enemy>();
+        InitializeEnemy(enemy);
         return enemy;
     }
 
-    public Enemy InitializeEnemy(GameObject obj)
-    {
-        return InitializeEnemy(obj.GetComponent<Enemy>());;
-    }
-
-    public void EnemyKilled(Enemy enemy)
-    {
+    public void NotifyEnemyKilled(Enemy enemy) {
+        //Remove enemy from list
         _enemies.Remove(enemy);
+        OnEnemiesChanged?.Invoke();
 
-        if (EnemyCount == 0)
-        {
+        //Check enemy count
+        if (EnemyCount == 0) {
+            //No more enemies -> Unlock doors
             UnlockDoors();
             
-            if (m_BossRoom)
-            {
-                // ALLOW ACCESS TO NEXT FLOOR
+            //Check if boss room
+            if (m_BossRoom)  {
+                //Is boss room -> Show elevator
                 m_Elevator.SetActive(true);
                 _isBossPresent = false;
-
                 return;
             }
         }
+    }
+
+    public void AddOnEnemiesChanged(Action action) {
+        OnEnemiesChanged += action;
+    }
+
+    public void RemoveOnEnemiesChanged(Action action) {
+        OnEnemiesChanged -= action;
     }
 
     //Room
@@ -139,7 +150,7 @@ public class Room : MonoBehaviour
             foreach (Transform spawnPoint in m_EnemySpawnPoints)
             {
                 // Chance to not spawn an enemy at this point
-                int skipRandom = Random.Range(0, 100);
+                int skipRandom = UnityEngine.Random.Range(0, 100);
                 if (skipRandom < 10) continue;
 
                 InitializeEnemy(Instantiate(def.GetRandomEnemyPrefab(), spawnPoint));
