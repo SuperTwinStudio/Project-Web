@@ -21,7 +21,7 @@ public class AttackAreaIndicator : MonoBehaviour {
         meshRenderer = GetComponent<MeshRenderer>();
 
         //Start disappearing
-        durationTimer.Count(duration);
+        Disappear(duration);
     }
 
     private void Update() {
@@ -30,6 +30,10 @@ public class AttackAreaIndicator : MonoBehaviour {
 
         //Check if finished
         if (durationTimer.IsFinished) Destroy(gameObject);
+    }
+
+    public void Disappear(float duration) {
+        durationTimer.Count(duration);
     }
 
     //Generation

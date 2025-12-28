@@ -7,6 +7,7 @@ public class BeastChargeState : BeastState {
     private readonly Timer timeoutTimer = new(); //To prevent the enemy from staying permanently in charge mode (happened once in testing)
 
     private const float TIMEOUT_DURATION = 2.0f;
+    private const float AOE_RADIUS = 2.0f;
 
 
     //Constructor
@@ -18,11 +19,14 @@ public class BeastChargeState : BeastState {
         Enemy.PlaySound(Beast.ChargeSound);
 
         //Get furthest point forward
-        Vector3 point = Enemy.GetFurthestPoint(Enemy.Model.forward, Beast.MaxChargeDistance);
+        (Vector3 point, float distance) = Enemy.GetFurthestPointAndDistance(Enemy.Model.forward, Beast.MaxChargeDistance);
 
         //Move to point
         Enemy.MoveTowards(point);
         timeoutTimer.Count(TIMEOUT_DURATION);
+
+        //Show AOE indicator
+        Enemy.Attack.ShowAOE(AOE_RADIUS, Mathf.Max(0, distance - AOE_RADIUS), true, 0.5f);
     }
 
     public override void OnExit() {

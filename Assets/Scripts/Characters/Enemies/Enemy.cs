@@ -54,7 +54,7 @@ public class Enemy : Character {
 
     //Attack
     [Header("Attack")]
-    [SerializeField, Min(0)] private float attackLevelFloorMultiplier = 0.5f;
+    [SerializeField, Min(0)] private float levelFloorAttackMultiplier = 0.5f;
 
     //Room
     public Room Room { get; private set; } = null;
@@ -297,7 +297,7 @@ public class Enemy : Character {
 
     //Attack
     public override float CalculateDamage(float damage) {
-        return base.CalculateDamage(damage) * (1 + (Level.Floor - 1) * attackLevelFloorMultiplier);
+        return base.CalculateDamage(damage) * (1 + (Level.Floor - 1) * levelFloorAttackMultiplier);
     }
 
     //Room

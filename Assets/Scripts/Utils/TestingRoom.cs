@@ -17,9 +17,9 @@ public class TestingRoom : MonoBehaviour {
 
     private void Start() {
         //Assing enemies to room
-        foreach (var enemy in room.Enemies) {
+        for (int i = room.Enemies.Count - 1; i >= 0 ; i--) { //Use reverse fori in case an enemy (miso beast) spawns more enemies inside the loop
             //Notify player entered the room
-            enemy.NotifyPlayerEnteredRoom();
+            room.Enemies[i].NotifyPlayerEnteredRoom();
         }
     }
 

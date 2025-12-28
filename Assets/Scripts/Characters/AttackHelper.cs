@@ -81,13 +81,14 @@ public class AttackHelper : MonoBehaviour {
         return DamageHits(AttackAroundCheck(showAOE, radius), damage, onHit);
     }
 
-    public void ShowAOE(float radius, float forward, bool inFront) {
+    public void ShowAOE(float radius, float forward, bool inFront, float duration = -1) {
         //No prefab or disabled in settings -> Return
         if (!AOEIndicator || !Preferences.ShowAOE) return;
 
         //Create indicator
         AttackAreaIndicator indicator = Instantiate(AOEIndicator, Model.position + 0.1f * Vector3.up, Model.rotation).GetComponent<AttackAreaIndicator>();
         indicator.GenerateIndicator(radius, forward, inFront);
+        if (duration > 0) indicator.Disappear(duration);
     }
 
     //Ranged
