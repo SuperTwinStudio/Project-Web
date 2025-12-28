@@ -1,17 +1,17 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class ThiefBehaviour : EnemyBehaviour {
 
     //Components
     [Header("Components")]
-    [SerializeField] private TMP_Text stolenAmountText;
     [SerializeField] private Effect _fleeEffect;
+    [SerializeField] private Effect _stealEffect;
 
     private Loadout Loadout => Enemy.Player.Loadout;
 
     public Effect FleeEffect => _fleeEffect;
+    public Effect StealEffect => _stealEffect;
 
     //Values
     [Header("Values")]
@@ -30,7 +30,7 @@ public class ThiefBehaviour : EnemyBehaviour {
     public int StealAmount => _stealAmount;
     public bool HasStolen => StolenAmount > 0;
     public float MaxFleeDistance => _maxFleeDistance;
-    
+
     //Sounds
     [Header("Sounds")]
     [SerializeField] private AudioClip _attackSound;
@@ -57,15 +57,6 @@ public class ThiefBehaviour : EnemyBehaviour {
     }
 
     //Helpers
-    public void UpdateGoldText() {
-        if (StolenAmount <= 0)
-            //Hide stolen amount
-            stolenAmountText.SetText("");
-        else
-            //Show stolen amount
-            stolenAmountText.SetText($"{StolenAmount}G");
-    }
-
     public bool CheckIfAllowedToSteal() {
         //Player has no gold
         if (!PlayerHasGold) return false;
@@ -99,7 +90,9 @@ public class ThiefBehaviour : EnemyBehaviour {
 
         //Add gold to stolen amount
         StolenAmount += gold;
-        UpdateGoldText();
+
+        //Add gold stolen effect
+        Enemy.AddEffect(StealEffect, float.PositiveInfinity, gold);
         return true;
     }
 
@@ -110,7 +103,9 @@ public class ThiefBehaviour : EnemyBehaviour {
         //Return gold to player
         Loadout.AddGold(StolenAmount);
         StolenAmount = 0;
-        UpdateGoldText();
+
+        //Remove gold stolen effect
+        Enemy.RemoveEffect(StealEffect, StolenAmount);
     }
 
 }

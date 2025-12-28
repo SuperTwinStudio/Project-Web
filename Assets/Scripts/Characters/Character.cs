@@ -392,7 +392,7 @@ public class Character : MonoBehaviour, IDamageable {
         }
     }
 
-    public void AddEffect(Effect effect, float duration = float.PositiveInfinity) {
+    public void AddEffect(Effect effect, float duration = float.PositiveInfinity, int levelsToAdd = 1) {
         //Dead -> Ignore
         if (!IsAlive) return;
 
@@ -404,14 +404,14 @@ public class Character : MonoBehaviour, IDamageable {
             //Already has effect -> Update it
             (float currentEndTimestamp, int currentLevel) = effects[effect];
             effects[effect] = (
-                Mathf.Max(currentEndTimestamp, endTimestamp),                                   //End timestamp
-                effect.HasLevels ? Mathf.Min(currentLevel + 1, effect.MaxLevel) : currentLevel  //Level
+                Mathf.Max(currentEndTimestamp, endTimestamp),                                               //End timestamp
+                effect.HasLevels ? Mathf.Min(currentLevel + levelsToAdd, effect.MaxLevel) : currentLevel    //Level
             );
         } else {
             //Does not have effect -> Add it
             effects[effect] = (
                 endTimestamp,   //End timestamp
-                1               //Level
+                levelsToAdd     //Level
             );
         }
 
@@ -434,7 +434,7 @@ public class Character : MonoBehaviour, IDamageable {
         }
     }
 
-    public void RemoveEffect(Effect effect) {
+    public void RemoveEffect(Effect effect, int levelsToRemove = 1) {
         //Check if player has effect
         if (!effects.ContainsKey(effect)) return;
 
@@ -442,9 +442,9 @@ public class Character : MonoBehaviour, IDamageable {
         (float endTimestamp, int level) = effects[effect];
 
         //Check if effect has levels
-        if (effect.HasLevels && level > 1) {
+        if (effect.HasLevels && level > levelsToRemove) {
             //Still has levels -> Update it
-            effects[effect] = (endTimestamp, level - 1);
+            effects[effect] = (endTimestamp, level - levelsToRemove);
         } else {
             //No levels / Level 1 -> Remove it
             effects.Remove(effect);

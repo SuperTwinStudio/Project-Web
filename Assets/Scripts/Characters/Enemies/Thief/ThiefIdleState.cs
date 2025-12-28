@@ -4,11 +4,6 @@ public class ThiefIdleState : ThiefState {
     public ThiefIdleState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
-    public override void OnEnter() {
-        //Update gold text
-        Thief.UpdateGoldText();
-    }
-
     public override void Execute() {
         //Check if target position is known
         if (!Enemy.TargetPositionIsKnown) return;
