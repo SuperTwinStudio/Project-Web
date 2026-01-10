@@ -15,12 +15,6 @@ public class KnightBehaviour : EnemyBehaviour {
     public float AttackRadius => _attackRadius;
     public float AttackDamage => _attackDamage;
 
-    //Stun
-    [Header("Stun")]
-    [SerializeField] private float _stunDuration = 2f;
-
-    public float StunDuration => _stunDuration;
-
     //Sounds
     [Header("Sounds")]
     [SerializeField] private AudioClip _damageSound;
