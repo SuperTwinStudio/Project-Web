@@ -4,8 +4,8 @@ public class TestingObject : MonoBehaviour {
 
     private void Awake() {
         #if !UNITY_EDITOR
-        Destroy(gameObject);
+        if (!Debug.isDebugBuild) Destroy(gameObject);
         #endif
     }
-    
+
 }

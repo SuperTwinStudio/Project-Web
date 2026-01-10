@@ -85,23 +85,24 @@ public class SettingsMenu : Menu {
 
         //Toggle buttons
         switch (scene) {
+            //Homme
+            case "Home":
+                buttonsHome.SetActive(true);
+                buttonsLobby.SetActive(false);
+                buttonsDungeon.SetActive(false);
+                break;
             //Castle (lobby)
             case "Lobby":
                 buttonsHome.SetActive(false);
                 buttonsLobby.SetActive(true);
                 buttonsDungeon.SetActive(false);
                 break;
-            //Dungeon
+            //Other (dungeon)
             case "Dungeon":
+            default:
                 buttonsHome.SetActive(false);
                 buttonsLobby.SetActive(false);
                 buttonsDungeon.SetActive(true);
-                break;
-            //Other (home)
-            default:
-                buttonsHome.SetActive(true);
-                buttonsLobby.SetActive(false);
-                buttonsDungeon.SetActive(false);
                 break;
         }
 
