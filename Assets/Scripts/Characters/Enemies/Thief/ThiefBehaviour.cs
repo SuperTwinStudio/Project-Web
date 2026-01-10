@@ -59,14 +59,14 @@ public class ThiefBehaviour : EnemyBehaviour {
     //Health
     public override void OnDeath() {
         //Remove update can steal event
-        Enemy.Room.AddOnEnemiesChanged(UpdateCanSteal);
+        Enemy.Room.RemoveOnEnemiesChanged(UpdateCanSteal);
 
         //Go to death
         SetState(new ThiefDeathState(this));
     }
 
     //Helpers
-    private void UpdateCanSteal() {
+    public void UpdateCanSteal() {
         //Update using basic checks
         CanSteal = PlayerHasGold && !HasStolen;
 

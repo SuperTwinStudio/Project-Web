@@ -14,6 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon.unity
     guid: f5f0c6568d2614d4e927859af9083fb8
+  - enabled: 1
+    path: Assets/Scenes/AI/GoblinTesting.unity
+    guid: 122061120544c994caa3f8560ca81c3e
+  - enabled: 1
+    path: Assets/Scenes/AI/KnightTesting.unity
+    guid: 3fa24462cce979a45ba030ed719b1aac
+  - enabled: 1
+    path: Assets/Scenes/AI/MisoTesting.unity
+    guid: cb46b551dcfa81144917ae5a02519d11
+  - enabled: 1
+    path: Assets/Scenes/AI/ThiefTesting.unity
+    guid: c0ae17c09ea55c941bb7697d36fe3bc8
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ae13fc00113098449b9f0e1698a32caf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

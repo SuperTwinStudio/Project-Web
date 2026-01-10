@@ -4,6 +4,11 @@ public class ThiefFollowState : ThiefState {
     public ThiefFollowState(EnemyBehaviour behaviour) : base(behaviour) {}
 
     //Actions
+    public override void OnEnter()
+    {
+        Thief.UpdateCanSteal();
+    }
+
     public override void OnExit() {
         //Stop movement
         Enemy.StopMovement();
